@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <div class="site-shell">
@@ -37,10 +37,23 @@
         <div class="eyebrow" data-i18n="demoEyebrow">TECHNICZNE DEMO EDUKACYJNE</div>
         <h1 data-i18n="demoTitle">Jak działa szklarnia?</h1>
         <p data-i18n="demoLead">Obejrzyj przykładową szklarnię i zobacz, co oznaczają nawa, rzędy, kapilary i wózki.</p>
-        <div class="hero-actions">
-          <button class="button button-primary" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
-          <button class="button button-secondary" type="button" data-camera="nave"><span aria-hidden="true">▦</span><span data-i18n="nave">Jedna nawa</span></button>
-          <button class="button button-secondary" type="button" data-camera="lift"><span aria-hidden="true">↕</span><span data-i18n="liftView">Górny wózek</span></button>
+        <button class="tour-hero-card" type="button" id="tourHeroButton">
+          <span class="tour-hero-icon" aria-hidden="true">▶</span>
+          <span><strong data-i18n="tourStart">Pokaż automatyczną wycieczkę</strong><small data-i18n="tourHint">Zobacz po kolei, jak działa szklarnia.</small></span>
+        </button>
+        <div class="view-tiles" aria-label="View selection">
+          <button class="view-tile is-active" type="button" data-camera="overview">
+            <span class="view-tile-icon" aria-hidden="true">◉</span><span><strong data-i18n="overview">Cała szklarnia</strong><small data-i18n="overviewDesc">Układ szklarni z góry.</small></span>
+          </button>
+          <button class="view-tile" type="button" data-camera="mainRoad">
+            <span class="view-tile-icon" aria-hidden="true">↔</span><span><strong data-i18n="mainRoadView">Główna droga</strong><small data-i18n="mainRoadDesc">Lewa i prawa strona.</small></span>
+          </button>
+          <button class="view-tile" type="button" data-camera="passage">
+            <span class="view-tile-icon" aria-hidden="true">▤</span><span><strong data-i18n="passageView">W środku przejścia</strong><small data-i18n="passageDesc">Dwa rzędy po bokach.</small></span>
+          </button>
+          <button class="view-tile" type="button" data-camera="worker">
+            <span class="view-tile-icon" aria-hidden="true">●</span><span><strong data-i18n="workerView">Poziom pracownika</strong><small data-i18n="workerDesc">Praca przy roślinach.</small></span>
+          </button>
         </div>
       </section>
 
@@ -67,9 +80,6 @@
           <button class="scene-label label-left" type="button" data-info-key="leftSide" data-i18n="leftSide">LEWA STRONA</button>
           <button class="scene-label label-right" type="button" data-info-key="rightSide" data-i18n="rightSide">PRAWA STRONA</button>
           <button class="scene-label label-cart" type="button" data-info-key="liftCart" data-i18n="liftCart">WÓZEK PODNOŚNIKOWY</button>
-          <button class="scene-label label-harvest" type="button" data-info-key="harvestCart" data-i18n="harvestCart">WÓZEK DO ZBIORU</button>
-          <button class="scene-label label-capillary" type="button" data-info-key="capillaries" data-i18n="capillaries">KAPILARY</button>
-          <button class="scene-label label-mat" type="button" data-info-key="growMat" data-i18n="growMat">PAMPERSY / MATY UPRAWOWE</button>
           <button class="scene-label label-passage" type="button" data-info-key="passage" data-i18n="passage">PRZEJŚCIE</button>
           <div class="mini-map" aria-hidden="true">
             <span data-i18n="miniMapTitle">PLAN NAWY</span>
@@ -82,25 +92,12 @@
           <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: lewa strona, przejście 1, lewy rząd</div>
         </div>
         <div class="scene-toolbar">
-          <button class="toolbar-button is-active" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
-          <button class="toolbar-button" type="button" data-camera="nave"><span aria-hidden="true">▦</span><span data-i18n="nave">Jedna nawa</span></button>
-          <button class="toolbar-button" type="button" data-camera="lift"><span aria-hidden="true">↕</span><span data-i18n="liftView">Górny wózek</span></button>
           <button class="toolbar-button" type="button" id="motionButton"><span aria-hidden="true">Ⅱ</span><span data-i18n="pause">Zatrzymaj ruch</span></button>
-          <button class="toolbar-button" type="button" id="liftButton"><span aria-hidden="true">↕</span><span data-i18n="liftStart">Podnieś platformę</span></button>
           <button class="toolbar-button" type="button" id="resetButton"><span aria-hidden="true">↺</span><span data-i18n="resetView">Resetuj widok</span></button>
           <button class="toolbar-button" type="button" id="fullscreenButton"><span aria-hidden="true">⛶</span><span data-i18n="fullscreen">Pełny ekran</span></button>
-          <button class="toolbar-button tour-button" type="button" id="tourButton"><span aria-hidden="true">▶</span><span data-i18n="tourStart">Pokaż automatyczną wycieczkę</span></button>
         </div>
         <p class="touch-hint" data-i18n="touchHint">Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć.</p>
-        <details class="camera-panel">
-          <summary data-i18n="cameraChoices">Punkty widoku</summary>
-          <div class="camera-choices">
-            <button class="choice-button" type="button" data-camera="mainRoad" data-i18n="mainRoadView">Główna droga</button>
-            <button class="choice-button" type="button" data-camera="passage" data-i18n="passageView">W środku przejścia</button>
-            <button class="choice-button" type="button" data-camera="worker" data-i18n="workerView">Poziom pracownika</button>
-          </div>
-        </details>
-        <details class="explore-panel" open>
+        <details class="explore-panel">
           <summary data-i18n="exploreTitle">Wybierz element do obejrzenia</summary>
           <div class="explore-grid">
             <div class="control-card">
@@ -211,6 +208,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-  <script type="module" src="app.js?v=3"></script>
+  <script type="module" src="app.js?v=4"></script>
 </body>
 </html>
