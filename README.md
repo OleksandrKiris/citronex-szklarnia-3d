@@ -1,6 +1,6 @@
 # CITRONEX Szklarnia 3D
 
-Niezależny projekt wizualizacji szklarni. Nie jest częścią systemu CITRONEX hydra S.R.Z.B.
+Niezależny projekt wizualizacji szklarni. Nie zawiera kodu pierwotnego projektu 3D zakładu i nie jest osadzony w systemie CITRONEX hydra S.R.Z.B. Hydra prowadzi do niego wyłącznie linkiem.
 
 Projekt pokazuje:
 
