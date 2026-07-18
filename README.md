@@ -18,6 +18,11 @@ Projekt pokazuje jako przykład edukacyjny:
 - podstawowy cykl: roślina, wzrost, pielęgnacja i zbiór,
 - wybór widoku i zatrzymanie animacji,
 - obracanie sceny palcem, przybliżanie oraz tryb pełnoekranowy,
+- wybór lewej lub prawej strony nawy, przejścia 1–5 i lewego lub prawego rzędu,
+- mały plan nawy oraz podświetlenie wybranego miejsca,
+- warstwy widoku: rośliny, kapilary, wózki i pracownicy,
+- animowany przepływ wody oraz suwak etapów wzrostu,
+- klikalne krótkie objaśnienia elementów w każdym z 9 języków,
 - 9 języków.
 
 Docelowy adres GitHub Pages:

@@ -60,13 +60,22 @@
             <div class="fallback-side"><span data-i18n="leftSide">LEWA STRONA</span><b>1 2 3 4 5</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
             <div class="fallback-side"><span data-i18n="rightSide">PRAWA STRONA</span><b>1 2 3 4 5</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
           </div>
-          <div class="scene-label label-road" data-i18n="middleRoad">DROGA ŚRODKOWA</div>
-          <div class="scene-label label-left" data-i18n="leftSide">LEWA STRONA</div>
-          <div class="scene-label label-right" data-i18n="rightSide">PRAWA STRONA</div>
-          <div class="scene-label label-cart" data-i18n="liftCart">WÓZEK PODNOŚNIKOWY</div>
-          <div class="scene-label label-harvest" data-i18n="harvestCart">WÓZEK DO ZBIORU</div>
-          <div class="scene-label label-capillary" data-i18n="capillaries">KAPILARY</div>
-          <div class="scene-label label-mat" data-i18n="growMat">PAMPERSY / MATY UPRAWOWE</div>
+          <button class="scene-label label-road" type="button" data-info-key="middleRoad" data-i18n="middleRoad">DROGA ŚRODKOWA</button>
+          <button class="scene-label label-left" type="button" data-info-key="leftSide" data-i18n="leftSide">LEWA STRONA</button>
+          <button class="scene-label label-right" type="button" data-info-key="rightSide" data-i18n="rightSide">PRAWA STRONA</button>
+          <button class="scene-label label-cart" type="button" data-info-key="liftCart" data-i18n="liftCart">WÓZEK PODNOŚNIKOWY</button>
+          <button class="scene-label label-harvest" type="button" data-info-key="harvestCart" data-i18n="harvestCart">WÓZEK DO ZBIORU</button>
+          <button class="scene-label label-capillary" type="button" data-info-key="capillaries" data-i18n="capillaries">KAPILARY</button>
+          <button class="scene-label label-mat" type="button" data-info-key="growMat" data-i18n="growMat">PAMPERSY / MATY UPRAWOWE</button>
+          <div class="mini-map" aria-hidden="true">
+            <span data-i18n="miniMapTitle">PLAN NAWY</span>
+            <div class="mini-map-body">
+              <div class="mini-map-side"><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b></div>
+              <i class="mini-map-road"></i>
+              <div class="mini-map-side"><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b></div>
+            </div>
+          </div>
+          <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: lewa strona, przejście 1, lewy rząd</div>
         </div>
         <div class="scene-toolbar">
           <button class="toolbar-button is-active" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
@@ -78,6 +87,51 @@
           <button class="toolbar-button" type="button" id="fullscreenButton"><span aria-hidden="true">⛶</span><span data-i18n="fullscreen">Pełny ekran</span></button>
         </div>
         <p class="touch-hint" data-i18n="touchHint">Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć.</p>
+        <details class="explore-panel" open>
+          <summary data-i18n="exploreTitle">Wybierz element do obejrzenia</summary>
+          <div class="explore-grid">
+            <div class="control-card">
+              <strong data-i18n="naveChoice">Wybierz stronę nawy</strong>
+              <div class="control-actions">
+                <button class="choice-button is-active" type="button" data-nave-side="left" data-i18n="leftSide">Lewa strona</button>
+                <button class="choice-button" type="button" data-nave-side="right" data-i18n="rightSide">Prawa strona</button>
+              </div>
+            </div>
+            <div class="control-card">
+              <strong data-i18n="passageChoice">Wybierz przejście 1–5</strong>
+              <div class="passage-buttons" aria-label="Passage selection">
+                <button class="choice-button is-active" type="button" data-passage="1">1</button>
+                <button class="choice-button" type="button" data-passage="2">2</button>
+                <button class="choice-button" type="button" data-passage="3">3</button>
+                <button class="choice-button" type="button" data-passage="4">4</button>
+                <button class="choice-button" type="button" data-passage="5">5</button>
+              </div>
+            </div>
+            <div class="control-card">
+              <strong data-i18n="rowChoice">Wybierz rząd w przejściu</strong>
+              <div class="control-actions">
+                <button class="choice-button is-active" type="button" data-row-side="left" data-i18n="leftRow">Lewy rząd</button>
+                <button class="choice-button" type="button" data-row-side="right" data-i18n="rightRow">Prawy rząd</button>
+              </div>
+            </div>
+            <div class="control-card">
+              <strong data-i18n="processChoice">Pokaż proces</strong>
+              <div class="control-actions process-actions">
+                <button class="choice-button" type="button" id="waterButton" data-i18n="showWater">Pokaż przepływ wody</button>
+                <label class="range-control"><span data-i18n="growthChoice">Etap wzrostu</span><input id="growthSlider" type="range" min="0" max="3" step="1" value="3"></label>
+              </div>
+            </div>
+            <div class="control-card">
+              <strong data-i18n="layersTitle">Warstwy widoku</strong>
+              <div class="layer-buttons">
+                <button class="choice-button is-on" type="button" data-layer="plants" data-i18n="plants">Rośliny</button>
+                <button class="choice-button is-on" type="button" data-layer="capillaries" data-i18n="capillaries">Kapilary</button>
+                <button class="choice-button is-on" type="button" data-layer="carts" data-i18n="carts">Wózki</button>
+                <button class="choice-button is-on" type="button" data-layer="people" data-i18n="people">Pracownicy</button>
+              </div>
+            </div>
+          </div>
+        </details>
       </section>
 
       <section class="legend-section" aria-label="Legenda">
@@ -98,9 +152,9 @@
           </div>
         </div>
         <div class="technical-grid">
-          <article class="technical-card"><span class="technical-icon" aria-hidden="true">↕</span><h3 data-i18n="capillaries">Kapilary</h3><p data-i18n="capillaryInfo">Cienkie przewody doprowadzające wodę i pożywkę do roślin.</p></article>
-          <article class="technical-card"><span class="technical-icon" aria-hidden="true">▰</span><h3 data-i18n="growMat">Pampersy / maty uprawowe</h3><p data-i18n="matInfo">Podłoże, w którym rosną rośliny i do którego trafia pożywka.</p></article>
-          <article class="technical-card"><span class="technical-icon" aria-hidden="true">●</span><h3 data-i18n="tomatoes">Pomidory</h3><p data-i18n="growthInfo">Roślina rośnie w rzędzie; dojrzałe owoce trafiają do wózka do zbioru.</p></article>
+          <article class="technical-card" data-info-key="capillaries"><span class="technical-icon" aria-hidden="true">↕</span><h3 data-i18n="capillaries">Kapilary</h3><p data-i18n="capillaryInfo">Cienkie przewody doprowadzające wodę i pożywkę do roślin.</p></article>
+          <article class="technical-card" data-info-key="growMat"><span class="technical-icon" aria-hidden="true">▰</span><h3 data-i18n="growMat">Pampersy / maty uprawowe</h3><p data-i18n="matInfo">Podłoże, w którym rosną rośliny i do którego trafia pożywka.</p></article>
+          <article class="technical-card" data-info-key="tomatoes"><span class="technical-icon" aria-hidden="true">●</span><h3 data-i18n="tomatoes">Pomidory</h3><p data-i18n="growthInfo">Roślina rośnie w rzędzie; dojrzałe owoce trafiają do wózka do zbioru.</p></article>
         </div>
       </section>
 
@@ -134,6 +188,13 @@
         <div class="fact"><strong>2</strong><span data-i18n="factSides">strony drogi</span></div>
       </section>
     </main>
+
+    <dialog id="infoDialog" class="info-dialog">
+      <button id="infoClose" class="info-close" type="button" aria-label="Close">×</button>
+      <div class="eyebrow" data-i18n="infoEyebrow">KRÓTKIE WYJAŚNIENIE</div>
+      <h2 id="infoTitle"></h2>
+      <p id="infoText"></p>
+    </dialog>
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>

@@ -74,11 +74,42 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     id: { liftView: "Troli dengan platform pengangkat", liftCart: "TROLI DENGAN PLATFORM PENGANGKAT", liftStart: "Naikkan platform", liftStop: "Turunkan platform", resetView: "Atur ulang tampilan", fullscreen: "Layar penuh", closeFullscreen: "Tutup layar penuh", touchHint: "Geser untuk melihat. Cubit untuk memperbesar." },
     ne: { liftView: "लिफ्ट प्लेटफर्म भएको गाडी", liftCart: "लिफ्ट प्लेटफर्म भएको गाडी", liftStart: "प्लेटफर्म उठाउनुहोस्", liftStop: "प्लेटफर्म झार्नुहोस्", resetView: "दृश्य रिसेट गर्नुहोस्", fullscreen: "पूरै स्क्रिन", closeFullscreen: "पूरै स्क्रिन बन्द गर्नुहोस्", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्।" }
   };
+  const explorationTranslations = {
+    pl: {
+      exploreTitle: "Wybierz element do obejrzenia", naveChoice: "Wybierz stronę nawy", passageChoice: "Wybierz przejście 1–5", rowChoice: "Wybierz rząd w przejściu", leftRow: "Lewy rząd", rightRow: "Prawy rząd", processChoice: "Pokaż proces", showWater: "Pokaż przepływ wody", hideWater: "Ukryj przepływ wody", growthChoice: "Etap wzrostu", layersTitle: "Warstwy widoku", miniMapTitle: "PLAN NAWY", selectionText: "Wybrane: {side}, przejście {passage}, {row}", infoEyebrow: "KRÓTKIE WYJAŚNIENIE", infoClose: "Zamknij", infoMiddleRoad: "Droga środkowa oddziela lewą i prawą stronę szklarni. To główna droga, którą kierujesz się do wybranej nawy.", infoLeftSide: "Lewa strona szklarni. Stojąc plecami do pierwszych naw, wybierasz stronę po lewej stronie drogi środkowej.", infoRightSide: "Prawa strona szklarni. Stojąc plecami do pierwszych naw, wybierasz stronę po prawej stronie drogi środkowej.", infoLiftCart: "Wózek podnośnikowy jeździ po podłodze przejścia jak zwykły wózek. Platforma podnosi pracownika do pracy przy roślinach.", infoHarvestCart: "Wózek do zbioru jedzie po podłodze przejścia. Zebrane pomidory odkłada się do pojemnika na wózku.", infoCapillaries: "Kapilary to cienkie przewody doprowadzające wodę i pożywkę do maty przy każdym rzędzie.", infoGrowMat: "Mata uprawowa, nazywana też pampersem, utrzymuje podłoże i wodę przy korzeniach rośliny.", infoTomatoes: "Roślina rośnie w swoim rzędzie. Owoce przechodzą od kwitnienia do zielonego, a następnie dojrzałego pomidora.", infoPeople: "Pracownicy poruszają się wyznaczonym przejściem i pracują przy przypisanym rzędzie.", infoWater: "Niebieskie punkty pokazują drogę wody: przewód, kapilara, mata i korzenie.", infoLeftRow: "Lewy rząd w wybranym przejściu. Pracujesz przy roślinach po lewej stronie przejścia.", infoRightRow: "Prawy rząd w wybranym przejściu. Pracujesz przy roślinach po prawej stronie przejścia.", infoPassage: "Przejście jest drogą między dwoma rzędami. W każdej nawie jest pięć przejść.", infoGrowth0: "Młoda roślina", infoGrowth1: "Kwitnienie", infoGrowth2: "Zielony owoc", infoGrowth3: "Dojrzały pomidor"
+    },
+    en: {
+      exploreTitle: "Choose what to explore", naveChoice: "Choose the nave side", passageChoice: "Choose passage 1–5", rowChoice: "Choose a row in the passage", leftRow: "Left row", rightRow: "Right row", processChoice: "Show the process", showWater: "Show water flow", hideWater: "Hide water flow", growthChoice: "Growth stage", layersTitle: "View layers", miniMapTitle: "NAVE PLAN", selectionText: "Selected: {side}, passage {passage}, {row}", infoEyebrow: "SHORT EXPLANATION", infoClose: "Close", infoMiddleRoad: "The middle road separates the left and right sides of the greenhouse. Use it to reach the selected nave.", infoLeftSide: "Left side of the greenhouse. With your back to the first naves, this is the side on your left.", infoRightSide: "Right side of the greenhouse. With your back to the first naves, this is the side on your right.", infoLiftCart: "The lift cart drives on the passage floor like a normal cart. Its platform raises the worker to the plants.", infoHarvestCart: "The harvest cart drives on the passage floor. Picked tomatoes go into the container on the cart.", infoCapillaries: "Capillaries are thin tubes that deliver water and nutrients to the growing mat beside each row.", infoGrowMat: "The growing mat holds the growing medium and water close to the plant roots.", infoTomatoes: "The plant grows in its row. The fruit develops from flowering to green and then ripe tomatoes.", infoPeople: "Workers use the assigned passage and work beside the assigned row.", infoWater: "Blue dots show the water path: tube, capillary, mat and roots.", infoLeftRow: "The left row in the selected passage. Work with the plants on the left side of the passage.", infoRightRow: "The right row in the selected passage. Work with the plants on the right side of the passage.", infoPassage: "A passage is the path between two rows. Each nave has five passages.", infoGrowth0: "Young plant", infoGrowth1: "Flowering", infoGrowth2: "Green fruit", infoGrowth3: "Ripe tomato"
+    },
+    ua: {
+      exploreTitle: "Оберіть, що переглянути", naveChoice: "Оберіть сторону нави", passageChoice: "Оберіть прохід 1–5", rowChoice: "Оберіть ряд у проході", leftRow: "Лівий ряд", rightRow: "Правий ряд", processChoice: "Покажіть процес", showWater: "Показати рух води", hideWater: "Сховати рух води", growthChoice: "Етап росту", layersTitle: "Шари огляду", miniMapTitle: "ПЛАН НАВИ", selectionText: "Обрано: {side}, прохід {passage}, {row}", infoEyebrow: "КОРОТКЕ ПОЯСНЕННЯ", infoClose: "Закрити", infoMiddleRoad: "Центральна дорога розділяє ліву і праву сторони теплиці. Нею ви прямуєте до потрібної нави.", infoLeftSide: "Ліва сторона теплиці. Якщо стояти спиною до перших нав, це сторона ліворуч.", infoRightSide: "Права сторона теплиці. Якщо стояти спиною до перших нав, це сторона праворуч.", infoLiftCart: "Візок з підйомною платформою їде підлогою проходу, як звичайний візок. Платформа піднімає працівника до рослин.", infoHarvestCart: "Візок для збору їде підлогою проходу. Зібрані помідори кладуть у контейнер на візку.", infoCapillaries: "Капіляри — це тонкі трубки, які подають воду та поживний розчин до мату біля кожного ряду.", infoGrowMat: "Мат для вирощування утримує субстрат і воду біля коріння рослини.", infoTomatoes: "Рослина росте у своєму ряду. Плоди проходять етапи цвітіння, зеленого та стиглого помідора.", infoPeople: "Працівники рухаються визначеним проходом і працюють біля призначеного ряду.", infoWater: "Сині точки показують шлях води: трубка, капіляр, мат і коріння.", infoLeftRow: "Лівий ряд у вибраному проході. Працюйте з рослинами ліворуч від проходу.", infoRightRow: "Правий ряд у вибраному проході. Працюйте з рослинами праворуч від проходу.", infoPassage: "Прохід — це дорога між двома рядами. У кожній наві є п’ять проходів.", infoGrowth0: "Молода рослина", infoGrowth1: "Цвітіння", infoGrowth2: "Зелений плід", infoGrowth3: "Стиглий помідор"
+    },
+    ru: {
+      exploreTitle: "Выберите, что посмотреть", naveChoice: "Выберите сторону нава", passageChoice: "Выберите проход 1–5", rowChoice: "Выберите ряд в проходе", leftRow: "Левый ряд", rightRow: "Правый ряд", processChoice: "Показать процесс", showWater: "Показать движение воды", hideWater: "Скрыть движение воды", growthChoice: "Этап роста", layersTitle: "Слои вида", miniMapTitle: "ПЛАН НАВЫ", selectionText: "Выбрано: {side}, проход {passage}, {row}", infoEyebrow: "КОРОТКОЕ ОБЪЯСНЕНИЕ", infoClose: "Закрыть", infoMiddleRoad: "Центральная дорога разделяет левую и правую стороны теплицы. По ней вы идёте к нужной наве.", infoLeftSide: "Левая сторона теплицы. Если стоять спиной к первым навам, это сторона слева.", infoRightSide: "Правая сторона теплицы. Если стоять спиной к первым навам, это сторона справа.", infoLiftCart: "Тележка с подъёмной платформой ездит по полу прохода, как обычная тележка. Платформа поднимает работника к растениям.", infoHarvestCart: "Тележка для сбора ездит по полу прохода. Собранные помидоры кладут в контейнер на тележке.", infoCapillaries: "Капилляры — это тонкие трубки, которые подают воду и питательный раствор к мату возле каждого ряда.", infoGrowMat: "Мат для выращивания удерживает субстрат и воду возле корней растения.", infoTomatoes: "Растение растёт в своём ряду. Плоды проходят этапы цветения, зелёного и спелого помидора.", infoPeople: "Работники идут по назначенному проходу и работают возле назначенного ряда.", infoWater: "Синие точки показывают путь воды: трубка, капилляр, мат и корни.", infoLeftRow: "Левый ряд в выбранном проходе. Работайте с растениями слева от прохода.", infoRightRow: "Правый ряд в выбранном проходе. Работайте с растениями справа от прохода.", infoPassage: "Проход — это дорожка между двумя рядами. В каждой наве пять проходов.", infoGrowth0: "Молодое растение", infoGrowth1: "Цветение", infoGrowth2: "Зелёный плод", infoGrowth3: "Спелый помидор"
+    },
+    az: {
+      exploreTitle: "Nəyi görmək istədiyinizi seçin", naveChoice: "Navanın tərəfini seçin", passageChoice: "1–5 keçidlərindən birini seçin", rowChoice: "Keçiddə cərgəni seçin", leftRow: "Sol cərgə", rightRow: "Sağ cərgə", processChoice: "Prosesi göstərin", showWater: "Su axınını göstər", hideWater: "Su axınını gizlət", growthChoice: "Böyümə mərhələsi", layersTitle: "Görüntü qatları", miniMapTitle: "NAVA PLANI", selectionText: "Seçildi: {side}, keçid {passage}, {row}", infoEyebrow: "QISA İZAH", infoClose: "Bağla", infoMiddleRoad: "Mərkəzi yol istixananın sol və sağ tərəflərini ayırır. Seçilmiş navaya bu yolla gedirsiniz.", infoLeftSide: "İstixananın sol tərəfi. Birinci navalara arxanızla dayandıqda bu, sol tərəfdir.", infoRightSide: "İstixananın sağ tərəfi. Birinci navalara arxanızla dayandıqda bu, sağ tərəfdir.", infoLiftCart: "Qaldırıcı platformalı araba keçidin döşəməsində adi araba kimi hərəkət edir. Platforma işçini bitkilərə qaldırır.", infoHarvestCart: "Yığım arabası keçidin döşəməsində hərəkət edir. Yığılan pomidorlar arabadakı qaba qoyulur.", infoCapillaries: "Kapilyarlar hər cərgənin yanındakı mata su və qida məhlulu gətirən nazik borulardır.", infoGrowMat: "Becərmə matı bitkinin köklərinin yanında substratı və suyu saxlayır.", infoTomatoes: "Bitki öz cərgəsində böyüyür. Meyvə çiçəklənmə, yaşıl və yetişmiş pomidor mərhələlərindən keçir.", infoPeople: "İşçilər təyin olunmuş keçiddən istifadə edir və təyin olunmuş cərgənin yanında işləyirlər.", infoWater: "Mavi nöqtələr suyun yolunu göstərir: boru, kapilyar, mat və köklər.", infoLeftRow: "Seçilmiş keçiddə sol cərgə. Keçidin sol tərəfindəki bitkilərlə işləyin.", infoRightRow: "Seçilmiş keçiddə sağ cərgə. Keçidin sağ tərəfindəki bitkilərlə işləyin.", infoPassage: "Keçid iki cərgə arasındakı yoldur. Hər navada beş keçid var.", infoGrowth0: "Gənc bitki", infoGrowth1: "Çiçəklənmə", infoGrowth2: "Yaşıl meyvə", infoGrowth3: "Yetişmiş pomidor"
+    },
+    es: {
+      exploreTitle: "Elige qué quieres ver", naveChoice: "Elige el lado de la nave", passageChoice: "Elige el pasillo 1–5", rowChoice: "Elige una fila del pasillo", leftRow: "Fila izquierda", rightRow: "Fila derecha", processChoice: "Mostrar el proceso", showWater: "Mostrar el flujo de agua", hideWater: "Ocultar el flujo de agua", growthChoice: "Etapa de crecimiento", layersTitle: "Capas de la vista", miniMapTitle: "PLANO DE LA NAVE", selectionText: "Seleccionado: {side}, pasillo {passage}, {row}", infoEyebrow: "EXPLICACIÓN BREVE", infoClose: "Cerrar", infoMiddleRoad: "El camino central separa los lados izquierdo y derecho del invernadero. Por él llegas a la nave elegida.", infoLeftSide: "Lado izquierdo del invernadero. Con la espalda hacia las primeras naves, es el lado de la izquierda.", infoRightSide: "Lado derecho del invernadero. Con la espalda hacia las primeras naves, es el lado de la derecha.", infoLiftCart: "El carro elevador circula por el suelo del pasillo como un carro normal. Su plataforma eleva al trabajador hasta las plantas.", infoHarvestCart: "El carro de cosecha circula por el suelo del pasillo. Los tomates recogidos se colocan en su contenedor.", infoCapillaries: "Los capilares son tubos finos que llevan agua y nutrientes a la manta de cultivo junto a cada fila.", infoGrowMat: "La manta de cultivo mantiene el sustrato y el agua cerca de las raíces.", infoTomatoes: "La planta crece en su fila. El fruto pasa por la floración, el fruto verde y el tomate maduro.", infoPeople: "Los trabajadores usan el pasillo asignado y trabajan junto a la fila asignada.", infoWater: "Los puntos azules muestran el recorrido del agua: tubo, capilar, manta y raíces.", infoLeftRow: "Fila izquierda del pasillo elegido. Trabaja con las plantas del lado izquierdo.", infoRightRow: "Fila derecha del pasillo elegido. Trabaja con las plantas del lado derecho.", infoPassage: "El pasillo es el camino entre dos filas. Cada nave tiene cinco pasillos.", infoGrowth0: "Planta joven", infoGrowth1: "Floración", infoGrowth2: "Fruto verde", infoGrowth3: "Tomate maduro"
+    },
+    fil: {
+      exploreTitle: "Piliin kung ano ang titingnan", naveChoice: "Piliin ang panig ng nave", passageChoice: "Piliin ang daanan 1–5", rowChoice: "Piliin ang hanay sa daanan", leftRow: "Kaliwang hanay", rightRow: "Kanang hanay", processChoice: "Ipakita ang proseso", showWater: "Ipakita ang daloy ng tubig", hideWater: "Itago ang daloy ng tubig", growthChoice: "Yugto ng paglaki", layersTitle: "Mga layer ng tanawin", miniMapTitle: "PLANO NG NAVE", selectionText: "Napili: {side}, daanan {passage}, {row}", infoEyebrow: "MAIKLING PALIWANAG", infoClose: "Isara", infoMiddleRoad: "Hinahati ng gitnang daan ang kaliwa at kanang bahagi ng greenhouse. Dito ka pupunta sa napiling nave.", infoLeftSide: "Kaliwang bahagi ng greenhouse. Kapag nakatalikod sa mga unang nave, ito ang nasa kaliwa.", infoRightSide: "Kanang bahagi ng greenhouse. Kapag nakatalikod sa mga unang nave, ito ang nasa kanan.", infoLiftCart: "Ang lift cart ay umaandar sa sahig ng daanan tulad ng ordinaryong cart. Itinataas ng platform ang manggagawa papunta sa mga halaman.", infoHarvestCart: "Ang harvest cart ay umaandar sa sahig ng daanan. Inilalagay ang mga napitas na kamatis sa lalagyan nito.", infoCapillaries: "Ang capillary ay manipis na tubo na naghahatid ng tubig at sustansiya sa grow mat sa tabi ng bawat hanay.", infoGrowMat: "Ang grow mat ay humahawak sa medium at tubig malapit sa ugat ng halaman.", infoTomatoes: "Lumalaki ang halaman sa sariling hanay. Dumadaan ang bunga sa pamumulaklak, berdeng bunga at hinog na kamatis.", infoPeople: "Gumagamit ang mga manggagawa ng itinakdang daanan at nagtatrabaho sa tabi ng itinakdang hanay.", infoWater: "Ipinapakita ng mga asul na tuldok ang daan ng tubig: tubo, capillary, mat at ugat.", infoLeftRow: "Kaliwang hanay sa napiling daanan. Magtrabaho sa mga halaman sa kaliwang bahagi.", infoRightRow: "Kanang hanay sa napiling daanan. Magtrabaho sa mga halaman sa kanang bahagi.", infoPassage: "Ang daanan ay nasa pagitan ng dalawang hanay. May limang daanan sa bawat nave.", infoGrowth0: "Batang halaman", infoGrowth1: "Namumulaklak", infoGrowth2: "Berdeng bunga", infoGrowth3: "Hinog na kamatis"
+    },
+    id: {
+      exploreTitle: "Pilih yang ingin dilihat", naveChoice: "Pilih sisi nave", passageChoice: "Pilih lorong 1–5", rowChoice: "Pilih baris di lorong", leftRow: "Baris kiri", rightRow: "Baris kanan", processChoice: "Tampilkan proses", showWater: "Tampilkan aliran air", hideWater: "Sembunyikan aliran air", growthChoice: "Tahap pertumbuhan", layersTitle: "Lapisan tampilan", miniMapTitle: "DENAH NAVE", selectionText: "Dipilih: {side}, lorong {passage}, {row}", infoEyebrow: "PENJELASAN SINGKAT", infoClose: "Tutup", infoMiddleRoad: "Jalan tengah memisahkan sisi kiri dan kanan rumah kaca. Dari sini Anda menuju nave yang dipilih.", infoLeftSide: "Sisi kiri rumah kaca. Saat membelakangi nave pertama, ini adalah sisi kiri Anda.", infoRightSide: "Sisi kanan rumah kaca. Saat membelakangi nave pertama, ini adalah sisi kanan Anda.", infoLiftCart: "Troli pengangkat berjalan di lantai lorong seperti troli biasa. Platformnya mengangkat pekerja ke tanaman.", infoHarvestCart: "Troli panen berjalan di lantai lorong. Tomat yang dipetik dimasukkan ke wadah di troli.", infoCapillaries: "Kapiler adalah selang tipis yang mengalirkan air dan nutrisi ke mat tanam di samping setiap baris.", infoGrowMat: "Mat tanam menahan media dan air di dekat akar tanaman.", infoTomatoes: "Tanaman tumbuh di barisnya. Buah berkembang dari berbunga, buah hijau hingga tomat matang.", infoPeople: "Pekerja menggunakan lorong yang ditentukan dan bekerja di samping baris yang ditentukan.", infoWater: "Titik biru menunjukkan jalur air: selang, kapiler, mat dan akar.", infoLeftRow: "Baris kiri pada lorong yang dipilih. Bekerjalah dengan tanaman di sisi kiri lorong.", infoRightRow: "Baris kanan pada lorong yang dipilih. Bekerjalah dengan tanaman di sisi kanan lorong.", infoPassage: "Lorong adalah jalan di antara dua baris. Setiap nave memiliki lima lorong.", infoGrowth0: "Tanaman muda", infoGrowth1: "Berbunga", infoGrowth2: "Buah hijau", infoGrowth3: "Tomat matang"
+    },
+    ne: {
+      exploreTitle: "के हेर्ने हो छान्नुहोस्", naveChoice: "नाभको पक्ष छान्नुहोस्", passageChoice: "बाटो १–५ छान्नुहोस्", rowChoice: "बाटोभित्रको लाइन छान्नुहोस्", leftRow: "बायाँ लाइन", rightRow: "दायाँ लाइन", processChoice: "प्रक्रिया देखाउनुहोस्", showWater: "पानीको बहाव देखाउनुहोस्", hideWater: "पानीको बहाव लुकाउनुहोस्", growthChoice: "बढ्ने चरण", layersTitle: "दृश्यका तहहरू", miniMapTitle: "नाभको योजना", selectionText: "छानिएको: {side}, बाटो {passage}, {row}", infoEyebrow: "छोटो व्याख्या", infoClose: "बन्द गर्नुहोस्", infoMiddleRoad: "बीचको बाटोले ग्रीनहाउसको बायाँ र दायाँ भाग छुट्याउँछ। यही बाटो भएर छानिएको नाभमा जानुहोस्।", infoLeftSide: "ग्रीनहाउसको बायाँ भाग। पहिलो नाभतिर ढाड फर्काउँदा यो तपाईंको बायाँतिर हुन्छ।", infoRightSide: "ग्रीनहाउसको दायाँ भाग। पहिलो नाभतिर ढाड फर्काउँदा यो तपाईंको दायाँतिर हुन्छ।", infoLiftCart: "लिफ्ट ट्रली साधारण ट्रलीजस्तै बाटोको भुइँमा चल्छ। यसको प्लेटफर्मले कामदारलाई बिरुवासम्म उठाउँछ।", infoHarvestCart: "बाली टिप्ने ट्रली बाटोको भुइँमा चल्छ। टिपिएका गोलभेडा ट्रलीको कन्टेनरमा राखिन्छन्।", infoCapillaries: "केपिलरी पातला पाइप हुन् जसले हरेक लाइनको म्याटसम्म पानी र पोषक घोल पुर्‍याउँछन्।", infoGrowMat: "उत्पादन म्याटले बिरुवाको जरानजिक माध्यम र पानी राख्छ।", infoTomatoes: "बिरुवा आफ्नै लाइनमा बढ्छ। फल फूल, हरियो फल र पाकेको गोलभेडाको चरणबाट जान्छ।", infoPeople: "कामदारले तोकिएको बाटो प्रयोग गर्छन् र तोकिएको लाइनछेउमा काम गर्छन्।", infoWater: "निला बिन्दुले पानीको बाटो देखाउँछन्: पाइप, केपिलरी, म्याट र जरा।", infoLeftRow: "छानिएको बाटोको बायाँ लाइन। बाटोको बायाँपट्टिका बिरुवामा काम गर्नुहोस्।", infoRightRow: "छानिएको बाटोको दायाँ लाइन। बाटोको दायाँपट्टिका बिरुवामा काम गर्नुहोस्।", infoPassage: "बाटो दुई लाइनबीचको हिँड्ने ठाउँ हो। प्रत्येक नाभमा पाँच बाटा हुन्छन्।", infoGrowth0: "सानो बिरुवा", infoGrowth1: "फूल फुल्ने चरण", infoGrowth2: "हरियो फल", infoGrowth3: "पाकेको गोलभेडा"
+    }
+  };
   Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(interactionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  Object.entries(explorationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
-  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: false, cameraMode: "overview" };
+  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: false, waterActive: false, growthStage: 3, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
+  const passagePositions = [-8.1, -6.45, -4.8, -3.15, -1.5];
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
 
@@ -92,6 +123,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateMotionText();
     updateLiftText();
     updateFullscreenText();
+    updateWaterText();
+    updateSelection();
   }
 
   function updateMotionText() {
@@ -109,6 +142,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     $("#fullscreenButton span:last-child").textContent = isFullscreen ? t("closeFullscreen") : t("fullscreen");
   }
 
+  function updateWaterText() {
+    const button = $("#waterButton");
+    if (button) button.textContent = state.waterActive ? t("hideWater") : t("showWater");
+  }
+
   $("#languageSelect").addEventListener("change", (event) => {
     state.lang = event.target.value;
     localStorage.setItem("citronex-3d-lang", state.lang);
@@ -122,6 +160,16 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let targetCamera;
   let scene;
   let animated = [];
+  let plantRecords = [];
+  let rowRecords = [];
+  let passageRecords = [];
+  let capillaryMeshes = [];
+  let waterDots = [];
+  let matMeshes = [];
+  let cartRecords = [];
+  let peopleRecords = [];
+  let demoLiftItem = null;
+  const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), new THREE.MeshStandardMaterial({ color, ...materialOptions }));
@@ -138,16 +186,20 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const stem = new THREE.Mesh(new THREE.CylinderGeometry(.035, .05, 1.35, 6), new THREE.MeshStandardMaterial({ color: 0x2f7845 }));
     stem.position.y = .9;
     group.add(support, stem);
+    const tomatoes = [];
     [-.12, .12].forEach((offset, index) => {
       const tomato = new THREE.Mesh(new THREE.SphereGeometry(.12, 8, 8), new THREE.MeshStandardMaterial({ color: index ? 0xd94d39 : 0xe96a3c }));
       tomato.position.set(offset, .95 + index * .14, 0);
       group.add(tomato);
+      tomatoes.push(tomato);
     });
     const leaves = new THREE.Mesh(new THREE.BoxGeometry(.48, .05, .08), new THREE.MeshStandardMaterial({ color: 0x4e9b57 }));
     leaves.position.set(side * .1, .65, 0);
     leaves.rotation.z = side * .25;
     group.add(leaves);
     scene.add(group);
+    plantRecords.push({ group, tomatoes });
+    return group;
   }
 
   function person(x, z, color, phase) {
@@ -160,6 +212,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     group.add(body, head);
     scene.add(group);
     animated.push({ object: group, type: "person", baseX: x, baseZ: z, phase });
+    peopleRecords.push(group);
   }
 
   function overheadCart(x, z, phase, demoLift = false) {
@@ -200,7 +253,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
     group.add(body, load);
     scene.add(group);
-    animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly });
+    const item = { object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly };
+    animated.push(item);
+    cartRecords.push(group);
+    if (demoLift) demoLiftItem = item;
   }
 
   function harvestCart(x, z, phase) {
@@ -221,6 +277,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }));
     scene.add(group);
     animated.push({ object: group, type: "harvest", baseX: x, baseZ: z, phase });
+    cartRecords.push(group);
   }
 
   function addGlasshouse() {
@@ -228,9 +285,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const frame = 0x4f8f7e;
     const floor = 0xd9e7dd;
     const passage = 0xd6bd83;
-    const passageCenters = [-8.1, -6.45, -4.8, -3.15, -1.5, 1.5, 3.15, 4.8, 6.45, 8.1];
-    const rows = [];
-    [-8.1, -6.45, -4.8, -3.15, -1.5].forEach((center) => { rows.push(center - .55, center + .55, -center - .55, -center + .55); });
+    const naveCenters = passagePositions;
+    const passageCenters = [...naveCenters, ...naveCenters.map((center) => -center)];
 
     box(18, .12, 32, floor, 0, .05, 0);
     box(2.7, .05, 30.5, passage, 0, .13, 0);
@@ -256,16 +312,34 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     });
     box(2.55, .045, 30.5, 0xe7cb92, 0, .2, 0);
 
-    rows.forEach((x) => {
-      box(.66, .10, 29, 0xb98258, x, .22, 0);
-      box(.6, .2, 29, 0x64a965, x, .36, 0);
-      box(.035, .045, 29, 0x4d9bd0, x, .52, 0);
-      for (let z = -13.2; z <= 13.2; z += 3.2) plant(x, z, x < 0 ? -1 : 1);
+    function addRow(x, passageNumber, naveSide, rowSide) {
+      const mat = box(.66, .10, 29, 0xb98258, x, .22, 0);
+      const bed = box(.6, .2, 29, 0x64a965, x, .36, 0);
+      const capillary = box(.035, .045, 29, 0x4d9bd0, x, .52, 0);
+      rowRecords.push({ mat, bed, capillary, passageNumber, naveSide, rowSide });
+      capillaryMeshes.push(capillary);
+      matMeshes.push(mat);
+      for (let z = -13.2; z <= 13.2; z += 3.2) {
+        plant(x, z, x < 0 ? -1 : 1);
+        const waterDot = new THREE.Mesh(new THREE.SphereGeometry(.07, 8, 8), new THREE.MeshStandardMaterial({ color: 0x2f9be5, emissive: 0x0a426b, emissiveIntensity: .45 }));
+        waterDot.position.set(x, .58, z);
+        scene.add(waterDot);
+        waterDots.push({ mesh: waterDot, baseX: x, baseZ: z, phase: z * .15 });
+      }
+    }
+    naveCenters.forEach((center, index) => {
+      addRow(center - .55, index + 1, "left", "left");
+      addRow(center + .55, index + 1, "left", "right");
+      addRow(-center - .55, index + 1, "right", "left");
+      addRow(-center + .55, index + 1, "right", "right");
     });
-    passageCenters.forEach((x) => {
-      box(.86, .035, 29, 0xf1dfaf, x, .5, 0);
+    passageCenters.forEach((x, index) => {
+      const naveSide = index < 5 ? "left" : "right";
+      const passageNumber = (index % 5) + 1;
+      const path = box(.86, .035, 29, 0xf1dfaf, x, .5, 0);
       box(.06, .035, 29, 0x737b7e, x - .3, .17, 0);
       box(.06, .035, 29, 0x737b7e, x + .3, .17, 0);
+      passageRecords.push({ mesh: path, naveSide, passageNumber });
     });
 
     [-8.1, -4.8, 4.8, 8.1].forEach((x, index) => overheadCart(x, x === -4.8 ? 4.5 : -10 + index * 5.5, index, x === -4.8));
@@ -295,6 +369,66 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
   }
 
+  function selectedPassageX() {
+    const x = passagePositions[state.selectedPassage - 1] || passagePositions[0];
+    return state.selectedNaveSide === "left" ? x : -x;
+  }
+
+  function updateSelection() {
+    const sideText = state.selectedNaveSide === "left" ? t("leftSide") : t("rightSide");
+    const rowText = state.selectedRowSide === "left" ? t("leftRow") : t("rightRow");
+    const selection = t("selectionText").replace("{side}", sideText).replace("{passage}", String(state.selectedPassage)).replace("{row}", rowText);
+    const badge = $("#selectionBadge");
+    if (badge) badge.textContent = selection;
+    rowRecords.forEach((record) => {
+      const selected = record.naveSide === state.selectedNaveSide && record.passageNumber === state.selectedPassage && record.rowSide === state.selectedRowSide;
+      [record.mat, record.bed, record.capillary].forEach((mesh) => {
+        mesh.material.emissive.setHex(selected ? 0x9a6b1b : 0x000000);
+        mesh.material.emissiveIntensity = selected ? .7 : 0;
+      });
+    });
+    passageRecords.forEach((record) => {
+      const selected = record.naveSide === state.selectedNaveSide && record.passageNumber === state.selectedPassage;
+      record.mesh.material.emissive.setHex(selected ? 0x4b86b6 : 0x000000);
+      record.mesh.material.emissiveIntensity = selected ? .75 : 0;
+    });
+    if (demoLiftItem) demoLiftItem.baseX = selectedPassageX();
+    document.querySelectorAll("[data-nave-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.naveSide === state.selectedNaveSide));
+    document.querySelectorAll("[data-passage]").forEach((button) => button.classList.toggle("is-active", Number(button.dataset.passage) === state.selectedPassage));
+    document.querySelectorAll("[data-row-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.rowSide === state.selectedRowSide));
+    applyLayerVisibility();
+  }
+
+  function applyLayerVisibility() {
+    plantRecords.forEach((record) => { record.group.visible = layerState.plants; });
+    capillaryMeshes.forEach((mesh) => { mesh.visible = layerState.capillaries; });
+    waterDots.forEach((dot) => { dot.mesh.visible = state.waterActive && layerState.capillaries; });
+    cartRecords.forEach((group) => { group.visible = layerState.carts; });
+    peopleRecords.forEach((group) => { group.visible = layerState.people; });
+    document.querySelectorAll("[data-layer]").forEach((button) => button.classList.toggle("is-on", layerState[button.dataset.layer]));
+  }
+
+  function applyGrowthStage(stage) {
+    state.growthStage = Number(stage);
+    const colors = [0x77b84e, 0xe4b32d, 0x79b94f, 0xd9483f];
+    plantRecords.forEach((record) => {
+      record.group.scale.y = .8 + state.growthStage * .07;
+      record.tomatoes.forEach((tomato) => tomato.material.color.setHex(colors[state.growthStage]));
+    });
+  }
+
+  function openInfo(key) {
+    const dialog = $("#infoDialog");
+    const title = $("#infoTitle");
+    const text = $("#infoText");
+    if (!dialog || !title || !text) return;
+    const infoKey = key.charAt(0).toUpperCase() + key.slice(1);
+    title.textContent = t(key);
+    text.textContent = t(`info${infoKey}`);
+    if (typeof dialog.showModal === "function") dialog.showModal();
+    else dialog.setAttribute("open", "");
+  }
+
   function initScene() {
     if (!THREE) { fallback.hidden = false; sceneCanvas.hidden = true; return; }
     try {
@@ -312,6 +446,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 2.1));
       const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(12, 22, 10); scene.add(sun);
       addGlasshouse();
+      applyGrowthStage(state.growthStage);
+      updateSelection();
       resizeScene();
       requestAnimationFrame(animate);
     } catch (error) {
@@ -333,8 +469,16 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     requestAnimationFrame(animate);
     const mode = state.cameraMode;
     const view = cameraViews[mode] || cameraViews.overview;
-    const targetVector = new THREE.Vector3(...view.target);
-    const spherical = new THREE.Spherical().setFromVector3(new THREE.Vector3(...view.position).sub(targetVector));
+    const focusX = selectedPassageX();
+    const targetValues = [...view.target];
+    const positionValues = [...view.position];
+    if (mode === "nave" || mode === "lift") {
+      const shiftX = focusX - targetValues[0];
+      targetValues[0] = focusX;
+      positionValues[0] += shiftX;
+    }
+    const targetVector = new THREE.Vector3(...targetValues);
+    const spherical = new THREE.Spherical().setFromVector3(new THREE.Vector3(...positionValues).sub(targetVector));
     spherical.theta += cameraTouch.yaw;
     spherical.phi = clamp(spherical.phi + cameraTouch.pitch, .35, 1.5);
     spherical.radius = clamp(spherical.radius * cameraTouch.zoom, 10, 58);
@@ -343,6 +487,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (state.moving) animated.forEach((item) => {
       if (item.type === "person") { item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5; item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI; }
       if (item.type === "cart") {
+        item.object.position.x = item.baseX;
         item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14;
         if (item.liftAssembly) {
           const liftProgress = state.liftActive ? .5 + Math.sin(time * .0011 + item.phase) * .5 : 0;
@@ -351,6 +496,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       }
       if (item.type === "harvest") { item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11; }
     });
+    if (state.waterActive && state.moving) waterDots.forEach((dot) => {
+      dot.mesh.position.z = ((dot.baseZ + time * .004 + dot.phase + 13.2) % 26.4) - 13.2;
+    });
     renderer.render(scene, camera);
   }
 
@@ -358,6 +506,34 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   $("#motionButton").addEventListener("click", () => { state.moving = !state.moving; updateMotionText(); });
   $("#liftButton").addEventListener("click", () => { state.liftActive = !state.liftActive; updateLiftText(); });
   $("#resetButton").addEventListener("click", () => { resetCameraControls(); configureCamera(state.cameraMode); });
+  $("#waterButton").addEventListener("click", () => { state.waterActive = !state.waterActive; updateWaterText(); applyLayerVisibility(); });
+  $("#growthSlider").addEventListener("input", (event) => applyGrowthStage(event.target.value));
+  document.querySelectorAll("[data-nave-side]").forEach((button) => button.addEventListener("click", () => {
+    state.selectedNaveSide = button.dataset.naveSide;
+    updateSelection();
+  }));
+  document.querySelectorAll("[data-passage]").forEach((button) => button.addEventListener("click", () => {
+    state.selectedPassage = Number(button.dataset.passage);
+    updateSelection();
+  }));
+  document.querySelectorAll("[data-row-side]").forEach((button) => button.addEventListener("click", () => {
+    state.selectedRowSide = button.dataset.rowSide;
+    updateSelection();
+  }));
+  document.querySelectorAll("[data-layer]").forEach((button) => button.addEventListener("click", () => {
+    const layer = button.dataset.layer;
+    layerState[layer] = !layerState[layer];
+    applyLayerVisibility();
+  }));
+  document.querySelectorAll("[data-info-key]").forEach((element) => {
+    element.addEventListener("click", () => openInfo(element.dataset.infoKey));
+    if (element.matches(".technical-card")) {
+      element.tabIndex = 0;
+      element.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openInfo(element.dataset.infoKey); } });
+    }
+  });
+  $("#infoClose").addEventListener("click", () => $("#infoDialog").close());
+  $("#infoDialog").addEventListener("click", (event) => { if (event.target === event.currentTarget) event.currentTarget.close(); });
 
   sceneCanvas.addEventListener("pointerdown", (event) => {
     sceneCanvas.setPointerCapture(event.pointerId);
