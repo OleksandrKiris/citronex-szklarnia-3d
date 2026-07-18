@@ -11,11 +11,13 @@ Projekt pokazuje jako przykład edukacyjny:
 - rośliny pomidorów,
 - pracowników poruszających się po obiekcie,
 - górne wózki,
+- górny wózek z platformą podnoszoną jak winda dla pracownika,
 - kapilary doprowadzające wodę i pożywkę,
 - maty uprawowe, nazywane na miejscu także „pampersami”,
 - wózek do zbioru oraz odkładanie zebranych pomidorów,
 - podstawowy cykl: roślina, wzrost, pielęgnacja i zbiór,
 - wybór widoku i zatrzymanie animacji,
+- obracanie sceny palcem, przybliżanie oraz tryb pełnoekranowy,
 - 9 języków.
 
 Docelowy adres GitHub Pages:
