@@ -104,22 +104,22 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
   };
   const processTranslations = {
-    pl: { passage: "Przejście", autoProcess: "Proces działa automatycznie", touchHint: "Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć. Kliknij obiekt, aby go wyjaśnić." },
-    en: { passage: "Passage", autoProcess: "The process runs automatically", touchHint: "Drag to look around. Pinch to zoom. Tap an object to learn what it is." },
-    ua: { passage: "Прохід", autoProcess: "Процес працює автоматично", touchHint: "Проведіть пальцем для огляду. Зведіть пальці для наближення. Натисніть об’єкт, щоб дізнатися, що це." },
-    ru: { passage: "Проход", autoProcess: "Процесс работает автоматически", touchHint: "Проведите пальцем для обзора. Сведите пальцы для приближения. Нажмите на объект, чтобы узнать, что это." },
-    az: { passage: "Keçid", autoProcess: "Proses avtomatik işləyir", touchHint: "Baxmaq üçün sürüşdürün. Yaxınlaşdırmaq üçün iki barmağınızı sıxın. Obyektin izahını görmək üçün ona toxunun." },
-    es: { passage: "Pasillo", autoProcess: "El proceso funciona automáticamente", touchHint: "Arrastra para mirar. Pellizca para ampliar. Toca un objeto para saber qué es." },
-    fil: { passage: "Daanan", autoProcess: "Awtomatikong gumagana ang proseso", touchHint: "I-drag para tumingin. Kurutin para mag-zoom. Pindutin ang bagay para malaman kung ano ito." },
-    id: { passage: "Lorong", autoProcess: "Proses berjalan otomatis", touchHint: "Geser untuk melihat. Cubit untuk memperbesar. Ketuk objek untuk mengetahui fungsinya." },
-    ne: { passage: "बाटो", autoProcess: "प्रक्रिया आफैँ चल्छ", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्। वस्तु के हो भनेर जान्न त्यसमा थिच्नुहोस्।" }
+    pl: { passage: "Przejście", autoProcess: "Proces działa automatycznie", cameraChoices: "Punkty widoku", mainRoadView: "Główna droga", passageView: "W środku przejścia", workerView: "Poziom pracownika", tourStart: "Pokaż automatyczną wycieczkę", tourStop: "Zatrzymaj wycieczkę", touchHint: "Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć. Kliknij obiekt, aby go wyjaśnić." },
+    en: { passage: "Passage", autoProcess: "The process runs automatically", cameraChoices: "Viewpoints", mainRoadView: "Main road", passageView: "Inside the passage", workerView: "Worker level", tourStart: "Start automatic tour", tourStop: "Stop the tour", touchHint: "Drag to look around. Pinch to zoom. Tap an object to learn what it is." },
+    ua: { passage: "Прохід", autoProcess: "Процес працює автоматично", cameraChoices: "Точки огляду", mainRoadView: "Головна дорога", passageView: "Усередині проходу", workerView: "Рівень працівника", tourStart: "Показати автоматичну екскурсію", tourStop: "Зупинити екскурсію", touchHint: "Проведіть пальцем для огляду. Зведіть пальці для наближення. Натисніть об’єкт, щоб дізнатися, що це." },
+    ru: { passage: "Проход", autoProcess: "Процесс работает автоматически", cameraChoices: "Точки обзора", mainRoadView: "Главная дорога", passageView: "Внутри прохода", workerView: "Уровень работника", tourStart: "Запустить автоматическую экскурсию", tourStop: "Остановить экскурсию", touchHint: "Проведите пальцем для обзора. Сведите пальцы для приближения. Нажмите на объект, чтобы узнать, что это." },
+    az: { passage: "Keçid", autoProcess: "Proses avtomatik işləyir", cameraChoices: "Baxış nöqtələri", mainRoadView: "Əsas yol", passageView: "Keçidin içi", workerView: "İşçi səviyyəsi", tourStart: "Avtomatik turu başlat", tourStop: "Turu dayandır", touchHint: "Baxmaq üçün sürüşdürün. Yaxınlaşdırmaq üçün iki barmağınızı sıxın. Obyektin izahını görmək üçün ona toxunun." },
+    es: { passage: "Pasillo", autoProcess: "El proceso funciona automáticamente", cameraChoices: "Puntos de vista", mainRoadView: "Camino principal", passageView: "Dentro del pasillo", workerView: "Nivel del trabajador", tourStart: "Iniciar visita automática", tourStop: "Detener la visita", touchHint: "Arrastra para mirar. Pellizca para ampliar. Toca un objeto para saber qué es." },
+    fil: { passage: "Daanan", autoProcess: "Awtomatikong gumagana ang proseso", cameraChoices: "Mga punto ng tanawin", mainRoadView: "Pangunahing daan", passageView: "Loob ng daanan", workerView: "Antas ng manggagawa", tourStart: "Simulan ang awtomatikong tour", tourStop: "Itigil ang tour", touchHint: "I-drag para tumingin. Kurutin para mag-zoom. Pindutin ang bagay para malaman kung ano ito." },
+    id: { passage: "Lorong", autoProcess: "Proses berjalan otomatis", cameraChoices: "Titik pandang", mainRoadView: "Jalan utama", passageView: "Di dalam lorong", workerView: "Tinggi pekerja", tourStart: "Mulai tur otomatis", tourStop: "Hentikan tur", touchHint: "Geser untuk melihat. Cubit untuk memperbesar. Ketuk objek untuk mengetahui fungsinya." },
+    ne: { passage: "बाटो", autoProcess: "प्रक्रिया आफैँ चल्छ", cameraChoices: "दृश्यका ठाउँहरू", mainRoadView: "मुख्य बाटो", passageView: "बाटोभित्र", workerView: "कामदारको उचाइ", tourStart: "स्वचालित भ्रमण सुरु गर्नुहोस्", tourStop: "भ्रमण रोक्नुहोस्", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्। वस्तु के हो भनेर जान्न त्यसमा थिच्नुहोस्।" }
   };
   Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(interactionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(explorationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(processTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
-  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
+  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const passagePositions = [-8.1, -6.45, -4.8, -3.15, -1.5];
   const $ = (selector) => document.querySelector(selector);
@@ -135,8 +135,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateMotionText();
     updateLiftText();
     updateFullscreenText();
+    updateTourText();
     updateWaterText();
     updateSelection();
+    $("#infoClose").setAttribute("aria-label", t("infoClose"));
   }
 
   function updateMotionText() {
@@ -152,6 +154,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function updateFullscreenText() {
     const isFullscreen = Boolean(document.fullscreenElement) || $(".scene-section").classList.contains("is-immersive");
     $("#fullscreenButton span:last-child").textContent = isFullscreen ? t("closeFullscreen") : t("fullscreen");
+  }
+
+  function updateTourText() {
+    const button = $("#tourButton");
+    if (button) button.querySelector("span:last-child").textContent = state.tourActive ? t("tourStop") : t("tourStart");
   }
 
   function updateWaterText() {
@@ -181,6 +188,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let cartRecords = [];
   let peopleRecords = [];
   let demoLiftItem = null;
+  let selectionArrows = [];
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -378,7 +386,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const cameraViews = {
     overview: { position: [26, 24, 32], target: [0, 1.2, 0] },
     nave: { position: [13, 8.5, 18], target: [-4.7, 1.4, 0] },
-    lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] }
+    lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] },
+    mainRoad: { position: [0, 3.8, 14], target: [0, 1.35, -1] },
+    passage: { position: [-4.8, 2.55, 11.5], target: [-4.8, 1.25, 0] },
+    worker: { position: [-4.8, 1.65, 4.2], target: [-4.8, 1.45, -1.5] }
   };
   const cameraTouch = { yaw: 0, pitch: 0, zoom: 1, pointers: new Map(), pinchDistance: 0 };
   const raycaster = new THREE.Raycaster();
@@ -387,10 +398,21 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   function resetCameraControls() { cameraTouch.yaw = 0; cameraTouch.pitch = 0; cameraTouch.zoom = 1; }
 
-  function configureCamera(mode) {
+  function configureCamera(mode, keepTour = false) {
+    if (!keepTour) {
+      state.tourActive = false;
+      updateTourText();
+    }
     state.cameraMode = cameraViews[mode] ? mode : "overview";
     resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
+  }
+
+  function getCameraView(mode) {
+    const x = selectedPassageX();
+    if (mode === "passage") return { position: [x, 2.55, 11.5], target: [x, 1.25, 0] };
+    if (mode === "worker") return { position: [x, 1.65, 4.2], target: [x, 1.45, -1.5] };
+    return cameraViews[mode] || cameraViews.overview;
   }
 
   function selectedPassageX() {
@@ -405,10 +427,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const badge = $("#selectionBadge");
     if (badge) badge.textContent = selection;
     rowRecords.forEach((record) => {
-      const selected = record.naveSide === state.selectedNaveSide && record.passageNumber === state.selectedPassage && record.rowSide === state.selectedRowSide;
+      const passageSelected = record.naveSide === state.selectedNaveSide && record.passageNumber === state.selectedPassage;
+      const selected = passageSelected && record.rowSide === state.selectedRowSide;
       [record.mat, record.bed, record.capillary].forEach((mesh) => {
-        mesh.material.emissive.setHex(selected ? 0x9a6b1b : 0x000000);
-        mesh.material.emissiveIntensity = selected ? .7 : 0;
+        mesh.material.emissive.setHex(selected ? 0x9a6b1b : passageSelected ? 0x4c8f64 : 0x000000);
+        mesh.material.emissiveIntensity = selected ? .75 : passageSelected ? .28 : 0;
       });
     });
     passageRecords.forEach((record) => {
@@ -417,6 +440,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       record.mesh.material.emissiveIntensity = selected ? .75 : 0;
     });
     if (demoLiftItem) demoLiftItem.baseX = selectedPassageX();
+    const selectedX = selectedPassageX();
+    selectionArrows.forEach((arrow, index) => {
+      arrow.position.set(selectedX + (index ? .55 : -.55), .78, -8.2);
+      arrow.visible = true;
+    });
     document.querySelectorAll("[data-nave-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.naveSide === state.selectedNaveSide));
     document.querySelectorAll("[data-passage]").forEach((button) => button.classList.toggle("is-active", Number(button.dataset.passage) === state.selectedPassage));
     document.querySelectorAll("[data-row-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.rowSide === state.selectedRowSide));
@@ -455,6 +483,29 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     else dialog.setAttribute("open", "");
   }
 
+  const tourSteps = [
+    { mode: "overview", side: "left", passage: 1, row: "left" },
+    { mode: "mainRoad", side: "left", passage: 1, row: "left" },
+    { mode: "nave", side: "left", passage: 3, row: "left" },
+    { mode: "passage", side: "left", passage: 3, row: "right" },
+    { mode: "worker", side: "left", passage: 3, row: "right" },
+    { mode: "lift", side: "left", passage: 3, row: "right" }
+  ];
+
+  function updateTourStep(time) {
+    if (!state.tourActive) return;
+    if (!state.tourStart) state.tourStart = time;
+    const stepIndex = Math.floor((time - state.tourStart) / 6000) % tourSteps.length;
+    if (stepIndex === state.tourStep) return;
+    const step = tourSteps[stepIndex];
+    state.tourStep = stepIndex;
+    state.selectedNaveSide = step.side;
+    state.selectedPassage = step.passage;
+    state.selectedRowSide = step.row;
+    configureCamera(step.mode, true);
+    updateSelection();
+  }
+
   function initScene() {
     if (!THREE) { fallback.hidden = false; sceneCanvas.hidden = true; return; }
     try {
@@ -472,6 +523,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 2.1));
       const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(12, 22, 10); scene.add(sun);
       addGlasshouse();
+      selectionArrows = [0, 1].map(() => new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, .78, -8.2), 1.8, 0xf0a832, .34, .18));
+      selectionArrows.forEach((arrow) => scene.add(arrow));
       applyGrowthStage(state.growthStage);
       updateSelection();
       resizeScene();
@@ -493,8 +546,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function animate(time) {
     requestAnimationFrame(animate);
+    updateTourStep(time);
     const mode = state.cameraMode;
-    const view = cameraViews[mode] || cameraViews.overview;
+    const view = getCameraView(mode);
     const focusX = selectedPassageX();
     const targetValues = [...view.target];
     const positionValues = [...view.position];
@@ -533,9 +587,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   document.querySelectorAll("[data-camera]").forEach((button) => button.addEventListener("click", () => configureCamera(button.dataset.camera)));
-  $("#motionButton").addEventListener("click", () => { state.moving = !state.moving; updateMotionText(); });
+  $("#motionButton").addEventListener("click", () => { state.moving = !state.moving; state.tourActive = false; updateMotionText(); updateTourText(); });
   $("#liftButton").addEventListener("click", () => { state.liftActive = !state.liftActive; updateLiftText(); });
-  $("#resetButton").addEventListener("click", () => { resetCameraControls(); state.growthAuto = true; state.waterActive = true; state.liftActive = true; applyGrowthStage(3); updateWaterText(); updateLiftText(); applyLayerVisibility(); configureCamera(state.cameraMode); });
+  $("#resetButton").addEventListener("click", () => { resetCameraControls(); state.tourActive = false; state.tourStart = 0; state.tourStep = -1; state.growthAuto = true; state.waterActive = true; state.liftActive = true; applyGrowthStage(3); updateWaterText(); updateLiftText(); updateTourText(); applyLayerVisibility(); configureCamera(state.cameraMode); });
+  $("#tourButton").addEventListener("click", () => { state.tourActive = !state.tourActive; state.tourStart = 0; state.tourStep = -1; if (state.tourActive) { state.moving = true; updateMotionText(); } updateTourText(); });
   $("#waterButton").addEventListener("click", () => { state.waterActive = !state.waterActive; updateWaterText(); applyLayerVisibility(); });
   $("#growthSlider").addEventListener("input", (event) => { state.growthAuto = false; applyGrowthStage(event.target.value); });
   document.querySelectorAll("[data-nave-side]").forEach((button) => button.addEventListener("click", () => {

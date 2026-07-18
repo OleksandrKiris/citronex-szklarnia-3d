@@ -17,6 +17,8 @@ Projekt pokazuje jako przykład edukacyjny:
 - wózek do zbioru oraz odkładanie zebranych pomidorów,
 - podstawowy cykl: roślina, wzrost, pielęgnacja i zbiór,
 - wybór widoku i zatrzymanie animacji,
+- automatyczna wycieczka przez główną drogę, nawę, przejście, poziom pracownika i wózek podnośnikowy,
+- dodatkowe punkty widoku: główna droga, wnętrze przejścia i poziom pracownika,
 - obracanie sceny palcem, przybliżanie oraz tryb pełnoekranowy,
 - wybór lewej lub prawej strony nawy, przejścia 1–5 i lewego lub prawego rzędu,
 - mały plan nawy oraz podświetlenie wybranego miejsca,
