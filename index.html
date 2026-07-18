@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=1">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
   <div class="site-shell">
@@ -34,9 +34,9 @@
 
     <main>
       <section class="hero">
-        <div class="eyebrow" data-i18n="eyebrow">OSOBNY PROJEKT WIZUALIZACJI</div>
-        <h1 data-i18n="title">Poznaj szklarnię</h1>
-        <p data-i18n="heroLead">Zobacz z góry, gdzie są drogi, nawy, przejścia, rzędy pomidorów i praca ludzi.</p>
+        <div class="eyebrow" data-i18n="demoEyebrow">TECHNICZNE DEMO EDUKACYJNE</div>
+        <h1 data-i18n="demoTitle">Jak działa szklarnia?</h1>
+        <p data-i18n="demoLead">Obejrzyj przykładową szklarnię i zobacz, co oznaczają nawa, rzędy, kapilary i wózki.</p>
         <div class="hero-actions">
           <button class="button button-primary" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
           <button class="button button-secondary" type="button" data-camera="nave"><span aria-hidden="true">▦</span><span data-i18n="nave">Jedna nawa</span></button>
@@ -64,6 +64,9 @@
           <div class="scene-label label-left" data-i18n="leftSide">LEWA STRONA</div>
           <div class="scene-label label-right" data-i18n="rightSide">PRAWA STRONA</div>
           <div class="scene-label label-cart" data-i18n="upperCart">GÓRNY WÓZEK</div>
+          <div class="scene-label label-harvest" data-i18n="harvestCart">WÓZEK DO ZBIORU</div>
+          <div class="scene-label label-capillary" data-i18n="capillaries">KAPILARY</div>
+          <div class="scene-label label-mat" data-i18n="growMat">PAMPERSY / MATY UPRAWOWE</div>
         </div>
         <div class="scene-toolbar">
           <button class="toolbar-button is-active" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
@@ -78,6 +81,23 @@
         <div class="legend-item"><i class="legend-dot dot-road"></i><span data-i18n="passages">Przejścia i droga</span></div>
         <div class="legend-item"><i class="legend-dot dot-person"></i><span data-i18n="people">Pracownicy</span></div>
         <div class="legend-item"><i class="legend-dot dot-cart"></i><span data-i18n="carts">Wózki</span></div>
+        <div class="legend-item"><i class="legend-dot dot-capillary"></i><span data-i18n="capillaries">Kapilary</span></div>
+        <div class="legend-item"><i class="legend-dot dot-mat"></i><span data-i18n="growMat">Maty uprawowe</span></div>
+        <div class="legend-item"><i class="legend-dot dot-harvest"></i><span data-i18n="harvestCart">Wózek do zbioru</span></div>
+      </section>
+
+      <section class="technical-note" aria-labelledby="technicalTitle">
+        <div class="section-heading compact-heading">
+          <div>
+            <div class="eyebrow" data-i18n="technicalEyebrow">CO TU WIDAĆ</div>
+            <h2 id="technicalTitle" data-i18n="technicalTitle">Elementy przykładowej szklarni</h2>
+          </div>
+        </div>
+        <div class="technical-grid">
+          <article class="technical-card"><span class="technical-icon" aria-hidden="true">↕</span><h3 data-i18n="capillaries">Kapilary</h3><p data-i18n="capillaryInfo">Cienkie przewody doprowadzające wodę i pożywkę do roślin.</p></article>
+          <article class="technical-card"><span class="technical-icon" aria-hidden="true">▰</span><h3 data-i18n="growMat">Pampersy / maty uprawowe</h3><p data-i18n="matInfo">Podłoże, w którym rosną rośliny i do którego trafia pożywka.</p></article>
+          <article class="technical-card"><span class="technical-icon" aria-hidden="true">●</span><h3 data-i18n="tomatoes">Pomidory</h3><p data-i18n="growthInfo">Roślina rośnie w rzędzie; dojrzałe owoce trafiają do wózka do zbioru.</p></article>
+        </div>
       </section>
 
       <section class="steps-section" aria-labelledby="stepsTitle">
@@ -113,7 +133,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
-  <script src="app.js?v=1"></script>
+  <script type="module" src="app.js?v=2"></script>
 </body>
 </html>

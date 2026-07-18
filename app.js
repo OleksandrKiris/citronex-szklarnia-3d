@@ -1,3 +1,5 @@
+import * as THREE from "./assets/vendor/three.module.min.js";
+
 (() => {
   "use strict";
 
@@ -22,6 +24,46 @@
     ne: {
       brandSub: "ग्रीनहाउस 3D", chooseLanguage: "भाषा छान्नुहोस्", eyebrow: "अलग दृश्य परियोजना", title: "ग्रीनहाउस बुझ्नुहोस्", heroLead: "माथिबाट बाटो, नावा, पैदल बाटो, गोलभेडाका लाइन र मानिसको काम हेर्नुहोस्।", overview: "पूरै ग्रीनहाउस", nave: "एउटा नावा", work: "काम र टिपाइ", liveEyebrow: "अन्तरक्रियात्मक दृश्य", sceneTitle: "माथि र छेउबाट ग्रीनहाउस", sceneLead: "दृश्यले बीचको बाटो, दुवै भाग, बिरुवाका लाइन र कामको समयमा हुने चाल देखाउँछ।", moving: "चालु", paused: "रोकिएको", pause: "चलायमान रोक्नुहोस्", play: "चलायमान सुरु गर्नुहोस्", middleRoad: "बीचको बाटो", leftSide: "बायाँ भाग", rightSide: "दायाँ भाग", upperCart: "माथिल्लो गाडी", plants: "गोलभेडाका लाइन", passages: "बाटा र सडक", people: "कामदार", carts: "गाडीहरू", rememberEyebrow: "याद गर्नुहोस्", stepsTitle: "बुझ्नुपर्ने तीन कुरा", step1Title: "पूरै ग्रीनहाउस", step1Text: "पहिलो नावा पछाडि फर्केर उभिनुहोस्। बीचको बाटोले बायाँ र दायाँ भाग छुट्याउँछ।", step2Title: "एउटा नावा", step2Text: "एउटा नावामा ५ वटा बाटा हुन्छन्। प्रत्येक बाटामा दुई लाइन हुन्छन्: बायाँ र दायाँ।", step3Title: "काम र टिपाइ", step3Text: "कामदार तोकिएको बाटोबाट जान्छ, आफ्नो लाइनमा काम गर्छ र टिपेका गोलभेडा गाडीमा राख्छ।", factPassages: "नावामा बाटा", factRows: "नावामा लाइन", factNaves: "ग्रीनहाउसअनुसार नावा", factSides: "बाटाका भाग", footerText: "ग्रीनहाउसको अलग दृश्य परियोजना। कामका निर्देशनहरू स्थान प्रणालीमै छन्।", fallback: "दृश्यका लागि ब्राउजरमा ग्राफिक्स समर्थन चाहिन्छ।" }
   };
+
+  const educationalTranslations = {
+    pl: {
+      demoEyebrow: "TECHNICZNE DEMO EDUKACYJNE", demoTitle: "Jak działa szklarnia?", demoLead: "Obejrzyj przykładową szklarnię i zobacz, co oznaczają nawa, rzędy, kapilary i wózki.", fivePassages: "5 przejść / 10 rzędów",
+      technicalEyebrow: "CO TU WIDAĆ", technicalTitle: "Elementy przykładowej szklarni", capillaries: "Kapilary", capillaryInfo: "Cienkie przewody doprowadzające wodę i pożywkę do roślin.", growMat: "Pampersy / maty uprawowe", matInfo: "Podłoże, w którym rosną rośliny i do którego trafia pożywka.", harvestCart: "Wózek do zbioru", tomatoes: "Pomidory", growthInfo: "Roślina rośnie w rzędzie; dojrzałe owoce trafiają do wózka do zbioru."
+    },
+    en: {
+      demoEyebrow: "TECHNICAL EDUCATIONAL DEMO", demoTitle: "How does a greenhouse work?", demoLead: "Explore one example greenhouse and see what a nave, rows, capillary tubes and carts mean.", fivePassages: "5 passages / 10 rows",
+      technicalEyebrow: "WHAT YOU SEE", technicalTitle: "Example greenhouse elements", capillaries: "Capillary tubes", capillaryInfo: "Thin tubes that deliver water and nutrients to the plants.", growMat: "Growing mats", matInfo: "The growing medium where plants grow and receive the nutrient solution.", harvestCart: "Harvest cart", tomatoes: "Tomatoes", growthInfo: "A plant grows in a row; ripe fruit goes to the harvest cart."
+    },
+    ua: {
+      demoEyebrow: "ТЕХНІЧНЕ НАВЧАЛЬНЕ ДЕМО", demoTitle: "Як працює теплиця?", demoLead: "Подивіться на приклад теплиці та зрозумійте, що таке нава, ряди, капіляри й візки.", fivePassages: "5 проходів / 10 рядів",
+      technicalEyebrow: "ЩО ТУТ ВИДНО", technicalTitle: "Елементи прикладу теплиці", capillaries: "Капіляри", capillaryInfo: "Тонкі трубки, які подають воду та поживний розчин до рослин.", growMat: "Мати для вирощування", matInfo: "Субстрат, у якому ростуть рослини та до якого надходить поживний розчин.", harvestCart: "Візок для збору", tomatoes: "Помідори", growthInfo: "Рослина росте в ряду; стиглі плоди складають у візок для збору."
+    },
+    ru: {
+      demoEyebrow: "ТЕХНИЧЕСКОЕ УЧЕБНОЕ ДЕМО", demoTitle: "Как работает теплица?", demoLead: "Посмотрите на пример теплицы и поймите, что такое пролёт, ряды, капилляры и тележки.", fivePassages: "5 проходов / 10 рядов",
+      technicalEyebrow: "ЧТО ЗДЕСЬ ВИДНО", technicalTitle: "Элементы примерной теплицы", capillaries: "Капилляры", capillaryInfo: "Тонкие трубки, которые подают воду и питательный раствор к растениям.", growMat: "Маты для выращивания", matInfo: "Субстрат, в котором растут растения и куда поступает питательный раствор.", harvestCart: "Тележка для сбора", tomatoes: "Помидоры", growthInfo: "Растение растёт в ряду; спелые плоды складывают в тележку для сбора."
+    },
+    az: {
+      demoEyebrow: "TEXNİKİ TƏDRİS DEMOSU", demoTitle: "İstixana necə işləyir?", demoLead: "Nümunə istixanaya baxın və nava, cərgələr, kapilyarlar və arabaların nə olduğunu görün.", fivePassages: "5 keçid / 10 sıra",
+      technicalEyebrow: "BURADA NƏ GÖRÜNÜR", technicalTitle: "Nümunə istixananın elementləri", capillaries: "Kapilyarlar", capillaryInfo: "Su və qida məhlulunu bitkilərə aparan nazik borular.", growMat: "Becərmə matları", matInfo: "Bitkilərin böyüdüyü və qida məhlulunu aldığı substrat.", harvestCart: "Yığım arabası", tomatoes: "Pomidorlar", growthInfo: "Bitki cərgədə böyüyür; yetişmiş meyvələr yığım arabasına qoyulur."
+    },
+    es: {
+      demoEyebrow: "DEMO TÉCNICA EDUCATIVA", demoTitle: "¿Cómo funciona un invernadero?", demoLead: "Mira un invernadero de ejemplo y descubre qué son las naves, las filas, los capilares y los carros.", fivePassages: "5 pasillos / 10 filas",
+      technicalEyebrow: "QUÉ VES AQUÍ", technicalTitle: "Elementos de un invernadero de ejemplo", capillaries: "Tubos capilares", capillaryInfo: "Tubos finos que llevan agua y nutrientes a las plantas.", growMat: "Sustrato de cultivo", matInfo: "La base donde crecen las plantas y reciben la solución nutritiva.", harvestCart: "Carro de cosecha", tomatoes: "Tomates", growthInfo: "La planta crece en una fila; los frutos maduros van al carro de cosecha."
+    },
+    fil: {
+      demoEyebrow: "TECHNICAL NA DEMO SA PAG-AARAL", demoTitle: "Paano gumagana ang greenhouse?", demoLead: "Tingnan ang isang halimbawa ng greenhouse at unawain ang nave, mga hanay, capillary tube at mga kariton.", fivePassages: "5 daanan / 10 hanay",
+      technicalEyebrow: "ANO ANG MAKIKITA", technicalTitle: "Mga bahagi ng halimbawa ng greenhouse", capillaries: "Mga capillary tube", capillaryInfo: "Manipis na tubo na naghahatid ng tubig at sustansiya sa mga halaman.", growMat: "Mga banig na taniman", matInfo: "Lalagyan kung saan tumutubo ang halaman at tumatanggap ng sustansiyang solusyon.", harvestCart: "Kariton sa pag-aani", tomatoes: "Mga kamatis", growthInfo: "Lumalaki ang halaman sa hanay; inilalagay ang hinog na bunga sa kariton sa pag-aani."
+    },
+    id: {
+      demoEyebrow: "DEMO TEKNIS PEMBELAJARAN", demoTitle: "Bagaimana rumah kaca bekerja?", demoLead: "Lihat satu contoh rumah kaca dan pahami arti nave, baris, pipa kapiler, dan troli.", fivePassages: "5 lorong / 10 baris",
+      technicalEyebrow: "YANG TERLIHAT DI SINI", technicalTitle: "Elemen rumah kaca contoh", capillaries: "Pipa kapiler", capillaryInfo: "Pipa tipis yang mengalirkan air dan nutrisi ke tanaman.", growMat: "Media tanam", matInfo: "Media tempat tanaman tumbuh dan menerima larutan nutrisi.", harvestCart: "Troli panen", tomatoes: "Tomat", growthInfo: "Tanaman tumbuh dalam baris; buah yang matang dimasukkan ke troli panen."
+    },
+    ne: {
+      demoEyebrow: "प्राविधिक सिकाइ डेमो", demoTitle: "ग्रीनहाउस कसरी काम गर्छ?", demoLead: "एउटा उदाहरण ग्रीनहाउस हेर्नुहोस् र नावा, लाइन, केपिलरी पाइप र गाडी बुझ्नुहोस्।", fivePassages: "५ बाटा / १० लाइन",
+      technicalEyebrow: "यहाँ के देखिन्छ", technicalTitle: "उदाहरण ग्रीनहाउसका भागहरू", capillaries: "केपिलरी पाइप", capillaryInfo: "बिरुवामा पानी र पोषक घोल पुर्‍याउने पातला पाइपहरू।", growMat: "उत्पादन म्याट", matInfo: "बिरुवा उम्रने र पोषक घोल पाउने माध्यम।", harvestCart: "बाली टिप्ने गाडी", tomatoes: "गोलभेडा", growthInfo: "बिरुवा लाइनमा बढ्छ; पाकेका फल बाली टिप्ने गाडीमा राखिन्छ।"
+    }
+  };
+  Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
@@ -68,9 +110,11 @@
   function plant(x, z, side) {
     const group = new THREE.Group();
     group.position.set(x, 0, z);
+    const support = new THREE.Mesh(new THREE.CylinderGeometry(.018, .018, 2.45, 5), new THREE.MeshStandardMaterial({ color: 0x8a9b98, roughness: .8 }));
+    support.position.y = 1.55;
     const stem = new THREE.Mesh(new THREE.CylinderGeometry(.035, .05, 1.35, 6), new THREE.MeshStandardMaterial({ color: 0x2f7845 }));
     stem.position.y = .9;
-    group.add(stem);
+    group.add(support, stem);
     [-.12, .12].forEach((offset, index) => {
       const tomato = new THREE.Mesh(new THREE.SphereGeometry(.12, 8, 8), new THREE.MeshStandardMaterial({ color: index ? 0xd94d39 : 0xe96a3c }));
       tomato.position.set(offset, .95 + index * .14, 0);
@@ -106,6 +150,26 @@
     animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase });
   }
 
+  function harvestCart(x, z, phase) {
+    const group = new THREE.Group();
+    group.position.set(x, 0, z);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(.82, .42, 1.2), new THREE.MeshStandardMaterial({ color: 0x315f9f, metalness: .15, roughness: .5 }));
+    body.position.y = .42;
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(.08, .62, .08), new THREE.MeshStandardMaterial({ color: 0x263e5a, metalness: .2 }));
+    handle.position.set(0, .86, -.48);
+    const load = new THREE.Mesh(new THREE.BoxGeometry(.54, .22, .74), new THREE.MeshStandardMaterial({ color: 0xe8ad2e, roughness: .7 }));
+    load.position.y = .76;
+    group.add(body, handle, load);
+    [-.3, .3].forEach((wheelX) => [-.38, .38].forEach((wheelZ) => {
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, .07, 10), new THREE.MeshStandardMaterial({ color: 0x27333d }));
+      wheel.rotation.z = Math.PI / 2;
+      wheel.position.set(wheelX, .14, wheelZ);
+      group.add(wheel);
+    }));
+    scene.add(group);
+    animated.push({ object: group, type: "harvest", baseX: x, baseZ: z, phase });
+  }
+
   function addGlasshouse() {
     const glass = { color: 0x8bd0c3, transparent: true, opacity: .18, roughness: .2, metalness: .05, side: THREE.DoubleSide };
     box(18, .12, 32, 0xd9e7dd, 0, .05, 0);
@@ -119,12 +183,15 @@
     [-12, -4, 4, 12].forEach((z) => { box(18, .08, .08, 0x609b8b, 0, 6.08, z); box(.08, 5.9, .08, 0x609b8b, 0, 3, z); });
     const rows = [-7.8, -6.2, -4.6, -3.0, 3.0, 4.6, 6.2, 7.8];
     rows.forEach((x) => {
-      box(1.1, .22, 29, 0x64a965, x, .32, 0);
+      box(1.16, .10, 29, 0xb98258, x, .22, 0);
+      box(1.1, .22, 29, 0x64a965, x, .38, 0);
+      box(.045, .045, 29, 0x4d9bd0, x, .54, 0);
       for (let z = -13; z <= 13; z += 2.15) plant(x, z, x < 0 ? -1 : 1);
     });
     [-8, -6.4, -4.8, -3.2, 3.2, 4.8, 6.4, 8].forEach((x) => box(.08, .12, 29, 0xf1dfaf, x, .5, 0));
     [-6.8, -4.9, -3.0, 3.0, 4.9, 6.8].forEach((x) => overheadCart(x, -10 + (x + 7) * .7, x));
     person(-1.0, -9, 0xe36b54, 0); person(1.0, -3, 0x4d86c6, 1.4); person(-1.0, 6, 0xe5a631, 2.8); person(1.0, 11, 0x8d67bf, 4.1);
+    harvestCart(-1.35, 11, .8);
     box(.5, .5, 1.1, 0xd74d37, -1.0, .45, 13.2); box(.5, .5, 1.1, 0xe9ad28, 1.0, .45, 13.2);
   }
 
@@ -140,7 +207,7 @@
   }
 
   function initScene() {
-    if (!window.THREE) { fallback.hidden = false; sceneCanvas.hidden = true; return; }
+    if (!THREE) { fallback.hidden = false; sceneCanvas.hidden = true; return; }
     try {
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xdff4ea);
@@ -178,6 +245,7 @@
     if (state.moving) animated.forEach((item) => {
       if (item.type === "person") { item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5; item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI; }
       if (item.type === "cart") { item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14; }
+      if (item.type === "harvest") { item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11; }
     });
     renderer.render(scene, camera);
   }
