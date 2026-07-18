@@ -5,6 +5,7 @@ Niezależny techniczny projekt demonstracyjny szklarni. Nie zawiera kodu pierwot
 Projekt pokazuje jako przykład edukacyjny:
 
 - szklarnię z góry i z boku,
+- wieloprzęsłową konstrukcję ze spadzistymi połaciami dachu,
 - centralną drogę oraz lewą i prawą stronę,
 - jedną nawę z przejściami i rzędami,
 - rośliny pomidorów,
