@@ -64,15 +64,15 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
   };
   const interactionTranslations = {
-    pl: { liftView: "Górny wózek", liftStart: "Podnieś platformę", liftStop: "Opuść platformę", resetView: "Resetuj widok", fullscreen: "Pełny ekran", closeFullscreen: "Zamknij pełny ekran", touchHint: "Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć." },
-    en: { liftView: "Overhead lift cart", liftStart: "Raise platform", liftStop: "Lower platform", resetView: "Reset view", fullscreen: "Full screen", closeFullscreen: "Close full screen", touchHint: "Drag to look around. Pinch to zoom." },
-    ua: { liftView: "Верхній візок-підйомник", liftStart: "Підняти платформу", liftStop: "Опустити платформу", resetView: "Скинути вигляд", fullscreen: "На весь екран", closeFullscreen: "Закрити повний екран", touchHint: "Проведіть пальцем, щоб оглянути. Зведіть пальці, щоб наблизити." },
-    ru: { liftView: "Верхняя тележка-подъёмник", liftStart: "Поднять платформу", liftStop: "Опустить платформу", resetView: "Сбросить вид", fullscreen: "Полный экран", closeFullscreen: "Закрыть полный экран", touchHint: "Проведите пальцем для обзора. Сведите пальцы для приближения." },
-    az: { liftView: "Yuxarı qaldırıcı araba", liftStart: "Platformanı qaldır", liftStop: "Platformanı endir", resetView: "Görünüşü sıfırla", fullscreen: "Tam ekran", closeFullscreen: "Tam ekranı bağla", touchHint: "Baxmaq üçün sürüşdürün. Yaxınlaşdırmaq üçün iki barmağınızı sıxın." },
-    es: { liftView: "Carro elevador superior", liftStart: "Subir plataforma", liftStop: "Bajar plataforma", resetView: "Restablecer vista", fullscreen: "Pantalla completa", closeFullscreen: "Cerrar pantalla completa", touchHint: "Arrastra para mirar. Pellizca para ampliar." },
-    fil: { liftView: "Pang-itaas na lift cart", liftStart: "Itaas ang platform", liftStop: "Ibaba ang platform", resetView: "Ibalik ang tanawin", fullscreen: "Buong screen", closeFullscreen: "Isara ang buong screen", touchHint: "I-drag para tumingin. Kurutin para mag-zoom." },
-    id: { liftView: "Troli pengangkat atas", liftStart: "Naikkan platform", liftStop: "Turunkan platform", resetView: "Atur ulang tampilan", fullscreen: "Layar penuh", closeFullscreen: "Tutup layar penuh", touchHint: "Geser untuk melihat. Cubit untuk memperbesar." },
-    ne: { liftView: "माथिल्लो लिफ्ट गाडी", liftStart: "प्लेटफर्म उठाउनुहोस्", liftStop: "प्लेटफर्म झार्नुहोस्", resetView: "दृश्य रिसेट गर्नुहोस्", fullscreen: "पूरै स्क्रिन", closeFullscreen: "पूरै स्क्रिन बन्द गर्नुहोस्", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्।" }
+    pl: { liftView: "Wózek podnośnikowy", liftCart: "WÓZEK PODNOŚNIKOWY", liftStart: "Podnieś platformę", liftStop: "Opuść platformę", resetView: "Resetuj widok", fullscreen: "Pełny ekran", closeFullscreen: "Zamknij pełny ekran", touchHint: "Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć." },
+    en: { liftView: "Lift platform cart", liftCart: "LIFT PLATFORM CART", liftStart: "Raise platform", liftStop: "Lower platform", resetView: "Reset view", fullscreen: "Full screen", closeFullscreen: "Close full screen", touchHint: "Drag to look around. Pinch to zoom." },
+    ua: { liftView: "Візок з підйомною платформою", liftCart: "ВІЗОК З ПІДЙОМНОЮ ПЛАТФОРМОЮ", liftStart: "Підняти платформу", liftStop: "Опустити платформу", resetView: "Скинути вигляд", fullscreen: "На весь екран", closeFullscreen: "Закрити повний екран", touchHint: "Проведіть пальцем, щоб оглянути. Зведіть пальці, щоб наблизити." },
+    ru: { liftView: "Тележка с подъёмной платформой", liftCart: "ТЕЛЕЖКА С ПОДЪЁМНОЙ ПЛАТФОРМОЙ", liftStart: "Поднять платформу", liftStop: "Опустить платформу", resetView: "Сбросить вид", fullscreen: "Полный экран", closeFullscreen: "Закрыть полный экран", touchHint: "Проведите пальцем для обзора. Сведите пальцы для приближения." },
+    az: { liftView: "Qaldırıcı platformalı araba", liftCart: "QALDIRICI PLATFORMALI ARABA", liftStart: "Platformanı qaldır", liftStop: "Platformanı endir", resetView: "Görünüşü sıfırla", fullscreen: "Tam ekran", closeFullscreen: "Tam ekranı bağla", touchHint: "Baxmaq üçün sürüşdürün. Yaxınlaşdırmaq üçün iki barmağınızı sıxın." },
+    es: { liftView: "Carro con plataforma elevadora", liftCart: "CARRO CON PLATAFORMA ELEVADORA", liftStart: "Subir plataforma", liftStop: "Bajar plataforma", resetView: "Restablecer vista", fullscreen: "Pantalla completa", closeFullscreen: "Cerrar pantalla completa", touchHint: "Arrastra para mirar. Pellizca para ampliar." },
+    fil: { liftView: "Karitong may lift platform", liftCart: "KARITONG MAY LIFT PLATFORM", liftStart: "Itaas ang platform", liftStop: "Ibaba ang platform", resetView: "Ibalik ang tanawin", fullscreen: "Buong screen", closeFullscreen: "Isara ang buong screen", touchHint: "I-drag para tumingin. Kurutin para mag-zoom." },
+    id: { liftView: "Troli dengan platform pengangkat", liftCart: "TROLI DENGAN PLATFORM PENGANGKAT", liftStart: "Naikkan platform", liftStop: "Turunkan platform", resetView: "Atur ulang tampilan", fullscreen: "Layar penuh", closeFullscreen: "Tutup layar penuh", touchHint: "Geser untuk melihat. Cubit untuk memperbesar." },
+    ne: { liftView: "लिफ्ट प्लेटफर्म भएको गाडी", liftCart: "लिफ्ट प्लेटफर्म भएको गाडी", liftStart: "प्लेटफर्म उठाउनुहोस्", liftStop: "प्लेटफर्म झार्नुहोस्", resetView: "दृश्य रिसेट गर्नुहोस्", fullscreen: "पूरै स्क्रिन", closeFullscreen: "पूरै स्क्रिन बन्द गर्नुहोस्", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्।" }
   };
   Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(interactionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
@@ -162,37 +162,45 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     animated.push({ object: group, type: "person", baseX: x, baseZ: z, phase });
   }
 
-  function overheadCart(x, z, phase) {
+  function overheadCart(x, z, phase, demoLift = false) {
     const group = new THREE.Group();
-    group.position.set(x, 5.05, z);
+    group.position.set(x, 0, z);
     const body = new THREE.Mesh(new THREE.BoxGeometry(.72, .28, 1.1), new THREE.MeshStandardMaterial({ color: 0x4b83c4, metalness: .25, roughness: .4 }));
+    body.position.y = .42;
     const load = new THREE.Mesh(new THREE.BoxGeometry(.48, .18, .62), new THREE.MeshStandardMaterial({ color: 0xf0b936 }));
-    load.position.y = .22;
-    const railWheel = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, .84, 8), new THREE.MeshStandardMaterial({ color: 0x33434b, metalness: .4, roughness: .35 }));
-    railWheel.rotation.z = Math.PI / 2;
-    railWheel.position.y = -.2;
-    const liftAssembly = new THREE.Group();
-    liftAssembly.position.y = -2.35;
-    const platform = new THREE.Mesh(new THREE.BoxGeometry(.82, .1, .94), new THREE.MeshStandardMaterial({ color: 0x2f5f91, metalness: .25, roughness: .45 }));
-    platform.position.y = 0;
-    const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(.05, .6, .86), new THREE.MeshStandardMaterial({ color: 0x263e5a, metalness: .2 }));
-    const guardRight = guardLeft.clone();
-    guardLeft.position.set(-.37, .3, 0); guardRight.position.set(.37, .3, 0);
-    const worker = new THREE.Group();
-    const workerBody = new THREE.Mesh(new THREE.CylinderGeometry(.13, .16, .55, 7), new THREE.MeshStandardMaterial({ color: 0xe36b54 }));
-    workerBody.position.y = .62;
-    const workerHead = new THREE.Mesh(new THREE.SphereGeometry(.15, 8, 8), new THREE.MeshStandardMaterial({ color: 0xf0b48f }));
-    workerHead.position.y = 1.02;
-    const helmet = new THREE.Mesh(new THREE.SphereGeometry(.18, 8, 5, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xf0b936 }));
-    helmet.position.y = 1.15;
-    worker.add(workerBody, workerHead, helmet);
-    liftAssembly.add(platform, guardLeft, guardRight, worker);
-    const liftMastLeft = new THREE.Mesh(new THREE.BoxGeometry(.06, 2.1, .06), new THREE.MeshStandardMaterial({ color: 0x415d6c, metalness: .3 }));
-    const liftMastRight = liftMastLeft.clone();
-    liftMastLeft.position.set(-.28, -1.12, 0); liftMastRight.position.set(.28, -1.12, 0);
-    group.add(body, load, railWheel, liftMastLeft, liftMastRight, liftAssembly);
+    load.position.y = .7;
+    const wheelMaterial = new THREE.MeshStandardMaterial({ color: 0x27333d, metalness: .25, roughness: .5 });
+    [-.3, .3].forEach((wheelX) => [-.38, .38].forEach((wheelZ) => {
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, .07, 10), wheelMaterial);
+      wheel.rotation.z = Math.PI / 2;
+      wheel.position.set(wheelX, .14, wheelZ);
+      group.add(wheel);
+    }));
+    let liftAssembly = null;
+    if (demoLift) {
+      liftAssembly = new THREE.Group();
+      liftAssembly.position.y = .72;
+      const platform = new THREE.Mesh(new THREE.BoxGeometry(.82, .1, .94), new THREE.MeshStandardMaterial({ color: 0x2f5f91, metalness: .25, roughness: .45 }));
+      const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(.05, .6, .86), new THREE.MeshStandardMaterial({ color: 0x263e5a, metalness: .2 }));
+      const guardRight = guardLeft.clone();
+      guardLeft.position.set(-.37, .3, 0); guardRight.position.set(.37, .3, 0);
+      const worker = new THREE.Group();
+      const workerBody = new THREE.Mesh(new THREE.CylinderGeometry(.13, .16, .55, 7), new THREE.MeshStandardMaterial({ color: 0xe36b54 }));
+      workerBody.position.y = .62;
+      const workerHead = new THREE.Mesh(new THREE.SphereGeometry(.15, 8, 8), new THREE.MeshStandardMaterial({ color: 0xf0b48f }));
+      workerHead.position.y = 1.02;
+      const helmet = new THREE.Mesh(new THREE.SphereGeometry(.18, 8, 5, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xf0b936 }));
+      helmet.position.y = 1.15;
+      worker.add(workerBody, workerHead, helmet);
+      liftAssembly.add(platform, guardLeft, guardRight, worker);
+      const liftMastLeft = new THREE.Mesh(new THREE.BoxGeometry(.06, 2.5, .06), new THREE.MeshStandardMaterial({ color: 0x415d6c, metalness: .3 }));
+      const liftMastRight = liftMastLeft.clone();
+      liftMastLeft.position.set(-.28, 1.55, 0); liftMastRight.position.set(.28, 1.55, 0);
+      group.add(liftMastLeft, liftMastRight, liftAssembly);
+    }
+    group.add(body, load);
     scene.add(group);
-    animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly: x === -8.1 ? liftAssembly : null });
+    animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly });
   }
 
   function harvestCart(x, z, phase) {
@@ -222,7 +230,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const passage = 0xd6bd83;
     const passageCenters = [-8.1, -6.45, -4.8, -3.15, -1.5, 1.5, 3.15, 4.8, 6.45, 8.1];
     const rows = [];
-    [-8.1, -6.45, -4.8, -3.15, -1.5].forEach((center) => { rows.push(center - .28, center + .28, -center - .28, -center + .28); });
+    [-8.1, -6.45, -4.8, -3.15, -1.5].forEach((center) => { rows.push(center - .55, center + .55, -center - .55, -center + .55); });
 
     box(18, .12, 32, floor, 0, .05, 0);
     box(2.7, .05, 30.5, passage, 0, .13, 0);
@@ -255,11 +263,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       for (let z = -13.2; z <= 13.2; z += 3.2) plant(x, z, x < 0 ? -1 : 1);
     });
     passageCenters.forEach((x) => {
-      box(.34, .035, 29, 0xf1dfaf, x, .5, 0);
-      box(.055, .055, 29, frame, x, 4.95, 0);
+      box(.86, .035, 29, 0xf1dfaf, x, .5, 0);
+      box(.06, .035, 29, 0x737b7e, x - .3, .17, 0);
+      box(.06, .035, 29, 0x737b7e, x + .3, .17, 0);
     });
 
-    [-8.1, -4.8, 4.8, 8.1].forEach((x, index) => overheadCart(x, -10 + index * 5.5, index));
+    [-8.1, -4.8, 4.8, 8.1].forEach((x, index) => overheadCart(x, x === -4.8 ? 4.5 : -10 + index * 5.5, index, x === -4.8));
     person(-6.45, -9, 0xe36b54, 0); person(4.8, -3, 0x4d86c6, 1.4); person(-3.15, 6, 0xe5a631, 2.8); person(6.45, 11, 0x8d67bf, 4.1);
     harvestCart(-4.8, 10.5, .8);
     box(.55, .5, 1.1, 0xd74d37, -1.0, .45, 13.2); box(.55, .5, 1.1, 0xe9ad28, 1.0, .45, 13.2);
@@ -274,7 +283,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const cameraViews = {
     overview: { position: [26, 24, 32], target: [0, 1.2, 0] },
     nave: { position: [13, 8.5, 18], target: [-4.7, 1.4, 0] },
-    lift: { position: [1.5, 4.2, 15], target: [-4.8, 1.25, 4.5] }
+    lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] }
   };
   const cameraTouch = { yaw: 0, pitch: 0, zoom: 1, pointers: new Map(), pinchDistance: 0 };
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -337,7 +346,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14;
         if (item.liftAssembly) {
           const liftProgress = state.liftActive ? .5 + Math.sin(time * .0011 + item.phase) * .5 : 0;
-          item.liftAssembly.position.y = -2.35 + liftProgress * 1.65;
+          item.liftAssembly.position.y = .72 + liftProgress * 1.45;
         }
       }
       if (item.type === "harvest") { item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11; }
