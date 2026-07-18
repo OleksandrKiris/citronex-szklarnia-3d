@@ -22,6 +22,8 @@ Projekt pokazuje jako przykład edukacyjny:
 - mały plan nawy oraz podświetlenie wybranego miejsca,
 - warstwy widoku: rośliny, kapilary, wózki i pracownicy,
 - animowany przepływ wody oraz suwak etapów wzrostu,
+- samoczynny cykl pracy ludzi, wózka podnośnikowego, wózka zbiorczego i wzrostu roślin,
+- kliknięcie obiektu 3D otwiera jego wyjaśnienie bez zatrzymywania sceny,
 - klikalne krótkie objaśnienia elementów w każdym z 9 języków,
 - 9 języków.
 

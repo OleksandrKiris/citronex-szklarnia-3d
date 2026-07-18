@@ -103,11 +103,23 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       exploreTitle: "के हेर्ने हो छान्नुहोस्", naveChoice: "नाभको पक्ष छान्नुहोस्", passageChoice: "बाटो १–५ छान्नुहोस्", rowChoice: "बाटोभित्रको लाइन छान्नुहोस्", leftRow: "बायाँ लाइन", rightRow: "दायाँ लाइन", processChoice: "प्रक्रिया देखाउनुहोस्", showWater: "पानीको बहाव देखाउनुहोस्", hideWater: "पानीको बहाव लुकाउनुहोस्", growthChoice: "बढ्ने चरण", layersTitle: "दृश्यका तहहरू", miniMapTitle: "नाभको योजना", selectionText: "छानिएको: {side}, बाटो {passage}, {row}", infoEyebrow: "छोटो व्याख्या", infoClose: "बन्द गर्नुहोस्", infoMiddleRoad: "बीचको बाटोले ग्रीनहाउसको बायाँ र दायाँ भाग छुट्याउँछ। यही बाटो भएर छानिएको नाभमा जानुहोस्।", infoLeftSide: "ग्रीनहाउसको बायाँ भाग। पहिलो नाभतिर ढाड फर्काउँदा यो तपाईंको बायाँतिर हुन्छ।", infoRightSide: "ग्रीनहाउसको दायाँ भाग। पहिलो नाभतिर ढाड फर्काउँदा यो तपाईंको दायाँतिर हुन्छ।", infoLiftCart: "लिफ्ट ट्रली साधारण ट्रलीजस्तै बाटोको भुइँमा चल्छ। यसको प्लेटफर्मले कामदारलाई बिरुवासम्म उठाउँछ।", infoHarvestCart: "बाली टिप्ने ट्रली बाटोको भुइँमा चल्छ। टिपिएका गोलभेडा ट्रलीको कन्टेनरमा राखिन्छन्।", infoCapillaries: "केपिलरी पातला पाइप हुन् जसले हरेक लाइनको म्याटसम्म पानी र पोषक घोल पुर्‍याउँछन्।", infoGrowMat: "उत्पादन म्याटले बिरुवाको जरानजिक माध्यम र पानी राख्छ।", infoTomatoes: "बिरुवा आफ्नै लाइनमा बढ्छ। फल फूल, हरियो फल र पाकेको गोलभेडाको चरणबाट जान्छ।", infoPeople: "कामदारले तोकिएको बाटो प्रयोग गर्छन् र तोकिएको लाइनछेउमा काम गर्छन्।", infoWater: "निला बिन्दुले पानीको बाटो देखाउँछन्: पाइप, केपिलरी, म्याट र जरा।", infoLeftRow: "छानिएको बाटोको बायाँ लाइन। बाटोको बायाँपट्टिका बिरुवामा काम गर्नुहोस्।", infoRightRow: "छानिएको बाटोको दायाँ लाइन। बाटोको दायाँपट्टिका बिरुवामा काम गर्नुहोस्।", infoPassage: "बाटो दुई लाइनबीचको हिँड्ने ठाउँ हो। प्रत्येक नाभमा पाँच बाटा हुन्छन्।", infoGrowth0: "सानो बिरुवा", infoGrowth1: "फूल फुल्ने चरण", infoGrowth2: "हरियो फल", infoGrowth3: "पाकेको गोलभेडा"
     }
   };
+  const processTranslations = {
+    pl: { passage: "Przejście", autoProcess: "Proces działa automatycznie", touchHint: "Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć. Kliknij obiekt, aby go wyjaśnić." },
+    en: { passage: "Passage", autoProcess: "The process runs automatically", touchHint: "Drag to look around. Pinch to zoom. Tap an object to learn what it is." },
+    ua: { passage: "Прохід", autoProcess: "Процес працює автоматично", touchHint: "Проведіть пальцем для огляду. Зведіть пальці для наближення. Натисніть об’єкт, щоб дізнатися, що це." },
+    ru: { passage: "Проход", autoProcess: "Процесс работает автоматически", touchHint: "Проведите пальцем для обзора. Сведите пальцы для приближения. Нажмите на объект, чтобы узнать, что это." },
+    az: { passage: "Keçid", autoProcess: "Proses avtomatik işləyir", touchHint: "Baxmaq üçün sürüşdürün. Yaxınlaşdırmaq üçün iki barmağınızı sıxın. Obyektin izahını görmək üçün ona toxunun." },
+    es: { passage: "Pasillo", autoProcess: "El proceso funciona automáticamente", touchHint: "Arrastra para mirar. Pellizca para ampliar. Toca un objeto para saber qué es." },
+    fil: { passage: "Daanan", autoProcess: "Awtomatikong gumagana ang proseso", touchHint: "I-drag para tumingin. Kurutin para mag-zoom. Pindutin ang bagay para malaman kung ano ito." },
+    id: { passage: "Lorong", autoProcess: "Proses berjalan otomatis", touchHint: "Geser untuk melihat. Cubit untuk memperbesar. Ketuk objek untuk mengetahui fungsinya." },
+    ne: { passage: "बाटो", autoProcess: "प्रक्रिया आफैँ चल्छ", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्। वस्तु के हो भनेर जान्न त्यसमा थिच्नुहोस्।" }
+  };
   Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(interactionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(explorationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  Object.entries(processTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
-  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: false, waterActive: false, growthStage: 3, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
+  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const passagePositions = [-8.1, -6.45, -4.8, -3.15, -1.5];
   const $ = (selector) => document.querySelector(selector);
@@ -180,6 +192,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function plant(x, z, side) {
     const group = new THREE.Group();
+    group.userData.infoKey = "tomatoes";
     group.position.set(x, 0, z);
     const support = new THREE.Mesh(new THREE.CylinderGeometry(.018, .018, 2.45, 5), new THREE.MeshStandardMaterial({ color: 0x8a9b98, roughness: .8 }));
     support.position.y = 1.55;
@@ -204,6 +217,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function person(x, z, color, phase) {
     const group = new THREE.Group();
+    group.userData.infoKey = "people";
     group.position.set(x, 0, z);
     const body = new THREE.Mesh(new THREE.CylinderGeometry(.13, .16, .55, 7), new THREE.MeshStandardMaterial({ color }));
     body.position.y = .5;
@@ -217,6 +231,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function overheadCart(x, z, phase, demoLift = false) {
     const group = new THREE.Group();
+    group.userData.infoKey = "liftCart";
     group.position.set(x, 0, z);
     const body = new THREE.Mesh(new THREE.BoxGeometry(.72, .28, 1.1), new THREE.MeshStandardMaterial({ color: 0x4b83c4, metalness: .25, roughness: .4 }));
     body.position.y = .42;
@@ -261,6 +276,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function harvestCart(x, z, phase) {
     const group = new THREE.Group();
+    group.userData.infoKey = "harvestCart";
     group.position.set(x, 0, z);
     const body = new THREE.Mesh(new THREE.BoxGeometry(.82, .42, 1.2), new THREE.MeshStandardMaterial({ color: 0x315f9f, metalness: .15, roughness: .5 }));
     body.position.y = .42;
@@ -289,7 +305,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const passageCenters = [...naveCenters, ...naveCenters.map((center) => -center)];
 
     box(18, .12, 32, floor, 0, .05, 0);
-    box(2.7, .05, 30.5, passage, 0, .13, 0);
+    const centralRoad = box(2.7, .05, 30.5, passage, 0, .13, 0);
+    centralRoad.userData.infoKey = "middleRoad";
     box(18, 5.8, .08, 0x78b9aa, 0, 2.9, -16, glass);
     box(18, 5.8, .08, 0x78b9aa, 0, 2.9, 16, glass);
     box(.08, 5.8, 32, 0x78b9aa, -9.2, 2.9, 0, glass);
@@ -316,6 +333,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const mat = box(.66, .10, 29, 0xb98258, x, .22, 0);
       const bed = box(.6, .2, 29, 0x64a965, x, .36, 0);
       const capillary = box(.035, .045, 29, 0x4d9bd0, x, .52, 0);
+      mat.userData.infoKey = "growMat";
+      bed.userData.infoKey = "tomatoes";
+      capillary.userData.infoKey = "capillaries";
       rowRecords.push({ mat, bed, capillary, passageNumber, naveSide, rowSide });
       capillaryMeshes.push(capillary);
       matMeshes.push(mat);
@@ -337,6 +357,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const naveSide = index < 5 ? "left" : "right";
       const passageNumber = (index % 5) + 1;
       const path = box(.86, .035, 29, 0xf1dfaf, x, .5, 0);
+      path.userData.infoKey = "passage";
       box(.06, .035, 29, 0x737b7e, x - .3, .17, 0);
       box(.06, .035, 29, 0x737b7e, x + .3, .17, 0);
       passageRecords.push({ mesh: path, naveSide, passageNumber });
@@ -360,6 +381,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] }
   };
   const cameraTouch = { yaw: 0, pitch: 0, zoom: 1, pointers: new Map(), pinchDistance: 0 };
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  const pointerStarts = new Map();
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   function resetCameraControls() { cameraTouch.yaw = 0; cameraTouch.pitch = 0; cameraTouch.zoom = 1; }
 
@@ -410,6 +434,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function applyGrowthStage(stage) {
     state.growthStage = Number(stage);
+    const slider = $("#growthSlider");
+    if (slider && slider.value !== String(state.growthStage)) slider.value = String(state.growthStage);
     const colors = [0x77b84e, 0xe4b32d, 0x79b94f, 0xd9483f];
     plantRecords.forEach((record) => {
       record.group.scale.y = .8 + state.growthStage * .07;
@@ -496,6 +522,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       }
       if (item.type === "harvest") { item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11; }
     });
+    if (state.growthAuto && state.moving) {
+      const automaticStage = Math.floor(time / 4200) % 4;
+      if (automaticStage !== state.growthStage) applyGrowthStage(automaticStage);
+    }
     if (state.waterActive && state.moving) waterDots.forEach((dot) => {
       dot.mesh.position.z = ((dot.baseZ + time * .004 + dot.phase + 13.2) % 26.4) - 13.2;
     });
@@ -505,9 +535,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   document.querySelectorAll("[data-camera]").forEach((button) => button.addEventListener("click", () => configureCamera(button.dataset.camera)));
   $("#motionButton").addEventListener("click", () => { state.moving = !state.moving; updateMotionText(); });
   $("#liftButton").addEventListener("click", () => { state.liftActive = !state.liftActive; updateLiftText(); });
-  $("#resetButton").addEventListener("click", () => { resetCameraControls(); configureCamera(state.cameraMode); });
+  $("#resetButton").addEventListener("click", () => { resetCameraControls(); state.growthAuto = true; state.waterActive = true; state.liftActive = true; applyGrowthStage(3); updateWaterText(); updateLiftText(); applyLayerVisibility(); configureCamera(state.cameraMode); });
   $("#waterButton").addEventListener("click", () => { state.waterActive = !state.waterActive; updateWaterText(); applyLayerVisibility(); });
-  $("#growthSlider").addEventListener("input", (event) => applyGrowthStage(event.target.value));
+  $("#growthSlider").addEventListener("input", (event) => { state.growthAuto = false; applyGrowthStage(event.target.value); });
   document.querySelectorAll("[data-nave-side]").forEach((button) => button.addEventListener("click", () => {
     state.selectedNaveSide = button.dataset.naveSide;
     updateSelection();
@@ -538,6 +568,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   sceneCanvas.addEventListener("pointerdown", (event) => {
     sceneCanvas.setPointerCapture(event.pointerId);
     cameraTouch.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    pointerStarts.set(event.pointerId, { x: event.clientX, y: event.clientY });
     if (cameraTouch.pointers.size === 2) cameraTouch.pinchDistance = 0;
   });
   sceneCanvas.addEventListener("pointermove", (event) => {
@@ -557,9 +588,30 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
     event.preventDefault();
   }, { passive: false });
+  function inspectCanvasPoint(event) {
+    if (!camera || !scene) return;
+    const rect = sceneCanvas.getBoundingClientRect();
+    pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+    const hit = raycaster.intersectObjects(scene.children, true).find((entry) => {
+      let object = entry.object;
+      while (object) { if (object.userData && object.userData.infoKey) return true; object = object.parent; }
+      return false;
+    });
+    if (!hit) return;
+    let object = hit.object;
+    while (object && !object.userData.infoKey) object = object.parent;
+    if (object && object.userData.infoKey) openInfo(object.userData.infoKey);
+  }
   ["pointerup", "pointercancel"].forEach((eventName) => sceneCanvas.addEventListener(eventName, (event) => {
+    const start = pointerStarts.get(event.pointerId);
+    const moved = start ? Math.hypot(event.clientX - start.x, event.clientY - start.y) : 99;
+    const wasSinglePointer = cameraTouch.pointers.size === 1;
     cameraTouch.pointers.delete(event.pointerId);
+    pointerStarts.delete(event.pointerId);
     if (cameraTouch.pointers.size < 2) cameraTouch.pinchDistance = 0;
+    if (eventName === "pointerup" && wasSinglePointer && moved < 8) inspectCanvasPoint(event);
   }));
   sceneCanvas.addEventListener("wheel", (event) => {
     cameraTouch.zoom = clamp(cameraTouch.zoom * (event.deltaY > 0 ? 1.06 : .94), .68, 1.35);

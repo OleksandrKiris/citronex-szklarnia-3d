@@ -51,7 +51,10 @@
             <h2 id="sceneTitle" data-i18n="sceneTitle">Szklarnia z góry i z boku</h2>
             <p data-i18n="sceneLead">Scena pokazuje centralną drogę, dwie strony szklarni, rzędy roślin oraz ruch podczas pracy.</p>
           </div>
-          <span class="live-status"><i></i><span id="statusText" data-i18n="moving">Ruch włączony</span></span>
+          <div class="status-stack">
+            <span class="live-status"><i></i><span id="statusText" data-i18n="moving">Ruch włączony</span></span>
+            <span class="auto-status"><i></i><span data-i18n="autoProcess">Proces działa automatycznie</span></span>
+          </div>
         </div>
         <div class="scene-frame">
           <canvas id="greenhouseCanvas" aria-label="Interaktywna wizualizacja szklarni"></canvas>
@@ -67,6 +70,7 @@
           <button class="scene-label label-harvest" type="button" data-info-key="harvestCart" data-i18n="harvestCart">WÓZEK DO ZBIORU</button>
           <button class="scene-label label-capillary" type="button" data-info-key="capillaries" data-i18n="capillaries">KAPILARY</button>
           <button class="scene-label label-mat" type="button" data-info-key="growMat" data-i18n="growMat">PAMPERSY / MATY UPRAWOWE</button>
+          <button class="scene-label label-passage" type="button" data-info-key="passage" data-i18n="passage">PRZEJŚCIE</button>
           <div class="mini-map" aria-hidden="true">
             <span data-i18n="miniMapTitle">PLAN NAWY</span>
             <div class="mini-map-body">
