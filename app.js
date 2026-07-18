@@ -141,11 +141,14 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function overheadCart(x, z, phase) {
     const group = new THREE.Group();
-    group.position.set(x, 4.7, z);
+    group.position.set(x, 5.05, z);
     const body = new THREE.Mesh(new THREE.BoxGeometry(.72, .28, 1.1), new THREE.MeshStandardMaterial({ color: 0x4b83c4, metalness: .25, roughness: .4 }));
     const load = new THREE.Mesh(new THREE.BoxGeometry(.48, .18, .62), new THREE.MeshStandardMaterial({ color: 0xf0b936 }));
     load.position.y = .22;
-    group.add(body, load);
+    const railWheel = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, .84, 8), new THREE.MeshStandardMaterial({ color: 0x33434b, metalness: .4, roughness: .35 }));
+    railWheel.rotation.z = Math.PI / 2;
+    railWheel.position.y = -.2;
+    group.add(body, load, railWheel);
     scene.add(group);
     animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase });
   }
@@ -171,28 +174,53 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function addGlasshouse() {
-    const glass = { color: 0x8bd0c3, transparent: true, opacity: .18, roughness: .2, metalness: .05, side: THREE.DoubleSide };
-    box(18, .12, 32, 0xd9e7dd, 0, .05, 0);
-    box(2.5, .05, 30, 0xd6bd83, 0, .13, 0);
-    box(.08, 5.8, 32, 0x78b9aa, -9.2, 2.9, 0, glass);
-    box(.08, 5.8, 32, 0x78b9aa, 9.2, 2.9, 0, glass);
+    const glass = { color: 0x8bd0c3, transparent: true, opacity: .16, roughness: .18, metalness: .08, side: THREE.DoubleSide };
+    const frame = 0x4f8f7e;
+    const floor = 0xd9e7dd;
+    const passage = 0xd6bd83;
+    const passageCenters = [-8.1, -6.45, -4.8, -3.15, -1.5, 1.5, 3.15, 4.8, 6.45, 8.1];
+    const rows = [];
+    [-8.1, -6.45, -4.8, -3.15, -1.5].forEach((center) => { rows.push(center - .28, center + .28, -center - .28, -center + .28); });
+
+    box(18, .12, 32, floor, 0, .05, 0);
+    box(2.7, .05, 30.5, passage, 0, .13, 0);
     box(18, 5.8, .08, 0x78b9aa, 0, 2.9, -16, glass);
     box(18, 5.8, .08, 0x78b9aa, 0, 2.9, 16, glass);
-    box(18, .08, 32, 0x8dcfc2, 0, 6.1, 0, glass);
-    [-8.9, -5.5, -2.1, 2.1, 5.5, 8.9].forEach((x) => box(.08, 6, .08, 0x609b8b, x, 3, 0));
-    [-12, -4, 4, 12].forEach((z) => { box(18, .08, .08, 0x609b8b, 0, 6.08, z); box(.08, 5.9, .08, 0x609b8b, 0, 3, z); });
-    const rows = [-7.8, -6.2, -4.6, -3.0, 3.0, 4.6, 6.2, 7.8];
-    rows.forEach((x) => {
-      box(1.16, .10, 29, 0xb98258, x, .22, 0);
-      box(1.1, .22, 29, 0x64a965, x, .38, 0);
-      box(.045, .045, 29, 0x4d9bd0, x, .54, 0);
-      for (let z = -13; z <= 13; z += 2.15) plant(x, z, x < 0 ? -1 : 1);
+    box(.08, 5.8, 32, 0x78b9aa, -9.2, 2.9, 0, glass);
+    box(.08, 5.8, 32, 0x78b9aa, 9.2, 2.9, 0, glass);
+
+    // Five repeated roof spans make the greenhouse read as a real multi-span structure.
+    const bayCenters = [-7.2, -3.6, 0, 3.6, 7.2];
+    const roofAngle = Math.atan2(.78, 1.78);
+    bayCenters.forEach((center) => {
+      const leftRoof = box(3.75, .07, 32, 0x8dcfc2, center - .9, 5.72, 0, glass);
+      const rightRoof = box(3.75, .07, 32, 0x8dcfc2, center + .9, 5.72, 0, glass);
+      leftRoof.rotation.z = roofAngle;
+      rightRoof.rotation.z = -roofAngle;
+      box(.09, 1.7, .09, frame, center, 5.72, 0);
     });
-    [-8, -6.4, -4.8, -3.2, 3.2, 4.8, 6.4, 8].forEach((x) => box(.08, .12, 29, 0xf1dfaf, x, .5, 0));
-    [-6.8, -4.9, -3.0, 3.0, 4.9, 6.8].forEach((x) => overheadCart(x, -10 + (x + 7) * .7, x));
-    person(-1.0, -9, 0xe36b54, 0); person(1.0, -3, 0x4d86c6, 1.4); person(-1.0, 6, 0xe5a631, 2.8); person(1.0, 11, 0x8d67bf, 4.1);
-    harvestCart(-1.35, 11, .8);
-    box(.5, .5, 1.1, 0xd74d37, -1.0, .45, 13.2); box(.5, .5, 1.1, 0xe9ad28, 1.0, .45, 13.2);
+    [-9, -7.2, -5.4, -3.6, -1.8, 0, 1.8, 3.6, 5.4, 7.2, 9].forEach((x) => box(.075, 5.8, .075, frame, x, 2.9, 0));
+    [-12, -8, -4, 0, 4, 8, 12].forEach((z) => {
+      box(18, .075, .075, frame, 0, 5.35, z);
+      box(18, .065, .065, frame, 0, 2.95, z);
+    });
+    box(2.55, .045, 30.5, 0xe7cb92, 0, .2, 0);
+
+    rows.forEach((x) => {
+      box(.66, .10, 29, 0xb98258, x, .22, 0);
+      box(.6, .2, 29, 0x64a965, x, .36, 0);
+      box(.035, .045, 29, 0x4d9bd0, x, .52, 0);
+      for (let z = -13.2; z <= 13.2; z += 3.2) plant(x, z, x < 0 ? -1 : 1);
+    });
+    passageCenters.forEach((x) => {
+      box(.34, .035, 29, 0xf1dfaf, x, .5, 0);
+      box(.055, .055, 29, frame, x, 4.95, 0);
+    });
+
+    [-8.1, -4.8, 4.8, 8.1].forEach((x, index) => overheadCart(x, -10 + index * 5.5, index));
+    person(-6.45, -9, 0xe36b54, 0); person(4.8, -3, 0x4d86c6, 1.4); person(-3.15, 6, 0xe5a631, 2.8); person(6.45, 11, 0x8d67bf, 4.1);
+    harvestCart(-4.8, 10.5, .8);
+    box(.55, .5, 1.1, 0xd74d37, -1.0, .45, 13.2); box(.55, .5, 1.1, 0xe9ad28, 1.0, .45, 13.2);
   }
 
   function lookAt(position, target) {
@@ -239,8 +267,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function animate(time) {
     requestAnimationFrame(animate);
     const mode = state.cameraMode;
-    const position = mode === "nave" ? [18, 9, 20] : mode === "work" ? [9, 4.8, 12] : [25, 23, 31];
-    const target = mode === "work" ? [0, 1, 5] : [0, 1, 0];
+    const position = mode === "nave" ? [13, 8.5, 18] : mode === "work" ? [1.5, 4.2, 15] : [26, 24, 32];
+    const target = mode === "nave" ? [-4.7, 1.4, 0] : mode === "work" ? [-4.8, 1.25, 4.5] : [0, 1.2, 0];
     lookAt(position, target);
     if (state.moving) animated.forEach((item) => {
       if (item.type === "person") { item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5; item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI; }
