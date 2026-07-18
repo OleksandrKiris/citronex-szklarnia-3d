@@ -63,9 +63,21 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       technicalEyebrow: "यहाँ के देखिन्छ", technicalTitle: "उदाहरण ग्रीनहाउसका भागहरू", capillaries: "केपिलरी पाइप", capillaryInfo: "बिरुवामा पानी र पोषक घोल पुर्‍याउने पातला पाइपहरू।", growMat: "उत्पादन म्याट", matInfo: "बिरुवा उम्रने र पोषक घोल पाउने माध्यम।", harvestCart: "बाली टिप्ने गाडी", tomatoes: "गोलभेडा", growthInfo: "बिरुवा लाइनमा बढ्छ; पाकेका फल बाली टिप्ने गाडीमा राखिन्छ।"
     }
   };
+  const interactionTranslations = {
+    pl: { liftView: "Górny wózek", liftStart: "Podnieś platformę", liftStop: "Opuść platformę", resetView: "Resetuj widok", fullscreen: "Pełny ekran", closeFullscreen: "Zamknij pełny ekran", touchHint: "Przeciągnij, aby obejrzeć. Uszczypnij, aby przybliżyć." },
+    en: { liftView: "Overhead lift cart", liftStart: "Raise platform", liftStop: "Lower platform", resetView: "Reset view", fullscreen: "Full screen", closeFullscreen: "Close full screen", touchHint: "Drag to look around. Pinch to zoom." },
+    ua: { liftView: "Верхній візок-підйомник", liftStart: "Підняти платформу", liftStop: "Опустити платформу", resetView: "Скинути вигляд", fullscreen: "На весь екран", closeFullscreen: "Закрити повний екран", touchHint: "Проведіть пальцем, щоб оглянути. Зведіть пальці, щоб наблизити." },
+    ru: { liftView: "Верхняя тележка-подъёмник", liftStart: "Поднять платформу", liftStop: "Опустить платформу", resetView: "Сбросить вид", fullscreen: "Полный экран", closeFullscreen: "Закрыть полный экран", touchHint: "Проведите пальцем для обзора. Сведите пальцы для приближения." },
+    az: { liftView: "Yuxarı qaldırıcı araba", liftStart: "Platformanı qaldır", liftStop: "Platformanı endir", resetView: "Görünüşü sıfırla", fullscreen: "Tam ekran", closeFullscreen: "Tam ekranı bağla", touchHint: "Baxmaq üçün sürüşdürün. Yaxınlaşdırmaq üçün iki barmağınızı sıxın." },
+    es: { liftView: "Carro elevador superior", liftStart: "Subir plataforma", liftStop: "Bajar plataforma", resetView: "Restablecer vista", fullscreen: "Pantalla completa", closeFullscreen: "Cerrar pantalla completa", touchHint: "Arrastra para mirar. Pellizca para ampliar." },
+    fil: { liftView: "Pang-itaas na lift cart", liftStart: "Itaas ang platform", liftStop: "Ibaba ang platform", resetView: "Ibalik ang tanawin", fullscreen: "Buong screen", closeFullscreen: "Isara ang buong screen", touchHint: "I-drag para tumingin. Kurutin para mag-zoom." },
+    id: { liftView: "Troli pengangkat atas", liftStart: "Naikkan platform", liftStop: "Turunkan platform", resetView: "Atur ulang tampilan", fullscreen: "Layar penuh", closeFullscreen: "Tutup layar penuh", touchHint: "Geser untuk melihat. Cubit untuk memperbesar." },
+    ne: { liftView: "माथिल्लो लिफ्ट गाडी", liftStart: "प्लेटफर्म उठाउनुहोस्", liftStop: "प्लेटफर्म झार्नुहोस्", resetView: "दृश्य रिसेट गर्नुहोस्", fullscreen: "पूरै स्क्रिन", closeFullscreen: "पूरै स्क्रिन बन्द गर्नुहोस्", touchHint: "हेर्न तान्नुहोस्। ठूलो बनाउन दुई औँला चिमोट्नुहोस्।" }
+  };
   Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  Object.entries(interactionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
-  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, cameraMode: "overview" };
+  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: false, cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
@@ -78,12 +90,23 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     $("#languageSelect").setAttribute("aria-label", t("chooseLanguage"));
     $("#greenhouseCanvas").setAttribute("aria-label", t("sceneTitle"));
     updateMotionText();
+    updateLiftText();
+    updateFullscreenText();
   }
 
   function updateMotionText() {
     $("#statusText").textContent = state.moving ? t("moving") : t("paused");
     const label = state.moving ? t("pause") : t("play");
     $("#motionButton span:last-child").textContent = label;
+  }
+
+  function updateLiftText() {
+    $("#liftButton span:last-child").textContent = state.liftActive ? t("liftStop") : t("liftStart");
+  }
+
+  function updateFullscreenText() {
+    const isFullscreen = Boolean(document.fullscreenElement) || $(".scene-section").classList.contains("is-immersive");
+    $("#fullscreenButton span:last-child").textContent = isFullscreen ? t("closeFullscreen") : t("fullscreen");
   }
 
   $("#languageSelect").addEventListener("change", (event) => {
@@ -148,9 +171,28 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const railWheel = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, .84, 8), new THREE.MeshStandardMaterial({ color: 0x33434b, metalness: .4, roughness: .35 }));
     railWheel.rotation.z = Math.PI / 2;
     railWheel.position.y = -.2;
-    group.add(body, load, railWheel);
+    const liftAssembly = new THREE.Group();
+    liftAssembly.position.y = -2.35;
+    const platform = new THREE.Mesh(new THREE.BoxGeometry(.82, .1, .94), new THREE.MeshStandardMaterial({ color: 0x2f5f91, metalness: .25, roughness: .45 }));
+    platform.position.y = 0;
+    const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(.05, .6, .86), new THREE.MeshStandardMaterial({ color: 0x263e5a, metalness: .2 }));
+    const guardRight = guardLeft.clone();
+    guardLeft.position.set(-.37, .3, 0); guardRight.position.set(.37, .3, 0);
+    const worker = new THREE.Group();
+    const workerBody = new THREE.Mesh(new THREE.CylinderGeometry(.13, .16, .55, 7), new THREE.MeshStandardMaterial({ color: 0xe36b54 }));
+    workerBody.position.y = .62;
+    const workerHead = new THREE.Mesh(new THREE.SphereGeometry(.15, 8, 8), new THREE.MeshStandardMaterial({ color: 0xf0b48f }));
+    workerHead.position.y = 1.02;
+    const helmet = new THREE.Mesh(new THREE.SphereGeometry(.18, 8, 5, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xf0b936 }));
+    helmet.position.y = 1.15;
+    worker.add(workerBody, workerHead, helmet);
+    liftAssembly.add(platform, guardLeft, guardRight, worker);
+    const liftMastLeft = new THREE.Mesh(new THREE.BoxGeometry(.06, 2.1, .06), new THREE.MeshStandardMaterial({ color: 0x415d6c, metalness: .3 }));
+    const liftMastRight = liftMastLeft.clone();
+    liftMastLeft.position.set(-.28, -1.12, 0); liftMastRight.position.set(.28, -1.12, 0);
+    group.add(body, load, railWheel, liftMastLeft, liftMastRight, liftAssembly);
     scene.add(group);
-    animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase });
+    animated.push({ object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly: x === -8.1 ? liftAssembly : null });
   }
 
   function harvestCart(x, z, phase) {
@@ -229,8 +271,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     camera.lookAt(targetCamera);
   }
 
+  const cameraViews = {
+    overview: { position: [26, 24, 32], target: [0, 1.2, 0] },
+    nave: { position: [13, 8.5, 18], target: [-4.7, 1.4, 0] },
+    lift: { position: [1.5, 4.2, 15], target: [-4.8, 1.25, 4.5] }
+  };
+  const cameraTouch = { yaw: 0, pitch: 0, zoom: 1, pointers: new Map(), pinchDistance: 0 };
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  function resetCameraControls() { cameraTouch.yaw = 0; cameraTouch.pitch = 0; cameraTouch.zoom = 1; }
+
   function configureCamera(mode) {
-    state.cameraMode = mode;
+    state.cameraMode = cameraViews[mode] ? mode : "overview";
+    resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
   }
 
@@ -239,10 +291,14 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     try {
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xdff4ea);
+      scene.fog = new THREE.Fog(0xdff4ea, 38, 78);
       camera = new THREE.PerspectiveCamera(38, 1, .1, 200);
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
       renderer.shadowMap.enabled = false;
       scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 2.1));
       const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(12, 22, 10); scene.add(sun);
@@ -267,12 +323,23 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function animate(time) {
     requestAnimationFrame(animate);
     const mode = state.cameraMode;
-    const position = mode === "nave" ? [13, 8.5, 18] : mode === "work" ? [1.5, 4.2, 15] : [26, 24, 32];
-    const target = mode === "nave" ? [-4.7, 1.4, 0] : mode === "work" ? [-4.8, 1.25, 4.5] : [0, 1.2, 0];
-    lookAt(position, target);
+    const view = cameraViews[mode] || cameraViews.overview;
+    const targetVector = new THREE.Vector3(...view.target);
+    const spherical = new THREE.Spherical().setFromVector3(new THREE.Vector3(...view.position).sub(targetVector));
+    spherical.theta += cameraTouch.yaw;
+    spherical.phi = clamp(spherical.phi + cameraTouch.pitch, .35, 1.5);
+    spherical.radius = clamp(spherical.radius * cameraTouch.zoom, 10, 58);
+    const adjustedPosition = new THREE.Vector3().setFromSpherical(spherical).add(targetVector);
+    lookAt(adjustedPosition.toArray(), targetVector.toArray());
     if (state.moving) animated.forEach((item) => {
       if (item.type === "person") { item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5; item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI; }
-      if (item.type === "cart") { item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14; }
+      if (item.type === "cart") {
+        item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14;
+        if (item.liftAssembly) {
+          const liftProgress = state.liftActive ? .5 + Math.sin(time * .0011 + item.phase) * .5 : 0;
+          item.liftAssembly.position.y = -2.35 + liftProgress * 1.65;
+        }
+      }
       if (item.type === "harvest") { item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11; }
     });
     renderer.render(scene, camera);
@@ -280,6 +347,63 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   document.querySelectorAll("[data-camera]").forEach((button) => button.addEventListener("click", () => configureCamera(button.dataset.camera)));
   $("#motionButton").addEventListener("click", () => { state.moving = !state.moving; updateMotionText(); });
+  $("#liftButton").addEventListener("click", () => { state.liftActive = !state.liftActive; updateLiftText(); });
+  $("#resetButton").addEventListener("click", () => { resetCameraControls(); configureCamera(state.cameraMode); });
+
+  sceneCanvas.addEventListener("pointerdown", (event) => {
+    sceneCanvas.setPointerCapture(event.pointerId);
+    cameraTouch.pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (cameraTouch.pointers.size === 2) cameraTouch.pinchDistance = 0;
+  });
+  sceneCanvas.addEventListener("pointermove", (event) => {
+    const previous = cameraTouch.pointers.get(event.pointerId);
+    if (!previous) return;
+    const dx = event.clientX - previous.x;
+    const dy = event.clientY - previous.y;
+    previous.x = event.clientX; previous.y = event.clientY;
+    if (cameraTouch.pointers.size === 1) {
+      cameraTouch.yaw -= dx * .008;
+      cameraTouch.pitch = clamp(cameraTouch.pitch - dy * .006, -.55, .55);
+    } else if (cameraTouch.pointers.size === 2) {
+      const points = [...cameraTouch.pointers.values()];
+      const distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+      if (cameraTouch.pinchDistance) cameraTouch.zoom = clamp(cameraTouch.zoom * cameraTouch.pinchDistance / distance, .68, 1.35);
+      cameraTouch.pinchDistance = distance;
+    }
+    event.preventDefault();
+  }, { passive: false });
+  ["pointerup", "pointercancel"].forEach((eventName) => sceneCanvas.addEventListener(eventName, (event) => {
+    cameraTouch.pointers.delete(event.pointerId);
+    if (cameraTouch.pointers.size < 2) cameraTouch.pinchDistance = 0;
+  }));
+  sceneCanvas.addEventListener("wheel", (event) => {
+    cameraTouch.zoom = clamp(cameraTouch.zoom * (event.deltaY > 0 ? 1.06 : .94), .68, 1.35);
+    event.preventDefault();
+  }, { passive: false });
+
+  const sceneSection = $(".scene-section");
+  async function toggleFullscreen() {
+    const isOpen = Boolean(document.fullscreenElement) || sceneSection.classList.contains("is-immersive");
+    if (isOpen) {
+      if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen();
+      sceneSection.classList.remove("is-immersive");
+      document.body.classList.remove("is-immersive");
+    } else {
+      sceneSection.classList.add("is-immersive");
+      document.body.classList.add("is-immersive");
+      try { if (sceneSection.requestFullscreen) await sceneSection.requestFullscreen(); } catch (error) { /* CSS fallback remains available on mobile Safari. */ }
+    }
+    updateFullscreenText();
+    resizeScene();
+  }
+  $("#fullscreenButton").addEventListener("click", toggleFullscreen);
+  document.addEventListener("fullscreenchange", () => {
+    const active = Boolean(document.fullscreenElement);
+    sceneSection.classList.toggle("is-immersive", active);
+    document.body.classList.toggle("is-immersive", active);
+    updateFullscreenText();
+    resizeScene();
+  });
   window.addEventListener("resize", resizeScene, { passive: true });
   applyLanguage();
   initScene();
