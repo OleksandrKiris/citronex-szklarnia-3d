@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d6b46">
+  <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
+  <title>CITRONEX | Szklarnia 3D</title>
+  <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="https://oleksandrkiris.github.io/citronex-hydra-project/" target="_blank" rel="noopener">
+        <img src="assets/logo-citronex.svg" alt="CITRONEX">
+        <span><strong>CITRONEX</strong><small data-i18n="brandSub">Szklarnia 3D</small></span>
+      </a>
+      <label class="language-picker">
+        <span class="sr-only" data-i18n="chooseLanguage">Wybierz język</span>
+        <select id="languageSelect" aria-label="Wybierz język">
+          <option value="pl">Polski</option>
+          <option value="en">English</option>
+          <option value="ua">Українська</option>
+          <option value="ru">Русский</option>
+          <option value="az">Azərbaycanca</option>
+          <option value="es">Español</option>
+          <option value="fil">Filipino</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="ne">नेपाली</option>
+        </select>
+      </label>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow" data-i18n="eyebrow">OSOBNY PROJEKT WIZUALIZACJI</div>
+        <h1 data-i18n="title">Poznaj szklarnię</h1>
+        <p data-i18n="heroLead">Zobacz z góry, gdzie są drogi, nawy, przejścia, rzędy pomidorów i praca ludzi.</p>
+        <div class="hero-actions">
+          <button class="button button-primary" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
+          <button class="button button-secondary" type="button" data-camera="nave"><span aria-hidden="true">▦</span><span data-i18n="nave">Jedna nawa</span></button>
+          <button class="button button-secondary" type="button" data-camera="work"><span aria-hidden="true">✦</span><span data-i18n="work">Praca i zbiór</span></button>
+        </div>
+      </section>
+
+      <section class="scene-section" aria-labelledby="sceneTitle">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow" data-i18n="liveEyebrow">WIDOK INTERAKTYWNY</div>
+            <h2 id="sceneTitle" data-i18n="sceneTitle">Szklarnia z góry i z boku</h2>
+            <p data-i18n="sceneLead">Scena pokazuje centralną drogę, dwie strony szklarni, rzędy roślin oraz ruch podczas pracy.</p>
+          </div>
+          <span class="live-status"><i></i><span id="statusText" data-i18n="moving">Ruch włączony</span></span>
+        </div>
+        <div class="scene-frame">
+          <canvas id="greenhouseCanvas" aria-label="Interaktywna wizualizacja szklarni"></canvas>
+          <div id="sceneFallback" class="scene-fallback" hidden>
+            <div class="fallback-road" data-i18n="middleRoad">DROGA ŚRODKOWA</div>
+            <div class="fallback-side"><span data-i18n="leftSide">LEWA STRONA</span><b>1 2 3 4 5</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
+            <div class="fallback-side"><span data-i18n="rightSide">PRAWA STRONA</span><b>1 2 3 4 5</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
+          </div>
+          <div class="scene-label label-road" data-i18n="middleRoad">DROGA ŚRODKOWA</div>
+          <div class="scene-label label-left" data-i18n="leftSide">LEWA STRONA</div>
+          <div class="scene-label label-right" data-i18n="rightSide">PRAWA STRONA</div>
+          <div class="scene-label label-cart" data-i18n="upperCart">GÓRNY WÓZEK</div>
+        </div>
+        <div class="scene-toolbar">
+          <button class="toolbar-button is-active" type="button" data-camera="overview"><span aria-hidden="true">◉</span><span data-i18n="overview">Cała szklarnia</span></button>
+          <button class="toolbar-button" type="button" data-camera="nave"><span aria-hidden="true">▦</span><span data-i18n="nave">Jedna nawa</span></button>
+          <button class="toolbar-button" type="button" data-camera="work"><span aria-hidden="true">✦</span><span data-i18n="work">Praca i zbiór</span></button>
+          <button class="toolbar-button" type="button" id="motionButton"><span aria-hidden="true">Ⅱ</span><span data-i18n="pause">Zatrzymaj ruch</span></button>
+        </div>
+      </section>
+
+      <section class="legend-section" aria-label="Legenda">
+        <div class="legend-item"><i class="legend-dot dot-plant"></i><span data-i18n="plants">Rzędy pomidorów</span></div>
+        <div class="legend-item"><i class="legend-dot dot-road"></i><span data-i18n="passages">Przejścia i droga</span></div>
+        <div class="legend-item"><i class="legend-dot dot-person"></i><span data-i18n="people">Pracownicy</span></div>
+        <div class="legend-item"><i class="legend-dot dot-cart"></i><span data-i18n="carts">Wózki</span></div>
+      </section>
+
+      <section class="steps-section" aria-labelledby="stepsTitle">
+        <div class="section-heading compact-heading">
+          <div>
+            <div class="eyebrow" data-i18n="rememberEyebrow">ZAPAMIĘTAJ</div>
+            <h2 id="stepsTitle" data-i18n="stepsTitle">Trzy rzeczy, które trzeba rozumieć</h2>
+          </div>
+        </div>
+        <div class="steps-grid">
+          <article class="info-step">
+            <span class="step-number">1</span>
+            <div><h3 data-i18n="step1Title">Cała szklarnia</h3><p data-i18n="step1Text">Stoisz plecami do pierwszych naw. Droga pośrodku dzieli lewą i prawą stronę.</p></div>
+          </article>
+          <article class="info-step">
+            <span class="step-number">2</span>
+            <div><h3 data-i18n="step2Title">Jedna nawa</h3><p data-i18n="step2Text">W jednej nawie widzisz 5 przejść. W każdym przejściu są dwa rzędy: lewy i prawy.</p></div>
+          </article>
+          <article class="info-step">
+            <span class="step-number">3</span>
+            <div><h3 data-i18n="step3Title">Praca i zbiór</h3><p data-i18n="step3Text">Człowiek idzie wyznaczonym przejściem, pracuje przy swoim rzędzie i odkłada zebrane pomidory.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="facts-section">
+        <div class="fact"><strong>5</strong><span data-i18n="factPassages">przejść w nawie</span></div>
+        <div class="fact"><strong>10</strong><span data-i18n="factRows">rzędów w nawie</span></div>
+        <div class="fact"><strong>37–39</strong><span data-i18n="factNaves">naw zależnie od szklarni</span></div>
+        <div class="fact"><strong>2</strong><span data-i18n="factSides">strony drogi</span></div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>
