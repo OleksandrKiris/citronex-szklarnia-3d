@@ -1,8 +1,8 @@
 # CITRONEX Szklarnia 3D
 
-Niezależny projekt wizualizacji szklarni. Nie zawiera kodu pierwotnego projektu 3D zakładu i nie jest osadzony w systemie CITRONEX hydra S.R.Z.B. Hydra prowadzi do niego wyłącznie linkiem.
+Niezależny techniczny projekt demonstracyjny szklarni. Nie zawiera kodu pierwotnego projektu 3D zakładu, nie jest narzędziem operacyjnym i nie jest osadzony w systemie CITRONEX hydra S.R.Z.B. Hydra nie zawiera do niego linku.
 
-Projekt pokazuje:
+Projekt pokazuje jako przykład edukacyjny:
 
 - szklarnię z góry i z boku,
 - centralną drogę oraz lewą i prawą stronę,
@@ -10,7 +10,10 @@ Projekt pokazuje:
 - rośliny pomidorów,
 - pracowników poruszających się po obiekcie,
 - górne wózki,
-- odkładanie zebranych pomidorów,
+- kapilary doprowadzające wodę i pożywkę,
+- maty uprawowe, nazywane na miejscu także „pampersami”,
+- wózek do zbioru oraz odkładanie zebranych pomidorów,
+- podstawowy cykl: roślina, wzrost, pielęgnacja i zbiór,
 - wybór widoku i zatrzymanie animacji,
 - 9 języków.
 
@@ -18,4 +21,4 @@ Docelowy adres GitHub Pages:
 
 `https://oleksandrkiris.github.io/citronex-szklarnia-3d/`
 
-Scena używa Three.js z CDN. Jeżeli przeglądarka nie załaduje biblioteki albo nie obsługuje WebGL, pokazuje prosty schemat zastępczy.
+Scena korzysta z lokalnie dołączonego Three.js, więc nie zależy od zewnętrznego CDN. Jeżeli przeglądarka nie obsługuje WebGL, pokazuje prosty schemat zastępczy.
