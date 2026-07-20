@@ -404,7 +404,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   const cameraViews = {
-    overview: { position: [26, 24, 32], target: [0, 1.2, 0] },
+    overview: { position: [0, 30, 30], target: [0, 0, 0] },
     nave: { position: [13, 8.5, 18], target: [-4.7, 1.4, 0] },
     lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] },
     mainRoad: { position: [0, 8.6, 19], target: [0, .9, -1] },
