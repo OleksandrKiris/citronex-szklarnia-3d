@@ -447,22 +447,24 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const badge = $("#selectionBadge");
     if (badge) badge.textContent = selection;
     rowRecords.forEach((record) => {
-      const passageSelected = record.naveSide === state.selectedNaveSide && record.passageNumber === state.selectedPassage;
-      const selected = passageSelected && record.rowSide === state.selectedRowSide;
+      const passageSelected = record.passageNumber === state.selectedPassage;
+      const selected = passageSelected && record.naveSide === state.selectedNaveSide && record.rowSide === state.selectedRowSide;
       [record.mat, record.bed, record.capillary].forEach((mesh) => {
         mesh.material.emissive.setHex(selected ? 0x9a6b1b : passageSelected ? 0x4c8f64 : 0x000000);
         mesh.material.emissiveIntensity = selected ? .75 : passageSelected ? .28 : 0;
       });
     });
     passageRecords.forEach((record) => {
-      const selected = record.naveSide === state.selectedNaveSide && record.passageNumber === state.selectedPassage;
+      const selected = record.passageNumber === state.selectedPassage;
       record.mesh.material.emissive.setHex(selected ? 0x4b86b6 : 0x000000);
       record.mesh.material.emissiveIntensity = selected ? .75 : 0;
     });
     if (demoLiftItem) demoLiftItem.baseX = selectedPassageX();
     const selectedX = selectedPassageX();
+    const oppositeX = -selectedX;
     selectionArrows.forEach((arrow, index) => {
-      arrow.position.set(selectedX + (index ? .55 : -.55), .78, -8.2);
+      const sideX = index < 2 ? selectedX : oppositeX;
+      arrow.position.set(sideX + (index % 2 ? .55 : -.55), .78, -8.2);
       arrow.visible = true;
     });
     document.querySelectorAll("[data-nave-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.naveSide === state.selectedNaveSide));
@@ -543,7 +545,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 2.1));
       const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(12, 22, 10); scene.add(sun);
       addGlasshouse();
-      selectionArrows = [0, 1].map(() => new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, .78, -8.2), 1.8, 0xf0a832, .34, .18));
+      selectionArrows = [0, 1, 2, 3].map(() => new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, .78, -8.2), 1.8, 0xf0a832, .34, .18));
       selectionArrows.forEach((arrow) => scene.add(arrow));
       applyGrowthStage(state.growthStage);
       updateSelection();
