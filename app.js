@@ -133,7 +133,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
-  const passagePositions = [-8.1, -6.45, -4.8, -3.15, -1.5];
+  // Passage 1 starts next to the central connector; matching numbers face each other.
+  const passagePositions = [-1.5, -3.15, -4.8, -6.45, -8.1];
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
 
@@ -386,9 +387,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const path = box(.86, .035, 29, 0xf1dfaf, x, .5, 0);
       path.userData.infoKey = "passage";
       Object.assign(path.userData, { naveSide, passageNumber });
+      const entrance = box(.72, .12, .24, 0xf0a832, x, .58, -14.22);
+      entrance.userData.infoKey = "passage";
+      Object.assign(entrance.userData, { naveSide, passageNumber });
       box(.06, .035, 29, 0x737b7e, x - .3, .17, 0);
       box(.06, .035, 29, 0x737b7e, x + .3, .17, 0);
-      passageRecords.push({ mesh: path, naveSide, passageNumber });
+      passageRecords.push({ mesh: path, entrance, naveSide, passageNumber });
     });
 
     [-8.1, -4.8, 4.8, 8.1].forEach((x, index) => overheadCart(x, x === -4.8 ? 4.5 : -10 + index * 5.5, index, x === -4.8));
@@ -456,15 +460,17 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     });
     passageRecords.forEach((record) => {
       const selected = record.passageNumber === state.selectedPassage;
-      record.mesh.material.emissive.setHex(selected ? 0x4b86b6 : 0x000000);
-      record.mesh.material.emissiveIntensity = selected ? .75 : 0;
+      [record.mesh, record.entrance].forEach((mesh) => {
+        mesh.material.emissive.setHex(selected ? 0x4b86b6 : 0x000000);
+        mesh.material.emissiveIntensity = selected ? .75 : 0;
+      });
     });
     if (demoLiftItem) demoLiftItem.baseX = selectedPassageX();
     const selectedX = selectedPassageX();
     const oppositeX = -selectedX;
     selectionArrows.forEach((arrow, index) => {
       const sideX = index < 2 ? selectedX : oppositeX;
-      arrow.position.set(sideX + (index % 2 ? .55 : -.55), .78, -8.2);
+      arrow.position.set(sideX + (index % 2 ? .55 : -.55), .78, -14.22);
       arrow.visible = true;
     });
     document.querySelectorAll("[data-nave-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.naveSide === state.selectedNaveSide));
