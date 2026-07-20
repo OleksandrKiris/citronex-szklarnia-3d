@@ -133,8 +133,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
-  // Passage 1 starts next to the central connector; matching numbers face each other.
-  const passagePositions = [-1.5, -3.15, -4.8, -6.45, -8.1];
+  // Five entry levels run along the connector road. Matching left/right entries share the same Z.
+  const passagePositions = [-11, -5.5, 0, 5.5, 11];
+  const passageSideCenters = { left: -5.15, right: 5.15 };
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
 
@@ -239,7 +240,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     return group;
   }
 
-  function person(x, z, color, phase) {
+  function person(x, z, color, phase, axis = "z") {
     const group = new THREE.Group();
     group.userData.infoKey = "people";
     group.position.set(x, 0, z);
@@ -249,11 +250,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     head.position.y = .9;
     group.add(body, head);
     scene.add(group);
-    animated.push({ object: group, type: "person", baseX: x, baseZ: z, phase });
+    animated.push({ object: group, type: "person", baseX: x, baseZ: z, phase, axis });
     peopleRecords.push(group);
   }
 
-  function overheadCart(x, z, phase, demoLift = false) {
+  function overheadCart(x, z, phase, demoLift = false, axis = "z") {
     const group = new THREE.Group();
     group.userData.infoKey = "liftCart";
     group.position.set(x, 0, z);
@@ -291,14 +292,15 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       group.add(liftMastLeft, liftMastRight, liftAssembly);
     }
     group.add(body, load);
+    if (axis === "x") group.rotation.y = Math.PI / 2;
     scene.add(group);
-    const item = { object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly };
+    const item = { object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly, axis };
     animated.push(item);
     cartRecords.push(group);
     if (demoLift) demoLiftItem = item;
   }
 
-  function harvestCart(x, z, phase) {
+  function harvestCart(x, z, phase, axis = "z") {
     const group = new THREE.Group();
     group.userData.infoKey = "harvestCart";
     group.position.set(x, 0, z);
@@ -315,8 +317,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       wheel.position.set(wheelX, .14, wheelZ);
       group.add(wheel);
     }));
+    if (axis === "x") group.rotation.y = Math.PI / 2;
     scene.add(group);
-    animated.push({ object: group, type: "harvest", baseX: x, baseZ: z, phase });
+    animated.push({ object: group, type: "harvest", baseX: x, baseZ: z, phase, axis });
     cartRecords.push(group);
   }
 
@@ -325,8 +328,6 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const frame = 0x4f8f7e;
     const floor = 0xd9e7dd;
     const passage = 0xd6bd83;
-    const naveCenters = passagePositions;
-    const passageCenters = [...naveCenters, ...naveCenters.map((center) => -center)];
 
     box(18, .12, 32, floor, 0, .05, 0);
     const centralRoad = box(3.25, .05, 30.5, passage, 0, .13, 0);
@@ -355,10 +356,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     [-1.58, 1.58].forEach((x) => box(.08, .055, 30.5, 0x8e7045, x, .25, 0));
     for (let z = -13; z <= 13; z += 4) box(.18, .06, 1.55, 0xf5d77d, 0, .27, z);
 
-    function addRow(x, passageNumber, naveSide, rowSide) {
-      const mat = box(.66, .10, 29, 0xb98258, x, .22, 0);
-      const bed = box(.6, .2, 29, 0x64a965, x, .36, 0);
-      const capillary = box(.035, .045, 29, 0x4d9bd0, x, .52, 0);
+    function addRow(passageZ, passageNumber, naveSide, rowSide) {
+      const direction = naveSide === "left" ? -1 : 1;
+      const rowZ = passageZ + (rowSide === "left" ? -.52 : .52);
+      const rowX = passageSideCenters[naveSide];
+      const mat = box(6.55, .10, .66, 0xb98258, rowX, .22, rowZ);
+      const bed = box(6.45, .2, .6, 0x64a965, rowX, .36, rowZ);
+      const capillary = box(6.45, .045, .035, 0x4d9bd0, rowX, .52, rowZ);
       mat.userData.infoKey = "growMat";
       bed.userData.infoKey = "tomatoes";
       capillary.userData.infoKey = "capillaries";
@@ -366,38 +370,41 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       rowRecords.push({ mat, bed, capillary, passageNumber, naveSide, rowSide });
       capillaryMeshes.push(capillary);
       matMeshes.push(mat);
-      for (let z = -13.2; z <= 13.2; z += 3.2) {
-        const plantGroup = plant(x, z, x < 0 ? -1 : 1);
+      for (let x = direction < 0 ? -2.3 : 2.3; direction < 0 ? x >= -8.1 : x <= 8.1; x += direction * 1.8) {
+        const plantGroup = plant(x, rowZ, direction);
         Object.assign(plantGroup.userData, { passageNumber, naveSide, rowSide });
         const waterDot = new THREE.Mesh(new THREE.SphereGeometry(.07, 8, 8), new THREE.MeshStandardMaterial({ color: 0x2f9be5, emissive: 0x0a426b, emissiveIntensity: .45 }));
-        waterDot.position.set(x, .58, z);
+        waterDot.position.set(x, .58, rowZ);
         scene.add(waterDot);
-        waterDots.push({ mesh: waterDot, baseX: x, baseZ: z, phase: z * .15 });
+        waterDots.push({ mesh: waterDot, baseX: x, baseZ: rowZ, phase: x * .15, axis: "x", direction });
       }
     }
-    naveCenters.forEach((center, index) => {
-      addRow(center - .55, index + 1, "left", "left");
-      addRow(center + .55, index + 1, "left", "right");
-      addRow(-center - .55, index + 1, "right", "left");
-      addRow(-center + .55, index + 1, "right", "right");
-    });
-    passageCenters.forEach((x, index) => {
-      const naveSide = index < 5 ? "left" : "right";
-      const passageNumber = (index % 5) + 1;
-      const path = box(.86, .035, 29, 0xf1dfaf, x, .5, 0);
-      path.userData.infoKey = "passage";
-      Object.assign(path.userData, { naveSide, passageNumber });
-      const entrance = box(.72, .12, .24, 0xf0a832, x, .58, -14.22);
-      entrance.userData.infoKey = "passage";
-      Object.assign(entrance.userData, { naveSide, passageNumber });
-      box(.06, .035, 29, 0x737b7e, x - .3, .17, 0);
-      box(.06, .035, 29, 0x737b7e, x + .3, .17, 0);
-      passageRecords.push({ mesh: path, entrance, naveSide, passageNumber });
+    passagePositions.forEach((passageZ, index) => {
+      const passageNumber = index + 1;
+      ["left", "right"].forEach((naveSide) => {
+        addRow(passageZ, passageNumber, naveSide, "left");
+        addRow(passageZ, passageNumber, naveSide, "right");
+        const direction = naveSide === "left" ? -1 : 1;
+        const path = box(6.7, .035, .86, 0xf1dfaf, passageSideCenters[naveSide], .5, passageZ);
+        path.userData.infoKey = "passage";
+        Object.assign(path.userData, { naveSide, passageNumber });
+        const entrance = box(.24, .12, .74, 0xf0a832, direction * 1.82, .58, passageZ);
+        entrance.userData.infoKey = "passage";
+        Object.assign(entrance.userData, { naveSide, passageNumber });
+        box(6.4, .035, .06, 0x737b7e, passageSideCenters[naveSide], .17, passageZ - .3);
+        box(6.4, .035, .06, 0x737b7e, passageSideCenters[naveSide], .17, passageZ + .3);
+        passageRecords.push({ mesh: path, entrance, naveSide, passageNumber });
+      });
+      // Each short stripe is a visible connector crossing the central road: 1↔1, 2↔2, etc.
+      const connector = box(3.05, .06, .12, 0xf0c35a, 0, .28, passageZ);
+      connector.userData.infoKey = "middleRoad";
     });
 
-    [-8.1, -4.8, 4.8, 8.1].forEach((x, index) => overheadCart(x, x === -4.8 ? 4.5 : -10 + index * 5.5, index, x === -4.8));
-    person(-6.45, -9, 0xe36b54, 0); person(4.8, -3, 0x4d86c6, 1.4); person(-3.15, 6, 0xe5a631, 2.8); person(6.45, 11, 0x8d67bf, 4.1);
-    harvestCart(-4.8, 10.5, .8);
+    overheadCart(-5.15, -5.5, 0, false, "x");
+    overheadCart(5.15, 0, 1.4, false, "x");
+    overheadCart(-5.15, 5.5, 2.8, true, "x");
+    person(-5.3, -11, 0xe36b54, 0, "x"); person(5.3, -5.5, 0x4d86c6, 1.4, "x"); person(-5.3, 5.5, 0xe5a631, 2.8, "x"); person(5.3, 11, 0x8d67bf, 4.1, "x");
+    harvestCart(-5.15, 0, .8, "x");
     box(.55, .5, 1.1, 0xd74d37, -1.0, .45, 13.2); box(.55, .5, 1.1, 0xe9ad28, 1.0, .45, 13.2);
   }
 
@@ -409,11 +416,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   const cameraViews = {
     overview: { position: [0, 30, 30], target: [0, 0, 0] },
-    nave: { position: [13, 8.5, 18], target: [-4.7, 1.4, 0] },
+    nave: { position: [0, 8.5, 18], target: [-5.15, 1.4, 0] },
     lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] },
     mainRoad: { position: [0, 8.6, 19], target: [0, .9, -1] },
-    passage: { position: [-4.8, 2.55, 11.5], target: [-4.8, 1.25, 0] },
-    worker: { position: [-4.8, 1.65, 4.2], target: [-4.8, 1.45, -1.5] }
+    passage: { position: [-7.8, 2.55, 0], target: [-5.15, 1.25, 0] },
+    worker: { position: [-7.1, 1.65, 0], target: [-5.15, 1.45, 0] }
   };
   const cameraTouch = { yaw: 0, pitch: 0, zoom: 1, pointers: new Map(), pinchDistance: 0 };
   const raycaster = new THREE.Raycaster();
@@ -434,14 +441,19 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function getCameraView(mode) {
     const x = selectedPassageX();
-    if (mode === "passage") return { position: [x, 2.55, 11.5], target: [x, 1.25, 0] };
-    if (mode === "worker") return { position: [x, 1.65, 4.2], target: [x, 1.45, -1.5] };
+    const z = selectedPassageZ();
+    const inward = state.selectedNaveSide === "left" ? 1 : -1;
+    if (mode === "passage") return { position: [x - inward * 2.4, 2.55, z], target: [x, 1.25, z] };
+    if (mode === "worker") return { position: [x - inward * 1.8, 1.65, z], target: [x, 1.45, z] };
     return cameraViews[mode] || cameraViews.overview;
   }
 
   function selectedPassageX() {
-    const x = passagePositions[state.selectedPassage - 1] || passagePositions[0];
-    return state.selectedNaveSide === "left" ? x : -x;
+    return passageSideCenters[state.selectedNaveSide];
+  }
+
+  function selectedPassageZ() {
+    return passagePositions[state.selectedPassage - 1] || passagePositions[0];
   }
 
   function updateSelection() {
@@ -465,12 +477,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         mesh.material.emissiveIntensity = selected ? .75 : 0;
       });
     });
-    if (demoLiftItem) demoLiftItem.baseX = selectedPassageX();
+    if (demoLiftItem) {
+      demoLiftItem.baseX = selectedPassageX();
+      demoLiftItem.baseZ = selectedPassageZ();
+    }
     const selectedX = selectedPassageX();
     const oppositeX = -selectedX;
+    const selectedZ = selectedPassageZ();
     selectionArrows.forEach((arrow, index) => {
       const sideX = index < 2 ? selectedX : oppositeX;
-      arrow.position.set(sideX + (index % 2 ? .55 : -.55), .78, -14.22);
+      const direction = sideX < 0 ? -1 : 1;
+      arrow.position.set(direction * 1.82, .82, selectedZ + (index % 2 ? .38 : -.38));
+      arrow.setDirection(new THREE.Vector3(direction, 0, 0));
       arrow.visible = true;
     });
     document.querySelectorAll("[data-nave-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.naveSide === state.selectedNaveSide));
@@ -551,7 +569,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 2.1));
       const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(12, 22, 10); scene.add(sun);
       addGlasshouse();
-      selectionArrows = [0, 1, 2, 3].map(() => new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, .78, -8.2), 1.8, 0xf0a832, .34, .18));
+      selectionArrows = [0, 1, 2, 3].map(() => new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, .78, 0), 1.8, 0xf0a832, .34, .18));
       selectionArrows.forEach((arrow) => scene.add(arrow));
       applyGrowthStage(state.growthStage);
       updateSelection();
@@ -593,23 +611,44 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const adjustedPosition = new THREE.Vector3().setFromSpherical(spherical).add(targetVector);
     lookAt(adjustedPosition.toArray(), targetVector.toArray());
     if (state.moving) animated.forEach((item) => {
-      if (item.type === "person") { item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5; item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI; }
+      if (item.type === "person") {
+        const direction = item.baseX < 0 ? -1 : 1;
+        if (item.axis === "x") item.object.position.x = item.baseX + Math.sin(time * .00045 + item.phase) * direction * 2.2;
+        else item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5;
+        item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI;
+      }
       if (item.type === "cart") {
-        item.object.position.x = item.baseX;
-        item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14;
+        if (item.axis === "x") {
+          const direction = item.baseX < 0 ? -1 : 1;
+          item.object.position.x = item.baseX + ((time * .0025 + item.phase * 2) % 3.4) * direction;
+          item.object.position.z = item.baseZ;
+        } else {
+          item.object.position.x = item.baseX;
+          item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14;
+        }
         if (item.liftAssembly) {
           const liftProgress = state.liftActive ? .5 + Math.sin(time * .0011 + item.phase) * .5 : 0;
           item.liftAssembly.position.y = .72 + liftProgress * 1.45;
         }
       }
-      if (item.type === "harvest") { item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11; }
+      if (item.type === "harvest") {
+        if (item.axis === "x") {
+          const direction = item.baseX < 0 ? -1 : 1;
+          item.object.position.x = item.baseX + ((time * .0012 + item.phase * 2) % 3.4) * direction;
+          item.object.position.z = item.baseZ;
+        } else item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11;
+      }
     });
     if (state.growthAuto && state.moving) {
       const automaticStage = Math.floor(time / 4200) % 4;
       if (automaticStage !== state.growthStage) applyGrowthStage(automaticStage);
     }
     if (state.waterActive && state.moving) waterDots.forEach((dot) => {
-      dot.mesh.position.z = ((dot.baseZ + time * .004 + dot.phase + 13.2) % 26.4) - 13.2;
+      if (dot.axis === "x") {
+        const start = dot.direction < 0 ? -2.3 : 2.3;
+        dot.mesh.position.x = start + ((time * .004 + dot.phase + 6.2) % 6.2) * dot.direction;
+        dot.mesh.position.z = dot.baseZ;
+      } else dot.mesh.position.z = ((dot.baseZ + time * .004 + dot.phase + 13.2) % 26.4) - 13.2;
     });
     renderer.render(scene, camera);
   }
