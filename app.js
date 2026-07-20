@@ -133,9 +133,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
-  // Five entry levels run along the connector road. Matching left/right entries share the same Z.
-  const passagePositions = [-11, -5.5, 0, 5.5, 11];
-  const passageSideCenters = { left: -5.15, right: 5.15 };
+  // The site plan has 39 naves along the axis and 27 spans on each facing side.
+  // The five passage markers below are only the educational detail for one selected nave.
+  const passagePositions = [-6.6, -3.3, 0, 3.3, 6.6];
+  const passageSideCenters = { left: -6.75, right: 6.75 };
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
 
@@ -324,88 +325,96 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function addGlasshouse() {
-    const glass = { color: 0x8bd0c3, transparent: true, opacity: .16, roughness: .18, metalness: .08, side: THREE.DoubleSide };
+    const glass = { color: 0x8bd0c3, transparent: true, opacity: .08, roughness: .18, metalness: .08, side: THREE.DoubleSide };
     const frame = 0x4f8f7e;
     const floor = 0xd9e7dd;
     const passage = 0xd6bd83;
 
-    box(18, .12, 32, floor, 0, .05, 0);
-    const centralRoad = box(3.25, .05, 30.5, passage, 0, .13, 0);
+    const naveCount = 39;
+    const spanCount = 27;
+    const navePitch = .44;
+    const spanPitch = .4;
+    const blockWidth = naveCount * navePitch;
+    const blockDepth = spanCount * spanPitch;
+    const roadDepth = 2.7;
+    const roadEdge = roadDepth / 2;
+    const sideCenters = { left: -(roadEdge + blockDepth / 2), right: roadEdge + blockDepth / 2 };
+    const naveXs = Array.from({ length: naveCount }, (_, index) => -blockWidth / 2 + navePitch * (index + .5));
+    const spanZ = (side, number) => side === "right" ? roadEdge + (number - .5) * spanPitch : -roadEdge - (number - .5) * spanPitch;
+
+    box(blockWidth, .12, blockDepth * 2 + roadDepth + .5, floor, 0, .05, 0);
+    const centralRoad = box(blockWidth, .06, roadDepth, passage, 0, .16, 0);
     centralRoad.userData.infoKey = "middleRoad";
-    box(18, 5.8, .08, 0x78b9aa, 0, 2.9, -16, glass);
-    box(18, 5.8, .08, 0x78b9aa, 0, 2.9, 16, glass);
-    box(.08, 5.8, 32, 0x78b9aa, -9.2, 2.9, 0, glass);
-    box(.08, 5.8, 32, 0x78b9aa, 9.2, 2.9, 0, glass);
 
-    // Five repeated roof spans make the greenhouse read as a real multi-span structure.
-    const bayCenters = [-7.2, -3.6, 0, 3.6, 7.2];
-    const roofAngle = Math.atan2(.78, 1.78);
-    bayCenters.forEach((center) => {
-      const leftRoof = box(3.75, .07, 32, 0x8dcfc2, center - .9, 5.72, 0, glass);
-      const rightRoof = box(3.75, .07, 32, 0x8dcfc2, center + .9, 5.72, 0, glass);
-      leftRoof.rotation.z = roofAngle;
-      rightRoof.rotation.z = -roofAngle;
-      box(.09, 1.7, .09, frame, center, 5.72, 0);
-    });
-    [-9, -7.2, -5.4, -3.6, -1.8, 0, 1.8, 3.6, 5.4, 7.2, 9].forEach((x) => box(.075, 5.8, .075, frame, x, 2.9, 0));
-    [-12, -8, -4, 0, 4, 8, 12].forEach((z) => {
-      box(18, .075, .075, frame, 0, 5.35, z);
-      box(18, .065, .065, frame, 0, 2.95, z);
-    });
-    box(3.05, .045, 30.5, 0xe7cb92, 0, .2, 0);
-    [-1.58, 1.58].forEach((x) => box(.08, .055, 30.5, 0x8e7045, x, .25, 0));
-    for (let z = -13; z <= 13; z += 4) box(.18, .06, 1.55, 0xf5d77d, 0, .27, z);
-
-    function addRow(passageZ, passageNumber, naveSide, rowSide) {
-      const direction = naveSide === "left" ? -1 : 1;
-      const rowZ = passageZ + (rowSide === "left" ? -.52 : .52);
-      const rowX = passageSideCenters[naveSide];
-      const mat = box(6.55, .10, .66, 0xb98258, rowX, .22, rowZ);
-      const bed = box(6.45, .2, .6, 0x64a965, rowX, .36, rowZ);
-      const capillary = box(6.45, .045, .035, 0x4d9bd0, rowX, .52, rowZ);
-      mat.userData.infoKey = "growMat";
-      bed.userData.infoKey = "tomatoes";
-      capillary.userData.infoKey = "capillaries";
-      [mat, bed, capillary].forEach((mesh) => Object.assign(mesh.userData, { passageNumber, naveSide, rowSide }));
-      rowRecords.push({ mat, bed, capillary, passageNumber, naveSide, rowSide });
-      capillaryMeshes.push(capillary);
-      matMeshes.push(mat);
-      for (let x = direction < 0 ? -2.3 : 2.3; direction < 0 ? x >= -8.1 : x <= 8.1; x += direction * 1.8) {
-        const plantGroup = plant(x, rowZ, direction);
-        Object.assign(plantGroup.userData, { passageNumber, naveSide, rowSide });
-        const waterDot = new THREE.Mesh(new THREE.SphereGeometry(.07, 8, 8), new THREE.MeshStandardMaterial({ color: 0x2f9be5, emissive: 0x0a426b, emissiveIntensity: .45 }));
-        waterDot.position.set(x, .58, rowZ);
-        scene.add(waterDot);
-        waterDots.push({ mesh: waterDot, baseX: x, baseZ: rowZ, phase: x * .15, axis: "x", direction });
+    ["left", "right"].forEach((naveSide) => {
+      const centerZ = sideCenters[naveSide];
+      box(blockWidth, .08, blockDepth, floor, 0, .15, centerZ);
+      box(blockWidth, .07, blockDepth, 0x8dcfc2, 0, 5.72, centerZ, glass);
+      box(blockWidth, 5.8, .08, 0x78b9aa, 0, 2.9, centerZ + (naveSide === "right" ? blockDepth / 2 : -blockDepth / 2), glass);
+      box(.08, 5.8, blockDepth, 0x78b9aa, -blockWidth / 2, 2.9, centerZ, glass);
+      box(.08, 5.8, blockDepth, 0x78b9aa, blockWidth / 2, 2.9, centerZ, glass);
+      for (let nave = 0; nave <= naveCount; nave += 1) {
+        const x = -blockWidth / 2 + navePitch * nave;
+        box(.035, 5.7, blockDepth, frame, x, 2.9, centerZ);
       }
-    }
-    passagePositions.forEach((passageZ, index) => {
-      const passageNumber = index + 1;
-      ["left", "right"].forEach((naveSide) => {
-        addRow(passageZ, passageNumber, naveSide, "left");
-        addRow(passageZ, passageNumber, naveSide, "right");
-        const direction = naveSide === "left" ? -1 : 1;
-        const path = box(6.7, .035, .86, 0xf1dfaf, passageSideCenters[naveSide], .5, passageZ);
-        path.userData.infoKey = "passage";
-        Object.assign(path.userData, { naveSide, passageNumber });
-        const entrance = box(.24, .12, .74, 0xf0a832, direction * 1.82, .58, passageZ);
-        entrance.userData.infoKey = "passage";
-        Object.assign(entrance.userData, { naveSide, passageNumber });
-        box(6.4, .035, .06, 0x737b7e, passageSideCenters[naveSide], .17, passageZ - .3);
-        box(6.4, .035, .06, 0x737b7e, passageSideCenters[naveSide], .17, passageZ + .3);
-        passageRecords.push({ mesh: path, entrance, naveSide, passageNumber });
-      });
-      // Each short stripe is a visible connector crossing the central road: 1↔1, 2↔2, etc.
-      const connector = box(3.05, .06, .12, 0xf0c35a, 0, .28, passageZ);
+      for (let span = 0; span <= spanCount; span += 1) {
+        const z = naveSide === "right" ? roadEdge + span * spanPitch : -roadEdge - span * spanPitch;
+        box(blockWidth, .055, .035, frame, 0, 2.95, z);
+      }
+      for (let span = 1; span <= spanCount; span += 1) {
+        const z = spanZ(naveSide, span);
+        box(blockWidth - .08, .045, .22, span % 2 ? 0x78a9d5 : 0x87bd69, 0, .29, z);
+      }
+      naveXs.forEach((x) => box(navePitch * .68, .16, blockDepth - .16, 0x64a965, x, .38, centerZ));
+    });
+
+    // The source plan shows three wide connectors crossing the central road.
+    [-5.28, 0, 5.28].forEach((x) => {
+      const connector = box(.82, .1, roadDepth, 0xf0c35a, x, .25, 0);
       connector.userData.infoKey = "middleRoad";
     });
+    for (let x = -blockWidth / 2 + .22; x <= blockWidth / 2; x += navePitch * 5) box(.06, .07, roadDepth, 0x8e7045, x, .28, 0);
 
-    overheadCart(-5.15, -5.5, 0, false, "x");
-    overheadCart(5.15, 0, 1.4, false, "x");
-    overheadCart(-5.15, 5.5, 2.8, true, "x");
-    person(-5.3, -11, 0xe36b54, 0, "x"); person(5.3, -5.5, 0x4d86c6, 1.4, "x"); person(-5.3, 5.5, 0xe5a631, 2.8, "x"); person(5.3, 11, 0x8d67bf, 4.1, "x");
-    harvestCart(-5.15, 0, .8, "x");
-    box(.55, .5, 1.1, 0xd74d37, -1.0, .45, 13.2); box(.55, .5, 1.1, 0xe9ad28, 1.0, .45, 13.2);
+    // Keep a lightweight crop layer: plants are sampled across the 39-nave grid for phone performance.
+    const sampleNaves = [0, 4, 9, 14, 19, 24, 29, 34, 38];
+    ["left", "right"].forEach((naveSide) => {
+      sampleNaves.forEach((naveIndex) => {
+        const x = naveXs[naveIndex];
+        for (let span = 2; span <= spanCount; span += 4) {
+          const z = spanZ(naveSide, span);
+          const leftPlant = plant(x - .07, z, x < 0 ? -1 : 1);
+          const rightPlant = plant(x + .07, z, x < 0 ? -1 : 1);
+          [leftPlant, rightPlant].forEach((plantGroup) => Object.assign(plantGroup.userData, { passageNumber: ((span - 1) % 5) + 1, naveSide, rowSide: plantGroup === leftPlant ? "left" : "right" }));
+          const waterDot = new THREE.Mesh(new THREE.SphereGeometry(.055, 7, 7), new THREE.MeshStandardMaterial({ color: 0x2f9be5, emissive: 0x0a426b, emissiveIntensity: .45 }));
+          waterDot.position.set(x, .58, z);
+          scene.add(waterDot);
+          waterDots.push({ mesh: waterDot, baseX: x, baseZ: z, phase: z * .15 });
+        }
+      });
+    });
+
+    // The detail controls show five entrances in one selected nave. Each pair is aligned across the road.
+    passagePositions.forEach((x, index) => {
+      const passageNumber = index + 1;
+      ["left", "right"].forEach((naveSide) => {
+        const direction = naveSide === "right" ? 1 : -1;
+        const entranceZ = direction * (roadEdge + .14);
+        const path = box(.24, .035, .92, 0xf1dfaf, x, .5, entranceZ + direction * .46);
+        path.userData.infoKey = "passage";
+        Object.assign(path.userData, { naveSide, passageNumber });
+        const entrance = box(.46, .14, .5, 0xf0a832, x, .58, entranceZ);
+        entrance.userData.infoKey = "passage";
+        Object.assign(entrance.userData, { naveSide, passageNumber });
+        rowRecords.push({ mat: path, bed: path, capillary: path, passageNumber, naveSide, rowSide: "left" });
+        passageRecords.push({ mesh: path, entrance, naveSide, passageNumber });
+      });
+    });
+
+    overheadCart(-3.3, sideCenters.right, 0, false);
+    overheadCart(3.3, sideCenters.left, 1.4, false);
+    overheadCart(0, sideCenters.right, 2.8, true);
+    person(-5.28, sideCenters.right, 0xe36b54, 0); person(0, sideCenters.left, 0x4d86c6, 1.4); person(5.28, sideCenters.right, 0xe5a631, 2.8); person(3.3, sideCenters.left, 0x8d67bf, 4.1);
+    harvestCart(-5.28, sideCenters.left, .8);
   }
 
   function lookAt(position, target) {
@@ -415,12 +424,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   const cameraViews = {
-    overview: { position: [0, 30, 30], target: [0, 0, 0] },
-    nave: { position: [0, 8.5, 18], target: [-5.15, 1.4, 0] },
+    overview: { position: [0, 37, .01], target: [0, 0, 0] },
+    nave: { position: [0, 14, 18], target: [0, 1.4, 0] },
     lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] },
     mainRoad: { position: [0, 8.6, 19], target: [0, .9, -1] },
-    passage: { position: [-7.8, 2.55, 0], target: [-5.15, 1.25, 0] },
-    worker: { position: [-7.1, 1.65, 0], target: [-5.15, 1.45, 0] }
+    passage: { position: [0, 2.55, 3.8], target: [0, 1.25, 6.75] },
+    worker: { position: [0, 1.65, 4.8], target: [0, 1.45, 6.75] }
   };
   const cameraTouch = { yaw: 0, pitch: 0, zoom: 1, pointers: new Map(), pinchDistance: 0 };
   const raycaster = new THREE.Raycaster();
@@ -442,18 +451,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function getCameraView(mode) {
     const x = selectedPassageX();
     const z = selectedPassageZ();
-    const inward = state.selectedNaveSide === "left" ? 1 : -1;
-    if (mode === "passage") return { position: [x - inward * 2.4, 2.55, z], target: [x, 1.25, z] };
-    if (mode === "worker") return { position: [x - inward * 1.8, 1.65, z], target: [x, 1.45, z] };
+    const depthDirection = state.selectedNaveSide === "right" ? 1 : -1;
+    if (mode === "passage") return { position: [x, 2.55, z - depthDirection * 2.4], target: [x, 1.25, z] };
+    if (mode === "worker") return { position: [x, 1.65, z - depthDirection * 1.8], target: [x, 1.45, z] };
     return cameraViews[mode] || cameraViews.overview;
   }
 
   function selectedPassageX() {
-    return passageSideCenters[state.selectedNaveSide];
+    return passagePositions[state.selectedPassage - 1] || passagePositions[0];
   }
 
   function selectedPassageZ() {
-    return passagePositions[state.selectedPassage - 1] || passagePositions[0];
+    return passageSideCenters[state.selectedNaveSide];
   }
 
   function updateSelection() {
@@ -482,13 +491,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       demoLiftItem.baseZ = selectedPassageZ();
     }
     const selectedX = selectedPassageX();
-    const oppositeX = -selectedX;
-    const selectedZ = selectedPassageZ();
     selectionArrows.forEach((arrow, index) => {
-      const sideX = index < 2 ? selectedX : oppositeX;
-      const direction = sideX < 0 ? -1 : 1;
-      arrow.position.set(direction * 1.82, .82, selectedZ + (index % 2 ? .38 : -.38));
-      arrow.setDirection(new THREE.Vector3(direction, 0, 0));
+      const side = index < 2 ? state.selectedNaveSide : (state.selectedNaveSide === "left" ? "right" : "left");
+      const direction = side === "right" ? 1 : -1;
+      arrow.position.set(selectedX + (index % 2 ? .18 : -.18), .82, direction * 1.49);
+      arrow.setDirection(new THREE.Vector3(0, 0, direction));
       arrow.visible = true;
     });
     document.querySelectorAll("[data-nave-side]").forEach((button) => button.classList.toggle("is-active", button.dataset.naveSide === state.selectedNaveSide));
