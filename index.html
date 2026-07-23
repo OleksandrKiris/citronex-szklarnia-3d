@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=24">
+    <link rel="stylesheet" href="styles.css?v=25">
 </head>
 <body>
   <div class="site-shell">
@@ -46,7 +46,7 @@
             <span class="view-tile-icon" aria-hidden="true">1</span><span><strong data-i18n="overview">Cała szklarnia</strong><small data-i18n="overviewDesc">Układ szklarni z góry.</small></span>
           </button>
           <button class="view-tile" type="button" data-camera="nave" data-step="2">
-            <span class="view-tile-icon" aria-hidden="true">2</span><span><strong data-i18n="nave">Jedna nawa</strong><small data-i18n="naveDetailDesc">5 wejść / 10 rzędów.</small></span>
+            <span class="view-tile-icon" aria-hidden="true">2</span><span><strong data-i18n="nave">Dwie nawy</strong><small data-i18n="naveDetailDesc">5 rzędów po lewej + 5 po prawej.</small></span>
           </button>
           <button class="view-tile" type="button" data-camera="passage" data-step="3">
             <span class="view-tile-icon" aria-hidden="true">3</span><span><strong data-i18n="passageView">W środku przejścia</strong><small data-i18n="passageDesc">Dwa rzędy po bokach.</small></span>
@@ -83,16 +83,16 @@
           <span id="lessonStep" class="lesson-step">1/3</span>
           <strong id="lessonText" data-i18n="lessonOverview">Droga środkowa dzieli szklarnię na prawą i lewą stronę.</strong>
           <button id="lessonNextButton" class="lesson-next" type="button">
-            <span id="lessonNextText" data-i18n="lessonNextNave">Dalej: jedna nawa</span>
+            <span id="lessonNextText" data-i18n="lessonNextNave">Dalej: dwie nawy</span>
             <b aria-hidden="true">→</b>
           </button>
         </div>
         <div class="scene-frame">
           <canvas id="greenhouseCanvas" aria-label="Interaktywna wizualizacja szklarni"></canvas>
           <div id="sceneFallback" class="scene-fallback" hidden>
-            <div class="fallback-side"><span data-i18n="leftSide">LEWA STRONA</span><b>39 ... 1</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
+            <div class="fallback-side"><span data-i18n="leftSide">LEWA STRONA</span><b>39 ... 1</b><small data-i18n="fivePassages">5 rzędów w jednej nawie</small></div>
             <div class="fallback-road" data-i18n="middleRoad">DROGA ŚRODKOWA</div>
-            <div class="fallback-side"><span data-i18n="rightSide">PRAWA STRONA</span><b>39 ... 1</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
+            <div class="fallback-side"><span data-i18n="rightSide">PRAWA STRONA</span><b>39 ... 1</b><small data-i18n="fivePassages">5 rzędów w jednej nawie</small></div>
           </div>
           <button class="scene-label label-road" type="button" data-info-key="middleRoad" data-i18n="middleRoad">DROGA ŚRODKOWA</button>
           <button class="scene-label label-right-side" type="button" data-info-key="rightSide" data-i18n="rightSide">PRAWA STRONA</button>
@@ -114,8 +114,8 @@
             <div class="mini-map-note"><span>1</span><i></i><span>27</span><b data-i18n="connectorCountShort">3 łączniki</b></div>
           </div>
           <div class="nave-selection-badge" aria-live="polite">
-            <strong><span data-i18n="naveLabel">NAWA</span> <span id="selectedNaveNumber">20</span></strong>
-            <small data-i18n="naveFiveEntrances">5 wejść w jednej nawie</small>
+            <strong><span data-i18n="naveLabel">NAWY</span> <span id="selectedNaveNumber">20</span></strong>
+            <small data-i18n="naveFiveEntrances">2 nawy • 5 + 5 rzędów</small>
             <span class="nave-entry-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></span>
           </div>
           <div class="nave-floor-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div>
@@ -238,8 +238,8 @@
       </section>
 
       <section class="facts-section">
-        <div class="fact"><strong>5</strong><span data-i18n="factPassages">przejść w nawie</span></div>
-        <div class="fact"><strong>10</strong><span data-i18n="factRows">rzędów w nawie</span></div>
+        <div class="fact"><strong>5</strong><span data-i18n="factPassages">rzędów w jednej nawie</span></div>
+        <div class="fact"><strong>10</strong><span data-i18n="factRows">rzędów w dwóch nawach: 5 + 5</span></div>
         <div class="fact"><strong>37–39</strong><span data-i18n="factNaves">naw zależnie od szklarni</span></div>
         <div class="fact"><strong>2</strong><span data-i18n="factSides">strony drogi</span></div>
       </section>
@@ -263,6 +263,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=24"></script>
+    <script type="module" src="app.js?v=25"></script>
 </body>
 </html>

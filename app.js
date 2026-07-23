@@ -556,6 +556,73 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   };
   Object.entries(naturalSceneTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
+  const correctedRowCountTranslations = {
+    pl: {
+      nave: "Dwie nawy", naveLabel: "NAWY", naveDetailDesc: "5 rzędów po lewej + 5 po prawej.", lessonNextNave: "Dalej: dwie nawy",
+      fivePassages: "5 rzędów w jednej nawie", naveFiveEntrances: "2 nawy • 5 + 5 rzędów",
+      lessonNave: "Dwie nawy leżą naprzeciw siebie. Lewa ma 5 rzędów, prawa ma 5 rzędów: razem 10.",
+      step2Title: "Dwie nawy", step2Text: "Po dwóch stronach drogi są dwie nawy. W każdej jest 5 rzędów, czyli razem 10.",
+      factPassages: "rzędów w jednej nawie", factRows: "rzędów w dwóch nawach: 5 + 5"
+    },
+    en: {
+      nave: "Two naves", naveLabel: "NAVES", naveDetailDesc: "5 rows on the left + 5 on the right.", lessonNextNave: "Next: two naves",
+      fivePassages: "5 rows in one nave", naveFiveEntrances: "2 naves • 5 + 5 rows",
+      lessonNave: "Two naves face each other. The left nave has 5 rows and the right nave has 5 rows: 10 in total.",
+      step2Title: "Two naves", step2Text: "There is one nave on each side of the road. Each has 5 rows, giving 10 rows in total.",
+      factPassages: "rows in one nave", factRows: "rows in two naves: 5 + 5"
+    },
+    ua: {
+      nave: "Дві нави", naveLabel: "НАВИ", naveDetailDesc: "5 рядів ліворуч + 5 праворуч.", lessonNextNave: "Далі: дві нави",
+      fivePassages: "5 рядів в одній наві", naveFiveEntrances: "2 нави • 5 + 5 рядів",
+      lessonNave: "Дві нави розташовані одна навпроти одної. У лівій 5 рядів і у правій 5 рядів: разом 10.",
+      step2Title: "Дві нави", step2Text: "По обидва боки дороги розташовані дві нави. У кожній по 5 рядів, разом 10.",
+      factPassages: "рядів в одній наві", factRows: "рядів у двох навах: 5 + 5"
+    },
+    ru: {
+      nave: "Две навы", naveLabel: "НАВЫ", naveDetailDesc: "5 рядов слева + 5 справа.", lessonNextNave: "Дальше: две навы",
+      fivePassages: "5 рядов в одной наве", naveFiveEntrances: "2 навы • 5 + 5 рядов",
+      lessonNave: "Две навы расположены напротив друг друга. В левой 5 рядов и в правой 5 рядов: всего 10.",
+      step2Title: "Две навы", step2Text: "По обе стороны дороги находятся две навы. В каждой по 5 рядов, всего 10.",
+      factPassages: "рядов в одной наве", factRows: "рядов в двух навах: 5 + 5"
+    },
+    az: {
+      nave: "İki nava", naveLabel: "NAVALAR", naveDetailDesc: "Solda 5 sıra + sağda 5 sıra.", lessonNextNave: "Sonra: iki nava",
+      fivePassages: "Bir navada 5 sıra", naveFiveEntrances: "2 nava • 5 + 5 sıra",
+      lessonNave: "İki nava bir-birinin qarşısındadır. Sol navada 5 sıra, sağ navada 5 sıra var: cəmi 10.",
+      step2Title: "İki nava", step2Text: "Yolun iki tərəfində iki nava var. Hərəsində 5 sıra, cəmi 10 sıra var.",
+      factPassages: "bir navada sıra", factRows: "iki navada sıra: 5 + 5"
+    },
+    es: {
+      nave: "Dos naves", naveLabel: "NAVES", naveDetailDesc: "5 filas a la izquierda + 5 a la derecha.", lessonNextNave: "Siguiente: dos naves",
+      fivePassages: "5 filas en una nave", naveFiveEntrances: "2 naves • 5 + 5 filas",
+      lessonNave: "Las dos naves están una frente a la otra. La izquierda tiene 5 filas y la derecha otras 5: 10 en total.",
+      step2Title: "Dos naves", step2Text: "Hay una nave a cada lado del camino. Cada una tiene 5 filas, 10 en total.",
+      factPassages: "filas en una nave", factRows: "filas en dos naves: 5 + 5"
+    },
+    fil: {
+      nave: "Dalawang nave", naveLabel: "MGA NAVE", naveDetailDesc: "5 hanay sa kaliwa + 5 sa kanan.", lessonNextNave: "Susunod: dalawang nave",
+      fivePassages: "5 hanay sa isang nave", naveFiveEntrances: "2 nave • 5 + 5 hanay",
+      lessonNave: "Magkaharap ang dalawang nave. May 5 hanay sa kaliwa at 5 hanay sa kanan: 10 lahat.",
+      step2Title: "Dalawang nave", step2Text: "May isang nave sa bawat panig ng daan. May 5 hanay sa bawat isa, 10 lahat.",
+      factPassages: "hanay sa isang nave", factRows: "hanay sa dalawang nave: 5 + 5"
+    },
+    id: {
+      nave: "Dua nave", naveLabel: "DUA NAVE", naveDetailDesc: "5 baris di kiri + 5 di kanan.", lessonNextNave: "Berikutnya: dua nave",
+      fivePassages: "5 baris dalam satu nave", naveFiveEntrances: "2 nave • 5 + 5 baris",
+      lessonNave: "Dua nave saling berhadapan. Nave kiri memiliki 5 baris dan nave kanan 5 baris: total 10.",
+      step2Title: "Dua nave", step2Text: "Ada satu nave di setiap sisi jalan. Masing-masing memiliki 5 baris, total 10.",
+      factPassages: "baris dalam satu nave", factRows: "baris dalam dua nave: 5 + 5"
+    },
+    ne: {
+      nave: "दुई नाभ", naveLabel: "दुई नाभ", naveDetailDesc: "बायाँ ५ लाइन + दायाँ ५ लाइन।", lessonNextNave: "अर्को: दुई नाभ",
+      fivePassages: "एउटा नाभमा ५ लाइन", naveFiveEntrances: "२ नाभ • ५ + ५ लाइन",
+      lessonNave: "दुई नाभ आमनेसामने छन्। बायाँ नाभमा ५ लाइन र दायाँ नाभमा ५ लाइन छन्: जम्मा १०।",
+      step2Title: "दुई नाभ", step2Text: "बाटोको दुवैपट्टि एक-एक नाभ छ। हरेकमा ५ लाइन छन्, जम्मा १०।",
+      factPassages: "एउटा नाभमा लाइन", factRows: "दुई नाभमा लाइन: ५ + ५"
+    }
+  };
+  Object.entries(correctedRowCountTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
@@ -1242,53 +1309,51 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function addTeachingNave() {
     const group = new THREE.Group();
     group.name = "teaching-nave";
-    const passageXs = [-4, -2, 0, 2, 4];
-    const gutterXs = [-5, -3, -1, 1, 3, 5];
-    teachingBox(group, 12, .12, 16.2, 0xe4e9e5, 0, .02, .25, { roughness: .98 });
-    teachingBox(group, 11.6, .08, 1.65, 0xcab487, 0, .15, -7.15, { roughness: .94 }, "middleRoad");
-    passageXs.forEach((x, index) => {
-      const passageNumber = index + 1;
-      const walkway = teachingBox(
-        group,
-        1.34,
-        .045,
-        12.9,
-        index === 0 ? 0xe9d8aa : 0xd5dad5,
-        x,
-        .18,
-        .4,
-        {
-          roughness: .97,
-          emissive: index === 0 ? 0x6b4e18 : 0x000000,
-          emissiveIntensity: index === 0 ? .16 : 0
-        },
-        "passage"
-      );
-      walkway.userData.passageNumber = passageNumber;
-      teachingPassageFloors.push(walkway);
-      [-.24, .24].forEach((offset) => {
-        const rail = teachingCylinder(group, .035, 12.8, 0x4d5350, x + offset, .255, .4, { metalness: .78, roughness: .28 }, "cartRails");
-        rail.rotation.x = Math.PI / 2;
+    const rowXs = [-4, -2, 0, 2, 4];
+    const roadDepth = 2;
+    const naveDepth = 6.55;
+    const naveCenter = roadDepth / 2 + naveDepth / 2;
+    teachingBox(group, 12, .12, 16.2, 0xe4e9e5, 0, .02, 0, { roughness: .98 });
+    teachingBox(group, 11.6, .08, roadDepth, 0xcab487, 0, .15, 0, { roughness: .94 }, "middleRoad");
+
+    [-1, 1].forEach((direction) => {
+      const centerZ = direction * naveCenter;
+      const sideKey = direction < 0 ? "leftSide" : "rightSide";
+      teachingBox(group, 11.45, .055, naveDepth, 0xf1f4f1, 0, .16, centerZ, { roughness: .98 }, sideKey);
+      rowXs.forEach((x, index) => {
+        const rowNumber = index + 1;
+        const selected = index === 0;
+        const walkway = teachingBox(
+          group,
+          1.3,
+          .035,
+          naveDepth - .32,
+          selected ? 0xe9d8aa : 0xd6dcd7,
+          x,
+          .19,
+          centerZ,
+          {
+            roughness: .97,
+            emissive: selected ? 0x6b4e18 : 0x000000,
+            emissiveIntensity: selected ? .16 : 0
+          },
+          "passage"
+        );
+        walkway.userData.passageNumber = rowNumber;
+        teachingPassageFloors.push(walkway);
+        const cropX = x + (index % 2 ? -.48 : .48);
+        teachingBox(group, .34, .15, naveDepth - .5, 0xf4f5ef, cropX, .48, centerZ, { metalness: .05, roughness: .72 }, "cultivationGutter");
+        teachingBox(group, .22, .08, naveDepth - .62, 0xb38657, cropX, .59, centerZ, { roughness: .94 }, "growMat");
+        teachingBox(group, .055, .38, naveDepth - .72, 0x4e934d, cropX, .82, centerZ, { roughness: .93 }, "tomatoes");
+        const roadEdgeZ = direction * (roadDepth / 2 + .18);
+        const threshold = teachingBox(group, 1.3, .075, .38, 0xf0ad32, x, .255, roadEdgeZ, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: selected ? .25 : 0 }, "passage");
+        threshold.userData.passageNumber = rowNumber;
+        teachingPassageMarkers.push(threshold);
+        teachingFloorNumber(group, rowNumber, x, roadEdgeZ + direction * .42);
       });
-      const threshold = teachingBox(group, 1.34, .075, .38, 0xf0ad32, x, .255, -6.04, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: index === 0 ? .25 : 0 }, "passage");
-      threshold.userData.passageNumber = passageNumber;
-      teachingPassageMarkers.push(threshold);
+      const shellStart = direction < 0 ? -(roadDepth / 2 + naveDepth) : roadDepth / 2;
+      addTeachingGlassShell(group, 11.4, naveDepth, 4.7, shellStart);
     });
-    gutterXs.forEach((x) => {
-      teachingBox(group, .38, .15, 12.55, 0xf4f5ef, x, .48, .48, { metalness: .05, roughness: .72 }, "cultivationGutter");
-      teachingBox(group, .23, .08, 12.38, 0xb38657, x, .59, .48, { roughness: .94 }, "growMat");
-      teachingBox(group, .026, .03, 12.2, 0x299bdc, x, .68, .48, { roughness: .42 }, "capillaries");
-      [-.12, .12].forEach((cropOffset) => {
-        teachingBox(group, .065, .35, 12.15, 0x4e934d, x + cropOffset, .83, .55, { roughness: .93 }, "tomatoes");
-      });
-      for (let z = -5.3; z <= 6.2; z += 2.35) {
-        teachingBox(group, .62, .045, .06, 0x86928d, x, .31, z, { metalness: .35, roughness: .48 }, "cultivationGutter");
-        teachingBox(group, .055, .28, .055, 0x7a8782, x, .3, z, { metalness: .35, roughness: .48 }, "cultivationGutter");
-      }
-      teachingBox(group, .025, .025, 12.7, 0xb7c0bd, x - .14, 4.45, .48, { metalness: .25, roughness: .45 }, "tomatoes");
-      teachingBox(group, .025, .025, 12.7, 0xb7c0bd, x + .14, 4.45, .48, { metalness: .25, roughness: .45 }, "tomatoes");
-    });
-    addTeachingGlassShell(group, 11.4, 13.4, 4.7, -6.15);
     scene.add(group);
     return group;
   }
@@ -1368,14 +1433,14 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     teachingPlants.forEach((object) => { object.visible = layerState.plants; });
     teachingCarts.forEach((object) => { object.visible = layerState.carts; });
     teachingPeople.forEach((object) => { object.visible = layerState.people; });
-    teachingPassageFloors.forEach((floor, index) => {
-      const selected = index + 1 === state.selectedPassage;
+    teachingPassageFloors.forEach((floor) => {
+      const selected = floor.userData.passageNumber === state.selectedPassage;
       floor.material.color.setHex(selected ? 0xe9d8aa : 0xd5dad5);
       floor.material.emissive.setHex(selected ? 0x6b4e18 : 0x000000);
       floor.material.emissiveIntensity = selected ? .2 : 0;
     });
-    teachingPassageMarkers.forEach((marker, index) => {
-      const selected = index + 1 === state.selectedPassage;
+    teachingPassageMarkers.forEach((marker) => {
+      const selected = marker.userData.passageNumber === state.selectedPassage;
       marker.material.emissiveIntensity = selected ? .55 : 0;
       marker.scale.y = selected ? 1.5 : 1;
     });
