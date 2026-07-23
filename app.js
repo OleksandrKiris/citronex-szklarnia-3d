@@ -141,6 +141,17 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     id: { infoNave: "Nave adalah modul rumah kaca yang panjang dan berulang. Denah ini menunjukkan 39; jumlah sebenarnya dapat berbeda.", miniMapTitle: "DENAH SELURUH RUMAH KACA", naveCountShort: "39 nave", connectorCountShort: "3 penghubung" },
     ne: { infoNave: "नावा ग्रीनहाउसको लामो र दोहोरिने भाग हो। यो योजनामा ३९ वटा देखाइएको छ; वास्तविक संख्या फरक हुन सक्छ।", miniMapTitle: "सम्पूर्ण ग्रीनहाउसको योजना", naveCountShort: "३९ नावा", connectorCountShort: "३ जोड्ने बाटा" }
   };
+  const naveSelectionTranslations = {
+    pl: { naveChoice: "Wybierz nawę i stronę", naveNumber: "Numer nawy", naveNumberHint: "Na planie pokazano 39 naw: 39–1.", naveLabel: "NAWA", naveFiveEntrances: "5 wejść w jednej nawie", selectionText: "Wybrane: nawa {nave}, {side}, przejście {passage}, {row}" },
+    en: { naveChoice: "Choose a nave and side", naveNumber: "Nave number", naveNumberHint: "The plan shows 39 naves: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 entrances in one nave", selectionText: "Selected: nave {nave}, {side}, passage {passage}, {row}" },
+    ua: { naveChoice: "Оберіть наву та сторону", naveNumber: "Номер нави", naveNumberHint: "На плані показано 39 нав: 39–1.", naveLabel: "НАВА", naveFiveEntrances: "5 входів в одній наві", selectionText: "Обрано: нава {nave}, {side}, прохід {passage}, {row}" },
+    ru: { naveChoice: "Выберите наву и сторону", naveNumber: "Номер навы", naveNumberHint: "На плане показано 39 нав: 39–1.", naveLabel: "НАВА", naveFiveEntrances: "5 входов в одной наве", selectionText: "Выбрано: нава {nave}, {side}, проход {passage}, {row}" },
+    az: { naveChoice: "Navanı və tərəfi seçin", naveNumber: "Nava nömrəsi", naveNumberHint: "Planda 39 nava göstərilir: 39–1.", naveLabel: "NAVA", naveFiveEntrances: "Bir navada 5 giriş", selectionText: "Seçildi: nava {nave}, {side}, keçid {passage}, {row}" },
+    es: { naveChoice: "Elige la nave y el lado", naveNumber: "Número de nave", naveNumberHint: "El plano muestra 39 naves: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 entradas en una nave", selectionText: "Seleccionado: nave {nave}, {side}, pasillo {passage}, {row}" },
+    fil: { naveChoice: "Piliin ang nave at panig", naveNumber: "Numero ng nave", naveNumberHint: "May 39 nave sa plano: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 pasukan sa isang nave", selectionText: "Napili: nave {nave}, {side}, daanan {passage}, {row}" },
+    id: { naveChoice: "Pilih nave dan sisi", naveNumber: "Nomor nave", naveNumberHint: "Denah menunjukkan 39 nave: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 pintu masuk dalam satu nave", selectionText: "Dipilih: nave {nave}, {side}, lorong {passage}, {row}" },
+    ne: { naveChoice: "नाभ र भाग छान्नुहोस्", naveNumber: "नाभ नम्बर", naveNumberHint: "योजनामा ३९ नाभ छन्: ३९–१।", naveLabel: "नाभ", naveFiveEntrances: "एउटा नाभमा ५ प्रवेशद्वार", selectionText: "छानिएको: नाभ {nave}, {side}, बाटो {passage}, {row}" }
+  };
   const guideTranslations = {
     pl: {
       guideEyebrow: "DLA NOWEJ OSOBY",
@@ -276,14 +287,22 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   };
   Object.entries(orientationGuideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  Object.entries(naveSelectionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
-  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
+  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   // The site plan has 39 naves along the axis and 27 spans on each facing side.
-  // The five passage markers below are only the educational detail for one selected nave.
-  // Five clean sample positions are used by the educational close-up.
+  // Excel numbers them from 39 on the left to 1 on the right.
+  const greenhouseNaveCount = 39;
+  const greenhouseNavePitch = .44;
+  const greenhouseBlockWidth = greenhouseNaveCount * greenhouseNavePitch;
+  // Five clean sample positions are the five entrances inside the selected nave.
   const passagePositions = [-2.4, -1.2, 0, 1.2, 2.4];
   const passageSideCenters = { left: -6.75, right: 6.75 };
+  let selectedNaveMarkers = [];
+  let selectedEntryMarkers = [];
+  let detailDemoObjects = [];
+  let detailDemoAnchorX = 0;
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
 
@@ -524,17 +543,28 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const floor = 0xd9e7dd;
     const passage = 0xd6bd83;
 
-    const naveCount = 39;
+    const naveCount = greenhouseNaveCount;
     const spanCount = 27;
-    const navePitch = .44;
+    const navePitch = greenhouseNavePitch;
     const spanPitch = .4;
-    const blockWidth = naveCount * navePitch;
+    const blockWidth = greenhouseBlockWidth;
     const blockDepth = spanCount * spanPitch;
     const roadDepth = 2.7;
     const roadEdge = roadDepth / 2;
     const sideCenters = { left: -(roadEdge + blockDepth / 2), right: roadEdge + blockDepth / 2 };
     const naveXs = Array.from({ length: naveCount }, (_, index) => -blockWidth / 2 + navePitch * (index + .5));
     const spanZ = (side, number) => side === "right" ? roadEdge + (number - .5) * spanPitch : -roadEdge - (number - .5) * spanPitch;
+    detailDemoObjects = [];
+    selectedNaveMarkers = [];
+    selectedEntryMarkers = [];
+    const demoNaveIndex = naveCount - state.selectedNave;
+    const demoNaveCenterX = naveXs[demoNaveIndex] || naveXs[Math.floor(naveCount / 2)];
+    detailDemoAnchorX = demoNaveCenterX;
+    const registerDetail = (object) => {
+      object.userData.detailDemoBaseX = object.position.x;
+      detailDemoObjects.push(object);
+      return object;
+    };
 
     box(blockWidth, .12, blockDepth * 2 + roadDepth + .5, floor, 0, .05, 0);
     const centralRoad = box(blockWidth, .06, roadDepth, passage, 0, .16, 0);
@@ -573,6 +603,35 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       });
     });
 
+    ["left", "right"].forEach((naveSide) => {
+      const marker = new THREE.Mesh(
+        new THREE.BoxGeometry(navePitch * .82, .035, blockDepth - .18),
+        new THREE.MeshBasicMaterial({ color: 0xf0a832, transparent: true, opacity: .3, depthWrite: false })
+      );
+      marker.position.set(demoNaveCenterX, .58, sideCenters[naveSide]);
+      marker.userData.infoKey = "nave";
+      marker.userData.naveNumber = state.selectedNave;
+      scene.add(marker);
+      overviewOnlyObjects.push(marker);
+      selectedNaveMarkers.push(marker);
+    });
+    const entryOffsets = [-.36, -.18, 0, .18, .36];
+    entryOffsets.forEach((offset, index) => {
+      ["left", "right"].forEach((naveSide) => {
+        const direction = naveSide === "right" ? 1 : -1;
+        const entryMarker = new THREE.Mesh(
+          new THREE.BoxGeometry(.11, .05, .28),
+          new THREE.MeshBasicMaterial({ color: 0xffc447, transparent: true, opacity: .95, depthWrite: false })
+        );
+        entryMarker.position.set(demoNaveCenterX + offset, .67, direction * (roadEdge + .08));
+        entryMarker.userData.infoKey = "passage";
+        entryMarker.userData.passageNumber = index + 1;
+        scene.add(entryMarker);
+        overviewOnlyObjects.push(entryMarker);
+        selectedEntryMarkers.push(entryMarker);
+      });
+    });
+
     // A denser crop sample makes the close-up read like a real working passage.
     passagePositions.forEach((x) => {
       ["left", "right"].forEach((naveSide) => {
@@ -586,6 +645,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
             plantGroup.userData.passageNumber = ((span - 1) % 5) + 1;
             plantGroup.userData.naveSide = naveSide;
             detailObjects.push(plantGroup);
+            registerDetail(plantGroup);
           });
         }
         [-.16, .16].forEach((rowOffset) => {
@@ -593,6 +653,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
           capillary.userData.infoKey = "capillaries";
           capillary.userData.detailOnly = true;
           detailObjects.push(capillary);
+          registerDetail(capillary);
         });
       });
     });
@@ -607,9 +668,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
           const railNear = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset - .1, .39, centerZ, { metalness: .2, roughness: .7 });
           const railFar = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset + .1, .39, centerZ, { metalness: .2, roughness: .7 });
           detailStructureObjects.push(bed, substrate, railNear, railFar);
+          [bed, substrate, railNear, railFar].forEach(registerDetail);
           [2.1, 3.1].forEach((height) => {
             const supportWire = box(.014, .014, blockDepth - .3, 0x71867b, x + rowOffset, height, centerZ, { metalness: .15, roughness: .65 });
             detailStructureObjects.push(supportWire);
+            registerDetail(supportWire);
           });
         });
       });
@@ -678,6 +741,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         const entrance = box(.46, .14, .5, 0xf0a832, x, .58, entranceZ);
         entrance.userData.infoKey = "passage";
         Object.assign(entrance.userData, { naveSide, passageNumber });
+        registerDetail(path);
+        registerDetail(entrance);
         rowRecords.push({ mat: path, bed: path, capillary: path, passageNumber, naveSide, rowSide: "left" });
         passageRecords.push({ mesh: path, entrance, naveSide, passageNumber });
       });
@@ -744,7 +809,27 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function selectedPassageX() {
-    return passagePositions[state.selectedPassage - 1] || passagePositions[0];
+    return selectedNaveCenterX() + (passagePositions[state.selectedPassage - 1] || passagePositions[0]);
+  }
+
+  function selectedNaveCenterX() {
+    const index = greenhouseNaveCount - clamp(Number(state.selectedNave) || 20, 1, greenhouseNaveCount);
+    return -greenhouseBlockWidth / 2 + greenhouseNavePitch * (index + .5);
+  }
+
+  function syncNaveVisuals() {
+    const deltaX = selectedNaveCenterX() - detailDemoAnchorX;
+    detailDemoObjects.forEach((object) => {
+      object.position.x = object.userData.detailDemoBaseX + deltaX;
+    });
+    selectedNaveMarkers.forEach((marker) => {
+      marker.position.x = selectedNaveCenterX();
+      marker.userData.naveNumber = state.selectedNave;
+    });
+    const entryOffsets = [-.36, -.18, 0, .18, .36];
+    selectedEntryMarkers.forEach((marker, index) => {
+      marker.position.x = selectedNaveCenterX() + entryOffsets[Math.floor(index / 2)];
+    });
   }
 
   function selectedPassageZ() {
@@ -752,9 +837,15 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function updateSelection() {
+    state.selectedNave = clamp(Number(state.selectedNave) || 20, 1, greenhouseNaveCount);
+    const naveInput = $("#naveNumberInput");
+    if (naveInput) naveInput.value = String(state.selectedNave);
+    const selectedNaveNumber = $("#selectedNaveNumber");
+    if (selectedNaveNumber) selectedNaveNumber.textContent = String(state.selectedNave);
+    syncNaveVisuals();
     const sideText = state.selectedNaveSide === "left" ? t("leftSide") : t("rightSide");
     const rowText = state.selectedRowSide === "left" ? t("leftRow") : t("rightRow");
-    const selection = t("selectionText").replace("{side}", sideText).replace("{passage}", String(state.selectedPassage)).replace("{row}", rowText);
+    const selection = t("selectionText").replace("{nave}", String(state.selectedNave)).replace("{side}", sideText).replace("{passage}", String(state.selectedPassage)).replace("{row}", rowText);
     const badge = $("#selectionBadge");
     if (badge) badge.textContent = selection;
     rowRecords.forEach((record) => {
@@ -823,12 +914,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   const tourSteps = [
-    { mode: "overview", side: "left", passage: 1, row: "left" },
-    { mode: "mainRoad", side: "left", passage: 1, row: "left" },
-    { mode: "nave", side: "left", passage: 3, row: "left" },
-    { mode: "passage", side: "left", passage: 3, row: "right" },
-    { mode: "worker", side: "left", passage: 3, row: "right" },
-    { mode: "lift", side: "left", passage: 3, row: "right" }
+    { mode: "overview", nave: 20, side: "left", passage: 1, row: "left" },
+    { mode: "mainRoad", nave: 20, side: "left", passage: 1, row: "left" },
+    { mode: "nave", nave: 20, side: "left", passage: 3, row: "left" },
+    { mode: "passage", nave: 20, side: "left", passage: 3, row: "right" },
+    { mode: "worker", nave: 20, side: "left", passage: 3, row: "right" },
+    { mode: "lift", nave: 20, side: "left", passage: 3, row: "right" }
   ];
 
   function updateTourStep(time) {
@@ -838,6 +929,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (stepIndex === state.tourStep) return;
     const step = tourSteps[stepIndex];
     state.tourStep = stepIndex;
+    state.selectedNave = step.nave;
     state.selectedNaveSide = step.side;
     state.selectedPassage = step.passage;
     state.selectedRowSide = step.row;
@@ -1031,6 +1123,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     state.selectedNaveSide = button.dataset.naveSide;
     updateSelection();
   }));
+  const naveNumberInput = $("#naveNumberInput");
+  if (naveNumberInput) naveNumberInput.addEventListener("change", (event) => {
+    state.selectedNave = clamp(Number(event.target.value) || 20, 1, greenhouseNaveCount);
+    updateSelection();
+  });
   document.querySelectorAll("[data-passage]").forEach((button) => button.addEventListener("click", () => {
     state.selectedPassage = Number(button.dataset.passage);
     updateSelection();

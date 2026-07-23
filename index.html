@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=16">
+    <link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
   <div class="site-shell">
@@ -95,6 +95,7 @@
           <div class="plan-overlay" aria-hidden="true">
             <div class="plan-axis plan-axis-top"><span>39</span><i></i><span>1</span></div>
             <div class="plan-axis plan-axis-bottom"><span>39</span><i></i><span>1</span></div>
+            <div class="plan-nave-labels"><span>39</span><span>30</span><span>20</span><span>10</span><span>1</span></div>
             <div class="plan-span-axis"><span>1</span><i></i><span>27</span></div>
             <div class="plan-connectors"><b>1</b><b>2</b><b>3</b></div>
           </div>
@@ -107,7 +108,12 @@
             </div>
             <div class="mini-map-note"><span>1</span><i></i><span>27</span><b data-i18n="connectorCountShort">3 łączniki</b></div>
           </div>
-          <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: lewa strona, przejście 1, lewy rząd</div>
+          <div class="nave-selection-badge" aria-live="polite">
+            <strong><span data-i18n="naveLabel">NAWA</span> <span id="selectedNaveNumber">20</span></strong>
+            <small data-i18n="naveFiveEntrances">5 wejść w jednej nawie</small>
+            <span class="nave-entry-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></span>
+          </div>
+          <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: nawa 20, lewa strona, przejście 1, lewy rząd</div>
         </div>
         <div class="scene-toolbar">
           <button class="toolbar-button" type="button" id="motionButton"><span aria-hidden="true">Ⅱ</span><span data-i18n="pause">Zatrzymaj ruch</span></button>
@@ -119,7 +125,12 @@
           <summary data-i18n="exploreTitle">Wybierz element do obejrzenia</summary>
           <div class="explore-grid">
             <div class="control-card">
-              <strong data-i18n="naveChoice">Wybierz stronę nawy</strong>
+              <strong data-i18n="naveChoice">Wybierz nawę i stronę</strong>
+              <label class="nave-number-control" for="naveNumberInput">
+                <span data-i18n="naveNumber">Numer nawy</span>
+                <input id="naveNumberInput" type="number" min="1" max="39" step="1" value="20" inputmode="numeric">
+                <em data-i18n="naveNumberHint">Na planie pokazano 39 naw: 39–1.</em>
+              </label>
               <div class="control-actions">
                 <button class="choice-button is-active" type="button" data-nave-side="left" data-i18n="leftSide">Lewa strona</button>
                 <button class="choice-button" type="button" data-nave-side="right" data-i18n="rightSide">Prawa strona</button>
@@ -226,6 +237,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=16"></script>
+    <script type="module" src="app.js?v=18"></script>
 </body>
 </html>
