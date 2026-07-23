@@ -463,7 +463,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       updateTourText();
     }
     state.cameraMode = cameraViews[mode] ? mode : "overview";
-    if (overviewCamera && perspectiveCamera) camera = state.cameraMode === "overview" ? overviewCamera : perspectiveCamera;
+    if (overviewCamera && perspectiveCamera) {
+      camera = state.cameraMode === "overview" ? overviewCamera : perspectiveCamera;
+      if (camera === perspectiveCamera) camera.up.set(0, 1, 0);
+    }
     roofMeshes.forEach((mesh) => { mesh.visible = state.cameraMode !== "overview"; });
     resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
@@ -588,6 +591,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.fog = new THREE.Fog(0xdff4ea, 38, 78);
       perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
       overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
+      // The site plan is read left-to-right: left side, central road, right side.
+      overviewCamera.up.set(1, 0, 0);
       camera = overviewCamera;
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
@@ -642,6 +647,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
       camera.zoom = clamp(1 / cameraTouch.zoom, .72, 1.45);
       camera.updateProjectionMatrix();
+      camera.up.set(1, 0, 0);
       camera.lookAt(targetCamera);
       if (state.moving) animated.forEach((item) => {
         if (item.type === "person") {
