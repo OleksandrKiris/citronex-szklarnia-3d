@@ -149,8 +149,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       guideRoad: "Id\u017A drog\u0105 \u015Brodkow\u0105",
       guidePassage: "Wejd\u017A w przej\u015Bcie",
       guideWorker: "Wybierz stron\u0119 rz\u0119du",
-      guideStatusOverview: "Zacznij od widoku z g\u00F3ry. Droga \u015Brodkowa dzieli lew\u0105 i praw\u0105 stron\u0119.",
-      guideStatusRoad: "Id\u017A drog\u0105 \u015Brodkow\u0105 do wybranej nawy. Wej\u015Bcia po obu stronach s\u0105 naprzeciw siebie.",
+      guideStatusOverview: "Zacznij od widoku z g\u00F3ry. Prawa strona jest nad drog\u0105, lewa pod drog\u0105. Nawy s\u0105 naprzeciw siebie.",
+      guideStatusRoad: "Id\u017A drog\u0105 \u015Brodkow\u0105 do wybranej nawy. Wej\u015Bcia prawej i lewej strony s\u0105 naprzeciw siebie.",
       guideStatusPassage: "W przej\u015Bciu s\u0105 dwa rz\u0119dy: lewy i prawy. Stoisz pomi\u0119dzy nimi.",
       guideStatusWorker: "Pracuj przy stronie rz\u0119du wskazanej w przydziale: lewy albo prawy rz\u0105d."
     },
@@ -161,8 +161,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       guideRoad: "Follow the middle road",
       guidePassage: "Enter the passage",
       guideWorker: "Choose the row side",
-      guideStatusOverview: "Start with the top view. The middle road separates the left and right sides.",
-      guideStatusRoad: "Follow the middle road to your assigned nave. Entrances on both sides face each other.",
+      guideStatusOverview: "Start with the top view. The right side is above the road and the left side is below it. The naves face each other.",
+      guideStatusRoad: "Follow the middle road to your assigned nave. The entrances on the right and left face each other.",
       guideStatusPassage: "A passage has two rows: left and right. You stand between the rows.",
       guideStatusWorker: "Work beside the row side shown in your assignment: left or right."
     },
@@ -173,8 +173,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       guideRoad: "\u0406\u0442\u0438 \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u044e \u0434\u043e\u0440\u043e\u0433\u043e\u044e",
       guidePassage: "\u0423\u0432\u0456\u0439\u0442\u0438 \u0432 \u043f\u0440\u043e\u0445\u0456\u0434",
       guideWorker: "\u041e\u0431\u0440\u0430\u0442\u0438 \u0441\u0442\u043e\u0440\u043e\u043d\u0443 \u0440\u044f\u0434\u0443",
-      guideStatusOverview: "\u041f\u043e\u0447\u043d\u0456\u0442\u044c \u0437 \u0432\u0438\u0434\u0443 \u0437\u0433\u043e\u0440\u0438. \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u0430 \u0434\u043e\u0440\u043e\u0433\u0430 \u0440\u043e\u0437\u0434\u0456\u043b\u044f\u0454 \u043b\u0456\u0432\u0443 \u0442\u0430 \u043f\u0440\u0430\u0432\u0443 \u0441\u0442\u043e\u0440\u043e\u043d\u0438.",
-      guideStatusRoad: "\u0406\u0434\u0456\u0442\u044c \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u044e \u0434\u043e\u0440\u043e\u0433\u043e\u044e \u0434\u043e \u043f\u0440\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u043e\u0457 \u043d\u0430\u0432\u0438. \u0412\u0445\u043e\u0434\u0438 \u0437 \u043e\u0431\u043e\u0445 \u0431\u043e\u043a\u0456\u0432 \u0440\u043e\u0437\u0442\u0430\u0448\u043e\u0432\u0430\u043d\u0456 \u043d\u0430\u0432\u043f\u0440\u043e\u0442\u0438 \u043e\u0434\u0438\u043d \u043e\u0434\u043d\u043e\u0433\u043e.",
+      guideStatusOverview: "\u041f\u043e\u0447\u043d\u0456\u0442\u044c \u0437 \u0432\u0438\u0434\u0443 \u0437\u0433\u043e\u0440\u0438. \u041f\u0440\u0430\u0432\u0430 \u0441\u0442\u043e\u0440\u043e\u043d\u0430 \u043d\u0430\u0434 \u0434\u043e\u0440\u043e\u0433\u043e\u044e, \u043b\u0456\u0432\u0430 \u043f\u0456\u0434 \u0434\u043e\u0440\u043e\u0433\u043e\u044e. \u041d\u0430\u0432\u0438 \u0440\u043e\u0437\u0442\u0430\u0448\u043e\u0432\u0430\u043d\u0456 \u043e\u0434\u043d\u0430 \u043d\u0430\u0432\u043f\u0440\u043e\u0442\u0438 \u043e\u0434\u043d\u043e\u0457.",
+      guideStatusRoad: "\u0406\u0434\u0456\u0442\u044c \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u044e \u0434\u043e\u0440\u043e\u0433\u043e\u044e \u0434\u043e \u043f\u0440\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u043e\u0457 \u043d\u0430\u0432\u0438. \u0412\u0445\u043e\u0434\u0438 \u043f\u0440\u0430\u0432\u043e\u0457 \u0442\u0430 \u043b\u0456\u0432\u043e\u0457 \u0441\u0442\u043e\u0440\u0456\u043d \u043d\u0430\u043f\u0440\u043e\u0442\u0438 \u043e\u0434\u0438\u043d \u043e\u0434\u043d\u043e\u0433\u043e.",
       guideStatusPassage: "\u0423 \u043f\u0440\u043e\u0445\u043e\u0434\u0456 \u0454 \u0434\u0432\u0430 \u0440\u044f\u0434\u0438: \u043b\u0456\u0432\u0438\u0439 \u0456 \u043f\u0440\u0430\u0432\u0438\u0439. \u0412\u0438 \u0441\u0442\u043e\u0457\u0442\u0435 \u043c\u0456\u0436 \u0440\u044f\u0434\u0430\u043c\u0438.",
       guideStatusWorker: "\u041f\u0440\u0430\u0446\u044e\u0439\u0442\u0435 \u0431\u0456\u043b\u044f \u0441\u0442\u043e\u0440\u043e\u043d\u0438 \u0440\u044f\u0434\u0443, \u0432\u043a\u0430\u0437\u0430\u043d\u043e\u0457 \u0432 \u043f\u0440\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u043d\u0456: \u043b\u0456\u0432\u0438\u0439 \u0430\u0431\u043e \u043f\u0440\u0430\u0432\u0438\u0439 \u0440\u044f\u0434."
     },
@@ -185,8 +185,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       guideRoad: "\u0418\u0434\u0442\u0438 \u043f\u043e \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439 \u0434\u043e\u0440\u043e\u0433\u0435",
       guidePassage: "\u0412\u043e\u0439\u0442\u0438 \u0432 \u043f\u0440\u043e\u0445\u043e\u0434",
       guideWorker: "\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0441\u0442\u043e\u0440\u043e\u043d\u0443 \u0440\u044f\u0434\u0430",
-      guideStatusOverview: "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u0441 \u0432\u0438\u0434\u0430 \u0441\u0432\u0435\u0440\u0445\u0443. \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u0434\u043e\u0440\u043e\u0433\u0430 \u0440\u0430\u0437\u0434\u0435\u043b\u044f\u0435\u0442 \u043b\u0435\u0432\u0443\u044e \u0438 \u043f\u0440\u0430\u0432\u0443\u044e \u0441\u0442\u043e\u0440\u043e\u043d\u044b.",
-      guideStatusRoad: "\u0418\u0434\u0438\u0442\u0435 \u043f\u043e \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439 \u0434\u043e\u0440\u043e\u0433\u0435 \u043a \u043d\u0443\u0436\u043d\u043e\u0439 \u043d\u0430\u0432\u0435. \u0412\u0445\u043e\u0434\u044b \u0441 \u043e\u0431\u0435\u0438\u0445 \u0441\u0442\u043e\u0440\u043e\u043d \u043d\u0430\u0445\u043e\u0434\u044f\u0442\u0441\u044f \u043d\u0430\u043f\u0440\u043e\u0442\u0438\u0432 \u0434\u0440\u0443\u0433 \u0434\u0440\u0443\u0433\u0430.",
+      guideStatusOverview: "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u0441 \u0432\u0438\u0434\u0430 \u0441\u0432\u0435\u0440\u0445\u0443. \u041f\u0440\u0430\u0432\u0430\u044f \u0441\u0442\u043e\u0440\u043e\u043d\u0430 \u043d\u0430\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u043d\u0430\u0434 \u0434\u043e\u0440\u043e\u0433\u043e\u0439, \u043b\u0435\u0432\u0430\u044f \u2014 \u043f\u043e\u0434 \u0434\u043e\u0440\u043e\u0433\u043e\u0439. \u041d\u0430\u0432\u044b \u0440\u0430\u0441\u043f\u043e\u043b\u043e\u0436\u0435\u043d\u044b \u043d\u0430\u043f\u0440\u043e\u0442\u0438\u0432 \u0434\u0440\u0443\u0433 \u0434\u0440\u0443\u0433\u0430.",
+      guideStatusRoad: "\u0418\u0434\u0438\u0442\u0435 \u043f\u043e \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439 \u0434\u043e\u0440\u043e\u0433\u0435 \u043a \u043d\u0443\u0436\u043d\u043e\u0439 \u043d\u0430\u0432\u0435. \u0412\u0445\u043e\u0434\u044b \u043f\u0440\u0430\u0432\u043e\u0439 \u0438 \u043b\u0435\u0432\u043e\u0439 \u0441\u0442\u043e\u0440\u043e\u043d\u044b \u043d\u0430\u0445\u043e\u0434\u044f\u0442\u0441\u044f \u043d\u0430\u043f\u0440\u043e\u0442\u0438\u0432 \u0434\u0440\u0443\u0433 \u0434\u0440\u0443\u0433\u0430.",
       guideStatusPassage: "\u0412 \u043f\u0440\u043e\u0445\u043e\u0434\u0435 \u0434\u0432\u0430 \u0440\u044f\u0434\u0430: \u043b\u0435\u0432\u044b\u0439 \u0438 \u043f\u0440\u0430\u0432\u044b\u0439. \u0412\u044b \u0441\u0442\u043e\u0438\u0442\u0435 \u043c\u0435\u0436\u0434\u0443 \u0440\u044f\u0434\u0430\u043c\u0438.",
       guideStatusWorker: "\u0420\u0430\u0431\u043e\u0442\u0430\u0439\u0442\u0435 \u0440\u044f\u0434\u043e\u043c \u0441\u043e \u0441\u0442\u043e\u0440\u043e\u043d\u043e\u0439 \u0440\u044f\u0434\u0430, \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432 \u043d\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0438: \u043b\u0435\u0432\u044b\u0439 \u0438\u043b\u0438 \u043f\u0440\u0430\u0432\u044b\u0439 \u0440\u044f\u0434."
     },
@@ -252,6 +252,29 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
   };
   Object.entries(guideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  const orientationGuideTranslations = {
+    az: {
+      guideStatusOverview: "\u00dcstd\u0259n bax\u0131\u015fdan ba\u015flay\u0131n. Sa\u011f t\u0259r\u0259f yolun \u00fcst\u00fcnd\u0259, sol t\u0259r\u0259f yolun alt\u0131ndad\u0131r. Navalar bir-birinin qar\u015f\u0131s\u0131ndad\u0131r.",
+      guideStatusRoad: "T\u0259yin olunmu\u015f navaya m\u0259rk\u0259zi yolla gedin. Sa\u011f v\u0259 sol t\u0259r\u0259fin giri\u015fl\u0259ri qar\u015f\u0131-qar\u015f\u0131d\u0131r."
+    },
+    es: {
+      guideStatusOverview: "Empieza con la vista desde arriba. El lado derecho est\u00e1 encima del camino y el izquierdo debajo. Las naves quedan enfrentadas.",
+      guideStatusRoad: "Sigue el camino central hasta la nave asignada. Las entradas de los lados derecho e izquierdo quedan una frente a otra."
+    },
+    fil: {
+      guideStatusOverview: "Magsimula sa tanawin mula sa itaas. Ang kanang panig ay nasa itaas ng daan at ang kaliwa ay nasa ibaba. Magkaharap ang mga nave.",
+      guideStatusRoad: "Sundin ang gitnang daan papunta sa itinakdang nave. Magkaharap ang pasukan sa kanan at kaliwang panig."
+    },
+    id: {
+      guideStatusOverview: "Mulai dari tampilan atas. Sisi kanan berada di atas jalan dan sisi kiri di bawahnya. Kedua nave saling berhadapan.",
+      guideStatusRoad: "Ikuti jalan tengah menuju nave yang ditentukan. Pintu masuk di sisi kanan dan kiri saling berhadapan."
+    },
+    ne: {
+      guideStatusOverview: "\u092e\u093e\u0925\u093f\u092c\u093e\u091f \u0926\u0947\u0916\u093f\u0928\u0947 \u0926\u0943\u0936\u094d\u092f\u092c\u093e\u091f \u0938\u0941\u0930\u0941 \u0917\u0930\u094d\u0928\u0941\u0939\u094b\u0938\u094d\u0964 \u0926\u093e\u092f\u093e\u0901 \u092d\u093e\u0917 \u092c\u093e\u091f\u094b\u0915\u094b \u092e\u093e\u0925\u093f \u091b \u0930 \u092c\u093e\u092f\u093e\u0901 \u092d\u093e\u0917 \u0924\u0932 \u091b\u0964 \u0928\u093e\u0935\u093e\u0939\u0930\u0942 \u0906\u092e\u0928\u0947-\u0938\u093e\u092e\u0928\u0947 \u091b\u0928\u094d\u0964",
+      guideStatusRoad: "\u0924\u094b\u0915\u093f\u090f\u0915\u094b \u0928\u093e\u0935\u0947\u0924\u093f\u0930 \u092c\u0940\u091a\u0915\u094b \u092c\u093e\u091f\u094b \u092a\u091b\u094d\u092f\u093e\u0909\u0928\u0941\u0939\u094b\u0938\u094d\u0964 \u0926\u093e\u092f\u093e\u0901 \u0930 \u092c\u093e\u092f\u093e\u0901 \u092d\u093e\u0917\u0915\u093e \u092a\u094d\u0930\u0935\u0947\u0936\u0926\u094d\u0935\u093e\u0930 \u0906\u092e\u0928\u0947-\u0938\u093e\u092e\u0928\u0947 \u091b\u0928\u094d\u0964"
+    }
+  };
+  Object.entries(orientationGuideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
@@ -830,8 +853,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.fog = new THREE.Fog(0xe7f2ee, 46, 92);
       perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
       overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
-      // The site plan is read left-to-right: left side, central road, right side.
-      overviewCamera.up.set(1, 0, 0);
+      // Match the source spreadsheet: right side above the horizontal road, left side below it.
+      overviewCamera.up.set(0, 0, -1);
       camera = overviewCamera;
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
@@ -886,7 +909,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
       camera.zoom = clamp(1 / cameraTouch.zoom, .72, 1.45);
       camera.updateProjectionMatrix();
-      camera.up.set(1, 0, 0);
+      camera.up.set(0, 0, -1);
       camera.lookAt(targetCamera);
       if (state.moving) animated.forEach((item) => {
         if (item.type === "person") {
