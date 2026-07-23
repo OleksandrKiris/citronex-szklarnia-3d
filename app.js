@@ -142,15 +142,15 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     ne: { infoNave: "नावा ग्रीनहाउसको लामो र दोहोरिने भाग हो। यो योजनामा ३९ वटा देखाइएको छ; वास्तविक संख्या फरक हुन सक्छ।", miniMapTitle: "सम्पूर्ण ग्रीनहाउसको योजना", naveCountShort: "३९ नावा", connectorCountShort: "३ जोड्ने बाटा" }
   };
   const naveSelectionTranslations = {
-    pl: { naveChoice: "Wybierz nawę i stronę", naveNumber: "Numer nawy", naveNumberHint: "Na planie pokazano 39 naw: 39–1.", naveLabel: "NAWA", naveFiveEntrances: "5 wejść w jednej nawie", selectionText: "Wybrane: nawa {nave}, {side}, przejście {passage}, {row}" },
-    en: { naveChoice: "Choose a nave and side", naveNumber: "Nave number", naveNumberHint: "The plan shows 39 naves: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 entrances in one nave", selectionText: "Selected: nave {nave}, {side}, passage {passage}, {row}" },
-    ua: { naveChoice: "Оберіть наву та сторону", naveNumber: "Номер нави", naveNumberHint: "На плані показано 39 нав: 39–1.", naveLabel: "НАВА", naveFiveEntrances: "5 входів в одній наві", selectionText: "Обрано: нава {nave}, {side}, прохід {passage}, {row}" },
-    ru: { naveChoice: "Выберите наву и сторону", naveNumber: "Номер навы", naveNumberHint: "На плане показано 39 нав: 39–1.", naveLabel: "НАВА", naveFiveEntrances: "5 входов в одной наве", selectionText: "Выбрано: нава {nave}, {side}, проход {passage}, {row}" },
-    az: { naveChoice: "Navanı və tərəfi seçin", naveNumber: "Nava nömrəsi", naveNumberHint: "Planda 39 nava göstərilir: 39–1.", naveLabel: "NAVA", naveFiveEntrances: "Bir navada 5 giriş", selectionText: "Seçildi: nava {nave}, {side}, keçid {passage}, {row}" },
-    es: { naveChoice: "Elige la nave y el lado", naveNumber: "Número de nave", naveNumberHint: "El plano muestra 39 naves: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 entradas en una nave", selectionText: "Seleccionado: nave {nave}, {side}, pasillo {passage}, {row}" },
-    fil: { naveChoice: "Piliin ang nave at panig", naveNumber: "Numero ng nave", naveNumberHint: "May 39 nave sa plano: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 pasukan sa isang nave", selectionText: "Napili: nave {nave}, {side}, daanan {passage}, {row}" },
-    id: { naveChoice: "Pilih nave dan sisi", naveNumber: "Nomor nave", naveNumberHint: "Denah menunjukkan 39 nave: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 pintu masuk dalam satu nave", selectionText: "Dipilih: nave {nave}, {side}, lorong {passage}, {row}" },
-    ne: { naveChoice: "नाभ र भाग छान्नुहोस्", naveNumber: "नाभ नम्बर", naveNumberHint: "योजनामा ३९ नाभ छन्: ३९–१।", naveLabel: "नाभ", naveFiveEntrances: "एउटा नाभमा ५ प्रवेशद्वार", selectionText: "छानिएको: नाभ {nave}, {side}, बाटो {passage}, {row}" }
+    pl: { naveChoice: "Wybierz nawę i stronę", naveNumber: "Numer nawy", naveNumberHint: "Na planie pokazano 39 naw: 39–1.", naveLabel: "NAWA", naveFiveEntrances: "5 wejść w jednej nawie", naveDetailDesc: "5 wejść / 10 rzędów.", naveEntryLine: "WEJŚCIA 1–5 • 10 RZĘDÓW", selectionText: "Wybrane: nawa {nave}, {side}, przejście {passage}, {row}" },
+    en: { naveChoice: "Choose a nave and side", naveNumber: "Nave number", naveNumberHint: "The plan shows 39 naves: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 entrances in one nave", naveDetailDesc: "5 entrances / 10 rows.", naveEntryLine: "ENTRANCES 1–5 • 10 ROWS", selectionText: "Selected: nave {nave}, {side}, passage {passage}, {row}" },
+    ua: { naveChoice: "Оберіть наву та сторону", naveNumber: "Номер нави", naveNumberHint: "На плані показано 39 нав: 39–1.", naveLabel: "НАВА", naveFiveEntrances: "5 входів в одній наві", naveDetailDesc: "5 входів / 10 рядів.", naveEntryLine: "ВХОДИ 1–5 • 10 РЯДІВ", selectionText: "Обрано: нава {nave}, {side}, прохід {passage}, {row}" },
+    ru: { naveChoice: "Выберите наву и сторону", naveNumber: "Номер навы", naveNumberHint: "На плане показано 39 нав: 39–1.", naveLabel: "НАВА", naveFiveEntrances: "5 входов в одной наве", naveDetailDesc: "5 входов / 10 рядов.", naveEntryLine: "ВХОДЫ 1–5 • 10 РЯДОВ", selectionText: "Выбрано: нава {nave}, {side}, проход {passage}, {row}" },
+    az: { naveChoice: "Navanı və tərəfi seçin", naveNumber: "Nava nömrəsi", naveNumberHint: "Planda 39 nava göstərilir: 39–1.", naveLabel: "NAVA", naveFiveEntrances: "Bir navada 5 giriş", naveDetailDesc: "5 giriş / 10 sıra.", naveEntryLine: "GİRİŞLƏR 1–5 • 10 SIRA", selectionText: "Seçildi: nava {nave}, {side}, keçid {passage}, {row}" },
+    es: { naveChoice: "Elige la nave y el lado", naveNumber: "Número de nave", naveNumberHint: "El plano muestra 39 naves: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 entradas en una nave", naveDetailDesc: "5 entradas / 10 filas.", naveEntryLine: "ENTRADAS 1–5 • 10 FILAS", selectionText: "Seleccionado: nave {nave}, {side}, pasillo {passage}, {row}" },
+    fil: { naveChoice: "Piliin ang nave at panig", naveNumber: "Numero ng nave", naveNumberHint: "May 39 nave sa plano: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 pasukan sa isang nave", naveDetailDesc: "5 pasukan / 10 hanay.", naveEntryLine: "PASUKAN 1–5 • 10 HANAY", selectionText: "Napili: nave {nave}, {side}, daanan {passage}, {row}" },
+    id: { naveChoice: "Pilih nave dan sisi", naveNumber: "Nomor nave", naveNumberHint: "Denah menunjukkan 39 nave: 39–1.", naveLabel: "NAVE", naveFiveEntrances: "5 pintu masuk dalam satu nave", naveDetailDesc: "5 pintu masuk / 10 baris.", naveEntryLine: "PINTU MASUK 1–5 • 10 BARIS", selectionText: "Dipilih: nave {nave}, {side}, lorong {passage}, {row}" },
+    ne: { naveChoice: "नाभ र भाग छान्नुहोस्", naveNumber: "नाभ नम्बर", naveNumberHint: "योजनामा ३९ नाभ छन्: ३९–१।", naveLabel: "नाभ", naveFiveEntrances: "एउटा नाभमा ५ प्रवेशद्वार", naveDetailDesc: "५ प्रवेशद्वार / १० लाइन।", naveEntryLine: "प्रवेशद्वार १–५ • १० लाइन", selectionText: "छानिएको: नाभ {nave}, {side}, बाटो {passage}, {row}" }
   };
   const guideTranslations = {
     pl: {
@@ -728,7 +728,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       ["left", "right"].forEach((naveSide) => {
         const direction = naveSide === "right" ? 1 : -1;
         const entryMarker = new THREE.Mesh(
-          new THREE.BoxGeometry(.11, .05, .28),
+          new THREE.BoxGeometry(.17, .09, .42),
           new THREE.MeshBasicMaterial({ color: 0xffc447, transparent: true, opacity: .95, depthWrite: false })
         );
         entryMarker.position.set(demoNaveCenterX + offset, .67, direction * (roadEdge + .08));
@@ -911,6 +911,25 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         const entrance = box(.46, .14, .5, 0xf0a832, x, .58, entranceZ);
         entrance.userData.infoKey = "passage";
         Object.assign(entrance.userData, { naveSide, passageNumber });
+        const portalLeft = box(.055, .95, .055, 0xf0a832, x - .22, .64, entranceZ, { metalness: .12, roughness: .62 });
+        const portalRight = box(.055, .95, .055, 0xf0a832, x + .22, .64, entranceZ, { metalness: .12, roughness: .62 });
+        const portalTop = box(.5, .055, .055, 0xf0a832, x, 1.1, entranceZ, { metalness: .12, roughness: .62 });
+        const entryMarker = new THREE.Mesh(
+          new THREE.CylinderGeometry(.16, .16, .035, 16),
+          new THREE.MeshStandardMaterial({ color: 0xffc447, emissive: 0x6b3e08, emissiveIntensity: .4, roughness: .6 })
+        );
+        entryMarker.rotation.x = Math.PI / 2;
+        entryMarker.position.set(x, .82, entranceZ - direction * .12);
+        [portalLeft, portalRight, portalTop].forEach((portalPart) => {
+          portalPart.userData.infoKey = "passage";
+          Object.assign(portalPart.userData, { naveSide, passageNumber });
+          detailStructureObjects.push(portalPart);
+          registerDetail(portalPart);
+        });
+        entryMarker.userData.infoKey = "passage";
+        Object.assign(entryMarker.userData, { naveSide, passageNumber });
+        detailStructureObjects.push(entryMarker);
+        registerDetail(entryMarker);
         registerDetail(path);
         registerDetail(entrance);
         rowRecords.push({ mat: path, bed: path, capillary: path, passageNumber, naveSide, rowSide: "left" });
@@ -965,6 +984,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (frame) frame.dataset.view = state.cameraMode;
     resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
+    applyLayerVisibility();
     updateGuideText();
   }
 
@@ -973,7 +993,14 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const z = selectedPassageZ();
     const depthDirection = state.selectedNaveSide === "right" ? 1 : -1;
     if (mode === "mainRoad") return { position: [x + 10, 5.4, 0], target: [x, 1.1, 0] };
-    if (mode === "nave") return { position: [x, 9.8, z - depthDirection * 5.4], target: [x, 1.35, z] };
+    if (mode === "nave") {
+      const naveX = selectedNaveCenterX();
+      // One nave is taught as a complete module: five entrance pairs face
+      // each other across the middle road, with ten rows visible behind them.
+      // A high camera keeps the plan readable instead of hiding the far
+      // entrances behind the tomato plants.
+      return { position: [naveX, 33.5, 0], target: [naveX, .2, 0] };
+    }
     if (mode === "passage") return { position: [x, 2.35, z - depthDirection * 3.8], target: [x, 1.25, z] };
     if (mode === "worker") return { position: [x, 1.5, z - depthDirection * 2.8], target: [x, 1.35, z] };
     if (mode === "lift") return { position: [x, 3.05, z - depthDirection * 4.4], target: [x, 1.5, z] };
@@ -1054,9 +1081,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function applyLayerVisibility() {
-    plantRecords.forEach((record) => { record.group.visible = layerState.plants; });
+    plantRecords.forEach((record) => {
+      const isDetailPlant = Boolean(record.group.userData.detailOnly);
+      record.group.visible = layerState.plants && (state.cameraMode === "overview" || isDetailPlant);
+    });
     capillaryMeshes.forEach((mesh) => { mesh.visible = layerState.capillaries; });
-    waterDots.forEach((dot) => { dot.mesh.visible = state.waterActive && layerState.capillaries; });
+    waterDots.forEach((dot) => { dot.mesh.visible = state.waterActive && layerState.capillaries && state.cameraMode === "overview"; });
     cartRecords.forEach((group) => { group.visible = layerState.carts; });
     peopleRecords.forEach((group) => { group.visible = layerState.people; });
     document.querySelectorAll("[data-layer]").forEach((button) => button.classList.toggle("is-on", layerState[button.dataset.layer]));
@@ -1221,7 +1251,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       renderer.render(scene, camera);
       return;
     }
-    const focusX = selectedPassageX();
+    const focusX = mode === "nave" ? selectedNaveCenterX() : selectedPassageX();
     const targetValues = [...view.target];
     const positionValues = [...view.position];
     if (mode === "nave" || mode === "lift") {
