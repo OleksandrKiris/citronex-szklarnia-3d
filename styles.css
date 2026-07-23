@@ -77,6 +77,7 @@ h3 { margin-bottom: 5px; font-size: 18px; line-height: 1.2; }
 .scene-frame[data-view="nave"] .nave-entry-numbers { gap: 6px; margin-top: 5px; }
 .scene-frame[data-view="nave"] .nave-entry-numbers i { width: 22px; height: 22px; font-size: 10px; }
 .scene-frame[data-view="nave"] .selection-badge { display: none; }
+.scene-frame[data-view="overview"] .nave-selection-badge { display: none; }
 .scene-frame[data-view="overview"] .selection-badge { display: none; }
 #greenhouseCanvas { display: block; width: 100%; height: 460px; touch-action: none; }
 .scene-label { position: absolute; z-index: 2; padding: 6px 9px; color: #fff; background: rgba(8,70,51,.82); border: 1px solid rgba(255,255,255,.28); border-radius: 7px; font-size: 10px; font-weight: 850; letter-spacing: .05em; pointer-events: auto; cursor: pointer; text-align: left; transition: transform .16s ease, filter .16s ease; }
@@ -104,6 +105,21 @@ h3 { margin-bottom: 5px; font-size: 18px; line-height: 1.2; }
 .scene-label,
 .plan-overlay,
 .mini-map { display: none; }
+.scene-frame[data-view="overview"] .scene-label { display: block; pointer-events: none; }
+.scene-frame[data-view="overview"] .label-right-side { top: 20%; }
+.scene-frame[data-view="overview"] .label-road { top: 50%; }
+.scene-frame[data-view="overview"] .label-left-side { bottom: 18%; }
+.passage-row-label { display: none; position: absolute; top: 14px; z-index: 3; padding: 7px 9px; color: #fff; border: 1px solid rgba(255,255,255,.7); border-radius: 7px; box-shadow: 0 4px 12px rgba(20,50,39,.13); font-size: 10px; font-weight: 900; line-height: 1.1; pointer-events: none; }
+.scene-frame[data-view="passage"] .passage-row-label,
+.scene-frame[data-view="worker"] .passage-row-label,
+.scene-frame[data-view="lift"] .passage-row-label { display: block; }
+.passage-row-left { left: 10px; background: rgba(42,116,164,.9); }
+.passage-row-right { right: 10px; background: rgba(46,130,73,.9); }
+.scene-frame[data-view="passage"] .selection-badge { display: none; }
+.nave-floor-numbers { display: none; position: absolute; right: 3%; bottom: 38px; left: 3%; z-index: 3; grid-template-columns: repeat(5, 1fr); align-items: center; justify-items: center; pointer-events: none; }
+.scene-frame[data-view="nave"] .nave-floor-numbers { display: grid; }
+.nave-floor-numbers i { display: grid; place-items: center; width: 24px; height: 24px; color: #fff; background: #9b6413; border: 2px solid rgba(255,255,255,.9); border-radius: 50%; box-shadow: 0 3px 9px rgba(58,39,13,.24); font-size: 11px; font-style: normal; font-weight: 900; }
+.scene-frame[data-view="nave"] .nave-entry-numbers { display: none; }
 .scene-toolbar { padding: 14px 16px 16px; border-top: 1px solid var(--line); background: #fbfdfc; }
 .toolbar-button { min-height: 44px; padding: 8px 12px; font-size: 13px; }
 .scene-toolbar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -144,6 +160,7 @@ h3 { margin-bottom: 5px; font-size: 18px; line-height: 1.2; }
 .selection-badge { position: absolute; left: 50%; bottom: 12px; z-index: 3; max-width: min(56%, 290px); padding: 7px 9px; color: #fff; background: rgba(19,75,52,.9); border-radius: 8px; font-size: 10px; font-weight: 800; line-height: 1.25; transform: translateX(-50%); }
 .nave-selection-badge { position: absolute; left: 50%; top: 10px; z-index: 3; display: grid; gap: 1px; min-width: 116px; max-width: 42%; padding: 6px 9px; color: #3e2e0f; background: rgba(255,224,132,.94); border: 1px solid rgba(117,86,21,.5); border-radius: 8px; box-shadow: 0 4px 12px rgba(70,52,17,.1); text-align: center; transform: translateX(-50%); backdrop-filter: blur(4px); }
 .nave-selection-badge strong { font-size: 11px; letter-spacing: .05em; line-height: 1.1; }
+.nave-selection-badge #selectedNaveNumber { display: none; }
 .nave-selection-badge small { font-size: 9px; font-weight: 800; line-height: 1.2; }
 .nave-entry-numbers { display: flex; justify-content: center; gap: 3px; margin-top: 3px; }
 .nave-entry-numbers i { display: grid; place-items: center; width: 16px; height: 16px; color: #fff; background: #a66d16; border-radius: 50%; font-size: 8px; font-style: normal; font-weight: 900; }
@@ -204,7 +221,7 @@ body.is-immersive { overflow: hidden; }
   .section-heading .eyebrow, .section-heading p, .auto-status { display: none; }
   .section-heading h2 { margin: 0; font-size: 19px; }
   .status-stack { margin: 0 0 0 auto; }
-  .live-status { font-size: 10px; }
+  .live-status { display: none; }
   .scene-section > .view-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 0 8px 8px; }
   .scene-section > .view-tiles .view-tile[data-camera="mainRoad"],
   .scene-section > .view-tiles .view-tile[data-camera="worker"] { display: none; }
@@ -216,6 +233,10 @@ body.is-immersive { overflow: hidden; }
   .scene-frame[data-view="nave"] .nave-selection-badge { top: 8px; width: min(208px, calc(100% - 20px)); padding: 7px 9px; }
   .scene-frame[data-view="nave"] .nave-entry-numbers i { width: 20px; height: 20px; }
   .scene-toolbar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 8px; }
+  .scene-frame[data-view="overview"] + .scene-toolbar,
+  .scene-frame[data-view="nave"] + .scene-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scene-frame[data-view="overview"] + .scene-toolbar #motionButton,
+  .scene-frame[data-view="nave"] + .scene-toolbar #motionButton { display: none; }
   .toolbar-button { min-height: 44px; padding: 7px 6px; font-size: 10px; line-height: 1.15; }
   .touch-hint { padding: 2px 10px 10px; font-size: 10px; }
   .explore-panel { margin: 0 8px 10px; }

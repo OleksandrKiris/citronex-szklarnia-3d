@@ -450,6 +450,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let planOnlyObjects = [];
   let detailStructureObjects = [];
   let overviewOnlyObjects = [];
+  let teachingGroups = {};
+  let teachingCart = null;
+  let teachingPassageMarkers = [];
+  let teachingPlants = [];
+  let teachingCarts = [];
+  let teachingPeople = [];
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -620,6 +626,193 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     scene.add(group);
     animated.push({ object: group, type: "harvest", baseX: x, baseZ: z, phase, axis });
     cartRecords.push(group);
+  }
+
+  function teachingBox(parent, width, height, depth, color, x, y, z, options = {}, infoKey = "") {
+    const mesh = new THREE.Mesh(
+      new THREE.BoxGeometry(width, height, depth),
+      new THREE.MeshStandardMaterial({ color, ...options })
+    );
+    mesh.position.set(x, y, z);
+    if (infoKey) mesh.userData.infoKey = infoKey;
+    parent.add(mesh);
+    return mesh;
+  }
+
+  function teachingLines(parent, segments, color = 0x9aa8a4, opacity = .9) {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.Float32BufferAttribute(segments.flat(), 3));
+    const lines = new THREE.LineSegments(
+      geometry,
+      new THREE.LineBasicMaterial({ color, transparent: opacity < 1, opacity })
+    );
+    parent.add(lines);
+    return lines;
+  }
+
+  function teachingPlant(parent, x, z, side) {
+    const group = new THREE.Group();
+    group.position.set(x, 0, z);
+    group.userData.infoKey = "tomatoes";
+    const stemMaterial = new THREE.MeshStandardMaterial({ color: 0x2f7e47, roughness: .88 });
+    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x4a9858, roughness: .92 });
+    const stem = new THREE.Mesh(new THREE.CylinderGeometry(.018, .027, 2.65, 6), stemMaterial);
+    stem.position.y = 1.58;
+    stem.userData.infoKey = "tomatoes";
+    group.add(stem);
+    [0, 1, 2].forEach((index) => {
+      const leaf = new THREE.Mesh(new THREE.SphereGeometry(1, 7, 5), leafMaterial);
+      leaf.scale.set(.13, .026, .065);
+      leaf.position.set(side * (index % 2 ? -.11 : .11), 1.02 + index * .55, 0);
+      leaf.rotation.z = side * (index % 2 ? -.35 : .35);
+      leaf.userData.infoKey = "tomatoes";
+      group.add(leaf);
+      const fruit = new THREE.Mesh(
+        new THREE.SphereGeometry(.052, 7, 7),
+        new THREE.MeshStandardMaterial({ color: [0xd84c3d, 0xec763e, 0x7ca54e][index], roughness: .78 })
+      );
+      fruit.position.set(side * .09, 1.05 + index * .24, .04);
+      fruit.userData.infoKey = "tomatoes";
+      group.add(fruit);
+    });
+    parent.add(group);
+    teachingPlants.push(group);
+    return group;
+  }
+
+  function addTeachingFrame(parent, width, depth, height, startZ) {
+    const segments = [];
+    const add = (x1, y1, z1, x2, y2, z2) => segments.push([x1, y1, z1, x2, y2, z2]);
+    const left = -width / 2;
+    const right = width / 2;
+    const ridge = height + .75;
+    for (let z = startZ; z <= startZ + depth + .01; z += 2.4) {
+      add(left, .2, z, left, height, z);
+      add(right, .2, z, right, height, z);
+      add(left, height, z, 0, ridge, z);
+      add(0, ridge, z, right, height, z);
+    }
+    add(left, height, startZ, left, height, startZ + depth);
+    add(0, ridge, startZ, 0, ridge, startZ + depth);
+    add(right, height, startZ, right, height, startZ + depth);
+    return teachingLines(parent, segments, 0x9ba8a5, .92);
+  }
+
+  function addTeachingOverview() {
+    const group = new THREE.Group();
+    group.name = "teaching-overview";
+    teachingBox(group, 18, .12, 17, 0xe9eeeb, 0, .02, 0, { roughness: .96 });
+    const road = teachingBox(group, 18, .08, 2.6, 0xd9bf84, 0, .12, 0, { roughness: .92 }, "middleRoad");
+    road.userData.infoKey = "middleRoad";
+    const naveXs = [-6.8, -5.1, -3.4, -1.7, 0, 1.7, 3.4, 5.1, 6.8];
+    ["left", "right"].forEach((side) => {
+      const direction = side === "right" ? 1 : -1;
+      const centerZ = direction * 5.25;
+      const floor = teachingBox(group, 16.2, .09, 7.6, 0xf4f6f3, 0, .13, centerZ, { roughness: .96 }, side === "right" ? "rightSide" : "leftSide");
+      floor.userData.infoKey = side === "right" ? "rightSide" : "leftSide";
+      naveXs.forEach((x) => {
+        teachingBox(group, .62, .06, 6.8, 0x8abb70, x, .23, centerZ, { roughness: .9 }, "nave");
+        teachingBox(group, .48, .035, .38, 0xf0b23c, x, .29, direction * 1.48, { roughness: .78 }, "passage");
+        const roofSegments = [];
+        const roadZ = direction * 1.35;
+        const endZ = direction * 9.05;
+        const xL = x - .72;
+        const xR = x + .72;
+        [roadZ, endZ].forEach((z) => {
+          roofSegments.push([xL, .25, z, xL, 3.2, z], [xR, .25, z, xR, 3.2, z]);
+          roofSegments.push([xL, 3.2, z, x, 3.8, z], [x, 3.8, z, xR, 3.2, z]);
+        });
+        roofSegments.push([xL, 3.2, roadZ, xL, 3.2, endZ], [x, 3.8, roadZ, x, 3.8, endZ], [xR, 3.2, roadZ, xR, 3.2, endZ]);
+        teachingLines(group, roofSegments, 0xa4afac, .82);
+      });
+    });
+    scene.add(group);
+    return group;
+  }
+
+  function addTeachingNave() {
+    const group = new THREE.Group();
+    group.name = "teaching-nave";
+    const passageXs = [-4, -2, 0, 2, 4];
+    teachingBox(group, 11.2, .1, 15.4, 0xf0f3f0, 0, .02, .3, { roughness: .97 });
+    teachingBox(group, 11.2, .08, 1.6, 0xd9bf84, 0, .12, -7.1, { roughness: .92 }, "middleRoad");
+    passageXs.forEach((x, index) => {
+      const passageNumber = index + 1;
+      const walkway = teachingBox(group, .86, .04, 12.8, 0xd9dbd6, x, .17, .4, { roughness: .96 }, "passage");
+      walkway.userData.passageNumber = passageNumber;
+      [-.2, .2].forEach((offset) => teachingBox(group, .045, .045, 12.8, 0x71736f, x + offset, .23, .4, { metalness: .68, roughness: .38 }, "passage"));
+      [-.58, .58].forEach((offset, rowIndex) => {
+        teachingBox(group, .24, .14, 12.5, 0xf5f5f0, x + offset, .29, .48, { roughness: .8 }, "growMat");
+        teachingBox(group, .15, .055, 12.35, 0xb78c5b, x + offset, .4, .48, { roughness: .9 }, "growMat");
+        teachingBox(group, .07, .16, 12.15, 0x6ea657, x + offset, .52, .55, { roughness: .9 }, "tomatoes");
+        teachingBox(group, .022, .03, 12.25, 0x309ad7, x + offset, .58, .48, { roughness: .45 }, "capillaries");
+      });
+      const threshold = teachingBox(group, .94, .07, .34, 0xf0ad32, x, .24, -6.02, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: index === 0 ? .25 : 0 }, "passage");
+      threshold.userData.passageNumber = passageNumber;
+      teachingPassageMarkers.push(threshold);
+    });
+    addTeachingFrame(group, 10.8, 13.3, 4.7, -6.1);
+    scene.add(group);
+    return group;
+  }
+
+  function addTeachingPassage() {
+    const group = new THREE.Group();
+    group.name = "teaching-passage";
+    teachingBox(group, 3.3, .1, 16.4, 0xf0f3f0, 0, .02, .7, { roughness: .97 });
+    const walkway = teachingBox(group, .9, .04, 15.2, 0xd9dbd6, 0, .17, .7, { roughness: .96 }, "passage");
+    [-.2, .2].forEach((x) => teachingBox(group, .045, .045, 15.1, 0x6e706c, x, .23, .7, { metalness: .7, roughness: .35 }, "passage"));
+    [-.72, .72].forEach((x, sideIndex) => {
+      const rowSide = sideIndex === 0 ? "leftRow" : "rightRow";
+      teachingBox(group, .3, .16, 15, 0xf6f5ef, x, .3, .7, { roughness: .78 }, "growMat");
+      teachingBox(group, .18, .06, 14.8, 0xb78c5b, x, .41, .7, { roughness: .9 }, "growMat");
+      teachingBox(group, .026, .03, 14.8, 0x299bdc, x, .57, .7, { roughness: .42 }, "capillaries");
+      for (let z = -5; z <= 7.7; z += 1.65) teachingPlant(group, x, z, sideIndex === 0 ? -1 : 1);
+      const rowMarker = teachingBox(group, .34, .07, .65, sideIndex === 0 ? 0x4e9ad0 : 0x55a56b, x, .65, -5.65, { emissive: sideIndex === 0 ? 0x17496c : 0x174f2a, emissiveIntensity: .35 }, rowSide);
+      rowMarker.userData.infoKey = rowSide;
+    });
+    addTeachingFrame(group, 3.15, 15.2, 4.6, -6.9);
+
+    const cart = new THREE.Group();
+    const cartBody = teachingBox(cart, .68, .28, .95, 0x336da8, 0, .36, 0, { metalness: .18, roughness: .55 }, "harvestCart");
+    teachingBox(cart, .48, .23, .62, 0xe5ae32, 0, .63, 0, { roughness: .72 }, "harvestCart");
+    [-.27, .27].forEach((x) => [-.32, .32].forEach((z) => {
+      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(.09, .09, .065, 10), new THREE.MeshStandardMaterial({ color: 0x2f363b, roughness: .6 }));
+      wheel.rotation.z = Math.PI / 2;
+      wheel.position.set(x, .13, z);
+      wheel.userData.infoKey = "harvestCart";
+      cart.add(wheel);
+    }));
+    cart.position.set(0, 0, 2.5);
+    group.add(cart);
+    teachingCart = cart;
+    teachingCarts.push(cart);
+    scene.add(group);
+    return group;
+  }
+
+  function addTeachingScenes() {
+    teachingGroups = {
+      overview: addTeachingOverview(),
+      nave: addTeachingNave(),
+      passage: addTeachingPassage()
+    };
+    updateTeachingVisibility();
+  }
+
+  function updateTeachingVisibility() {
+    if (!teachingGroups.overview) return;
+    teachingGroups.overview.visible = ["overview", "mainRoad"].includes(state.cameraMode);
+    teachingGroups.nave.visible = state.cameraMode === "nave";
+    teachingGroups.passage.visible = ["passage", "worker", "lift"].includes(state.cameraMode);
+    teachingPlants.forEach((object) => { object.visible = layerState.plants; });
+    teachingCarts.forEach((object) => { object.visible = layerState.carts; });
+    teachingPeople.forEach((object) => { object.visible = layerState.people; });
+    teachingPassageMarkers.forEach((marker, index) => {
+      const selected = index + 1 === state.selectedPassage;
+      marker.material.emissiveIntensity = selected ? .55 : 0;
+      marker.scale.y = selected ? 1.5 : 1;
+    });
   }
 
   function addGlasshouse() {
@@ -1003,22 +1196,15 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function getCameraView(mode) {
-    const x = selectedPassageX();
-    const z = selectedPassageZ();
-    const depthDirection = state.selectedNaveSide === "right" ? 1 : -1;
-    if (mode === "mainRoad") return { position: [x + 10, 5.4, 0], target: [x, 1.1, 0] };
-    if (mode === "nave") {
-      const naveX = selectedNaveCenterX();
-      // Stand on the middle road and look into one complete nave. The higher
-      // entrance angle keeps all five neighbouring passages visible on a phone.
-      return {
-        position: [naveX, 7.8, -depthDirection * 1.05],
-        target: [naveX, .72, depthDirection * (greenhouseRoadEdge + greenhouseBlockDepth * .5)]
-      };
+    if (mode === "overview") return { position: [14.8, 15.8, -19.5], target: [0, .5, 0] };
+    if (mode === "mainRoad") return { position: [11.5, 4.8, 0], target: [0, .7, 0] };
+    if (mode === "nave") return { position: [0, 10.8, -17.5], target: [0, .65, 1.4] };
+    if (mode === "passage") return { position: [0, 1.72, -7.4], target: [0, 1.25, 4.8] };
+    if (mode === "worker") {
+      const rowX = state.selectedRowSide === "left" ? -.72 : .72;
+      return { position: [0, 1.62, -5.8], target: [rowX, 1.45, 2.8] };
     }
-    if (mode === "passage") return { position: [x, 1.68, z - depthDirection * 4.95], target: [x, 1.1, z + depthDirection * 3.25] };
-    if (mode === "worker") return { position: [x, 1.55, z - depthDirection * 3.9], target: [x + (state.selectedRowSide === "left" ? -detailRowOffset : detailRowOffset), 1.28, z + depthDirection * 1.8] };
-    if (mode === "lift") return { position: [x, 3.05, z - depthDirection * 4.4], target: [x, 1.5, z] };
+    if (mode === "lift") return { position: [2.6, 3.6, -5.8], target: [0, 1.55, 2.8] };
     return cameraViews[mode] || cameraViews.overview;
   }
 
@@ -1111,6 +1297,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     waterDots.forEach((dot) => { dot.mesh.visible = state.waterActive && layerState.capillaries && state.cameraMode === "overview"; });
     cartRecords.forEach((group) => { group.visible = layerState.carts && state.cameraMode !== "nave"; });
     peopleRecords.forEach((group) => { group.visible = layerState.people && state.cameraMode !== "nave"; });
+    updateTeachingVisibility();
     document.querySelectorAll("[data-layer]").forEach((button) => button.classList.toggle("is-on", layerState[button.dataset.layer]));
   }
 
@@ -1188,9 +1375,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       renderer.shadowMap.enabled = false;
       scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 1.8));
       const sun = new THREE.DirectionalLight(0xfff8e8, 2.0); sun.position.set(12, 22, 10); scene.add(sun);
-      addGlasshouse();
-      selectionArrows = [0, 1, 2, 3].map(() => new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, .78, 0), 1.8, 0xf0a832, .34, .18));
-      selectionArrows.forEach((arrow) => scene.add(arrow));
+      addTeachingScenes();
+      selectionArrows = [];
       applyGrowthStage(state.growthStage);
       updateSelection();
       configureCamera(state.cameraMode, true);
@@ -1229,6 +1415,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateTourStep(time);
     const mode = state.cameraMode;
     const view = getCameraView(mode);
+    if (teachingCart && state.moving) {
+      teachingCart.position.z = -2.8 + ((time * .00125) % 8.8);
+    }
     if (camera === overviewCamera) {
       camera.position.lerp(new THREE.Vector3(0, 37, .01), .12);
       targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
