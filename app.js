@@ -125,6 +125,20 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     id: "Ketuk lorong atau baris untuk masuk. Geser untuk melihat.",
     ne: "भित्र जान बाटो वा लाइनमा थिच्नुहोस्। हेर्न तान्नुहोस्।"
   };
+  const sceneStepTitles = {
+    pl: "Szklarnia w 3 krokach",
+    en: "Greenhouse in 3 steps",
+    ua: "Теплиця у 3 кроках",
+    ru: "Теплица в 3 шагах",
+    az: "İstixana 3 addımda",
+    es: "Invernadero en 3 pasos",
+    fil: "Bahay-taniman sa 3 hakbang",
+    id: "Rumah kaca dalam 3 langkah",
+    ne: "३ चरणमा ग्रीनहाउस"
+  };
+  Object.entries(sceneStepTitles).forEach(([language, sceneTitle]) => {
+    translations[language].sceneTitle = sceneTitle;
+  });
   Object.entries(educationalTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(interactionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(explorationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
@@ -314,8 +328,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   Object.entries(sourcePlanOrientationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveSelectionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  translations.ru.nave = "Одна нава";
 
-  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
+  const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   // The site plan has 39 naves along the axis and 27 spans on each facing side.
   // Excel numbers them from 39 on the left to 1 on the right. One nave is wide
@@ -336,8 +351,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   // The overview uses the Excel scale. The close-up opens one nave as a
   // teachable working module, so the five passages have enough room to read.
   const overviewPassagePositions = [-.4, -.2, 0, .2, .4];
-  const detailPassagePositions = [-1.8, -.9, 0, .9, 1.8];
-  const detailRowOffset = .28;
+  const detailPassagePositions = [-2.8, -1.4, 0, 1.4, 2.8];
+  const detailRowOffset = .44;
   const passageSideCenters = greenhouseSideCenters;
   let selectedNaveMarkers = [];
   let selectedEntryMarkers = [];
@@ -478,23 +493,24 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const group = new THREE.Group();
     group.userData.infoKey = "tomatoes";
     group.position.set(x, 0, z);
-    const support = new THREE.Mesh(new THREE.CylinderGeometry(.018, .018, 2.45, 5), new THREE.MeshStandardMaterial({ color: 0x8a9b98, roughness: .8 }));
-    support.position.y = 1.55;
-    const stem = new THREE.Mesh(new THREE.CylinderGeometry(.035, .05, 1.35, 6), new THREE.MeshStandardMaterial({ color: 0x2f7845 }));
-    stem.position.y = .9;
+    const support = new THREE.Mesh(new THREE.CylinderGeometry(.008, .008, 3.7, 5), new THREE.MeshStandardMaterial({ color: 0xb7c0bd, metalness: .35, roughness: .5 }));
+    support.position.y = 2.15;
+    const stem = new THREE.Mesh(new THREE.CylinderGeometry(.018, .03, 2.75, 6), new THREE.MeshStandardMaterial({ color: 0x327b48, roughness: .86 }));
+    stem.position.y = 1.62;
     group.add(support, stem);
     const tomatoes = [];
-    [-.12, .12].forEach((offset, index) => {
-      const tomato = new THREE.Mesh(new THREE.SphereGeometry(.12, 8, 8), new THREE.MeshStandardMaterial({ color: index ? 0xd94d39 : 0xe96a3c }));
-      tomato.position.set(offset, .95 + index * .14, 0);
+    [-.1, .08, -.04].forEach((offset, index) => {
+      const tomato = new THREE.Mesh(new THREE.SphereGeometry(.055, 7, 7), new THREE.MeshStandardMaterial({ color: [0xd64b3b, 0xeb7a3e, 0x78a84d][index], roughness: .78 }));
+      tomato.position.set(side * offset, 1.02 + index * .24, index % 2 ? .035 : -.03);
       group.add(tomato);
       tomatoes.push(tomato);
     });
-    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x4e9b57, roughness: .9 });
+    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x3f8f50, roughness: .92 });
     [
-      [side * .1, .68, .02, .25, .055, .12, side * .42],
-      [-side * .08, 1.08, -.02, .2, .045, .1, -side * .28],
-      [side * .1, 1.38, .01, .16, .04, .085, side * .35]
+      [side * .11, .86, .02, .14, .026, .07, side * .42],
+      [-side * .09, 1.34, -.02, .13, .024, .065, -side * .3],
+      [side * .1, 1.82, .01, .12, .022, .06, side * .35],
+      [-side * .08, 2.27, -.01, .1, .02, .05, -side * .25]
     ].forEach(([leafX, leafY, leafZ, scaleX, scaleY, scaleZ, rotation]) => {
       const leaf = new THREE.Mesh(new THREE.SphereGeometry(1, 7, 5), leafMaterial);
       leaf.position.set(leafX, leafY, leafZ);
@@ -608,9 +624,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function addGlasshouse() {
     // In the overview the roof must stay readable as a greenhouse outline, not hide the plan below it.
-    const glass = { color: 0xbde9dc, transparent: true, opacity: .035, depthWrite: false, roughness: .22, metalness: .03, side: THREE.DoubleSide };
-    const frame = 0x4f8f7e;
-    const floor = 0xd9e7dd;
+    const glass = { color: 0xd8eeea, transparent: true, opacity: .025, depthWrite: false, roughness: .2, metalness: .03, side: THREE.DoubleSide };
+    const frame = 0x9aa8a4;
+    const floor = 0xe7ece8;
     const passage = 0xd6bd83;
 
     const naveCount = greenhouseNaveCount;
@@ -644,10 +660,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const centerZ = sideCenters[naveSide];
       const blockFloor = box(blockWidth, .08, blockDepth, floor, 0, .15, centerZ);
       overviewOnlyObjects.push(blockFloor);
-      roofMeshes.push(box(blockWidth, .07, blockDepth, 0x8dcfc2, 0, 5.72, centerZ, glass));
-      const endWall = box(blockWidth, 5.8, .08, 0x78b9aa, 0, 2.9, centerZ + (naveSide === "right" ? blockDepth / 2 : -blockDepth / 2), glass);
-      const leftWall = box(.08, 5.8, blockDepth, 0x78b9aa, -blockWidth / 2, 2.9, centerZ, glass);
-      const rightWall = box(.08, 5.8, blockDepth, 0x78b9aa, blockWidth / 2, 2.9, centerZ, glass);
+      roofMeshes.push(box(blockWidth, .07, blockDepth, 0xd5ece7, 0, 5.72, centerZ, glass));
+      const endWall = box(blockWidth, 5.8, .08, 0xd3e9e4, 0, 2.9, centerZ + (naveSide === "right" ? blockDepth / 2 : -blockDepth / 2), glass);
+      const leftWall = box(.08, 5.8, blockDepth, 0xd3e9e4, -blockWidth / 2, 2.9, centerZ, glass);
+      const rightWall = box(.08, 5.8, blockDepth, 0xd3e9e4, blockWidth / 2, 2.9, centerZ, glass);
       overviewOnlyObjects.push(endWall, leftWall, rightWall);
       for (let nave = 0; nave <= naveCount; nave += 1) {
         const x = -blockWidth / 2 + navePitch * nave;
@@ -681,8 +697,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const roofAngle = Math.atan2(ridgeY - eaveY, halfNave);
       const roofLength = Math.hypot(halfNave, ridgeY - eaveY);
       naveXs.forEach((x) => {
-        const leftRoof = roofPanel(roofLength, blockDepth - .08, 0x8acdbb, x - halfNave / 2, (eaveY + ridgeY) / 2, centerZ, roofAngle, { opacity: .075 });
-        const rightRoof = roofPanel(roofLength, blockDepth - .08, 0x8acdbb, x + halfNave / 2, (eaveY + ridgeY) / 2, centerZ, -roofAngle, { opacity: .075 });
+        const leftRoof = roofPanel(roofLength, blockDepth - .08, 0xd5ece7, x - halfNave / 2, (eaveY + ridgeY) / 2, centerZ, roofAngle, { opacity: .045 });
+        const rightRoof = roofPanel(roofLength, blockDepth - .08, 0xd5ece7, x + halfNave / 2, (eaveY + ridgeY) / 2, centerZ, -roofAngle, { opacity: .045 });
         overviewOnlyObjects.push(leftRoof, rightRoof);
       });
 
@@ -744,7 +760,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     detailPassagePositions.forEach((x, passageIndex) => {
       ["left", "right"].forEach((naveSide) => {
         const centerZ = sideCenters[naveSide];
-        for (let span = 1; span <= spanCount; span += 2) {
+        for (let span = 2; span <= spanCount; span += 4) {
           const z = spanZ(naveSide, span);
           const leftPlant = plant(x - detailRowOffset, z, -1);
           const rightPlant = plant(x + detailRowOffset, z, 1);
@@ -772,12 +788,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       ["left", "right"].forEach((naveSide) => {
         const centerZ = sideCenters[naveSide];
         [-detailRowOffset, detailRowOffset].forEach((rowOffset) => {
-          const bed = box(.28, .11, blockDepth - .24, 0x78a95f, x + rowOffset, .25, centerZ, { roughness: .95 });
-          const substrate = box(.23, .045, blockDepth - .3, 0xa2c777, x + rowOffset, .33, centerZ, { roughness: 1 });
-          const railNear = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset - .1, .39, centerZ, { metalness: .2, roughness: .7 });
-          const railFar = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset + .1, .39, centerZ, { metalness: .2, roughness: .7 });
-          detailStructureObjects.push(bed, substrate, railNear, railFar);
-          [bed, substrate, railNear, railFar].forEach(registerDetail);
+          const bed = box(.2, .14, blockDepth - .24, 0xf1f3ef, x + rowOffset, .29, centerZ, { metalness: .08, roughness: .72 });
+          const substrate = box(.14, .055, blockDepth - .3, 0xb98e5c, x + rowOffset, .39, centerZ, { roughness: .88 });
+          detailStructureObjects.push(bed, substrate);
+          [bed, substrate].forEach(registerDetail);
           [2.1, 3.1].forEach((height) => {
             const supportWire = box(.014, .014, blockDepth - .3, 0x71867b, x + rowOffset, height, centerZ, { metalness: .15, roughness: .65 });
             detailStructureObjects.push(supportWire);
@@ -796,10 +810,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       ["left", "right"].forEach((naveSide) => {
         const centerZ = sideCenters[naveSide];
         const direction = naveSide === "right" ? 1 : -1;
-        const walkway = box(.32, .035, blockDepth - .22, 0xe0d0a3, x, .19, centerZ, { roughness: .9 });
+        const walkway = box(.76, .035, blockDepth - .22, 0xd5d7d1, x, .19, centerZ, { roughness: .94 });
         walkway.userData.infoKey = "passage";
-        const trackNear = box(.035, .024, blockDepth - .16, 0x687777, x - .39, .215, centerZ, { metalness: .25, roughness: .62 });
-        const trackFar = box(.035, .024, blockDepth - .16, 0x687777, x + .39, .215, centerZ, { metalness: .25, roughness: .62 });
+        const trackNear = box(.04, .04, blockDepth - .16, 0x6f706b, x - .2, .235, centerZ, { metalness: .68, roughness: .38 });
+        const trackFar = box(.04, .04, blockDepth - .16, 0x6f706b, x + .2, .235, centerZ, { metalness: .68, roughness: .38 });
         detailStructureObjects.push(walkway, trackNear, trackFar);
         [walkway, trackNear, trackFar].forEach(registerDetail);
         for (let span = 1; span <= spanCount; span += 1) {
@@ -815,7 +829,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
             registerDetail(emitter);
           });
         }
-        const entryThreshold = box(.52, .055, .28, 0xf0b23c, x, .24, direction * (roadEdge + .12), { roughness: .7 });
+        const entryThreshold = box(.8, .055, .28, 0xf0b23c, x, .24, direction * (roadEdge + .12), { roughness: .7 });
         entryThreshold.userData.infoKey = "passage";
         detailStructureObjects.push(entryThreshold);
         registerDetail(entryThreshold);
@@ -825,8 +839,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     // Slim posts, rafters and translucent roof strips make the close view feel like
     // one selected nave. The old version used the whole greenhouse width here,
     // which made a close-up look like several naves glued together.
-    const structureMaterial = { metalness: .28, roughness: .55 };
-    const detailNaveWidth = 4.8;
+    const structureMaterial = { metalness: .72, roughness: .28 };
+    const detailNaveWidth = 7.2;
     ["left", "right"].forEach((naveSide) => {
       const centerZ = sideCenters[naveSide];
       const detailEaveY = 5.24;
@@ -834,11 +848,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const detailHalf = detailNaveWidth / 2;
       const detailRoofAngle = Math.atan2(detailRidgeY - detailEaveY, detailHalf);
       const detailRoofLength = Math.hypot(detailHalf, detailRidgeY - detailEaveY);
-      const roofLeft = roofPanel(detailRoofLength, blockDepth - .12, 0xa8d8cc, -detailHalf / 2, (detailEaveY + detailRidgeY) / 2, centerZ, detailRoofAngle, { opacity: .095 });
-      const roofRight = roofPanel(detailRoofLength, blockDepth - .12, 0xa8d8cc, detailHalf / 2, (detailEaveY + detailRidgeY) / 2, centerZ, -detailRoofAngle, { opacity: .095 });
-      const gutterLeft = box(.045, .045, blockDepth - .12, 0x5d7b70, -detailHalf, detailEaveY, centerZ, structureMaterial);
-      const gutterRight = box(.045, .045, blockDepth - .12, 0x5d7b70, detailHalf, detailEaveY, centerZ, structureMaterial);
-      const ridge = box(.055, .055, blockDepth - .12, 0x5d7b70, 0, detailRidgeY, centerZ, structureMaterial);
+      const roofLeft = roofPanel(detailRoofLength, blockDepth - .12, 0xcfe9e4, -detailHalf / 2, (detailEaveY + detailRidgeY) / 2, centerZ, detailRoofAngle, { opacity: .065 });
+      const roofRight = roofPanel(detailRoofLength, blockDepth - .12, 0xcfe9e4, detailHalf / 2, (detailEaveY + detailRidgeY) / 2, centerZ, -detailRoofAngle, { opacity: .065 });
+      const gutterLeft = box(.045, .045, blockDepth - .12, 0xb6c3bf, -detailHalf, detailEaveY, centerZ, structureMaterial);
+      const gutterRight = box(.045, .045, blockDepth - .12, 0xb6c3bf, detailHalf, detailEaveY, centerZ, structureMaterial);
+      const ridge = box(.055, .055, blockDepth - .12, 0xb6c3bf, 0, detailRidgeY, centerZ, structureMaterial);
       detailStructureObjects.push(roofLeft, roofRight, gutterLeft, gutterRight, ridge);
       [roofLeft, roofRight, gutterLeft, gutterRight, ridge].forEach(registerDetail);
 
@@ -859,7 +873,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       addFrame(-detailHalf, detailEaveY, zStart, -detailHalf, detailEaveY, zEnd);
       addFrame(0, detailRidgeY, zStart, 0, detailRidgeY, zEnd);
       addFrame(detailHalf, detailEaveY, zStart, detailHalf, detailEaveY, zEnd);
-      const detailFrames = detailFrameLines(frameSegments, 0x5d7b70, .62);
+      const detailFrames = detailFrameLines(frameSegments, 0xaab8b4, .82);
       registerDetail(detailFrames);
     });
     [-1, 1].forEach((direction) => {
@@ -951,7 +965,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   const cameraViews = {
-    overview: { position: [0, 37, .01], target: [0, 0, 0] },
+    overview: { position: [0, 78, 66], target: [0, .8, 0] },
     nave: { position: [0, 14, 18], target: [0, 1.4, 0] },
     lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] },
     mainRoad: { position: [19, 5.8, 0], target: [-1, 1.0, 0] },
@@ -972,8 +986,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
     state.cameraMode = cameraViews[mode] ? mode : "overview";
     if (overviewCamera && perspectiveCamera) {
-      camera = state.cameraMode === "overview" ? overviewCamera : perspectiveCamera;
-      if (camera === perspectiveCamera) camera.up.set(0, 1, 0);
+      camera = perspectiveCamera;
+      camera.up.set(0, 1, 0);
     }
     roofMeshes.forEach((mesh) => { mesh.visible = false; });
     detailObjects.forEach((object) => { object.visible = state.cameraMode !== "overview"; });
@@ -995,14 +1009,15 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (mode === "mainRoad") return { position: [x + 10, 5.4, 0], target: [x, 1.1, 0] };
     if (mode === "nave") {
       const naveX = selectedNaveCenterX();
-      // One nave is taught as a complete module: five entrance pairs face
-      // each other across the middle road, with ten rows visible behind them.
-      // A high camera keeps the plan readable instead of hiding the far
-      // entrances behind the tomato plants.
-      return { position: [naveX, 33.5, 0], target: [naveX, .2, 0] };
+      // Stand on the middle road and look into one complete nave. The higher
+      // entrance angle keeps all five neighbouring passages visible on a phone.
+      return {
+        position: [naveX, 7.8, -depthDirection * 1.05],
+        target: [naveX, .72, depthDirection * (greenhouseRoadEdge + greenhouseBlockDepth * .5)]
+      };
     }
-    if (mode === "passage") return { position: [x, 2.35, z - depthDirection * 3.8], target: [x, 1.25, z] };
-    if (mode === "worker") return { position: [x, 1.5, z - depthDirection * 2.8], target: [x, 1.35, z] };
+    if (mode === "passage") return { position: [x, 1.68, z - depthDirection * 4.95], target: [x, 1.1, z + depthDirection * 3.25] };
+    if (mode === "worker") return { position: [x, 1.55, z - depthDirection * 3.9], target: [x + (state.selectedRowSide === "left" ? -detailRowOffset : detailRowOffset), 1.28, z + depthDirection * 1.8] };
     if (mode === "lift") return { position: [x, 3.05, z - depthDirection * 4.4], target: [x, 1.5, z] };
     return cameraViews[mode] || cameraViews.overview;
   }
@@ -1083,12 +1098,19 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function applyLayerVisibility() {
     plantRecords.forEach((record) => {
       const isDetailPlant = Boolean(record.group.userData.detailOnly);
-      record.group.visible = layerState.plants && (state.cameraMode === "overview" || isDetailPlant);
+      const inSelectedPassage = isDetailPlant
+        && record.group.userData.passageNumber === state.selectedPassage
+        && record.group.userData.naveSide === state.selectedNaveSide;
+      const closePassage = ["passage", "worker", "lift"].includes(state.cameraMode);
+      record.group.visible = layerState.plants
+        && ((!isDetailPlant && state.cameraMode === "overview") || (inSelectedPassage && closePassage));
     });
-    capillaryMeshes.forEach((mesh) => { mesh.visible = layerState.capillaries; });
+    capillaryMeshes.forEach((mesh) => {
+      mesh.visible = layerState.capillaries && state.cameraMode !== "overview" && state.cameraMode !== "nave";
+    });
     waterDots.forEach((dot) => { dot.mesh.visible = state.waterActive && layerState.capillaries && state.cameraMode === "overview"; });
-    cartRecords.forEach((group) => { group.visible = layerState.carts; });
-    peopleRecords.forEach((group) => { group.visible = layerState.people; });
+    cartRecords.forEach((group) => { group.visible = layerState.carts && state.cameraMode !== "nave"; });
+    peopleRecords.forEach((group) => { group.visible = layerState.people && state.cameraMode !== "nave"; });
     document.querySelectorAll("[data-layer]").forEach((button) => button.classList.toggle("is-on", layerState[button.dataset.layer]));
   }
 
@@ -1096,10 +1118,16 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     state.growthStage = Number(stage);
     const slider = $("#growthSlider");
     if (slider && slider.value !== String(state.growthStage)) slider.value = String(state.growthStage);
-    const colors = [0x77b84e, 0xe4b32d, 0x79b94f, 0xd9483f];
-    plantRecords.forEach((record) => {
+    const colors = [0x77b84e, 0xa9b94e, 0x79b94f];
+    const ripePalette = [0xd9483f, 0xec763e, 0x7da74d];
+    plantRecords.forEach((record, plantIndex) => {
       record.group.scale.y = .8 + state.growthStage * .07;
-      record.tomatoes.forEach((tomato) => tomato.material.color.setHex(colors[state.growthStage]));
+      record.tomatoes.forEach((tomato, tomatoIndex) => {
+        const color = state.growthStage === 3
+          ? ripePalette[(plantIndex + tomatoIndex) % ripePalette.length]
+          : colors[Math.min(state.growthStage, colors.length - 1)];
+        tomato.material.color.setHex(color);
+      });
     });
   }
 
@@ -1145,7 +1173,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xe7f2ee);
       scene.fog = new THREE.Fog(0xe7f2ee, 46, 92);
-      perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
+      perspectiveCamera = new THREE.PerspectiveCamera(46, 1, .1, 220);
       overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
       // Match the source spreadsheet: right side above the horizontal road,
       // left side below it.
@@ -1420,6 +1448,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }, { passive: false });
 
   const sceneSection = $(".scene-section");
+  const main = document.querySelector("main");
+  const hero = $(".hero");
+  const viewTiles = $(".view-tiles");
+  if (main && hero && sceneSection) main.insertBefore(sceneSection, hero);
+  if (viewTiles && sceneSection) sceneSection.insertBefore(viewTiles, $(".scene-frame"));
   async function toggleFullscreen() {
     const isOpen = Boolean(document.fullscreenElement) || sceneSection.classList.contains("is-immersive");
     if (isOpen) {

@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=18">
+    <link rel="stylesheet" href="styles.css?v=19">
 </head>
 <body>
   <div class="site-shell">
@@ -42,17 +42,17 @@
           <span><strong data-i18n="tourStart">Pokaż automatyczną wycieczkę</strong><small data-i18n="tourHint">Zobacz po kolei, jak działa szklarnia.</small></span>
         </button>
         <div class="view-tiles" aria-label="View selection">
-          <button class="view-tile is-active" type="button" data-camera="overview">
-            <span class="view-tile-icon" aria-hidden="true">◉</span><span><strong data-i18n="overview">Cała szklarnia</strong><small data-i18n="overviewDesc">Układ szklarni z góry.</small></span>
+          <button class="view-tile is-active" type="button" data-camera="overview" data-step="1">
+            <span class="view-tile-icon" aria-hidden="true">1</span><span><strong data-i18n="overview">Cała szklarnia</strong><small data-i18n="overviewDesc">Układ szklarni z góry.</small></span>
           </button>
-          <button class="view-tile" type="button" data-camera="nave">
-            <span class="view-tile-icon" aria-hidden="true">▦</span><span><strong data-i18n="nave">Jedna nawa</strong><small data-i18n="naveDetailDesc">5 wejść / 10 rzędów.</small></span>
+          <button class="view-tile" type="button" data-camera="nave" data-step="2">
+            <span class="view-tile-icon" aria-hidden="true">2</span><span><strong data-i18n="nave">Jedna nawa</strong><small data-i18n="naveDetailDesc">5 wejść / 10 rzędów.</small></span>
           </button>
           <button class="view-tile" type="button" data-camera="mainRoad">
             <span class="view-tile-icon" aria-hidden="true">↔</span><span><strong data-i18n="mainRoadView">Główna droga</strong><small data-i18n="mainRoadDesc">Lewa i prawa strona.</small></span>
           </button>
-          <button class="view-tile" type="button" data-camera="passage">
-            <span class="view-tile-icon" aria-hidden="true">▤</span><span><strong data-i18n="passageView">W środku przejścia</strong><small data-i18n="passageDesc">Dwa rzędy po bokach.</small></span>
+          <button class="view-tile" type="button" data-camera="passage" data-step="3">
+            <span class="view-tile-icon" aria-hidden="true">3</span><span><strong data-i18n="passageView">W środku przejścia</strong><small data-i18n="passageDesc">Dwa rzędy po bokach.</small></span>
           </button>
           <button class="view-tile" type="button" data-camera="worker">
             <span class="view-tile-icon" aria-hidden="true">●</span><span><strong data-i18n="workerView">Poziom pracownika</strong><small data-i18n="workerDesc">Praca przy roślinach.</small></span>
@@ -115,10 +115,6 @@
             <strong><span data-i18n="naveLabel">NAWA</span> <span id="selectedNaveNumber">20</span></strong>
             <small data-i18n="naveFiveEntrances">5 wejść w jednej nawie</small>
             <span class="nave-entry-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></span>
-          </div>
-          <div class="nave-entry-line" aria-hidden="true">
-            <small data-i18n="naveEntryLine">WEJŚCIA 1–5 • 10 RZĘDÓW</small>
-            <span><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></span>
           </div>
           <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: nawa 20, lewa strona, przejście 1, lewy rząd</div>
         </div>
@@ -244,6 +240,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=18"></script>
+    <script type="module" src="app.js?v=19"></script>
 </body>
 </html>
