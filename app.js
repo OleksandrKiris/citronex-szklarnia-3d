@@ -337,6 +337,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   // teachable working module, so the five passages have enough room to read.
   const overviewPassagePositions = [-.4, -.2, 0, .2, .4];
   const detailPassagePositions = [-1.8, -.9, 0, .9, 1.8];
+  const detailRowOffset = .28;
   const passageSideCenters = greenhouseSideCenters;
   let selectedNaveMarkers = [];
   let selectedEntryMarkers = [];
@@ -745,8 +746,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         const centerZ = sideCenters[naveSide];
         for (let span = 1; span <= spanCount; span += 2) {
           const z = spanZ(naveSide, span);
-          const leftPlant = plant(x - .16, z, -1);
-          const rightPlant = plant(x + .16, z, 1);
+          const leftPlant = plant(x - detailRowOffset, z, -1);
+          const rightPlant = plant(x + detailRowOffset, z, 1);
           [leftPlant, rightPlant].forEach((plantGroup) => {
             plantGroup.userData.detailOnly = true;
             plantGroup.userData.passageNumber = passageIndex + 1;
@@ -755,11 +756,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
             registerDetail(plantGroup);
           });
         }
-        [-.16, .16].forEach((rowOffset) => {
+        [-detailRowOffset, detailRowOffset].forEach((rowOffset) => {
           const capillary = box(.028, .045, blockDepth - .2, 0x3b9bca, x + rowOffset, .64, centerZ);
           capillary.userData.infoKey = "capillaries";
           capillary.userData.detailOnly = true;
           detailObjects.push(capillary);
+          capillaryMeshes.push(capillary);
           registerDetail(capillary);
         });
       });
@@ -769,9 +771,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     detailPassagePositions.forEach((x) => {
       ["left", "right"].forEach((naveSide) => {
         const centerZ = sideCenters[naveSide];
-        [-.16, .16].forEach((rowOffset) => {
-          const bed = box(.34, .11, blockDepth - .24, 0x78a95f, x + rowOffset, .25, centerZ, { roughness: .95 });
-          const substrate = box(.27, .045, blockDepth - .3, 0xa2c777, x + rowOffset, .33, centerZ, { roughness: 1 });
+        [-detailRowOffset, detailRowOffset].forEach((rowOffset) => {
+          const bed = box(.28, .11, blockDepth - .24, 0x78a95f, x + rowOffset, .25, centerZ, { roughness: .95 });
+          const substrate = box(.23, .045, blockDepth - .3, 0xa2c777, x + rowOffset, .33, centerZ, { roughness: 1 });
           const railNear = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset - .1, .39, centerZ, { metalness: .2, roughness: .7 });
           const railFar = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset + .1, .39, centerZ, { metalness: .2, roughness: .7 });
           detailStructureObjects.push(bed, substrate, railNear, railFar);
@@ -782,6 +784,41 @@ import * as THREE from "./assets/vendor/three.module.min.js";
             registerDetail(supportWire);
           });
         });
+      });
+    });
+
+    // Working details inside the selected nave: a walking lane between two
+    // rows, two floor rails for the cart, and visible drip points along every
+    // row. These details explain the place better than another large label.
+    const emitterGeometry = new THREE.SphereGeometry(.038, 6, 5);
+    const emitterMaterial = new THREE.MeshStandardMaterial({ color: 0x2b9ee5, emissive: 0x0a426b, emissiveIntensity: .38, roughness: .4 });
+    detailPassagePositions.forEach((x) => {
+      ["left", "right"].forEach((naveSide) => {
+        const centerZ = sideCenters[naveSide];
+        const direction = naveSide === "right" ? 1 : -1;
+        const walkway = box(.32, .035, blockDepth - .22, 0xe0d0a3, x, .19, centerZ, { roughness: .9 });
+        walkway.userData.infoKey = "passage";
+        const trackNear = box(.035, .024, blockDepth - .16, 0x687777, x - .39, .215, centerZ, { metalness: .25, roughness: .62 });
+        const trackFar = box(.035, .024, blockDepth - .16, 0x687777, x + .39, .215, centerZ, { metalness: .25, roughness: .62 });
+        detailStructureObjects.push(walkway, trackNear, trackFar);
+        [walkway, trackNear, trackFar].forEach(registerDetail);
+        for (let span = 1; span <= spanCount; span += 1) {
+          const z = spanZ(naveSide, span);
+          [-detailRowOffset, detailRowOffset].forEach((rowOffset) => {
+            const emitter = new THREE.Mesh(emitterGeometry, emitterMaterial);
+            emitter.position.set(x + rowOffset, .58, z);
+            emitter.userData.infoKey = "capillaries";
+            emitter.userData.detailOnly = true;
+            scene.add(emitter);
+            detailObjects.push(emitter);
+            capillaryMeshes.push(emitter);
+            registerDetail(emitter);
+          });
+        }
+        const entryThreshold = box(.52, .055, .28, 0xf0b23c, x, .24, direction * (roadEdge + .12), { roughness: .7 });
+        entryThreshold.userData.infoKey = "passage";
+        detailStructureObjects.push(entryThreshold);
+        registerDetail(entryThreshold);
       });
     });
 
