@@ -286,19 +286,44 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
   };
   Object.entries(orientationGuideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  // The overview is displayed as left block | middle road | right block.
+  // Keep the spoken/explanatory text aligned with that visual orientation.
+  const facingSideGuideTranslations = {
+    pl: { guideStatusOverview: "Zacznij od widoku z g\u00f3ry. Po lewej i prawej stronie drogi s\u0105 przeciwleg\u0142e bloki szklarni. Wej\u015bcia s\u0105 naprzeciw siebie.", guideStatusRoad: "Id\u017a drog\u0105 \u015brodkow\u0105 do wybranej nawy. Wej\u015bcie po lewej jest naprzeciw wej\u015bcia po prawej." },
+    en: { guideStatusOverview: "Start with the top view. Opposite greenhouse blocks are on the left and right of the road. The entrances face each other.", guideStatusRoad: "Follow the middle road to the assigned nave. The left entrance faces the right entrance." },
+    ua: { guideStatusOverview: "Почніть з вигляду зверху. Ліворуч і праворуч від дороги розташовані протилежні блоки теплиці. Входи навпроти один одного.", guideStatusRoad: "Ідіть центральною дорогою до призначеної нави. Лівий вхід розташований навпроти правого." },
+    ru: { guideStatusOverview: "Начните с вида сверху. Слева и справа от дороги находятся противоположные блоки теплицы. Входы расположены друг напротив друга.", guideStatusRoad: "Идите по центральной дороге к назначенной наве. Левый вход находится напротив правого." },
+    az: { guideStatusOverview: "Yuxar\u0131dan bax\u0131n. Yolun solunda v\u0259 sa\u011f\u0131nda bir-birinin qar\u015f\u0131s\u0131nda duran istixana bloklar\u0131 var. Giri\u015fl\u0259r qar\u015f\u0131-qar\u015f\u0131yad\u0131r.", guideStatusRoad: "M\u0259rk\u0259zi yol il\u0259 t\u0259yin olunmu\u015f navaya gedin. Soldak\u0131 giri\u015f sa\u011fdak\u0131 giri\u015fin qar\u015f\u0131s\u0131ndad\u0131r." },
+    es: { guideStatusOverview: "Empieza con la vista desde arriba. A la izquierda y a la derecha del camino hay bloques enfrentados. Las entradas quedan una frente a otra.", guideStatusRoad: "Sigue el camino central hasta la nave asignada. La entrada izquierda queda frente a la derecha." },
+    fil: { guideStatusOverview: "Magsimula sa tanawin mula sa itaas. May magkaharap na bahagi ng greenhouse sa kaliwa at kanan ng daan. Magkaharap ang mga pasukan.", guideStatusRoad: "Sundin ang gitnang daan papunta sa itinakdang nave. Ang pasukan sa kaliwa ay katapat ng nasa kanan." },
+    id: { guideStatusOverview: "Mulai dari tampilan atas. Blok rumah kaca yang saling berhadapan berada di kiri dan kanan jalan. Pintu masuk saling berhadapan.", guideStatusRoad: "Ikuti jalan tengah menuju nave yang ditentukan. Pintu masuk kiri berhadapan dengan pintu masuk kanan." },
+    ne: { guideStatusOverview: "माथिबाट हेर्नुहोस्। बाटोको बायाँ र दायाँपट्टि एकअर्काको सामुन्ने रहेका ग्रीनहाउसका भागहरू छन्। प्रवेशद्वारहरू आमनेसामने छन्।", guideStatusRoad: "बीचको बाटो हुँदै तोकिएको नाभेसम्म जानुहोस्। बायाँ प्रवेशद्वार दायाँ प्रवेशद्वारको सामुन्ने छ।" }
+  };
+  Object.entries(facingSideGuideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveSelectionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   // The site plan has 39 naves along the axis and 27 spans on each facing side.
-  // Excel numbers them from 39 on the left to 1 on the right.
+  // Excel numbers them from 39 on the left to 1 on the right. One nave is wide
+  // enough to show its five working passages; the overview is then a true
+  // repeated grid instead of a decorative strip.
   const greenhouseNaveCount = 39;
-  const greenhouseNavePitch = .44;
+  const greenhouseNavePitch = 1.2;
+  const greenhouseSpanCount = 27;
+  const greenhouseSpanPitch = .42;
+  const greenhouseRoadDepth = 2.7;
   const greenhouseBlockWidth = greenhouseNaveCount * greenhouseNavePitch;
-  // Five clean sample positions are the five entrances inside the selected nave.
-  const passagePositions = [-2.4, -1.2, 0, 1.2, 2.4];
-  const passageSideCenters = { left: -6.75, right: 6.75 };
+  const greenhouseBlockDepth = greenhouseSpanCount * greenhouseSpanPitch;
+  const greenhouseRoadEdge = greenhouseRoadDepth / 2;
+  const greenhouseSideCenters = {
+    left: -(greenhouseRoadEdge + greenhouseBlockDepth / 2),
+    right: greenhouseRoadEdge + greenhouseBlockDepth / 2
+  };
+  // Five passages belong inside one nave, not across the whole greenhouse.
+  const passagePositions = [-.4, -.2, 0, .2, .4];
+  const passageSideCenters = greenhouseSideCenters;
   let selectedNaveMarkers = [];
   let selectedEntryMarkers = [];
   let detailDemoObjects = [];
@@ -544,14 +569,14 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const passage = 0xd6bd83;
 
     const naveCount = greenhouseNaveCount;
-    const spanCount = 27;
+    const spanCount = greenhouseSpanCount;
     const navePitch = greenhouseNavePitch;
-    const spanPitch = .4;
+    const spanPitch = greenhouseSpanPitch;
     const blockWidth = greenhouseBlockWidth;
     const blockDepth = spanCount * spanPitch;
-    const roadDepth = 2.7;
+    const roadDepth = greenhouseRoadDepth;
     const roadEdge = roadDepth / 2;
-    const sideCenters = { left: -(roadEdge + blockDepth / 2), right: roadEdge + blockDepth / 2 };
+    const sideCenters = greenhouseSideCenters;
     const naveXs = Array.from({ length: naveCount }, (_, index) => -blockWidth / 2 + navePitch * (index + .5));
     const spanZ = (side, number) => side === "right" ? roadEdge + (number - .5) * spanPitch : -roadEdge - (number - .5) * spanPitch;
     detailDemoObjects = [];
@@ -678,18 +703,21 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       });
     });
 
-    // Slim posts, rafters and translucent roof strips make the close view feel like a real house.
+    // Slim posts, rafters and translucent roof strips make the close view feel like
+    // one selected nave. The old version used the whole greenhouse width here,
+    // which made a close-up look like several naves glued together.
     const structureMaterial = { metalness: .28, roughness: .55 };
-    for (let x = -blockWidth / 2 + 1.1; x <= blockWidth / 2; x += 2.2) {
-      const rafter = box(.075, .075, blockDepth * 2 + roadDepth, 0x5d7b70, x, 5.35, 0, structureMaterial);
-      const leftPost = box(.065, 5.1, .065, 0x5d7b70, x, 2.62, -roadEdge - .08, structureMaterial);
-      const rightPost = box(.065, 5.1, .065, 0x5d7b70, x, 2.62, roadEdge + .08, structureMaterial);
+    const detailNaveWidth = navePitch * .94;
+    for (let x = -detailNaveWidth / 2; x <= detailNaveWidth / 2; x += .24) {
+      const rafter = box(.04, .04, blockDepth * 2 + roadDepth, 0x5d7b70, x, 5.35, 0, structureMaterial);
+      const leftPost = box(.045, 5.1, .045, 0x5d7b70, x, 2.62, -roadEdge - .08, structureMaterial);
+      const rightPost = box(.045, 5.1, .045, 0x5d7b70, x, 2.62, roadEdge + .08, structureMaterial);
       detailStructureObjects.push(rafter, leftPost, rightPost);
     }
     ["left", "right"].forEach((naveSide) => {
       const centerZ = sideCenters[naveSide];
-      const roofStrip = box(blockWidth - .12, .035, blockDepth - .12, 0xa8d8cc, 0, 5.48, centerZ, { transparent: true, opacity: .09, depthWrite: false, side: THREE.DoubleSide });
-      const ridge = box(blockWidth - .12, .05, .05, 0x5d7b70, 0, 5.58, centerZ, structureMaterial);
+      const roofStrip = box(detailNaveWidth, .035, blockDepth - .12, 0xa8d8cc, 0, 5.48, centerZ, { transparent: true, opacity: .09, depthWrite: false, side: THREE.DoubleSide });
+      const ridge = box(detailNaveWidth, .05, .05, 0x5d7b70, 0, 5.58, centerZ, structureMaterial);
       detailStructureObjects.push(roofStrip, ridge);
     });
     [-1, 1].forEach((direction) => {
@@ -802,6 +830,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const x = selectedPassageX();
     const z = selectedPassageZ();
     const depthDirection = state.selectedNaveSide === "right" ? 1 : -1;
+    if (mode === "mainRoad") return { position: [x + 10, 5.4, 0], target: [x, 1.1, 0] };
+    if (mode === "nave") return { position: [x, 9.8, z - depthDirection * 5.4], target: [x, 1.35, z] };
     if (mode === "passage") return { position: [x, 2.35, z - depthDirection * 3.8], target: [x, 1.25, z] };
     if (mode === "worker") return { position: [x, 1.5, z - depthDirection * 2.8], target: [x, 1.35, z] };
     if (mode === "lift") return { position: [x, 3.05, z - depthDirection * 4.4], target: [x, 1.5, z] };
@@ -945,8 +975,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.fog = new THREE.Fog(0xe7f2ee, 46, 92);
       perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
       overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
-      // Match the source spreadsheet: right side above the horizontal road, left side below it.
-      overviewCamera.up.set(0, 0, -1);
+      // Match the source spreadsheet on screen: two facing blocks with a
+      // vertical middle road between them.
+      overviewCamera.up.set(1, 0, 0);
       camera = overviewCamera;
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
@@ -982,7 +1013,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       perspectiveCamera.updateProjectionMatrix();
     }
     if (overviewCamera) {
-      const halfHeight = 14;
+      const planWidth = greenhouseBlockWidth + 2.2;
+      const planDepth = greenhouseBlockDepth * 2 + greenhouseRoadDepth + 2.2;
+      // With the overview rotated, world X is the screen height and world Z
+      // is the screen width.
+      const halfHeight = Math.max(planWidth / 2, planDepth / (2 * aspect)) * 1.08;
       overviewCamera.left = -halfHeight * aspect;
       overviewCamera.right = halfHeight * aspect;
       overviewCamera.top = halfHeight;
@@ -1001,7 +1036,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
       camera.zoom = clamp(1 / cameraTouch.zoom, .72, 1.45);
       camera.updateProjectionMatrix();
-      camera.up.set(0, 0, -1);
+      camera.up.set(1, 0, 0);
       camera.lookAt(targetCamera);
       if (state.moving) animated.forEach((item) => {
         if (item.type === "person") {
