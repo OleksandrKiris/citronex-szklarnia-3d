@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=25">
+    <link rel="stylesheet" href="styles.css?v=26">
 </head>
 <body>
   <div class="site-shell">
@@ -107,9 +107,9 @@
           <div class="mini-map" aria-hidden="true">
             <span data-i18n="miniMapTitle">PLAN CAŁEJ SZKLARNI</span>
             <div class="mini-map-body">
-              <div class="mini-map-side mini-map-right"><b data-i18n="rightSide">PRAWA STRONA</b><i></i><small data-i18n="naveCountShort">39 naw</small></div>
-              <i class="mini-map-road"></i>
               <div class="mini-map-side mini-map-left"><b data-i18n="leftSide">LEWA STRONA</b><i></i><small data-i18n="naveCountShort">39 naw</small></div>
+              <i class="mini-map-road"></i>
+              <div class="mini-map-side mini-map-right"><b data-i18n="rightSide">PRAWA STRONA</b><i></i><small data-i18n="naveCountShort">39 naw</small></div>
             </div>
             <div class="mini-map-note"><span>1</span><i></i><span>27</span><b data-i18n="connectorCountShort">3 łączniki</b></div>
           </div>
@@ -119,6 +119,10 @@
             <span class="nave-entry-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></span>
           </div>
           <div class="nave-floor-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div>
+          <div class="standing-guide" aria-live="polite">
+            <span class="standing-guide-icon" aria-hidden="true">↑</span>
+            <span><strong data-i18n="standingPosition">STOISZ NA DRODZE</strong><small data-i18n="standingDirection">Plecami do pierwszych naw • patrzysz do przodu</small></span>
+          </div>
           <div class="passage-row-label passage-row-left" data-i18n="leftRow">Lewy rząd</div>
           <div class="passage-row-label passage-row-right" data-i18n="rightRow">Prawy rząd</div>
           <button class="passage-equipment-label passage-gutter-left" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
@@ -263,6 +267,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=25"></script>
+    <script type="module" src="app.js?v=26"></script>
 </body>
 </html>

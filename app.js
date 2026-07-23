@@ -562,63 +562,72 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       fivePassages: "5 rzędów w jednej nawie", naveFiveEntrances: "2 nawy • 5 + 5 rzędów",
       lessonNave: "Dwie nawy leżą naprzeciw siebie. Lewa ma 5 rzędów, prawa ma 5 rzędów: razem 10.",
       step2Title: "Dwie nawy", step2Text: "Po dwóch stronach drogi są dwie nawy. W każdej jest 5 rzędów, czyli razem 10.",
-      factPassages: "rzędów w jednej nawie", factRows: "rzędów w dwóch nawach: 5 + 5"
+      factPassages: "rzędów w jednej nawie", factRows: "rzędów w dwóch nawach: 5 + 5",
+      standingPosition: "STOISZ NA DRODZE", standingDirection: "Plecami do pierwszych naw • patrzysz do przodu"
     },
     en: {
       nave: "Two naves", naveLabel: "NAVES", naveDetailDesc: "5 rows on the left + 5 on the right.", lessonNextNave: "Next: two naves",
       fivePassages: "5 rows in one nave", naveFiveEntrances: "2 naves • 5 + 5 rows",
       lessonNave: "Two naves face each other. The left nave has 5 rows and the right nave has 5 rows: 10 in total.",
       step2Title: "Two naves", step2Text: "There is one nave on each side of the road. Each has 5 rows, giving 10 rows in total.",
-      factPassages: "rows in one nave", factRows: "rows in two naves: 5 + 5"
+      factPassages: "rows in one nave", factRows: "rows in two naves: 5 + 5",
+      standingPosition: "YOU STAND ON THE ROAD", standingDirection: "Your back is to the first naves • look forward"
     },
     ua: {
       nave: "Дві нави", naveLabel: "НАВИ", naveDetailDesc: "5 рядів ліворуч + 5 праворуч.", lessonNextNave: "Далі: дві нави",
       fivePassages: "5 рядів в одній наві", naveFiveEntrances: "2 нави • 5 + 5 рядів",
       lessonNave: "Дві нави розташовані одна навпроти одної. У лівій 5 рядів і у правій 5 рядів: разом 10.",
       step2Title: "Дві нави", step2Text: "По обидва боки дороги розташовані дві нави. У кожній по 5 рядів, разом 10.",
-      factPassages: "рядів в одній наві", factRows: "рядів у двох навах: 5 + 5"
+      factPassages: "рядів в одній наві", factRows: "рядів у двох навах: 5 + 5",
+      standingPosition: "ВИ СТОЇТЕ НА ДОРОЗІ", standingDirection: "Спиною до перших нав • дивіться вперед"
     },
     ru: {
       nave: "Две навы", naveLabel: "НАВЫ", naveDetailDesc: "5 рядов слева + 5 справа.", lessonNextNave: "Дальше: две навы",
       fivePassages: "5 рядов в одной наве", naveFiveEntrances: "2 навы • 5 + 5 рядов",
       lessonNave: "Две навы расположены напротив друг друга. В левой 5 рядов и в правой 5 рядов: всего 10.",
       step2Title: "Две навы", step2Text: "По обе стороны дороги находятся две навы. В каждой по 5 рядов, всего 10.",
-      factPassages: "рядов в одной наве", factRows: "рядов в двух навах: 5 + 5"
+      factPassages: "рядов в одной наве", factRows: "рядов в двух навах: 5 + 5",
+      standingPosition: "ВЫ СТОИТЕ НА ДОРОГЕ", standingDirection: "Спиной к первым навам • смотрите вперёд"
     },
     az: {
       nave: "İki nava", naveLabel: "NAVALAR", naveDetailDesc: "Solda 5 sıra + sağda 5 sıra.", lessonNextNave: "Sonra: iki nava",
       fivePassages: "Bir navada 5 sıra", naveFiveEntrances: "2 nava • 5 + 5 sıra",
       lessonNave: "İki nava bir-birinin qarşısındadır. Sol navada 5 sıra, sağ navada 5 sıra var: cəmi 10.",
       step2Title: "İki nava", step2Text: "Yolun iki tərəfində iki nava var. Hərəsində 5 sıra, cəmi 10 sıra var.",
-      factPassages: "bir navada sıra", factRows: "iki navada sıra: 5 + 5"
+      factPassages: "bir navada sıra", factRows: "iki navada sıra: 5 + 5",
+      standingPosition: "SİZ YOLDA DAYANMISINIZ", standingDirection: "Arxanız ilk navalara tərəfdir • qabağa baxın"
     },
     es: {
       nave: "Dos naves", naveLabel: "NAVES", naveDetailDesc: "5 filas a la izquierda + 5 a la derecha.", lessonNextNave: "Siguiente: dos naves",
       fivePassages: "5 filas en una nave", naveFiveEntrances: "2 naves • 5 + 5 filas",
       lessonNave: "Las dos naves están una frente a la otra. La izquierda tiene 5 filas y la derecha otras 5: 10 en total.",
       step2Title: "Dos naves", step2Text: "Hay una nave a cada lado del camino. Cada una tiene 5 filas, 10 en total.",
-      factPassages: "filas en una nave", factRows: "filas en dos naves: 5 + 5"
+      factPassages: "filas en una nave", factRows: "filas en dos naves: 5 + 5",
+      standingPosition: "ESTÁS EN EL CAMINO", standingDirection: "De espaldas a las primeras naves • mira hacia delante"
     },
     fil: {
       nave: "Dalawang nave", naveLabel: "MGA NAVE", naveDetailDesc: "5 hanay sa kaliwa + 5 sa kanan.", lessonNextNave: "Susunod: dalawang nave",
       fivePassages: "5 hanay sa isang nave", naveFiveEntrances: "2 nave • 5 + 5 hanay",
       lessonNave: "Magkaharap ang dalawang nave. May 5 hanay sa kaliwa at 5 hanay sa kanan: 10 lahat.",
       step2Title: "Dalawang nave", step2Text: "May isang nave sa bawat panig ng daan. May 5 hanay sa bawat isa, 10 lahat.",
-      factPassages: "hanay sa isang nave", factRows: "hanay sa dalawang nave: 5 + 5"
+      factPassages: "hanay sa isang nave", factRows: "hanay sa dalawang nave: 5 + 5",
+      standingPosition: "NASA DAAN KA", standingDirection: "Nakatalikod sa mga unang nave • tumingin sa unahan"
     },
     id: {
       nave: "Dua nave", naveLabel: "DUA NAVE", naveDetailDesc: "5 baris di kiri + 5 di kanan.", lessonNextNave: "Berikutnya: dua nave",
       fivePassages: "5 baris dalam satu nave", naveFiveEntrances: "2 nave • 5 + 5 baris",
       lessonNave: "Dua nave saling berhadapan. Nave kiri memiliki 5 baris dan nave kanan 5 baris: total 10.",
       step2Title: "Dua nave", step2Text: "Ada satu nave di setiap sisi jalan. Masing-masing memiliki 5 baris, total 10.",
-      factPassages: "baris dalam satu nave", factRows: "baris dalam dua nave: 5 + 5"
+      factPassages: "baris dalam satu nave", factRows: "baris dalam dua nave: 5 + 5",
+      standingPosition: "ANDA BERDIRI DI JALAN", standingDirection: "Membelakangi nave pertama • lihat ke depan"
     },
     ne: {
       nave: "दुई नाभ", naveLabel: "दुई नाभ", naveDetailDesc: "बायाँ ५ लाइन + दायाँ ५ लाइन।", lessonNextNave: "अर्को: दुई नाभ",
       fivePassages: "एउटा नाभमा ५ लाइन", naveFiveEntrances: "२ नाभ • ५ + ५ लाइन",
       lessonNave: "दुई नाभ आमनेसामने छन्। बायाँ नाभमा ५ लाइन र दायाँ नाभमा ५ लाइन छन्: जम्मा १०।",
       step2Title: "दुई नाभ", step2Text: "बाटोको दुवैपट्टि एक-एक नाभ छ। हरेकमा ५ लाइन छन्, जम्मा १०।",
-      factPassages: "एउटा नाभमा लाइन", factRows: "दुई नाभमा लाइन: ५ + ५"
+      factPassages: "एउटा नाभमा लाइन", factRows: "दुई नाभमा लाइन: ५ + ५",
+      standingPosition: "तपाईं बाटोमा उभिनुभएको छ", standingDirection: "पहिलो नाभतिर ढाड फर्काएर • अगाडि हेर्नुहोस्"
     }
   };
   Object.entries(correctedRowCountTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
@@ -1302,6 +1311,20 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         });
       });
     });
+    const standingPerson = teachingPerson(group, 0x236f55);
+    standingPerson.position.set(7.35, 0, 0);
+    standingPerson.rotation.y = -Math.PI / 2;
+    teachingPeople.push(standingPerson);
+    const standingArrow = new THREE.ArrowHelper(
+      new THREE.Vector3(-1, 0, 0),
+      new THREE.Vector3(7.05, .82, 0),
+      2.35,
+      0x0b7a4f,
+      .45,
+      .26
+    );
+    group.add(standingArrow);
+    group.rotation.y = Math.PI / 2;
     scene.add(group);
     return group;
   }
@@ -1354,6 +1377,20 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const shellStart = direction < 0 ? -(roadDepth / 2 + naveDepth) : roadDepth / 2;
       addTeachingGlassShell(group, 11.4, naveDepth, 4.7, shellStart);
     });
+    const standingPerson = teachingPerson(group, 0x236f55);
+    standingPerson.position.set(5.15, 0, 0);
+    standingPerson.rotation.y = -Math.PI / 2;
+    teachingPeople.push(standingPerson);
+    const standingArrow = new THREE.ArrowHelper(
+      new THREE.Vector3(-1, 0, 0),
+      new THREE.Vector3(4.85, .82, 0),
+      2.1,
+      0x0b7a4f,
+      .42,
+      .24
+    );
+    group.add(standingArrow);
+    group.rotation.y = Math.PI / 2;
     scene.add(group);
     return group;
   }
@@ -1834,7 +1871,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function getCameraView(mode) {
-    if (mode === "overview") return { position: [14.8, 15.8, -19.5], target: [0, .5, 0] };
+    if (mode === "overview") return { position: [0, 18.5, -22.5], target: [0, .5, 0] };
     if (mode === "mainRoad") return { position: [11.5, 4.8, 0], target: [0, .7, 0] };
     if (mode === "nave") return { position: [0, 10.8, -17.5], target: [0, .65, 1.4] };
     if (mode === "passage") return { position: [0, 1.72, -7.4], target: [0, 1.25, 4.8] };
