@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=21">
+    <link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body>
   <div class="site-shell">
@@ -127,6 +127,9 @@
           <div class="nave-floor-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div>
           <div class="passage-row-label passage-row-left" data-i18n="leftRow">Lewy rząd</div>
           <div class="passage-row-label passage-row-right" data-i18n="rightRow">Prawy rząd</div>
+          <button class="passage-equipment-label passage-gutter-left" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
+          <button class="passage-equipment-label passage-gutter-right" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
+          <button class="passage-equipment-label passage-rails" type="button" data-info-key="cartRails" data-i18n="cartRails">2 rury = tor wózka</button>
           <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: nawa 20, lewa strona, przejście 1, lewy rząd</div>
         </div>
         <div class="scene-toolbar">
@@ -205,6 +208,8 @@
           </div>
         </div>
         <div class="technical-grid">
+          <article class="technical-card" data-info-key="cultivationGutter"><span class="technical-icon" aria-hidden="true">▱</span><h3 data-i18n="cultivationGutter">Rynna uprawowa</h3><p data-i18n="infoCultivationGutter">Jedna ciągła rynna uprawowa biegnie pod matami. Rośliny są prowadzone po jej lewej i prawej stronie.</p></article>
+          <article class="technical-card" data-info-key="cartRails"><span class="technical-icon" aria-hidden="true">Ⅱ</span><h3 data-i18n="cartRails">2 rury = tor wózka</h3><p data-i18n="infoCartRails">Dwie czarne rury leżą w przejściu i tworzą tor dla wózka.</p></article>
           <article class="technical-card" data-info-key="capillaries"><span class="technical-icon" aria-hidden="true">↕</span><h3 data-i18n="capillaries">Kapilary</h3><p data-i18n="capillaryInfo">Cienkie przewody doprowadzające wodę i pożywkę do roślin.</p></article>
           <article class="technical-card" data-info-key="growMat"><span class="technical-icon" aria-hidden="true">▰</span><h3 data-i18n="growMat">Pampersy / maty uprawowe</h3><p data-i18n="matInfo">Podłoże, w którym rosną rośliny i do którego trafia pożywka.</p></article>
           <article class="technical-card" data-info-key="tomatoes"><span class="technical-icon" aria-hidden="true">●</span><h3 data-i18n="tomatoes">Pomidory</h3><p data-i18n="growthInfo">Roślina rośnie w rzędzie; dojrzałe owoce trafiają do wózka do zbioru.</p></article>
@@ -251,6 +256,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=21"></script>
+    <script type="module" src="app.js?v=22"></script>
 </body>
 </html>

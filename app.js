@@ -404,6 +404,90 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
   };
   Object.entries(lessonTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  const greenhouseStructureTranslations = {
+    pl: {
+      cultivationGutter: "Rynna uprawowa",
+      infoCultivationGutter: "Jedna ciągła rynna uprawowa biegnie pod matami. Rośliny są prowadzone po jej lewej i prawej stronie.",
+      cartRails: "2 rury = tor wózka",
+      infoCartRails: "Dwie czarne rury leżą w przejściu. Są ogrzewaniem i jednocześnie torem dla wózka. To nie jest rynna uprawowa.",
+      naveFiveEntrances: "5 przejść • 10 stron rzędów",
+      lessonNave: "W nawie jest 5 przejść. Rynna uprawowa biegnie pod roślinami, a przejście z rurami znajduje się obok.",
+      lessonPassage: "W przejściu pracujesz przy lewym albo prawym rzędzie. Dwie czarne rury na podłodze to tor wózka."
+    },
+    en: {
+      cultivationGutter: "Growing gutter",
+      infoCultivationGutter: "One continuous growing gutter runs beneath the slabs. Plants are trained on its left and right sides.",
+      cartRails: "2 pipes = cart track",
+      infoCartRails: "Two black heating pipes run along the passage and also guide the cart. They are not a growing gutter.",
+      naveFiveEntrances: "5 passages • 10 crop sides",
+      lessonNave: "A nave has 5 passages. The growing gutter runs beneath the plants; the passage with two pipes is beside it.",
+      lessonPassage: "In a passage, you work at the left or right crop row. The two black floor pipes form the cart track."
+    },
+    ua: {
+      cultivationGutter: "Ринва для вирощування",
+      infoCultivationGutter: "Одна безперервна ринва проходить під матами. Рослини ведуть по її лівому та правому боках.",
+      cartRails: "2 труби = колія візка",
+      infoCartRails: "Дві чорні опалювальні труби проходять у проході й утворюють колію для візка. Це не ринва для вирощування.",
+      naveFiveEntrances: "5 проходів • 10 сторін рядів",
+      lessonNave: "У наві є 5 проходів. Ринва проходить під рослинами, а поруч розташований прохід із двома трубами.",
+      lessonPassage: "У проході працюють біля лівого або правого ряду. Дві чорні труби на підлозі утворюють колію візка."
+    },
+    ru: {
+      cultivationGutter: "Выращивающая ринна",
+      infoCultivationGutter: "Одна непрерывная выращивающая ринна проходит под матами. Растения направлены по её левой и правой сторонам.",
+      cartRails: "2 трубы = рельсы тележки",
+      infoCartRails: "Две чёрные отопительные трубы проходят по проходу и служат рельсами для тележки. Это не выращивающая ринна.",
+      naveFiveEntrances: "5 проходов • 10 сторон рядов",
+      lessonNave: "В наве есть 5 проходов. Выращивающая ринна идёт под растениями, а рядом находится проход с двумя трубами.",
+      lessonPassage: "В проходе работают у левого или правого ряда. Две чёрные трубы на полу служат рельсами для тележки."
+    },
+    az: {
+      cultivationGutter: "Becərmə novçası",
+      infoCultivationGutter: "Bir davamlı becərmə novçası döşəklərin altından keçir. Bitkilər onun sol və sağ tərəflərinə yönəldilir.",
+      cartRails: "2 boru = araba relsi",
+      infoCartRails: "Keçiddəki iki qara istilik borusu araba üçün rels rolunu oynayır. Bunlar becərmə novçası deyil.",
+      naveFiveEntrances: "5 keçid • 10 bitki tərəfi",
+      lessonNave: "Navada 5 keçid var. Becərmə novçası bitkilərin altından keçir, iki borulu keçid isə onun yanındadır.",
+      lessonPassage: "Keçiddə sol və ya sağ bitki sırasında işləyirsiniz. Döşəmədəki iki qara boru araba relsidir."
+    },
+    es: {
+      cultivationGutter: "Canal de cultivo",
+      infoCultivationGutter: "Un canal de cultivo continuo pasa bajo los sustratos. Las plantas se guían por sus lados izquierdo y derecho.",
+      cartRails: "2 tubos = vía del carro",
+      infoCartRails: "Dos tubos negros de calefacción recorren el pasillo y sirven de vía para el carro. No son el canal de cultivo.",
+      naveFiveEntrances: "5 pasillos • 10 lados de cultivo",
+      lessonNave: "La nave tiene 5 pasillos. El canal va bajo las plantas y, a su lado, está el pasillo con dos tubos.",
+      lessonPassage: "En el pasillo se trabaja en la fila izquierda o derecha. Los dos tubos negros del suelo son la vía del carro."
+    },
+    fil: {
+      cultivationGutter: "Kanal ng taniman",
+      infoCultivationGutter: "Isang tuloy-tuloy na kanal ng taniman ang nasa ilalim ng mga growing slab. Ang mga halaman ay ginagabayan sa kaliwa at kanang panig nito.",
+      cartRails: "2 tubo = riles ng kariton",
+      infoCartRails: "Ang dalawang itim na heating pipe sa daanan ay riles din ng kariton. Hindi ito kanal ng taniman.",
+      naveFiveEntrances: "5 daanan • 10 panig ng halaman",
+      lessonNave: "May 5 daanan sa nave. Ang kanal ay nasa ilalim ng mga halaman; katabi nito ang daanan na may dalawang tubo.",
+      lessonPassage: "Sa daanan, nagtatrabaho sa kaliwa o kanang hanay. Ang dalawang itim na tubo sa sahig ang riles ng kariton."
+    },
+    id: {
+      cultivationGutter: "Talang budidaya",
+      infoCultivationGutter: "Satu talang budidaya yang menerus berada di bawah media tanam. Tanaman diarahkan ke sisi kiri dan kanannya.",
+      cartRails: "2 pipa = rel troli",
+      infoCartRails: "Dua pipa pemanas hitam berada di lorong dan menjadi rel troli. Pipa tersebut bukan talang budidaya.",
+      naveFiveEntrances: "5 lorong • 10 sisi tanaman",
+      lessonNave: "Satu nave memiliki 5 lorong. Talang berada di bawah tanaman; lorong dengan dua pipa berada di sebelahnya.",
+      lessonPassage: "Di lorong, Anda bekerja pada baris kiri atau kanan. Dua pipa hitam di lantai adalah rel troli."
+    },
+    ne: {
+      cultivationGutter: "खेती गर्ने नाली",
+      infoCultivationGutter: "एउटा निरन्तर खेती गर्ने नाली बिरुवा उमार्ने म्याटमुनि जान्छ। बिरुवा यसको बायाँ र दायाँतर्फ बढाइन्छ।",
+      cartRails: "२ पाइप = ट्रलीको रेल",
+      infoCartRails: "बाटोमा रहेका दुई कालो तताउने पाइप ट्रलीको रेल पनि हुन्। यी खेती गर्ने नाली होइनन्।",
+      naveFiveEntrances: "५ बाटा • बिरुवाका १० भाग",
+      lessonNave: "एउटा नावामा ५ बाटा हुन्छन्। खेती गर्ने नाली बिरुवामुनि हुन्छ र दुई पाइप भएको बाटो यसको छेउमा हुन्छ।",
+      lessonPassage: "बाटोमा बायाँ वा दायाँ लाइनमा काम गरिन्छ। भुइँका दुई कालो पाइप ट्रलीका रेल हुन्।"
+    }
+  };
+  Object.entries(greenhouseStructureTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
@@ -834,22 +918,25 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const group = new THREE.Group();
     group.name = "teaching-nave";
     const passageXs = [-4, -2, 0, 2, 4];
+    const gutterXs = [-5, -3, -1, 1, 3, 5];
     teachingBox(group, 11.2, .1, 15.4, 0xf0f3f0, 0, .02, .3, { roughness: .97 });
     teachingBox(group, 11.2, .08, 1.6, 0xd9bf84, 0, .12, -7.1, { roughness: .92 }, "middleRoad");
     passageXs.forEach((x, index) => {
       const passageNumber = index + 1;
-      const walkway = teachingBox(group, .86, .04, 12.8, 0xd9dbd6, x, .17, .4, { roughness: .96 }, "passage");
+      const walkway = teachingBox(group, 1.24, .04, 12.8, 0xd9dbd6, x, .17, .4, { roughness: .96 }, "passage");
       walkway.userData.passageNumber = passageNumber;
-      [-.2, .2].forEach((offset) => teachingBox(group, .045, .045, 12.8, 0x71736f, x + offset, .23, .4, { metalness: .68, roughness: .38 }, "passage"));
-      [-.58, .58].forEach((offset, rowIndex) => {
-        teachingBox(group, .24, .14, 12.5, 0xf5f5f0, x + offset, .29, .48, { roughness: .8 }, "growMat");
-        teachingBox(group, .15, .055, 12.35, 0xb78c5b, x + offset, .4, .48, { roughness: .9 }, "growMat");
-        teachingBox(group, .07, .16, 12.15, 0x6ea657, x + offset, .52, .55, { roughness: .9 }, "tomatoes");
-        teachingBox(group, .022, .03, 12.25, 0x309ad7, x + offset, .58, .48, { roughness: .45 }, "capillaries");
-      });
-      const threshold = teachingBox(group, .94, .07, .34, 0xf0ad32, x, .24, -6.02, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: index === 0 ? .25 : 0 }, "passage");
+      [-.24, .24].forEach((offset) => teachingBox(group, .055, .055, 12.8, 0x4d5350, x + offset, .24, .4, { metalness: .75, roughness: .32 }, "cartRails"));
+      const threshold = teachingBox(group, 1.28, .07, .34, 0xf0ad32, x, .24, -6.02, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: index === 0 ? .25 : 0 }, "passage");
       threshold.userData.passageNumber = passageNumber;
       teachingPassageMarkers.push(threshold);
+    });
+    gutterXs.forEach((x) => {
+      teachingBox(group, .34, .16, 12.5, 0xf5f5f0, x, .3, .48, { roughness: .78 }, "cultivationGutter");
+      teachingBox(group, .2, .06, 12.35, 0xb78c5b, x, .41, .48, { roughness: .9 }, "growMat");
+      teachingBox(group, .026, .03, 12.25, 0x299bdc, x, .57, .48, { roughness: .42 }, "capillaries");
+      [-.12, .12].forEach((cropOffset) => {
+        teachingBox(group, .055, .16, 12.15, 0x5f9f4f, x + cropOffset, .53, .55, { roughness: .9 }, "tomatoes");
+      });
     });
     addTeachingFrame(group, 10.8, 13.3, 4.7, -6.1);
     scene.add(group);
@@ -861,13 +948,16 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     group.name = "teaching-passage";
     teachingBox(group, 3.3, .1, 16.4, 0xf0f3f0, 0, .02, .7, { roughness: .97 });
     const walkway = teachingBox(group, .9, .04, 15.2, 0xd9dbd6, 0, .17, .7, { roughness: .96 }, "passage");
-    [-.2, .2].forEach((x) => teachingBox(group, .045, .045, 15.1, 0x6e706c, x, .23, .7, { metalness: .7, roughness: .35 }, "passage"));
+    [-.2, .2].forEach((x) => teachingBox(group, .055, .055, 15.1, 0x4d5350, x, .24, .7, { metalness: .75, roughness: .32 }, "cartRails"));
     [-.72, .72].forEach((x, sideIndex) => {
       const rowSide = sideIndex === 0 ? "leftRow" : "rightRow";
-      teachingBox(group, .3, .16, 15, 0xf6f5ef, x, .3, .7, { roughness: .78 }, "growMat");
+      teachingBox(group, .34, .16, 15, 0xf6f5ef, x, .3, .7, { roughness: .78 }, "cultivationGutter");
       teachingBox(group, .18, .06, 14.8, 0xb78c5b, x, .41, .7, { roughness: .9 }, "growMat");
       teachingBox(group, .026, .03, 14.8, 0x299bdc, x, .57, .7, { roughness: .42 }, "capillaries");
-      for (let z = -5; z <= 7.7; z += 1.65) teachingPlant(group, x, z, sideIndex === 0 ? -1 : 1);
+      for (let z = -5; z <= 7.7; z += 1.85) {
+        teachingPlant(group, x - .1, z, -1);
+        teachingPlant(group, x + .1, z + .18, 1);
+      }
       const rowMarker = teachingBox(group, .34, .07, .65, sideIndex === 0 ? 0x4e9ad0 : 0x55a56b, x, .65, -5.65, { emissive: sideIndex === 0 ? 0x17496c : 0x174f2a, emissiveIntensity: .35 }, rowSide);
       rowMarker.userData.infoKey = rowSide;
     });
