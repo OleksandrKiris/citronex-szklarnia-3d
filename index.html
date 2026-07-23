@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=13">
+    <link rel="stylesheet" href="styles.css?v=14">
 </head>
 <body>
   <div class="site-shell">
@@ -54,6 +54,19 @@
           <button class="view-tile" type="button" data-camera="worker">
             <span class="view-tile-icon" aria-hidden="true">●</span><span><strong data-i18n="workerView">Poziom pracownika</strong><small data-i18n="workerDesc">Praca przy roślinach.</small></span>
           </button>
+        </div>
+        <div class="learning-path" aria-labelledby="guideTitle">
+          <div class="learning-path-heading">
+            <span class="eyebrow" data-i18n="guideEyebrow">DLA NOWEJ OSOBY</span>
+            <strong id="guideTitle" data-i18n="guideTitle">Jak znaleźć swoje miejsce?</strong>
+          </div>
+          <div class="learning-path-steps">
+            <button class="learning-step is-active" type="button" data-camera="overview"><b>1</b><span data-i18n="guideWhole">Zobacz całość</span></button>
+            <button class="learning-step" type="button" data-camera="mainRoad"><b>2</b><span data-i18n="guideRoad">Idź drogą środkową</span></button>
+            <button class="learning-step" type="button" data-camera="passage"><b>3</b><span data-i18n="guidePassage">Wejdź w przejście</span></button>
+            <button class="learning-step" type="button" data-camera="worker"><b>4</b><span data-i18n="guideWorker">Wybierz stronę rzędu</span></button>
+          </div>
+          <p id="guideStatus" class="learning-path-status" data-i18n="guideStatusOverview">Zacznij od widoku z góry. Droga środkowa dzieli lewą i prawą stronę.</p>
         </div>
       </section>
 
@@ -213,6 +226,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=13"></script>
+    <script type="module" src="app.js?v=14"></script>
 </body>
 </html>

@@ -141,6 +141,117 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     id: { infoNave: "Nave adalah modul rumah kaca yang panjang dan berulang. Denah ini menunjukkan 39; jumlah sebenarnya dapat berbeda.", miniMapTitle: "DENAH SELURUH RUMAH KACA", naveCountShort: "39 nave", connectorCountShort: "3 penghubung" },
     ne: { infoNave: "नावा ग्रीनहाउसको लामो र दोहोरिने भाग हो। यो योजनामा ३९ वटा देखाइएको छ; वास्तविक संख्या फरक हुन सक्छ।", miniMapTitle: "सम्पूर्ण ग्रीनहाउसको योजना", naveCountShort: "३९ नावा", connectorCountShort: "३ जोड्ने बाटा" }
   };
+  const guideTranslations = {
+    pl: {
+      guideEyebrow: "DLA NOWEJ OSOBY",
+      guideTitle: "Jak znale\u017A\u0107 swoje miejsce?",
+      guideWhole: "Zobacz ca\u0142o\u015B\u0107",
+      guideRoad: "Id\u017A drog\u0105 \u015Brodkow\u0105",
+      guidePassage: "Wejd\u017A w przej\u015Bcie",
+      guideWorker: "Wybierz stron\u0119 rz\u0119du",
+      guideStatusOverview: "Zacznij od widoku z g\u00F3ry. Droga \u015Brodkowa dzieli lew\u0105 i praw\u0105 stron\u0119.",
+      guideStatusRoad: "Id\u017A drog\u0105 \u015Brodkow\u0105 do wybranej nawy. Wej\u015Bcia po obu stronach s\u0105 naprzeciw siebie.",
+      guideStatusPassage: "W przej\u015Bciu s\u0105 dwa rz\u0119dy: lewy i prawy. Stoisz pomi\u0119dzy nimi.",
+      guideStatusWorker: "Pracuj przy stronie rz\u0119du wskazanej w przydziale: lewy albo prawy rz\u0105d."
+    },
+    en: {
+      guideEyebrow: "FOR A NEW PERSON",
+      guideTitle: "How do you find your place?",
+      guideWhole: "See the whole plan",
+      guideRoad: "Follow the middle road",
+      guidePassage: "Enter the passage",
+      guideWorker: "Choose the row side",
+      guideStatusOverview: "Start with the top view. The middle road separates the left and right sides.",
+      guideStatusRoad: "Follow the middle road to your assigned nave. Entrances on both sides face each other.",
+      guideStatusPassage: "A passage has two rows: left and right. You stand between the rows.",
+      guideStatusWorker: "Work beside the row side shown in your assignment: left or right."
+    },
+    ua: {
+      guideEyebrow: "\u0414\u041b\u042f \u041d\u041e\u0412\u041e\u0413\u041e \u041f\u0420\u0410\u0426\u0406\u0412\u041d\u0418\u041a\u0410",
+      guideTitle: "\u042f\u043a \u0437\u043d\u0430\u0439\u0442\u0438 \u0441\u0432\u043e\u0454 \u043c\u0456\u0441\u0446\u0435?",
+      guideWhole: "\u041f\u043e\u0431\u0430\u0447\u0438\u0442\u0438 \u0432\u0441\u044e \u0442\u0435\u043f\u043b\u0438\u0446\u044e",
+      guideRoad: "\u0406\u0442\u0438 \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u044e \u0434\u043e\u0440\u043e\u0433\u043e\u044e",
+      guidePassage: "\u0423\u0432\u0456\u0439\u0442\u0438 \u0432 \u043f\u0440\u043e\u0445\u0456\u0434",
+      guideWorker: "\u041e\u0431\u0440\u0430\u0442\u0438 \u0441\u0442\u043e\u0440\u043e\u043d\u0443 \u0440\u044f\u0434\u0443",
+      guideStatusOverview: "\u041f\u043e\u0447\u043d\u0456\u0442\u044c \u0437 \u0432\u0438\u0434\u0443 \u0437\u0433\u043e\u0440\u0438. \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u0430 \u0434\u043e\u0440\u043e\u0433\u0430 \u0440\u043e\u0437\u0434\u0456\u043b\u044f\u0454 \u043b\u0456\u0432\u0443 \u0442\u0430 \u043f\u0440\u0430\u0432\u0443 \u0441\u0442\u043e\u0440\u043e\u043d\u0438.",
+      guideStatusRoad: "\u0406\u0434\u0456\u0442\u044c \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u044e \u0434\u043e\u0440\u043e\u0433\u043e\u044e \u0434\u043e \u043f\u0440\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u043e\u0457 \u043d\u0430\u0432\u0438. \u0412\u0445\u043e\u0434\u0438 \u0437 \u043e\u0431\u043e\u0445 \u0431\u043e\u043a\u0456\u0432 \u0440\u043e\u0437\u0442\u0430\u0448\u043e\u0432\u0430\u043d\u0456 \u043d\u0430\u0432\u043f\u0440\u043e\u0442\u0438 \u043e\u0434\u0438\u043d \u043e\u0434\u043d\u043e\u0433\u043e.",
+      guideStatusPassage: "\u0423 \u043f\u0440\u043e\u0445\u043e\u0434\u0456 \u0454 \u0434\u0432\u0430 \u0440\u044f\u0434\u0438: \u043b\u0456\u0432\u0438\u0439 \u0456 \u043f\u0440\u0430\u0432\u0438\u0439. \u0412\u0438 \u0441\u0442\u043e\u0457\u0442\u0435 \u043c\u0456\u0436 \u0440\u044f\u0434\u0430\u043c\u0438.",
+      guideStatusWorker: "\u041f\u0440\u0430\u0446\u044e\u0439\u0442\u0435 \u0431\u0456\u043b\u044f \u0441\u0442\u043e\u0440\u043e\u043d\u0438 \u0440\u044f\u0434\u0443, \u0432\u043a\u0430\u0437\u0430\u043d\u043e\u0457 \u0432 \u043f\u0440\u0438\u0437\u043d\u0430\u0447\u0435\u043d\u043d\u0456: \u043b\u0456\u0432\u0438\u0439 \u0430\u0431\u043e \u043f\u0440\u0430\u0432\u0438\u0439 \u0440\u044f\u0434."
+    },
+    ru: {
+      guideEyebrow: "\u0414\u041b\u042f \u041d\u041e\u0412\u041e\u0413\u041e \u0420\u0410\u0411\u041e\u0422\u041d\u0418\u041a\u0410",
+      guideTitle: "\u041a\u0430\u043a \u043d\u0430\u0439\u0442\u0438 \u0441\u0432\u043e\u0451 \u043c\u0435\u0441\u0442\u043e?",
+      guideWhole: "\u041f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c \u0432\u0441\u044e \u0442\u0435\u043f\u043b\u0438\u0446\u0443",
+      guideRoad: "\u0418\u0434\u0442\u0438 \u043f\u043e \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439 \u0434\u043e\u0440\u043e\u0433\u0435",
+      guidePassage: "\u0412\u043e\u0439\u0442\u0438 \u0432 \u043f\u0440\u043e\u0445\u043e\u0434",
+      guideWorker: "\u0412\u044b\u0431\u0440\u0430\u0442\u044c \u0441\u0442\u043e\u0440\u043e\u043d\u0443 \u0440\u044f\u0434\u0430",
+      guideStatusOverview: "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u0441 \u0432\u0438\u0434\u0430 \u0441\u0432\u0435\u0440\u0445\u0443. \u0426\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u0430\u044f \u0434\u043e\u0440\u043e\u0433\u0430 \u0440\u0430\u0437\u0434\u0435\u043b\u044f\u0435\u0442 \u043b\u0435\u0432\u0443\u044e \u0438 \u043f\u0440\u0430\u0432\u0443\u044e \u0441\u0442\u043e\u0440\u043e\u043d\u044b.",
+      guideStatusRoad: "\u0418\u0434\u0438\u0442\u0435 \u043f\u043e \u0446\u0435\u043d\u0442\u0440\u0430\u043b\u044c\u043d\u043e\u0439 \u0434\u043e\u0440\u043e\u0433\u0435 \u043a \u043d\u0443\u0436\u043d\u043e\u0439 \u043d\u0430\u0432\u0435. \u0412\u0445\u043e\u0434\u044b \u0441 \u043e\u0431\u0435\u0438\u0445 \u0441\u0442\u043e\u0440\u043e\u043d \u043d\u0430\u0445\u043e\u0434\u044f\u0442\u0441\u044f \u043d\u0430\u043f\u0440\u043e\u0442\u0438\u0432 \u0434\u0440\u0443\u0433 \u0434\u0440\u0443\u0433\u0430.",
+      guideStatusPassage: "\u0412 \u043f\u0440\u043e\u0445\u043e\u0434\u0435 \u0434\u0432\u0430 \u0440\u044f\u0434\u0430: \u043b\u0435\u0432\u044b\u0439 \u0438 \u043f\u0440\u0430\u0432\u044b\u0439. \u0412\u044b \u0441\u0442\u043e\u0438\u0442\u0435 \u043c\u0435\u0436\u0434\u0443 \u0440\u044f\u0434\u0430\u043c\u0438.",
+      guideStatusWorker: "\u0420\u0430\u0431\u043e\u0442\u0430\u0439\u0442\u0435 \u0440\u044f\u0434\u043e\u043c \u0441\u043e \u0441\u0442\u043e\u0440\u043e\u043d\u043e\u0439 \u0440\u044f\u0434\u0430, \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432 \u043d\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0438: \u043b\u0435\u0432\u044b\u0439 \u0438\u043b\u0438 \u043f\u0440\u0430\u0432\u044b\u0439 \u0440\u044f\u0434."
+    },
+    az: {
+      guideEyebrow: "YEN\u0130 \u0130\u015e\u00c7\u0130 \u00dc\u00c7\u00dcN",
+      guideTitle: "\u00d6z yerinizi nec\u0259 tapmaq olar?",
+      guideWhole: "B\u00fct\u00fcn istixanaya bax\u0131n",
+      guideRoad: "M\u0259rk\u0259zi yolla gedin",
+      guidePassage: "Ke\u00e7id\u0259 daxil olun",
+      guideWorker: "S\u0131ra t\u0259r\u0259fini se\u00e7in",
+      guideStatusOverview: "\u00dcstd\u0259n g\u00f6r\u00fcn\u00fc\u015fd\u0259n ba\u015flay\u0131n. M\u0259rk\u0259zi yol sol v\u0259 sa\u011f t\u0259r\u0259fi ay\u0131r\u0131r.",
+      guideStatusRoad: "T\u0259yin olunmu\u015f navaya m\u0259rk\u0259zi yolla gedin. H\u0259r iki t\u0259r\u0259fd\u0259ki giri\u015fl\u0259r qar\u015f\u0131-qar\u015f\u0131d\u0131r.",
+      guideStatusPassage: "Ke\u00e7idd\u0259 iki s\u0131ra var: sol v\u0259 sa\u011f. Siz s\u0131ralar\u0131n aras\u0131nda dayan\u0131rs\u0131n\u0131z.",
+      guideStatusWorker: "Tap\u015f\u0131r\u0131qda g\u00f6st\u0259ril\u0259n s\u0131ra t\u0259r\u0259find\u0259 i\u015fl\u0259yin: sol v\u0259 ya sa\u011f s\u0131ra."
+    },
+    es: {
+      guideEyebrow: "PARA UNA PERSONA NUEVA",
+      guideTitle: "\u00bfC\u00f3mo encontrar tu lugar?",
+      guideWhole: "Ver todo el invernadero",
+      guideRoad: "Sigue el camino central",
+      guidePassage: "Entra en el pasillo",
+      guideWorker: "Elige el lado de la fila",
+      guideStatusOverview: "Empieza con la vista desde arriba. El camino central separa los lados izquierdo y derecho.",
+      guideStatusRoad: "Sigue el camino central hasta la nave asignada. Las entradas de ambos lados quedan una frente a otra.",
+      guideStatusPassage: "En el pasillo hay dos filas: izquierda y derecha. Te colocas entre las filas.",
+      guideStatusWorker: "Trabaja junto al lado de la fila indicado en tu asignaci\u00f3n: izquierda o derecha."
+    },
+    fil: {
+      guideEyebrow: "PARA SA BAGONG TAO",
+      guideTitle: "Paano hanapin ang iyong lugar?",
+      guideWhole: "Tingnan ang buong greenhouse",
+      guideRoad: "Sundin ang gitnang daan",
+      guidePassage: "Pumasok sa daanan",
+      guideWorker: "Piliin ang panig ng hanay",
+      guideStatusOverview: "Magsimula sa tanawin mula sa itaas. Hinahati ng gitnang daan ang kaliwa at kanang panig.",
+      guideStatusRoad: "Sundin ang gitnang daan papunta sa itinakdang nave. Magkaharap ang mga pasukan sa magkabilang panig.",
+      guideStatusPassage: "May dalawang hanay sa daanan: kaliwa at kanan. Nakatayo ka sa pagitan ng mga hanay.",
+      guideStatusWorker: "Magtrabaho sa panig ng hanay na nakalagay sa iyong assignment: kaliwa o kanan."
+    },
+    id: {
+      guideEyebrow: "UNTUK PEKERJA BARU",
+      guideTitle: "Bagaimana menemukan tempat Anda?",
+      guideWhole: "Lihat seluruh rumah kaca",
+      guideRoad: "Ikuti jalan tengah",
+      guidePassage: "Masuk ke lorong",
+      guideWorker: "Pilih sisi baris",
+      guideStatusOverview: "Mulai dari tampilan atas. Jalan tengah memisahkan sisi kiri dan kanan.",
+      guideStatusRoad: "Ikuti jalan tengah menuju nave yang ditentukan. Pintu masuk di kedua sisi saling berhadapan.",
+      guideStatusPassage: "Di dalam lorong ada dua baris: kiri dan kanan. Anda berdiri di antara baris.",
+      guideStatusWorker: "Bekerjalah di sisi baris yang tertulis dalam penugasan: kiri atau kanan."
+    },
+    ne: {
+      guideEyebrow: "\u0928\u092f\u093e\u0901 \u0915\u093e\u092e\u0926\u093e\u0930\u0915\u093e \u0932\u093e\u0917\u093f",
+      guideTitle: "\u0906\u092b\u094d\u0928\u094b \u0938\u094d\u0925\u093e\u0928 \u0915\u0938\u0930\u0940 \u092d\u0947\u091f\u094d\u0928\u0947?",
+      guideWhole: "\u0938\u092c\u0948 \u0917\u094d\u0930\u0940\u0928\u0939\u093e\u0909\u0938 \u0939\u0947\u0930\u094d\u0928\u0941\u0939\u094b\u0938\u094d",
+      guideRoad: "\u092c\u0940\u091a\u0915\u094b \u092c\u093e\u091f\u094b \u092a\u091b\u094d\u092f\u093e\u0909\u0928\u0941\u0939\u094b\u0938\u094d",
+      guidePassage: "\u092c\u093e\u091f\u094b\u092d\u093f\u0924\u094d\u0930 \u091c\u093e\u0928\u0941\u0939\u094b\u0938\u094d",
+      guideWorker: "\u0932\u093e\u0907\u0928\u0915\u094b \u092d\u093e\u0917 \u091b\u093e\u0928\u094d\u0928\u0941\u0939\u094b\u0938\u094d",
+      guideStatusOverview: "\u092e\u093e\u0925\u093f\u092c\u093e\u091f \u0926\u0947\u0916\u093f\u0928\u0947 \u0926\u0943\u0936\u094d\u092f\u092c\u093e\u091f \u0938\u0941\u0930\u0941 \u0917\u0930\u094d\u0928\u0941\u0939\u094b\u0938\u094d\u0964 \u092c\u0940\u091a\u0915\u094b \u092c\u093e\u091f\u094b\u0932\u0947 \u092c\u093e\u092f\u093e\u0901 \u0930 \u0926\u093e\u092f\u093e\u0901 \u092d\u093e\u0917 \u091b\u0941\u091f\u094d\u092f\u093e\u0909\u0901\u091b\u0964",
+      guideStatusRoad: "\u0924\u094b\u0915\u093f\u090f\u0915\u094b \u0928\u093e\u0935\u0947\u0924\u093f\u0930 \u092c\u0940\u091a\u0915\u094b \u092c\u093e\u091f\u094b \u092a\u091b\u094d\u092f\u093e\u0909\u0928\u0941\u0939\u094b\u0938\u094d\u0964 \u0926\u0941\u0935\u0948 \u092d\u093e\u0917\u0915\u093e \u092a\u094d\u0930\u0935\u0947\u0936\u0926\u094d\u0935\u093e\u0930 \u0906\u092e\u0928\u0947-\u0938\u093e\u092e\u0928\u0947 \u091b\u0928\u094d\u0964",
+      guideStatusPassage: "\u092c\u093e\u091f\u094b\u092e\u093e \u0926\u0941\u0908 \u0932\u093e\u0907\u0928 \u091b\u0928\u094d: \u092c\u093e\u092f\u093e\u0901 \u0930 \u0926\u093e\u092f\u093e\u0901\u0964 \u0924\u092a\u093e\u0908\u0902 \u0932\u093e\u0907\u0928\u0939\u0930\u0942\u0915\u094b \u092c\u0940\u091a\u092e\u093e \u0939\u0941\u0928\u0941\u0939\u0941\u0928\u094d\u091b\u0964",
+      guideStatusWorker: "\u0924\u092a\u093e\u0908\u0902\u0915\u094b \u0915\u093e\u092e\u0915\u094b \u0928\u093f\u0930\u094d\u0926\u0947\u0936\u0928\u092e\u093e \u092d\u090f\u0915\u094b \u0932\u093e\u0907\u0928\u0915\u094b \u092d\u093e\u0917\u092e\u093e \u0915\u093e\u092e \u0917\u0930\u094d\u0928\u0941\u0939\u094b\u0938\u094d: \u092c\u093e\u092f\u093e\u0901 \u0935\u093e \u0926\u093e\u092f\u093e\u0901\u0964"
+    }
+  };
+  Object.entries(guideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
@@ -166,6 +277,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateTourText();
     updateWaterText();
     updateSelection();
+    updateGuideText();
     $("#infoClose").setAttribute("aria-label", t("infoClose"));
   }
 
@@ -195,6 +307,20 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function updateWaterText() {
     const button = $("#waterButton");
     if (button) button.textContent = state.waterActive ? t("hideWater") : t("showWater");
+  }
+
+  function updateGuideText() {
+    const status = $("#guideStatus");
+    if (!status) return;
+    const keyByMode = {
+      overview: "guideStatusOverview",
+      mainRoad: "guideStatusRoad",
+      passage: "guideStatusPassage",
+      worker: "guideStatusWorker",
+      lift: "guideStatusPassage",
+      nave: "guideStatusOverview"
+    };
+    status.textContent = t(keyByMode[state.cameraMode] || "guideStatusOverview");
   }
 
   $("#languageSelect").addEventListener("change", (event) => {
@@ -502,6 +628,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (frame) frame.dataset.view = state.cameraMode;
     resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
+    updateGuideText();
   }
 
   function getCameraView(mode) {

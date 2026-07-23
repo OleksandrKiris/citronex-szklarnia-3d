@@ -45,6 +45,16 @@ h3 { margin-bottom: 5px; font-size: 18px; line-height: 1.2; }
 .view-tile strong, .view-tile small { display: block; }
 .view-tile strong { font-size: 13px; line-height: 1.2; }
 .view-tile small { margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.25; }
+.learning-path { margin-top: 14px; padding: 14px 0 0; border-top: 1px solid var(--line); }
+.learning-path-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 10px; }
+.learning-path-heading .eyebrow { margin-bottom: 0; }
+.learning-path-heading strong { font-size: 15px; }
+.learning-path-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.learning-step { min-width: 0; min-height: 54px; display: flex; align-items: center; gap: 8px; padding: 8px 10px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; text-align: left; font-size: 12px; font-weight: 800; }
+.learning-step b { display: grid; place-items: center; flex: 0 0 26px; width: 26px; height: 26px; color: #fff; background: #94a79c; border-radius: 50%; }
+.learning-step.is-active { color: var(--green-dark); background: var(--green-soft); border-color: #9ed0b6; }
+.learning-step.is-active b { background: var(--green); }
+.learning-path-status { margin: 9px 0 0; padding: 9px 11px; color: var(--muted); background: #f5f9f6; border-left: 3px solid var(--green); border-radius: 0 8px 8px 0; font-size: 12px; line-height: 1.35; }
 .hero-actions, .scene-toolbar { display: flex; flex-wrap: wrap; gap: 10px; }
 .button, .toolbar-button { min-height: 48px; border: 1px solid var(--line); border-radius: 11px; padding: 10px 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
 .button:hover, .toolbar-button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(24,65,50,.12); }
@@ -155,6 +165,12 @@ body.is-immersive { overflow: hidden; }
   .section-heading { display: block; padding: 16px 14px 12px; }.status-stack { margin-top: 12px; align-items: flex-start; }.scene-frame { min-height: 360px; }.scene-label { max-width: 45%; padding: 5px 6px; font-size: 8px; line-height: 1.15; }.label-right-side { right: 3%; top: 50%; }.label-left-side { left: 3%; top: 50%; }.label-road { top: 50%; }.plan-axis { top: 14%; bottom: 14%; font-size: 8px; }.plan-axis-top { left: 8%; }.plan-axis-bottom { right: 8%; }.plan-span-axis { left: 21%; right: 21%; top: 5%; font-size: 8px; }.plan-connectors { gap: 17px; }.plan-connectors b { width: 15px; height: 15px; }
   #greenhouseCanvas { height: 360px; }.scene-toolbar { display: grid; grid-template-columns: 1fr 1fr; padding: 10px; }.toolbar-button { min-height: 48px; width: 100%; font-size: 12px; }
   .steps-grid { grid-template-columns: 1fr; }.info-step { min-height: 0; }.technical-note { margin-top: 16px; padding: 14px; border-radius: 13px; }.technical-grid { grid-template-columns: 1fr; }.technical-card { padding: 14px; }.facts-section { grid-template-columns: 1fr 1fr; }.footer { display: block; padding: 16px 12px 26px; }.footer span { display: block; }.footer span + span { margin-top: 7px; }.scene-toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }.touch-hint { padding: 0 10px 12px; font-size: 11px; }.camera-panel { margin: 0 10px 9px; }.camera-choices { grid-template-columns: 1fr; gap: 6px; }.explore-panel { margin: 0 10px 12px; }.explore-grid { grid-template-columns: 1fr; gap: 8px; }.control-card { padding: 10px; }.choice-button { min-height: 42px; }.scene-section:fullscreen .scene-frame, .scene-section.is-immersive .scene-frame { min-height: calc(100vh - 220px); }.scene-section:fullscreen #greenhouseCanvas, .scene-section.is-immersive #greenhouseCanvas { height: calc(100vh - 220px); }.scene-fallback { inset: 10px; grid-template-columns: 1fr 46px 1fr; padding: 22px 8px; gap: 6px; }.fallback-side { padding: 10px 4px; }.fallback-side b { letter-spacing: 3px; font-size: 11px; }.fallback-side small { font-size: 9px; }.fallback-road { font-size: 9px; }.mini-map { right: 8px; bottom: 8px; width: 138px; transform: scale(.88); transform-origin: bottom right; }.selection-badge { left: 50%; bottom: 10px; max-width: 52%; font-size: 9px; transform: translateX(-50%); }.info-dialog { align-self: end; width: 100%; max-width: none; margin: 0; padding: 20px 16px 24px; border-radius: 18px 18px 0 0; }
+}
+@media (max-width: 760px) {
+  .learning-path { margin-top: 12px; padding-top: 12px; }
+  .learning-path-steps { grid-template-columns: 1fr 1fr; }
+  .learning-step { min-height: 50px; padding: 7px; font-size: 11px; }
+  .learning-path-status { font-size: 11px; }
 }
 @media (max-width: 380px) {
   .view-tiles { grid-template-columns: 1fr; }
