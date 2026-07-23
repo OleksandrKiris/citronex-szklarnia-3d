@@ -300,6 +300,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     ne: { guideStatusOverview: "माथिबाट हेर्नुहोस्। बाटोको बायाँ र दायाँपट्टि एकअर्काको सामुन्ने रहेका ग्रीनहाउसका भागहरू छन्। प्रवेशद्वारहरू आमनेसामने छन्।", guideStatusRoad: "बीचको बाटो हुँदै तोकिएको नाभेसम्म जानुहोस्। बायाँ प्रवेशद्वार दायाँ प्रवेशद्वारको सामुन्ने छ।" }
   };
   Object.entries(facingSideGuideTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+  const sourcePlanOrientationTranslations = {
+    pl: { guideStatusOverview: "Zacznij od widoku z g\u00f3ry. Prawa strona jest nad drog\u0105, a lewa pod drog\u0105. Nawy s\u0105 naprzeciw siebie.", guideStatusRoad: "Id\u017a drog\u0105 \u015brodkow\u0105 do wybranej nawy. Wej\u015bcia prawej i lewej strony s\u0105 naprzeciw siebie." },
+    en: { guideStatusOverview: "Start with the top view. The right side is above the road and the left side is below it. The naves face each other.", guideStatusRoad: "Follow the middle road to the assigned nave. The entrances on both sides face each other." },
+    ua: { guideStatusOverview: "Почніть з вигляду зверху. Права сторона над дорогою, а ліва під дорогою. Нави розташовані одна навпроти одної.", guideStatusRoad: "Ідіть центральною дорогою до призначеної нави. Входи правої та лівої сторони розташовані навпроти." },
+    ru: { guideStatusOverview: "Начните с вида сверху. Правая сторона находится над дорогой, левая под дорогой. Навы расположены друг напротив друга.", guideStatusRoad: "Идите по центральной дороге к назначенной наве. Входы правой и левой стороны находятся напротив друг друга." },
+    az: { guideStatusOverview: "Yuxar\u0131dan bax\u0131n. Sa\u011f t\u0259r\u0259f yolun \u00fcst\u00fcnd\u0259, sol t\u0259r\u0259f is\u0259 alt\u0131ndad\u0131r. Navalar bir-birinin qar\u015f\u0131s\u0131ndad\u0131r.", guideStatusRoad: "M\u0259rk\u0259zi yol il\u0259 t\u0259yin olunmu\u015f navaya gedin. H\u0259r iki t\u0259r\u0259fin giri\u015fl\u0259ri qar\u015f\u0131-qar\u015f\u0131d\u0131r." },
+    es: { guideStatusOverview: "Empieza con la vista desde arriba. El lado derecho est\u00e1 encima del camino y el izquierdo debajo. Las naves quedan enfrentadas.", guideStatusRoad: "Sigue el camino central hasta la nave asignada. Las entradas de ambos lados quedan una frente a otra." },
+    fil: { guideStatusOverview: "Magsimula sa tanawin mula sa itaas. Ang kanang bahagi ay nasa itaas ng daan at ang kaliwa ay nasa ibaba. Magkaharap ang mga nave.", guideStatusRoad: "Sundin ang gitnang daan papunta sa itinakdang nave. Magkaharap ang mga pasukan sa magkabilang panig." },
+    id: { guideStatusOverview: "Mulai dari tampilan atas. Sisi kanan berada di atas jalan dan sisi kiri di bawahnya. Kedua nave saling berhadapan.", guideStatusRoad: "Ikuti jalan tengah menuju nave yang ditentukan. Pintu masuk di kedua sisi saling berhadapan." },
+    ne: { guideStatusOverview: "माथिबाट हेर्नुहोस्। दायाँ भाग बाटोको माथि र बायाँ भाग बाटोको तल छ। नाभेहरू आमनेसामने छन्।", guideStatusRoad: "बीचको बाटो हुँदै तोकिएको नाभेसम्म जानुहोस्। दुवै भागका प्रवेशद्वार आमनेसामने छन्।" }
+  };
+  Object.entries(sourcePlanOrientationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveSelectionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
@@ -975,9 +987,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene.fog = new THREE.Fog(0xe7f2ee, 46, 92);
       perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
       overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
-      // Match the source spreadsheet on screen: two facing blocks with a
-      // vertical middle road between them.
-      overviewCamera.up.set(1, 0, 0);
+      // Match the source spreadsheet: right side above the horizontal road,
+      // left side below it.
+      overviewCamera.up.set(0, 0, -1);
       camera = overviewCamera;
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
@@ -1015,9 +1027,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (overviewCamera) {
       const planWidth = greenhouseBlockWidth + 2.2;
       const planDepth = greenhouseBlockDepth * 2 + greenhouseRoadDepth + 2.2;
-      // With the overview rotated, world X is the screen height and world Z
-      // is the screen width.
-      const halfHeight = Math.max(planWidth / 2, planDepth / (2 * aspect)) * 1.08;
+      const halfHeight = Math.max(planDepth / 2, planWidth / (2 * aspect)) * 1.08;
       overviewCamera.left = -halfHeight * aspect;
       overviewCamera.right = halfHeight * aspect;
       overviewCamera.top = halfHeight;
@@ -1036,7 +1046,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
       camera.zoom = clamp(1 / cameraTouch.zoom, .72, 1.45);
       camera.updateProjectionMatrix();
-      camera.up.set(1, 0, 0);
+      camera.up.set(0, 0, -1);
       camera.lookAt(targetCamera);
       if (state.moving) animated.forEach((item) => {
         if (item.type === "person") {
