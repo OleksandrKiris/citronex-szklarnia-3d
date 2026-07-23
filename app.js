@@ -351,6 +351,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let roofMeshes = [];
   let detailObjects = [];
   let planOnlyObjects = [];
+  let detailStructureObjects = [];
+  let overviewOnlyObjects = [];
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -376,10 +378,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       group.add(tomato);
       tomatoes.push(tomato);
     });
-    const leaves = new THREE.Mesh(new THREE.BoxGeometry(.48, .05, .08), new THREE.MeshStandardMaterial({ color: 0x4e9b57 }));
-    leaves.position.set(side * .1, .65, 0);
-    leaves.rotation.z = side * .25;
-    group.add(leaves);
+    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x4e9b57, roughness: .9 });
+    [
+      [side * .1, .68, .02, .25, .055, .12, side * .42],
+      [-side * .08, 1.08, -.02, .2, .045, .1, -side * .28],
+      [side * .1, 1.38, .01, .16, .04, .085, side * .35]
+    ].forEach(([leafX, leafY, leafZ, scaleX, scaleY, scaleZ, rotation]) => {
+      const leaf = new THREE.Mesh(new THREE.SphereGeometry(1, 7, 5), leafMaterial);
+      leaf.position.set(leafX, leafY, leafZ);
+      leaf.scale.set(scaleX, scaleY, scaleZ);
+      leaf.rotation.z = rotation;
+      group.add(leaf);
+    });
     scene.add(group);
     plantRecords.push({ group, tomatoes });
     return group;
@@ -389,11 +399,23 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const group = new THREE.Group();
     group.userData.infoKey = "people";
     group.position.set(x, 0, z);
-    const body = new THREE.Mesh(new THREE.CylinderGeometry(.13, .16, .55, 7), new THREE.MeshStandardMaterial({ color }));
-    body.position.y = .5;
-    const head = new THREE.Mesh(new THREE.SphereGeometry(.15, 8, 8), new THREE.MeshStandardMaterial({ color: 0xf0b48f }));
-    head.position.y = .9;
-    group.add(body, head);
+    const workMaterial = new THREE.MeshStandardMaterial({ color, roughness: .78 });
+    const darkMaterial = new THREE.MeshStandardMaterial({ color: 0x273b43, roughness: .72 });
+    const skinMaterial = new THREE.MeshStandardMaterial({ color: 0xd99472, roughness: .88 });
+    const body = new THREE.Mesh(new THREE.BoxGeometry(.28, .48, .2), workMaterial);
+    body.position.y = .66;
+    const head = new THREE.Mesh(new THREE.SphereGeometry(.15, 10, 8), skinMaterial);
+    head.position.y = 1.07;
+    const helmet = new THREE.Mesh(new THREE.SphereGeometry(.18, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xf0b936, roughness: .7 }));
+    helmet.position.y = 1.18;
+    const legLeft = new THREE.Mesh(new THREE.BoxGeometry(.085, .34, .09), darkMaterial);
+    const legRight = legLeft.clone();
+    legLeft.position.set(-.07, .23, 0); legRight.position.set(.07, .23, 0);
+    const armLeft = new THREE.Mesh(new THREE.CylinderGeometry(.035, .04, .34, 7), skinMaterial);
+    const armRight = armLeft.clone();
+    armLeft.position.set(-.2, .68, 0); armRight.position.set(.2, .68, 0);
+    armLeft.rotation.z = -.35; armRight.rotation.z = .35;
+    group.add(body, head, helmet, legLeft, legRight, armLeft, armRight);
     scene.add(group);
     animated.push({ object: group, type: "person", baseX: x, baseZ: z, phase, axis });
     peopleRecords.push(group);
@@ -407,6 +429,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     body.position.y = .42;
     const load = new THREE.Mesh(new THREE.BoxGeometry(.48, .18, .62), new THREE.MeshStandardMaterial({ color: 0xf0b936 }));
     load.position.y = .7;
+    const handle = new THREE.Mesh(new THREE.BoxGeometry(.06, .5, .06), new THREE.MeshStandardMaterial({ color: 0x263e5a, metalness: .35, roughness: .48 }));
+    handle.position.set(0, .7, -.47);
+    const safetyBar = new THREE.Mesh(new THREE.BoxGeometry(.58, .05, .05), new THREE.MeshStandardMaterial({ color: 0xf0b936, metalness: .2, roughness: .6 }));
+    safetyBar.position.set(0, .9, -.47);
     const wheelMaterial = new THREE.MeshStandardMaterial({ color: 0x27333d, metalness: .25, roughness: .5 });
     [-.3, .3].forEach((wheelX) => [-.38, .38].forEach((wheelZ) => {
       const wheel = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, .07, 10), wheelMaterial);
@@ -436,7 +462,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       liftMastLeft.position.set(-.28, 1.55, 0); liftMastRight.position.set(.28, 1.55, 0);
       group.add(liftMastLeft, liftMastRight, liftAssembly);
     }
-    group.add(body, load);
+    group.add(body, load, handle, safetyBar);
     if (axis === "x") group.rotation.y = Math.PI / 2;
     scene.add(group);
     const item = { object: group, type: "cart", baseX: x, baseZ: z, phase, liftAssembly, axis };
@@ -493,11 +519,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
     ["left", "right"].forEach((naveSide) => {
       const centerZ = sideCenters[naveSide];
-      box(blockWidth, .08, blockDepth, floor, 0, .15, centerZ);
+      const blockFloor = box(blockWidth, .08, blockDepth, floor, 0, .15, centerZ);
+      overviewOnlyObjects.push(blockFloor);
       roofMeshes.push(box(blockWidth, .07, blockDepth, 0x8dcfc2, 0, 5.72, centerZ, glass));
-      box(blockWidth, 5.8, .08, 0x78b9aa, 0, 2.9, centerZ + (naveSide === "right" ? blockDepth / 2 : -blockDepth / 2), glass);
-      box(.08, 5.8, blockDepth, 0x78b9aa, -blockWidth / 2, 2.9, centerZ, glass);
-      box(.08, 5.8, blockDepth, 0x78b9aa, blockWidth / 2, 2.9, centerZ, glass);
+      const endWall = box(blockWidth, 5.8, .08, 0x78b9aa, 0, 2.9, centerZ + (naveSide === "right" ? blockDepth / 2 : -blockDepth / 2), glass);
+      const leftWall = box(.08, 5.8, blockDepth, 0x78b9aa, -blockWidth / 2, 2.9, centerZ, glass);
+      const rightWall = box(.08, 5.8, blockDepth, 0x78b9aa, blockWidth / 2, 2.9, centerZ, glass);
+      overviewOnlyObjects.push(endWall, leftWall, rightWall);
       for (let nave = 0; nave <= naveCount; nave += 1) {
         const x = -blockWidth / 2 + navePitch * nave;
         const naveLine = box(.035, 5.7, blockDepth, frame, x, 2.9, centerZ);
@@ -508,13 +536,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       }
       for (let span = 0; span <= spanCount; span += 1) {
         const z = naveSide === "right" ? roadEdge + span * spanPitch : -roadEdge - span * spanPitch;
-        box(blockWidth, .055, .035, frame, 0, 2.95, z);
+        const planSpanLine = box(blockWidth, .055, .035, frame, 0, 2.95, z);
+        overviewOnlyObjects.push(planSpanLine);
       }
       for (let span = 1; span <= spanCount; span += 1) {
         const z = spanZ(naveSide, span);
-        box(blockWidth - .08, .045, .22, span % 2 ? 0x78a9d5 : 0x87bd69, 0, .29, z);
+        const planMat = box(blockWidth - .08, .045, .22, span % 2 ? 0x78a9d5 : 0x87bd69, 0, .29, z);
+        overviewOnlyObjects.push(planMat);
       }
-      naveXs.forEach((x) => box(navePitch * .68, .16, blockDepth - .16, 0x64a965, x, .38, centerZ));
+      naveXs.forEach((x) => {
+        const planBed = box(navePitch * .68, .16, blockDepth - .16, 0x64a965, x, .38, centerZ);
+        overviewOnlyObjects.push(planBed);
+      });
     });
 
     // A denser crop sample makes the close-up read like a real working passage.
@@ -541,12 +574,56 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       });
     });
 
+    // Close views use real narrow beds and working rails instead of the wide plan blocks.
+    passagePositions.forEach((x) => {
+      ["left", "right"].forEach((naveSide) => {
+        const centerZ = sideCenters[naveSide];
+        [-.16, .16].forEach((rowOffset) => {
+          const bed = box(.34, .11, blockDepth - .24, 0x78a95f, x + rowOffset, .25, centerZ, { roughness: .95 });
+          const substrate = box(.27, .045, blockDepth - .3, 0xa2c777, x + rowOffset, .33, centerZ, { roughness: 1 });
+          const railNear = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset - .1, .39, centerZ, { metalness: .2, roughness: .7 });
+          const railFar = box(.025, .025, blockDepth - .28, 0x9a8257, x + rowOffset + .1, .39, centerZ, { metalness: .2, roughness: .7 });
+          detailStructureObjects.push(bed, substrate, railNear, railFar);
+          [2.1, 3.1].forEach((height) => {
+            const supportWire = box(.014, .014, blockDepth - .3, 0x71867b, x + rowOffset, height, centerZ, { metalness: .15, roughness: .65 });
+            detailStructureObjects.push(supportWire);
+          });
+        });
+      });
+    });
+
+    // Slim posts, rafters and translucent roof strips make the close view feel like a real house.
+    const structureMaterial = { metalness: .28, roughness: .55 };
+    for (let x = -blockWidth / 2 + 1.1; x <= blockWidth / 2; x += 2.2) {
+      const rafter = box(.075, .075, blockDepth * 2 + roadDepth, 0x5d7b70, x, 5.35, 0, structureMaterial);
+      const leftPost = box(.065, 5.1, .065, 0x5d7b70, x, 2.62, -roadEdge - .08, structureMaterial);
+      const rightPost = box(.065, 5.1, .065, 0x5d7b70, x, 2.62, roadEdge + .08, structureMaterial);
+      detailStructureObjects.push(rafter, leftPost, rightPost);
+    }
+    ["left", "right"].forEach((naveSide) => {
+      const centerZ = sideCenters[naveSide];
+      const roofStrip = box(blockWidth - .12, .035, blockDepth - .12, 0xa8d8cc, 0, 5.48, centerZ, { transparent: true, opacity: .09, depthWrite: false, side: THREE.DoubleSide });
+      const ridge = box(blockWidth - .12, .05, .05, 0x5d7b70, 0, 5.58, centerZ, structureMaterial);
+      detailStructureObjects.push(roofStrip, ridge);
+    });
+    [-1, 1].forEach((direction) => {
+      const roadEdgeLine = box(blockWidth - .1, .045, .08, 0xb08c51, 0, .23, direction * roadEdge, { roughness: .85 });
+      detailStructureObjects.push(roadEdgeLine);
+    });
+
     // The source plan shows three wide connectors crossing the central road.
     [-5.28, 0, 5.28].forEach((x) => {
       const connector = box(.82, .1, roadDepth, 0xf0c35a, x, .25, 0);
       connector.userData.infoKey = "middleRoad";
     });
-    for (let x = -blockWidth / 2 + .22; x <= blockWidth / 2; x += navePitch * 5) box(.06, .07, roadDepth, 0x8e7045, x, .28, 0);
+    for (let x = -blockWidth / 2 + .22; x <= blockWidth / 2; x += navePitch * 5) {
+      const planRoadMark = box(.06, .07, roadDepth, 0x8e7045, x, .28, 0);
+      overviewOnlyObjects.push(planRoadMark);
+    }
+    [-.43, .43].forEach((z) => {
+      const wheelTrack = box(blockWidth - .12, .025, .1, 0xb29a69, 0, .22, z, { roughness: .9 });
+      detailStructureObjects.push(wheelTrack);
+    });
 
     // Keep a lightweight crop layer: plants are sampled across the 39-nave grid for phone performance.
     const sampleNaves = [0, 4, 9, 14, 19, 24, 29, 34, 38];
@@ -623,7 +700,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     }
     roofMeshes.forEach((mesh) => { mesh.visible = false; });
     detailObjects.forEach((object) => { object.visible = state.cameraMode !== "overview"; });
+    detailStructureObjects.forEach((object) => { object.visible = state.cameraMode !== "overview"; });
     planOnlyObjects.forEach((object) => { object.visible = state.cameraMode === "overview"; });
+    overviewOnlyObjects.forEach((object) => { object.visible = state.cameraMode === "overview"; });
     const frame = $(".scene-frame");
     if (frame) frame.dataset.view = state.cameraMode;
     resetCameraControls();
@@ -747,8 +826,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (!THREE) { fallback.hidden = false; sceneCanvas.hidden = true; return; }
     try {
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xdff4ea);
-      scene.fog = new THREE.Fog(0xdff4ea, 38, 78);
+      scene.background = new THREE.Color(0xe7f2ee);
+      scene.fog = new THREE.Fog(0xe7f2ee, 46, 92);
       perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
       overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
       // The site plan is read left-to-right: left side, central road, right side.
@@ -761,8 +840,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.05;
       renderer.shadowMap.enabled = false;
-      scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 2.1));
-      const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(12, 22, 10); scene.add(sun);
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x6e9677, 1.8));
+      const sun = new THREE.DirectionalLight(0xfff8e8, 2.0); sun.position.set(12, 22, 10); scene.add(sun);
       addGlasshouse();
       selectionArrows = [0, 1, 2, 3].map(() => new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(0, .78, 0), 1.8, 0xf0a832, .34, .18));
       selectionArrows.forEach((arrow) => scene.add(arrow));
