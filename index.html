@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=23">
+    <link rel="stylesheet" href="styles.css?v=24">
 </head>
 <body>
   <div class="site-shell">
@@ -124,6 +124,10 @@
           <button class="passage-equipment-label passage-gutter-left" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
           <button class="passage-equipment-label passage-rails" type="button" data-info-key="cartRails" data-i18n="cartRails">2 rury = tor wózka</button>
           <div class="passage-process-badge" aria-live="polite"><i></i><span id="passageProcessText" data-i18n="processHarvest">Zbiór: wózek jedzie po rurach</span></div>
+          <div class="passage-span-note">
+            <strong data-i18n="spanNumbers">Numery przęseł są na środku przejścia</strong>
+            <small data-i18n="spanCountVaries">W przykładzie: 1–27. Liczba zależy od szklarni.</small>
+          </div>
           <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: nawa 20, lewa strona, przejście 1, lewy rząd</div>
         </div>
         <div class="scene-toolbar">
@@ -259,6 +263,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=23"></script>
+    <script type="module" src="app.js?v=24"></script>
 </body>
 </html>

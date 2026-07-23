@@ -507,8 +507,59 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   };
   Object.entries(greenhouseStructureTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
+  const naturalSceneTranslations = {
+    pl: {
+      spanNumbers: "Numery przęseł są na środku przejścia",
+      spanCountVaries: "W przykładzie: 1–27. Liczba zależy od szklarni.",
+      processPicking: "Pracownik zrywa pomidor i odkłada go do wózka"
+    },
+    en: {
+      spanNumbers: "Span numbers are marked in the centre of the passage",
+      spanCountVaries: "Example: 1–27. The actual count depends on the greenhouse.",
+      processPicking: "The worker picks a tomato and places it in the cart"
+    },
+    ua: {
+      spanNumbers: "Номери прольотів позначені посередині проходу",
+      spanCountVaries: "У прикладі: 1–27. Кількість залежить від теплиці.",
+      processPicking: "Працівник зриває помідор і кладе його у візок"
+    },
+    ru: {
+      spanNumbers: "Номера секций указаны посередине прохода",
+      spanCountVaries: "В примере: 1–27. Количество зависит от теплицы.",
+      processPicking: "Работник срывает помидор и кладёт его в тележку"
+    },
+    az: {
+      spanNumbers: "Bölmə nömrələri keçidin ortasında göstərilib",
+      spanCountVaries: "Nümunədə: 1–27. Say istixanadan asılıdır.",
+      processPicking: "İşçi pomidoru dərir və arabaya qoyur"
+    },
+    es: {
+      spanNumbers: "Los números de sección están en el centro del pasillo",
+      spanCountVaries: "Ejemplo: 1–27. La cantidad depende del invernadero.",
+      processPicking: "El trabajador recoge un tomate y lo coloca en el carro"
+    },
+    fil: {
+      spanNumbers: "Nasa gitna ng daanan ang mga numero ng seksiyon",
+      spanCountVaries: "Halimbawa: 1–27. Depende sa greenhouse ang bilang.",
+      processPicking: "Pumipitas ang manggagawa ng kamatis at inilalagay ito sa kariton"
+    },
+    id: {
+      spanNumbers: "Nomor bagian ditandai di tengah lorong",
+      spanCountVaries: "Contoh: 1–27. Jumlah sebenarnya bergantung pada rumah kaca.",
+      processPicking: "Pekerja memetik tomat dan meletakkannya di troli"
+    },
+    ne: {
+      spanNumbers: "खण्डका नम्बर बाटोको बीचमा लेखिएका छन्",
+      spanCountVaries: "उदाहरण: १–२७। वास्तविक संख्या ग्रीनहाउसअनुसार फरक हुन्छ।",
+      processPicking: "कामदारले गोलभेडा टिपेर ट्रलीमा राख्छ"
+    }
+  };
+  Object.entries(naturalSceneTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
+  const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
+    || (navigator.deviceMemory && navigator.deviceMemory <= 4);
   // The site plan has 39 naves along the axis and 27 spans on each facing side.
   // Excel numbers them from 39 on the left to 1 on the right. One nave is wide
   // enough to show its five working passages; the overview is then a true
@@ -625,7 +676,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function updatePassageProcessBadge() {
     const badge = $("#passageProcessText");
     if (!badge) return;
-    badge.textContent = t(teachingProcess === "lift" ? "processLift" : "processHarvest");
+    badge.textContent = t(teachingProcess === "lift" ? "processLift" : "processPicking");
     badge.closest(".passage-process-badge")?.classList.toggle("is-lift", teachingProcess === "lift");
   }
 
@@ -664,6 +715,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let teachingLiftCart = null;
   let teachingLiftAssembly = null;
   let teachingWorker = null;
+  let teachingPickedTomato = null;
   let teachingPassageFloors = [];
   let teachingPassageMarkers = [];
   let teachingPlants = [];
@@ -672,6 +724,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let teachingProcess = "harvest";
   let teachingClock = 0;
   let teachingLastTime = 0;
+  let teachingRenderTime = 0;
+  let cameraFocusPoint = null;
+  let cameraFocusUntil = 0;
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -870,8 +925,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const group = new THREE.Group();
     group.position.set(x, 0, z);
     group.userData.infoKey = "tomatoes";
+    const variation = Math.abs(Math.sin(x * 12.9898 + z * 78.233));
+    const plantHeight = 3.18 + variation * .34;
     const stemMaterial = new THREE.MeshStandardMaterial({ color: 0x2d7742, roughness: .9 });
-    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x438e50, roughness: .94 });
+    const leafMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color().setHSL(.34, .38 + variation * .08, .38 + variation * .05),
+      roughness: .94
+    });
     const string = new THREE.Mesh(
       new THREE.CylinderGeometry(.006, .006, 3.9, 5),
       new THREE.MeshStandardMaterial({ color: 0xc9cfca, metalness: .2, roughness: .55 })
@@ -880,18 +940,21 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     group.add(string);
     const vineCurve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(0, .45, 0),
-      new THREE.Vector3(side * .035, 1.2, .01),
-      new THREE.Vector3(side * .11, 2.15, -.015),
-      new THREE.Vector3(side * .2, 3.35, .01)
+      new THREE.Vector3(side * (.025 + variation * .025), 1.2, .02 - variation * .03),
+      new THREE.Vector3(side * (.09 + variation * .04), 2.15, -.025 + variation * .02),
+      new THREE.Vector3(side * (.17 + variation * .06), plantHeight, .015)
     ]);
     const stem = new THREE.Mesh(new THREE.TubeGeometry(vineCurve, 16, .017, 6, false), stemMaterial);
     group.add(stem);
-    [0, 1, 2, 3, 4].forEach((index) => {
+    const leafCount = lowPowerDevice ? 4 : 6;
+    Array.from({ length: leafCount }, (_, index) => index).forEach((index) => {
       const direction = index % 2 ? -side : side;
       const leaf = new THREE.Mesh(new THREE.SphereGeometry(1, 7, 5), leafMaterial);
-      leaf.scale.set(.17 - index * .01, .03, .085 - index * .004);
-      leaf.position.set(direction * (.13 + index * .01), .9 + index * .5, index % 2 ? -.035 : .035);
-      leaf.rotation.z = direction * (.32 + index * .04);
+      const leafScale = .92 + Math.abs(Math.sin(variation * 9 + index)) * .18;
+      leaf.scale.set((.17 - index * .008) * leafScale, .03, (.085 - index * .003) * leafScale);
+      leaf.position.set(direction * (.13 + index * .009), .86 + index * .43, index % 2 ? -.045 : .04);
+      leaf.rotation.z = direction * (.28 + index * .045 + variation * .08);
+      leaf.rotation.y = (variation - .5) * .45;
       group.add(leaf);
     });
     [0, 1, 2].forEach((clusterIndex) => {
@@ -918,6 +981,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       group.add(truss);
     });
     parent.add(group);
+    group.rotation.y = (variation - .5) * .16;
+    group.scale.setScalar(.96 + variation * .08);
     teachingPlants.push(group);
     return group;
   }
@@ -933,15 +998,61 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     return mesh;
   }
 
+  function teachingFloorNumber(parent, number, x, z) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 96;
+    canvas.height = 96;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, 96, 96);
+    context.fillStyle = "rgba(255,255,255,.94)";
+    context.strokeStyle = "#8b651d";
+    context.lineWidth = 6;
+    context.beginPath();
+    context.arc(48, 48, 35, 0, Math.PI * 2);
+    context.fill();
+    context.stroke();
+    context.fillStyle = "#513b12";
+    context.font = "900 42px Arial";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(String(number), 48, 50);
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    const marker = new THREE.Mesh(
+      new THREE.PlaneGeometry(.33, .33),
+      new THREE.MeshBasicMaterial({ map: texture, transparent: true, depthWrite: false })
+    );
+    marker.rotation.x = -Math.PI / 2;
+    marker.position.set(x, .224, z);
+    marker.renderOrder = 4;
+    parent.add(marker);
+    return marker;
+  }
+
   function teachingPerson(parent, color = 0xe7aa32) {
     const person = new THREE.Group();
     person.userData.infoKey = "people";
     teachingBox(person, .28, .5, .2, color, 0, .7, 0, { roughness: .75 }, "people");
-    teachingBox(person, .1, .38, .1, 0x31424b, -.07, .26, 0, { roughness: .75 }, "people");
-    teachingBox(person, .1, .38, .1, 0x31424b, .07, .26, 0, { roughness: .75 }, "people");
+    const leftLeg = teachingBox(person, .1, .38, .1, 0x31424b, -.07, .26, 0, { roughness: .75 }, "people");
+    const rightLeg = teachingBox(person, .1, .38, .1, 0x31424b, .07, .26, 0, { roughness: .75 }, "people");
+    const skinMaterial = new THREE.MeshStandardMaterial({ color: 0xd99a76, roughness: .86 });
+    const createArm = (armX) => {
+      const pivot = new THREE.Group();
+      pivot.position.set(armX, .88, 0);
+      const arm = new THREE.Mesh(new THREE.CylinderGeometry(.035, .04, .38, 7), skinMaterial);
+      arm.position.y = -.17;
+      arm.userData.infoKey = "people";
+      pivot.add(arm);
+      person.add(pivot);
+      return pivot;
+    };
+    const leftArm = createArm(-.19);
+    const rightArm = createArm(.19);
+    leftArm.rotation.z = -.12;
+    rightArm.rotation.z = .12;
     const head = new THREE.Mesh(
       new THREE.SphereGeometry(.14, 10, 8),
-      new THREE.MeshStandardMaterial({ color: 0xd99a76, roughness: .86 })
+      skinMaterial
     );
     head.position.y = 1.08;
     const helmet = new THREE.Mesh(
@@ -950,6 +1061,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     );
     helmet.position.y = 1.17;
     person.add(head, helmet);
+    Object.assign(person.userData, { leftArm, rightArm, leftLeg, rightLeg });
     parent.add(person);
     return person;
   }
@@ -1190,6 +1302,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       const rail = teachingCylinder(group, .045, 15.2, 0x3f4744, x, .255, .7, { metalness: .82, roughness: .25 }, "cartRails");
       rail.rotation.x = Math.PI / 2;
     });
+    for (let span = 1; span <= 27; span += 1) {
+      const z = -6.5 + (span - 1) * (14.4 / 26);
+      teachingBox(group, .78, .012, .018, 0x9b947f, 0, .213, z, { roughness: .92 });
+      teachingFloorNumber(group, span, 0, z);
+    }
     [-.9, .9].forEach((x, sideIndex) => {
       const rowSide = sideIndex === 0 ? "leftRow" : "rightRow";
       teachingBox(group, .4, .16, 15.1, 0xf3f5ef, x, .5, .7, { metalness: .04, roughness: .72 }, "cultivationGutter");
@@ -1221,6 +1338,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
     teachingWorker = teachingPerson(group, 0xe7aa32);
     teachingWorker.position.set(.33, 0, -4.15);
+    teachingPickedTomato = new THREE.Mesh(
+      new THREE.SphereGeometry(.072, 9, 8),
+      new THREE.MeshStandardMaterial({ color: 0xd83f33, roughness: .82 })
+    );
+    teachingPickedTomato.userData.infoKey = "tomatoes";
+    teachingPickedTomato.visible = false;
+    teachingWorker.add(teachingPickedTomato);
     teachingPeople.push(teachingWorker);
 
     scene.add(group);
@@ -1612,7 +1736,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const pointer = new THREE.Vector2();
   const pointerStarts = new Map();
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-  function resetCameraControls() { cameraTouch.yaw = 0; cameraTouch.pitch = 0; cameraTouch.zoom = 1; }
+  function resetCameraControls() {
+    cameraTouch.yaw = 0;
+    cameraTouch.pitch = 0;
+    cameraTouch.zoom = 1;
+    cameraFocusPoint = null;
+    cameraFocusUntil = 0;
+  }
 
   function configureCamera(mode, keepTour = false) {
     if (!keepTour) {
@@ -1819,7 +1949,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       camera = overviewCamera;
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lowPowerDevice ? 1.1 : 1.5));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.05;
@@ -1863,6 +1993,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
 
   function animate(time) {
     requestAnimationFrame(animate);
+    if (lowPowerDevice && time - teachingRenderTime < 30) return;
+    teachingRenderTime = time;
     updateTourStep(time);
     const mode = state.cameraMode;
     const view = getCameraView(mode);
@@ -1885,7 +2017,29 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         teachingCart.position.z = -3.2 + harvestProgress * 7.2;
         teachingWorker.position.z = teachingCart.position.z - .95;
         teachingWorker.rotation.y = 0;
+        const pickProgress = (processTime % 2200) / 2200;
+        const reach = Math.sin(Math.min(1, pickProgress / .44) * Math.PI / 2);
+        const release = pickProgress > .62 ? (pickProgress - .62) / .38 : 0;
+        const armSwing = Math.sin(processTime * .009) * .16;
+        const { leftArm, rightArm, leftLeg, rightLeg } = teachingWorker.userData;
+        if (leftArm) leftArm.rotation.z = -.12 - reach * .88 + release * .88;
+        if (rightArm) rightArm.rotation.z = .12 + armSwing;
+        if (leftLeg && rightLeg) {
+          leftLeg.rotation.x = armSwing;
+          rightLeg.rotation.x = -armSwing;
+        }
+        if (teachingPickedTomato) {
+          teachingPickedTomato.visible = pickProgress > .18 && pickProgress < .86;
+          if (pickProgress < .55) {
+            const move = clamp((pickProgress - .18) / .37, 0, 1);
+            teachingPickedTomato.position.set(-.55 + move * .38, 1.18 - move * .2, .03 + move * .2);
+          } else {
+            const move = clamp((pickProgress - .55) / .31, 0, 1);
+            teachingPickedTomato.position.set(-.17 + move * .17, .98 - move * .2, .23 + move * .7);
+          }
+        }
       } else {
+        if (teachingPickedTomato) teachingPickedTomato.visible = false;
         const liftTime = processTime - 9000;
         const travelProgress = clamp(liftTime / 2300, 0, 1);
         teachingLiftCart.position.z = -1.6 + travelProgress * 4.4;
@@ -1954,6 +2108,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       positionValues[0] += shiftX;
     }
     const targetVector = new THREE.Vector3(...targetValues);
+    if (cameraFocusPoint && time < cameraFocusUntil) targetVector.lerp(cameraFocusPoint, .72);
+    else if (cameraFocusPoint && time >= cameraFocusUntil) cameraFocusPoint = null;
     const spherical = new THREE.Spherical().setFromVector3(new THREE.Vector3(...positionValues).sub(targetVector));
     spherical.theta += cameraTouch.yaw;
     spherical.phi = clamp(spherical.phi + cameraTouch.pitch, .35, 1.5);
@@ -2100,7 +2256,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       configureCamera(rowSide ? "worker" : "passage");
       return;
     }
-    openInfo(object.userData.infoKey);
+    cameraFocusPoint = new THREE.Vector3();
+    object.getWorldPosition(cameraFocusPoint);
+    cameraFocusUntil = performance.now() + 3200;
+    cameraTouch.zoom = clamp(cameraTouch.zoom * .78, .68, 1.35);
+    window.setTimeout(() => openInfo(object.userData.infoKey), 220);
   }
   ["pointerup", "pointercancel"].forEach((eventName) => sceneCanvas.addEventListener(eventName, (event) => {
     const start = pointerStarts.get(event.pointerId);
