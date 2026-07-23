@@ -147,7 +147,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   if (!LANGS.includes(state.lang)) state.lang = "en";
   // The site plan has 39 naves along the axis and 27 spans on each facing side.
   // The five passage markers below are only the educational detail for one selected nave.
-  const passagePositions = [-6.6, -3.3, 0, 3.3, 6.6];
+  // Five clean sample positions are used by the educational close-up.
+  const passagePositions = [-2.4, -1.2, 0, 1.2, 2.4];
   const passageSideCenters = { left: -6.75, right: 6.75 };
   const $ = (selector) => document.querySelector(selector);
   const t = (key) => (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key;
@@ -222,6 +223,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let demoLiftItem = null;
   let selectionArrows = [];
   let roofMeshes = [];
+  let detailObjects = [];
+  let planOnlyObjects = [];
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -375,6 +378,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         naveLine.userData.infoKey = "nave";
         naveLine.userData.naveSide = naveSide;
         naveLine.userData.naveNumber = naveCount - Math.min(nave, naveCount);
+        planOnlyObjects.push(naveLine);
       }
       for (let span = 0; span <= spanCount; span += 1) {
         const z = naveSide === "right" ? roadEdge + span * spanPitch : -roadEdge - span * spanPitch;
@@ -385,6 +389,30 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         box(blockWidth - .08, .045, .22, span % 2 ? 0x78a9d5 : 0x87bd69, 0, .29, z);
       }
       naveXs.forEach((x) => box(navePitch * .68, .16, blockDepth - .16, 0x64a965, x, .38, centerZ));
+    });
+
+    // A denser crop sample makes the close-up read like a real working passage.
+    passagePositions.forEach((x) => {
+      ["left", "right"].forEach((naveSide) => {
+        const centerZ = sideCenters[naveSide];
+        for (let span = 1; span <= spanCount; span += 2) {
+          const z = spanZ(naveSide, span);
+          const leftPlant = plant(x - .16, z, -1);
+          const rightPlant = plant(x + .16, z, 1);
+          [leftPlant, rightPlant].forEach((plantGroup) => {
+            plantGroup.userData.detailOnly = true;
+            plantGroup.userData.passageNumber = ((span - 1) % 5) + 1;
+            plantGroup.userData.naveSide = naveSide;
+            detailObjects.push(plantGroup);
+          });
+        }
+        [-.16, .16].forEach((rowOffset) => {
+          const capillary = box(.028, .045, blockDepth - .2, 0x3b9bca, x + rowOffset, .64, centerZ);
+          capillary.userData.infoKey = "capillaries";
+          capillary.userData.detailOnly = true;
+          detailObjects.push(capillary);
+        });
+      });
     });
 
     // The source plan shows three wide connectors crossing the central road.
@@ -446,7 +474,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     overview: { position: [0, 37, .01], target: [0, 0, 0] },
     nave: { position: [0, 14, 18], target: [0, 1.4, 0] },
     lift: { position: [2.5, 4.8, 14], target: [-4.8, 1.35, 4.5] },
-    mainRoad: { position: [0, 8.6, 19], target: [0, .9, -1] },
+    mainRoad: { position: [19, 5.8, 0], target: [-1, 1.0, 0] },
     passage: { position: [0, 2.55, 3.8], target: [0, 1.25, 6.75] },
     worker: { position: [0, 1.65, 4.8], target: [0, 1.45, 6.75] }
   };
@@ -467,7 +495,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       camera = state.cameraMode === "overview" ? overviewCamera : perspectiveCamera;
       if (camera === perspectiveCamera) camera.up.set(0, 1, 0);
     }
-    roofMeshes.forEach((mesh) => { mesh.visible = state.cameraMode !== "overview"; });
+    roofMeshes.forEach((mesh) => { mesh.visible = false; });
+    detailObjects.forEach((object) => { object.visible = state.cameraMode !== "overview"; });
+    planOnlyObjects.forEach((object) => { object.visible = state.cameraMode === "overview"; });
+    const frame = $(".scene-frame");
+    if (frame) frame.dataset.view = state.cameraMode;
     resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
   }
@@ -476,8 +508,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const x = selectedPassageX();
     const z = selectedPassageZ();
     const depthDirection = state.selectedNaveSide === "right" ? 1 : -1;
-    if (mode === "passage") return { position: [x, 2.55, z - depthDirection * 2.4], target: [x, 1.25, z] };
-    if (mode === "worker") return { position: [x, 1.65, z - depthDirection * 1.8], target: [x, 1.45, z] };
+    if (mode === "passage") return { position: [x, 2.35, z - depthDirection * 3.8], target: [x, 1.25, z] };
+    if (mode === "worker") return { position: [x, 1.5, z - depthDirection * 2.8], target: [x, 1.35, z] };
+    if (mode === "lift") return { position: [x, 3.05, z - depthDirection * 4.4], target: [x, 1.5, z] };
     return cameraViews[mode] || cameraViews.overview;
   }
 

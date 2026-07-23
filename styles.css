@@ -76,6 +76,9 @@ h3 { margin-bottom: 5px; font-size: 18px; line-height: 1.2; }
 .plan-span-axis i { height: 1px; flex: 1; margin: 0 5px; background: repeating-linear-gradient(90deg, rgba(57,110,82,.55) 0 4px, transparent 4px 8px); }
 .plan-connectors { position: absolute; top: 50%; left: 50%; display: flex; flex-direction: column; gap: 28px; transform: translate(-50%, -50%); color: #72551e; }
 .plan-connectors b { display: grid; place-items: center; width: 17px; height: 17px; background: rgba(246,208,101,.96); border: 1px solid rgba(117,86,21,.62); border-radius: 50%; font-size: 8px; }
+.scene-frame:not([data-view="overview"]) .scene-label,
+.scene-frame:not([data-view="overview"]) .plan-overlay,
+.scene-frame:not([data-view="overview"]) .mini-map { display: none; }
 .scene-toolbar { padding: 14px 16px 16px; border-top: 1px solid var(--line); background: #fbfdfc; }
 .toolbar-button { min-height: 44px; padding: 8px 12px; font-size: 13px; }
 .scene-toolbar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
