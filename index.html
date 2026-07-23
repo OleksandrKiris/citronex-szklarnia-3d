@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=22">
+    <link rel="stylesheet" href="styles.css?v=23">
 </head>
 <body>
   <div class="site-shell">
@@ -48,14 +48,8 @@
           <button class="view-tile" type="button" data-camera="nave" data-step="2">
             <span class="view-tile-icon" aria-hidden="true">2</span><span><strong data-i18n="nave">Jedna nawa</strong><small data-i18n="naveDetailDesc">5 wejść / 10 rzędów.</small></span>
           </button>
-          <button class="view-tile" type="button" data-camera="mainRoad">
-            <span class="view-tile-icon" aria-hidden="true">↔</span><span><strong data-i18n="mainRoadView">Główna droga</strong><small data-i18n="mainRoadDesc">Lewa i prawa strona.</small></span>
-          </button>
           <button class="view-tile" type="button" data-camera="passage" data-step="3">
             <span class="view-tile-icon" aria-hidden="true">3</span><span><strong data-i18n="passageView">W środku przejścia</strong><small data-i18n="passageDesc">Dwa rzędy po bokach.</small></span>
-          </button>
-          <button class="view-tile" type="button" data-camera="worker">
-            <span class="view-tile-icon" aria-hidden="true">●</span><span><strong data-i18n="workerView">Poziom pracownika</strong><small data-i18n="workerDesc">Praca przy roślinach.</small></span>
           </button>
         </div>
         <div class="learning-path" aria-labelledby="guideTitle">
@@ -128,8 +122,8 @@
           <div class="passage-row-label passage-row-left" data-i18n="leftRow">Lewy rząd</div>
           <div class="passage-row-label passage-row-right" data-i18n="rightRow">Prawy rząd</div>
           <button class="passage-equipment-label passage-gutter-left" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
-          <button class="passage-equipment-label passage-gutter-right" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
           <button class="passage-equipment-label passage-rails" type="button" data-info-key="cartRails" data-i18n="cartRails">2 rury = tor wózka</button>
+          <div class="passage-process-badge" aria-live="polite"><i></i><span id="passageProcessText" data-i18n="processHarvest">Zbiór: wózek jedzie po rurach</span></div>
           <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: nawa 20, lewa strona, przejście 1, lewy rząd</div>
         </div>
         <div class="scene-toolbar">
@@ -251,11 +245,20 @@
       <button id="infoClose" class="info-close" type="button" aria-label="Close">×</button>
       <div class="eyebrow" data-i18n="infoEyebrow">KRÓTKIE WYJAŚNIENIE</div>
       <h2 id="infoTitle"></h2>
+      <div id="infoVisual" class="info-visual" aria-hidden="true">
+        <div class="gutter-cutaway">
+          <i class="cutaway-plant cutaway-left"></i>
+          <i class="cutaway-plant cutaway-right"></i>
+          <b class="cutaway-mat"></b>
+          <span class="cutaway-gutter"></span>
+        </div>
+        <div class="rail-cutaway"><i></i><i></i><span></span></div>
+      </div>
       <p id="infoText"></p>
     </dialog>
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=22"></script>
+    <script type="module" src="app.js?v=23"></script>
 </body>
 </html>

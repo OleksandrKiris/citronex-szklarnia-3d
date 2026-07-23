@@ -410,6 +410,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "Jedna ciągła rynna uprawowa biegnie pod matami. Rośliny są prowadzone po jej lewej i prawej stronie.",
       cartRails: "2 rury = tor wózka",
       infoCartRails: "Dwie czarne rury leżą w przejściu. Są ogrzewaniem i jednocześnie torem dla wózka. To nie jest rynna uprawowa.",
+      processHarvest: "Zbiór: wózek jedzie po rurach",
+      processLift: "Praca u góry: platforma podnosi pracownika",
       naveFiveEntrances: "5 przejść • 10 stron rzędów",
       lessonNave: "W nawie jest 5 przejść. Rynna uprawowa biegnie pod roślinami, a przejście z rurami znajduje się obok.",
       lessonPassage: "W przejściu pracujesz przy lewym albo prawym rzędzie. Dwie czarne rury na podłodze to tor wózka."
@@ -419,6 +421,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "One continuous growing gutter runs beneath the slabs. Plants are trained on its left and right sides.",
       cartRails: "2 pipes = cart track",
       infoCartRails: "Two black heating pipes run along the passage and also guide the cart. They are not a growing gutter.",
+      processHarvest: "Harvest: the cart travels on the pipes",
+      processLift: "Work above: the platform lifts the worker",
       naveFiveEntrances: "5 passages • 10 crop sides",
       lessonNave: "A nave has 5 passages. The growing gutter runs beneath the plants; the passage with two pipes is beside it.",
       lessonPassage: "In a passage, you work at the left or right crop row. The two black floor pipes form the cart track."
@@ -428,17 +432,21 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "Одна безперервна ринва проходить під матами. Рослини ведуть по її лівому та правому боках.",
       cartRails: "2 труби = колія візка",
       infoCartRails: "Дві чорні опалювальні труби проходять у проході й утворюють колію для візка. Це не ринва для вирощування.",
+      processHarvest: "Збір: візок їде по трубах",
+      processLift: "Робота вгорі: платформа піднімає працівника",
       naveFiveEntrances: "5 проходів • 10 сторін рядів",
       lessonNave: "У наві є 5 проходів. Ринва проходить під рослинами, а поруч розташований прохід із двома трубами.",
       lessonPassage: "У проході працюють біля лівого або правого ряду. Дві чорні труби на підлозі утворюють колію візка."
     },
     ru: {
-      cultivationGutter: "Выращивающая ринна",
-      infoCultivationGutter: "Одна непрерывная выращивающая ринна проходит под матами. Растения направлены по её левой и правой сторонам.",
+      cultivationGutter: "Ринна для выращивания",
+      infoCultivationGutter: "Одна непрерывная ринна проходит под матами для выращивания. Растения направлены по её левой и правой сторонам.",
       cartRails: "2 трубы = рельсы тележки",
       infoCartRails: "Две чёрные отопительные трубы проходят по проходу и служат рельсами для тележки. Это не выращивающая ринна.",
+      processHarvest: "Сбор: тележка едет по трубам",
+      processLift: "Работа наверху: платформа поднимает работника",
       naveFiveEntrances: "5 проходов • 10 сторон рядов",
-      lessonNave: "В наве есть 5 проходов. Выращивающая ринна идёт под растениями, а рядом находится проход с двумя трубами.",
+      lessonNave: "В наве есть 5 проходов. Ринна для выращивания идёт под растениями, а рядом находится проход с двумя трубами.",
       lessonPassage: "В проходе работают у левого или правого ряда. Две чёрные трубы на полу служат рельсами для тележки."
     },
     az: {
@@ -446,6 +454,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "Bir davamlı becərmə novçası döşəklərin altından keçir. Bitkilər onun sol və sağ tərəflərinə yönəldilir.",
       cartRails: "2 boru = araba relsi",
       infoCartRails: "Keçiddəki iki qara istilik borusu araba üçün rels rolunu oynayır. Bunlar becərmə novçası deyil.",
+      processHarvest: "Yığım: araba borular üzərində hərəkət edir",
+      processLift: "Yuxarıda iş: platforma işçini qaldırır",
       naveFiveEntrances: "5 keçid • 10 bitki tərəfi",
       lessonNave: "Navada 5 keçid var. Becərmə novçası bitkilərin altından keçir, iki borulu keçid isə onun yanındadır.",
       lessonPassage: "Keçiddə sol və ya sağ bitki sırasında işləyirsiniz. Döşəmədəki iki qara boru araba relsidir."
@@ -455,15 +465,19 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "Un canal de cultivo continuo pasa bajo los sustratos. Las plantas se guían por sus lados izquierdo y derecho.",
       cartRails: "2 tubos = vía del carro",
       infoCartRails: "Dos tubos negros de calefacción recorren el pasillo y sirven de vía para el carro. No son el canal de cultivo.",
+      processHarvest: "Cosecha: el carro circula por los tubos",
+      processLift: "Trabajo arriba: la plataforma eleva al trabajador",
       naveFiveEntrances: "5 pasillos • 10 lados de cultivo",
       lessonNave: "La nave tiene 5 pasillos. El canal va bajo las plantas y, a su lado, está el pasillo con dos tubos.",
       lessonPassage: "En el pasillo se trabaja en la fila izquierda o derecha. Los dos tubos negros del suelo son la vía del carro."
     },
     fil: {
       cultivationGutter: "Kanal ng taniman",
-      infoCultivationGutter: "Isang tuloy-tuloy na kanal ng taniman ang nasa ilalim ng mga growing slab. Ang mga halaman ay ginagabayan sa kaliwa at kanang panig nito.",
+      infoCultivationGutter: "Isang tuloy-tuloy na kanal ng taniman ang nasa ilalim ng mga banig na taniman. Ang mga halaman ay ginagabayan sa kaliwa at kanang panig nito.",
       cartRails: "2 tubo = riles ng kariton",
       infoCartRails: "Ang dalawang itim na heating pipe sa daanan ay riles din ng kariton. Hindi ito kanal ng taniman.",
+      processHarvest: "Pag-aani: umaandar ang kariton sa mga tubo",
+      processLift: "Trabaho sa itaas: itinataas ng platform ang manggagawa",
       naveFiveEntrances: "5 daanan • 10 panig ng halaman",
       lessonNave: "May 5 daanan sa nave. Ang kanal ay nasa ilalim ng mga halaman; katabi nito ang daanan na may dalawang tubo.",
       lessonPassage: "Sa daanan, nagtatrabaho sa kaliwa o kanang hanay. Ang dalawang itim na tubo sa sahig ang riles ng kariton."
@@ -473,6 +487,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "Satu talang budidaya yang menerus berada di bawah media tanam. Tanaman diarahkan ke sisi kiri dan kanannya.",
       cartRails: "2 pipa = rel troli",
       infoCartRails: "Dua pipa pemanas hitam berada di lorong dan menjadi rel troli. Pipa tersebut bukan talang budidaya.",
+      processHarvest: "Panen: troli bergerak di atas pipa",
+      processLift: "Kerja di atas: platform mengangkat pekerja",
       naveFiveEntrances: "5 lorong • 10 sisi tanaman",
       lessonNave: "Satu nave memiliki 5 lorong. Talang berada di bawah tanaman; lorong dengan dua pipa berada di sebelahnya.",
       lessonPassage: "Di lorong, Anda bekerja pada baris kiri atau kanan. Dua pipa hitam di lantai adalah rel troli."
@@ -482,6 +498,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       infoCultivationGutter: "एउटा निरन्तर खेती गर्ने नाली बिरुवा उमार्ने म्याटमुनि जान्छ। बिरुवा यसको बायाँ र दायाँतर्फ बढाइन्छ।",
       cartRails: "२ पाइप = ट्रलीको रेल",
       infoCartRails: "बाटोमा रहेका दुई कालो तताउने पाइप ट्रलीको रेल पनि हुन्। यी खेती गर्ने नाली होइनन्।",
+      processHarvest: "टिपाइ: ट्रली पाइपमाथि गुड्छ",
+      processLift: "माथिको काम: प्लेटफर्मले कामदारलाई उठाउँछ",
       naveFiveEntrances: "५ बाटा • बिरुवाका १० भाग",
       lessonNave: "एउटा नावामा ५ बाटा हुन्छन्। खेती गर्ने नाली बिरुवामुनि हुन्छ र दुई पाइप भएको बाटो यसको छेउमा हुन्छ।",
       lessonPassage: "बाटोमा बायाँ वा दायाँ लाइनमा काम गरिन्छ। भुइँका दुई कालो पाइप ट्रलीका रेल हुन्।"
@@ -535,6 +553,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateSelection();
     updateGuideText();
     updateLessonText();
+    updatePassageProcessBadge();
     $("#infoClose").setAttribute("aria-label", t("infoClose"));
   }
 
@@ -603,6 +622,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     button.classList.toggle("is-restart", simpleMode === "passage");
   }
 
+  function updatePassageProcessBadge() {
+    const badge = $("#passageProcessText");
+    if (!badge) return;
+    badge.textContent = t(teachingProcess === "lift" ? "processLift" : "processHarvest");
+    badge.closest(".passage-process-badge")?.classList.toggle("is-lift", teachingProcess === "lift");
+  }
+
   $("#languageSelect").addEventListener("change", (event) => {
     state.lang = event.target.value;
     localStorage.setItem("citronex-3d-lang", state.lang);
@@ -635,11 +661,17 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let overviewOnlyObjects = [];
   let teachingGroups = {};
   let teachingCart = null;
+  let teachingLiftCart = null;
+  let teachingLiftAssembly = null;
   let teachingWorker = null;
+  let teachingPassageFloors = [];
   let teachingPassageMarkers = [];
   let teachingPlants = [];
   let teachingCarts = [];
   let teachingPeople = [];
+  let teachingProcess = "harvest";
+  let teachingClock = 0;
+  let teachingLastTime = 0;
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -838,30 +870,193 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const group = new THREE.Group();
     group.position.set(x, 0, z);
     group.userData.infoKey = "tomatoes";
-    const stemMaterial = new THREE.MeshStandardMaterial({ color: 0x2f7e47, roughness: .88 });
-    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x4a9858, roughness: .92 });
-    const stem = new THREE.Mesh(new THREE.CylinderGeometry(.018, .027, 2.65, 6), stemMaterial);
-    stem.position.y = 1.58;
-    stem.userData.infoKey = "tomatoes";
+    const stemMaterial = new THREE.MeshStandardMaterial({ color: 0x2d7742, roughness: .9 });
+    const leafMaterial = new THREE.MeshStandardMaterial({ color: 0x438e50, roughness: .94 });
+    const string = new THREE.Mesh(
+      new THREE.CylinderGeometry(.006, .006, 3.9, 5),
+      new THREE.MeshStandardMaterial({ color: 0xc9cfca, metalness: .2, roughness: .55 })
+    );
+    string.position.set(side * .2, 2.45, 0);
+    group.add(string);
+    const vineCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, .45, 0),
+      new THREE.Vector3(side * .035, 1.2, .01),
+      new THREE.Vector3(side * .11, 2.15, -.015),
+      new THREE.Vector3(side * .2, 3.35, .01)
+    ]);
+    const stem = new THREE.Mesh(new THREE.TubeGeometry(vineCurve, 16, .017, 6, false), stemMaterial);
     group.add(stem);
-    [0, 1, 2].forEach((index) => {
+    [0, 1, 2, 3, 4].forEach((index) => {
+      const direction = index % 2 ? -side : side;
       const leaf = new THREE.Mesh(new THREE.SphereGeometry(1, 7, 5), leafMaterial);
-      leaf.scale.set(.13, .026, .065);
-      leaf.position.set(side * (index % 2 ? -.11 : .11), 1.02 + index * .55, 0);
-      leaf.rotation.z = side * (index % 2 ? -.35 : .35);
-      leaf.userData.infoKey = "tomatoes";
+      leaf.scale.set(.17 - index * .01, .03, .085 - index * .004);
+      leaf.position.set(direction * (.13 + index * .01), .9 + index * .5, index % 2 ? -.035 : .035);
+      leaf.rotation.z = direction * (.32 + index * .04);
       group.add(leaf);
-      const fruit = new THREE.Mesh(
-        new THREE.SphereGeometry(.052, 7, 7),
-        new THREE.MeshStandardMaterial({ color: [0xd84c3d, 0xec763e, 0x7ca54e][index], roughness: .78 })
+    });
+    [0, 1, 2].forEach((clusterIndex) => {
+      const clusterY = 1.05 + clusterIndex * .48;
+      [0, 1, 2].forEach((fruitIndex) => {
+        const ripeness = (clusterIndex + fruitIndex) % 3;
+        const fruit = new THREE.Mesh(
+          new THREE.SphereGeometry(.052, 8, 7),
+          new THREE.MeshStandardMaterial({ color: [0xd74336, 0xf07838, 0x75a94b][ripeness], roughness: .8 })
+        );
+        fruit.position.set(
+          side * (.09 + fruitIndex * .035),
+          clusterY - fruitIndex * .055,
+          (fruitIndex - 1) * .055
+        );
+        group.add(fruit);
+      });
+      const truss = new THREE.Mesh(
+        new THREE.CylinderGeometry(.008, .008, .2, 5),
+        stemMaterial
       );
-      fruit.position.set(side * .09, 1.05 + index * .24, .04);
-      fruit.userData.infoKey = "tomatoes";
-      group.add(fruit);
+      truss.rotation.z = Math.PI / 2;
+      truss.position.set(side * .08, clusterY + .04, 0);
+      group.add(truss);
     });
     parent.add(group);
     teachingPlants.push(group);
     return group;
+  }
+
+  function teachingCylinder(parent, radius, height, color, x, y, z, options = {}, infoKey = "") {
+    const mesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(radius, radius, height, 10),
+      new THREE.MeshStandardMaterial({ color, ...options })
+    );
+    mesh.position.set(x, y, z);
+    if (infoKey) mesh.userData.infoKey = infoKey;
+    parent.add(mesh);
+    return mesh;
+  }
+
+  function teachingPerson(parent, color = 0xe7aa32) {
+    const person = new THREE.Group();
+    person.userData.infoKey = "people";
+    teachingBox(person, .28, .5, .2, color, 0, .7, 0, { roughness: .75 }, "people");
+    teachingBox(person, .1, .38, .1, 0x31424b, -.07, .26, 0, { roughness: .75 }, "people");
+    teachingBox(person, .1, .38, .1, 0x31424b, .07, .26, 0, { roughness: .75 }, "people");
+    const head = new THREE.Mesh(
+      new THREE.SphereGeometry(.14, 10, 8),
+      new THREE.MeshStandardMaterial({ color: 0xd99a76, roughness: .86 })
+    );
+    head.position.y = 1.08;
+    const helmet = new THREE.Mesh(
+      new THREE.SphereGeometry(.17, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2),
+      new THREE.MeshStandardMaterial({ color: 0xf0c13b, roughness: .7 })
+    );
+    helmet.position.y = 1.17;
+    person.add(head, helmet);
+    parent.add(person);
+    return person;
+  }
+
+  function teachingGroundShadow(parent, width, depth, x, z) {
+    const shadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(width, depth),
+      new THREE.MeshBasicMaterial({ color: 0x203d33, transparent: true, opacity: .12, depthWrite: false })
+    );
+    shadow.rotation.x = -Math.PI / 2;
+    shadow.position.set(x, .205, z);
+    parent.add(shadow);
+    return shadow;
+  }
+
+  function addTeachingGlassShell(parent, width, depth, height, startZ) {
+    const ridge = height + .75;
+    const angle = Math.atan2(.75, width / 2);
+    const slope = Math.hypot(width / 2, .75);
+    [-1, 1].forEach((direction) => {
+      const panel = teachingBox(
+        parent,
+        slope,
+        .025,
+        depth,
+        0xdff2ed,
+        direction * width / 4,
+        height + .37,
+        startZ + depth / 2,
+        { transparent: true, opacity: .1, depthWrite: false, roughness: .18, side: THREE.DoubleSide }
+      );
+      panel.rotation.z = direction * -angle;
+    });
+    [-1, 1].forEach((direction) => {
+      teachingBox(
+        parent,
+        .025,
+        height - .25,
+        depth,
+        0xe7f4f0,
+        direction * width / 2,
+        height / 2,
+        startZ + depth / 2,
+        { transparent: true, opacity: .055, depthWrite: false, side: THREE.DoubleSide }
+      );
+    });
+    addTeachingFrame(parent, width, depth, height, startZ);
+  }
+
+  function addTeachingHarvestCart(parent) {
+    const cart = new THREE.Group();
+    cart.userData.infoKey = "harvestCart";
+    teachingGroundShadow(cart, .78, 1.15, 0, 0);
+    teachingBox(cart, .62, .18, .94, 0x2e628f, 0, .36, 0, { metalness: .35, roughness: .45 }, "harvestCart");
+    teachingBox(cart, .52, .05, .82, 0x183d5c, 0, .49, 0, { metalness: .45, roughness: .4 }, "harvestCart");
+    [-.21, .21].forEach((wheelX) => [-.34, .34].forEach((wheelZ) => {
+      const wheel = teachingCylinder(cart, .105, .075, 0x242b2d, wheelX, .17, wheelZ, { metalness: .18, roughness: .56 }, "harvestCart");
+      wheel.rotation.z = Math.PI / 2;
+    }));
+    [-.18, .18].forEach((crateX) => {
+      teachingBox(cart, .31, .27, .6, 0xe7a92f, crateX, .66, .02, { roughness: .72 }, "harvestCart");
+      for (let z = -.18; z <= .22; z += .2) {
+        const tomato = new THREE.Mesh(
+          new THREE.SphereGeometry(.05, 7, 7),
+          new THREE.MeshStandardMaterial({ color: z > .1 ? 0xed743b : 0xd74638, roughness: .82 })
+        );
+        tomato.position.set(crateX, .83, z);
+        tomato.userData.infoKey = "harvestCart";
+        cart.add(tomato);
+      }
+    });
+    const handleLeft = teachingBox(cart, .045, .72, .045, 0x29485d, -.27, .82, -.44, { metalness: .4, roughness: .4 }, "harvestCart");
+    const handleRight = handleLeft.clone();
+    handleRight.position.x = .27;
+    handleRight.userData.infoKey = "harvestCart";
+    cart.add(handleRight);
+    teachingBox(cart, .58, .045, .045, 0x29485d, 0, 1.16, -.44, { metalness: .4, roughness: .4 }, "harvestCart");
+    parent.add(cart);
+    return cart;
+  }
+
+  function addTeachingLiftCart(parent) {
+    const cart = new THREE.Group();
+    cart.userData.infoKey = "liftCart";
+    teachingGroundShadow(cart, .82, 1.08, 0, 0);
+    teachingBox(cart, .68, .2, .92, 0x2e628f, 0, .36, 0, { metalness: .38, roughness: .42 }, "liftCart");
+    [-.21, .21].forEach((wheelX) => [-.34, .34].forEach((wheelZ) => {
+      const wheel = teachingCylinder(cart, .105, .075, 0x242b2d, wheelX, .17, wheelZ, { metalness: .18, roughness: .56 }, "liftCart");
+      wheel.rotation.z = Math.PI / 2;
+    }));
+    [-.25, .25].forEach((mastX) => {
+      teachingBox(cart, .055, 2.65, .055, 0x395867, mastX, 1.6, 0, { metalness: .45, roughness: .35 }, "liftCart");
+    });
+    const assembly = new THREE.Group();
+    assembly.userData.infoKey = "liftCart";
+    teachingBox(assembly, .78, .09, .86, 0x2a5f8f, 0, 0, 0, { metalness: .3, roughness: .46 }, "liftCart");
+    [-.36, .36].forEach((railX) => {
+      teachingBox(assembly, .045, .62, .045, 0xf0b936, railX, .33, 0, { metalness: .22, roughness: .5 }, "liftCart");
+    });
+    teachingBox(assembly, .76, .045, .045, 0xf0b936, 0, .62, -.4, { metalness: .22, roughness: .5 }, "liftCart");
+    teachingBox(assembly, .76, .045, .045, 0xf0b936, 0, .62, .4, { metalness: .22, roughness: .5 }, "liftCart");
+    const worker = teachingPerson(assembly, 0xe36b54);
+    worker.position.y = .04;
+    assembly.position.y = .74;
+    cart.add(assembly);
+    parent.add(cart);
+    return { cart, assembly };
   }
 
   function addTeachingFrame(parent, width, depth, height, startZ) {
@@ -885,18 +1080,22 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function addTeachingOverview() {
     const group = new THREE.Group();
     group.name = "teaching-overview";
-    teachingBox(group, 18, .12, 17, 0xe9eeeb, 0, .02, 0, { roughness: .96 });
-    const road = teachingBox(group, 18, .08, 2.6, 0xd9bf84, 0, .12, 0, { roughness: .92 }, "middleRoad");
+    teachingBox(group, 20, .14, 19, 0xc8d9c4, 0, -.02, 0, { roughness: 1 });
+    teachingBox(group, 18.2, .1, 17.1, 0xe7ece8, 0, .06, 0, { roughness: .96 });
+    const road = teachingBox(group, 18.2, .09, 2.6, 0xcab487, 0, .16, 0, { roughness: .94 }, "middleRoad");
     road.userData.infoKey = "middleRoad";
     const naveXs = [-6.8, -5.1, -3.4, -1.7, 0, 1.7, 3.4, 5.1, 6.8];
     ["left", "right"].forEach((side) => {
       const direction = side === "right" ? 1 : -1;
       const centerZ = direction * 5.25;
-      const floor = teachingBox(group, 16.2, .09, 7.6, 0xf4f6f3, 0, .13, centerZ, { roughness: .96 }, side === "right" ? "rightSide" : "leftSide");
+      const floor = teachingBox(group, 16.2, .09, 7.6, 0xf1f4f1, 0, .17, centerZ, { roughness: .96 }, side === "right" ? "rightSide" : "leftSide");
       floor.userData.infoKey = side === "right" ? "rightSide" : "leftSide";
       naveXs.forEach((x) => {
-        teachingBox(group, .62, .06, 6.8, 0x8abb70, x, .23, centerZ, { roughness: .9 }, "nave");
-        teachingBox(group, .48, .035, .38, 0xf0b23c, x, .29, direction * 1.48, { roughness: .78 }, "passage");
+        teachingBox(group, .3, .09, 6.8, 0xf4f2e9, x, .28, centerZ, { roughness: .82 }, "cultivationGutter");
+        teachingBox(group, .08, .09, 6.65, 0x4f9650, x - .1, .38, centerZ, { roughness: .92 }, "tomatoes");
+        teachingBox(group, .08, .09, 6.65, 0x4f9650, x + .1, .38, centerZ, { roughness: .92 }, "tomatoes");
+        teachingBox(group, .62, .025, 6.65, 0xd8ddd8, x + .76, .24, centerZ, { roughness: .96 }, "passage");
+        teachingBox(group, .52, .04, .38, 0xf0b23c, x + .76, .3, direction * 1.48, { roughness: .78 }, "passage");
         const roofSegments = [];
         const roadZ = direction * 1.35;
         const endZ = direction * 9.05;
@@ -908,6 +1107,20 @@ import * as THREE from "./assets/vendor/three.module.min.js";
         });
         roofSegments.push([xL, 3.2, roadZ, xL, 3.2, endZ], [x, 3.8, roadZ, x, 3.8, endZ], [xR, 3.2, roadZ, xR, 3.2, endZ]);
         teachingLines(group, roofSegments, 0xa4afac, .82);
+        [-1, 1].forEach((roofSide) => {
+          const panel = teachingBox(
+            group,
+            .92,
+            .018,
+            7.7,
+            0xdff2ed,
+            x + roofSide * .36,
+            3.5,
+            centerZ,
+            { transparent: true, opacity: .045, depthWrite: false, side: THREE.DoubleSide }
+          );
+          panel.rotation.z = roofSide * -.55;
+        });
       });
     });
     scene.add(group);
@@ -919,26 +1132,51 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     group.name = "teaching-nave";
     const passageXs = [-4, -2, 0, 2, 4];
     const gutterXs = [-5, -3, -1, 1, 3, 5];
-    teachingBox(group, 11.2, .1, 15.4, 0xf0f3f0, 0, .02, .3, { roughness: .97 });
-    teachingBox(group, 11.2, .08, 1.6, 0xd9bf84, 0, .12, -7.1, { roughness: .92 }, "middleRoad");
+    teachingBox(group, 12, .12, 16.2, 0xe4e9e5, 0, .02, .25, { roughness: .98 });
+    teachingBox(group, 11.6, .08, 1.65, 0xcab487, 0, .15, -7.15, { roughness: .94 }, "middleRoad");
     passageXs.forEach((x, index) => {
       const passageNumber = index + 1;
-      const walkway = teachingBox(group, 1.24, .04, 12.8, 0xd9dbd6, x, .17, .4, { roughness: .96 }, "passage");
+      const walkway = teachingBox(
+        group,
+        1.34,
+        .045,
+        12.9,
+        index === 0 ? 0xe9d8aa : 0xd5dad5,
+        x,
+        .18,
+        .4,
+        {
+          roughness: .97,
+          emissive: index === 0 ? 0x6b4e18 : 0x000000,
+          emissiveIntensity: index === 0 ? .16 : 0
+        },
+        "passage"
+      );
       walkway.userData.passageNumber = passageNumber;
-      [-.24, .24].forEach((offset) => teachingBox(group, .055, .055, 12.8, 0x4d5350, x + offset, .24, .4, { metalness: .75, roughness: .32 }, "cartRails"));
-      const threshold = teachingBox(group, 1.28, .07, .34, 0xf0ad32, x, .24, -6.02, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: index === 0 ? .25 : 0 }, "passage");
+      teachingPassageFloors.push(walkway);
+      [-.24, .24].forEach((offset) => {
+        const rail = teachingCylinder(group, .035, 12.8, 0x4d5350, x + offset, .255, .4, { metalness: .78, roughness: .28 }, "cartRails");
+        rail.rotation.x = Math.PI / 2;
+      });
+      const threshold = teachingBox(group, 1.34, .075, .38, 0xf0ad32, x, .255, -6.04, { roughness: .72, emissive: 0x6b3d08, emissiveIntensity: index === 0 ? .25 : 0 }, "passage");
       threshold.userData.passageNumber = passageNumber;
       teachingPassageMarkers.push(threshold);
     });
     gutterXs.forEach((x) => {
-      teachingBox(group, .34, .16, 12.5, 0xf5f5f0, x, .3, .48, { roughness: .78 }, "cultivationGutter");
-      teachingBox(group, .2, .06, 12.35, 0xb78c5b, x, .41, .48, { roughness: .9 }, "growMat");
-      teachingBox(group, .026, .03, 12.25, 0x299bdc, x, .57, .48, { roughness: .42 }, "capillaries");
+      teachingBox(group, .38, .15, 12.55, 0xf4f5ef, x, .48, .48, { metalness: .05, roughness: .72 }, "cultivationGutter");
+      teachingBox(group, .23, .08, 12.38, 0xb38657, x, .59, .48, { roughness: .94 }, "growMat");
+      teachingBox(group, .026, .03, 12.2, 0x299bdc, x, .68, .48, { roughness: .42 }, "capillaries");
       [-.12, .12].forEach((cropOffset) => {
-        teachingBox(group, .055, .16, 12.15, 0x5f9f4f, x + cropOffset, .53, .55, { roughness: .9 }, "tomatoes");
+        teachingBox(group, .065, .35, 12.15, 0x4e934d, x + cropOffset, .83, .55, { roughness: .93 }, "tomatoes");
       });
+      for (let z = -5.3; z <= 6.2; z += 2.35) {
+        teachingBox(group, .62, .045, .06, 0x86928d, x, .31, z, { metalness: .35, roughness: .48 }, "cultivationGutter");
+        teachingBox(group, .055, .28, .055, 0x7a8782, x, .3, z, { metalness: .35, roughness: .48 }, "cultivationGutter");
+      }
+      teachingBox(group, .025, .025, 12.7, 0xb7c0bd, x - .14, 4.45, .48, { metalness: .25, roughness: .45 }, "tomatoes");
+      teachingBox(group, .025, .025, 12.7, 0xb7c0bd, x + .14, 4.45, .48, { metalness: .25, roughness: .45 }, "tomatoes");
     });
-    addTeachingFrame(group, 10.8, 13.3, 4.7, -6.1);
+    addTeachingGlassShell(group, 11.4, 13.4, 4.7, -6.15);
     scene.add(group);
     return group;
   }
@@ -946,54 +1184,44 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   function addTeachingPassage() {
     const group = new THREE.Group();
     group.name = "teaching-passage";
-    teachingBox(group, 3.3, .1, 16.4, 0xf0f3f0, 0, .02, .7, { roughness: .97 });
-    const walkway = teachingBox(group, .9, .04, 15.2, 0xd9dbd6, 0, .17, .7, { roughness: .96 }, "passage");
-    [-.2, .2].forEach((x) => teachingBox(group, .055, .055, 15.1, 0x4d5350, x, .24, .7, { metalness: .75, roughness: .32 }, "cartRails"));
-    [-.72, .72].forEach((x, sideIndex) => {
+    teachingBox(group, 4.2, .12, 16.8, 0xe2e7e3, 0, .02, .7, { roughness: .98 });
+    const walkway = teachingBox(group, 1.32, .045, 15.3, 0xd3d8d3, 0, .18, .7, { roughness: .98 }, "passage");
+    [-.22, .22].forEach((x) => {
+      const rail = teachingCylinder(group, .045, 15.2, 0x3f4744, x, .255, .7, { metalness: .82, roughness: .25 }, "cartRails");
+      rail.rotation.x = Math.PI / 2;
+    });
+    [-.9, .9].forEach((x, sideIndex) => {
       const rowSide = sideIndex === 0 ? "leftRow" : "rightRow";
-      teachingBox(group, .34, .16, 15, 0xf6f5ef, x, .3, .7, { roughness: .78 }, "cultivationGutter");
-      teachingBox(group, .18, .06, 14.8, 0xb78c5b, x, .41, .7, { roughness: .9 }, "growMat");
-      teachingBox(group, .026, .03, 14.8, 0x299bdc, x, .57, .7, { roughness: .42 }, "capillaries");
-      for (let z = -5; z <= 7.7; z += 1.85) {
-        teachingPlant(group, x - .1, z, -1);
-        teachingPlant(group, x + .1, z + .18, 1);
+      teachingBox(group, .4, .16, 15.1, 0xf3f5ef, x, .5, .7, { metalness: .04, roughness: .72 }, "cultivationGutter");
+      teachingBox(group, .23, .08, 14.9, 0xb38657, x, .62, .7, { roughness: .94 }, "growMat");
+      teachingBox(group, .026, .03, 14.8, 0x299bdc, x, .72, .7, { roughness: .42 }, "capillaries");
+      for (let supportZ = -5.7; supportZ <= 7.4; supportZ += 2.25) {
+        teachingBox(group, .72, .045, .06, 0x82908a, x, .31, supportZ, { metalness: .42, roughness: .42 }, "cultivationGutter");
+        teachingBox(group, .055, .3, .055, 0x77847f, x, .3, supportZ, { metalness: .42, roughness: .42 }, "cultivationGutter");
       }
-      const rowMarker = teachingBox(group, .34, .07, .65, sideIndex === 0 ? 0x4e9ad0 : 0x55a56b, x, .65, -5.65, { emissive: sideIndex === 0 ? 0x17496c : 0x174f2a, emissiveIntensity: .35 }, rowSide);
+      for (let z = -5; z <= 7.7; z += 2.25) {
+        teachingPlant(group, x - .11, z, -1);
+        teachingPlant(group, x + .11, z + .22, 1);
+      }
+      teachingBox(group, .025, .025, 15.4, 0xb8c1bd, x - .14, 4.5, .7, { metalness: .3, roughness: .42 }, "tomatoes");
+      teachingBox(group, .025, .025, 15.4, 0xb8c1bd, x + .14, 4.5, .7, { metalness: .3, roughness: .42 }, "tomatoes");
+      const rowMarker = teachingBox(group, .38, .075, .7, sideIndex === 0 ? 0x4e9ad0 : 0x55a56b, x, .76, -5.7, { emissive: sideIndex === 0 ? 0x17496c : 0x174f2a, emissiveIntensity: .3 }, rowSide);
       rowMarker.userData.infoKey = rowSide;
     });
-    addTeachingFrame(group, 3.15, 15.2, 4.6, -6.9);
+    addTeachingGlassShell(group, 4, 15.5, 4.8, -7);
 
-    const cart = new THREE.Group();
-    const cartBody = teachingBox(cart, .68, .28, .95, 0x336da8, 0, .36, 0, { metalness: .18, roughness: .55 }, "harvestCart");
-    teachingBox(cart, .48, .23, .62, 0xe5ae32, 0, .63, 0, { roughness: .72 }, "harvestCart");
-    [-.27, .27].forEach((x) => [-.32, .32].forEach((z) => {
-      const wheel = new THREE.Mesh(new THREE.CylinderGeometry(.09, .09, .065, 10), new THREE.MeshStandardMaterial({ color: 0x2f363b, roughness: .6 }));
-      wheel.rotation.z = Math.PI / 2;
-      wheel.position.set(x, .13, z);
-      wheel.userData.infoKey = "harvestCart";
-      cart.add(wheel);
-    }));
-    cart.position.set(0, 0, 2.5);
-    group.add(cart);
-    teachingCart = cart;
-    teachingCarts.push(cart);
+    teachingCart = addTeachingHarvestCart(group);
+    teachingCart.position.set(0, 0, -3.2);
+    teachingCarts.push(teachingCart);
+    const lift = addTeachingLiftCart(group);
+    teachingLiftCart = lift.cart;
+    teachingLiftAssembly = lift.assembly;
+    teachingLiftCart.position.set(0, 0, 2.8);
+    teachingCarts.push(teachingLiftCart);
 
-    const worker = new THREE.Group();
-    teachingBox(worker, .28, .5, .2, 0xe7aa32, 0, .7, 0, { roughness: .75 }, "people");
-    teachingBox(worker, .1, .38, .1, 0x31424b, -.07, .26, 0, { roughness: .75 }, "people");
-    teachingBox(worker, .1, .38, .1, 0x31424b, .07, .26, 0, { roughness: .75 }, "people");
-    const head = new THREE.Mesh(new THREE.SphereGeometry(.14, 9, 8), new THREE.MeshStandardMaterial({ color: 0xd99a76, roughness: .86 }));
-    head.position.y = 1.08;
-    head.userData.infoKey = "people";
-    worker.add(head);
-    const helmet = new THREE.Mesh(new THREE.SphereGeometry(.17, 9, 6, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xf0c13b, roughness: .7 }));
-    helmet.position.y = 1.17;
-    helmet.userData.infoKey = "people";
-    worker.add(helmet);
-    worker.position.set(.25, 0, 4.1);
-    group.add(worker);
-    teachingWorker = worker;
-    teachingPeople.push(worker);
+    teachingWorker = teachingPerson(group, 0xe7aa32);
+    teachingWorker.position.set(.33, 0, -4.15);
+    teachingPeople.push(teachingWorker);
 
     scene.add(group);
     return group;
@@ -1016,6 +1244,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     teachingPlants.forEach((object) => { object.visible = layerState.plants; });
     teachingCarts.forEach((object) => { object.visible = layerState.carts; });
     teachingPeople.forEach((object) => { object.visible = layerState.people; });
+    teachingPassageFloors.forEach((floor, index) => {
+      const selected = index + 1 === state.selectedPassage;
+      floor.material.color.setHex(selected ? 0xe9d8aa : 0xd5dad5);
+      floor.material.emissive.setHex(selected ? 0x6b4e18 : 0x000000);
+      floor.material.emissiveIntensity = selected ? .2 : 0;
+    });
     teachingPassageMarkers.forEach((marker, index) => {
       const selected = index + 1 === state.selectedPassage;
       marker.material.emissiveIntensity = selected ? .55 : 0;
@@ -1531,21 +1765,24 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const dialog = $("#infoDialog");
     const title = $("#infoTitle");
     const text = $("#infoText");
+    const visual = $("#infoVisual");
     if (!dialog || !title || !text) return;
     const infoKey = key.charAt(0).toUpperCase() + key.slice(1);
     title.textContent = t(key);
     text.textContent = t(`info${infoKey}`);
+    if (visual) {
+      visual.classList.toggle("show-gutter", key === "cultivationGutter");
+      visual.classList.toggle("show-rails", key === "cartRails");
+      visual.hidden = !["cultivationGutter", "cartRails"].includes(key);
+    }
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "");
   }
 
   const tourSteps = [
     { mode: "overview", nave: 20, side: "left", passage: 1, row: "left" },
-    { mode: "mainRoad", nave: 20, side: "left", passage: 1, row: "left" },
     { mode: "nave", nave: 20, side: "left", passage: 3, row: "left" },
-    { mode: "passage", nave: 20, side: "left", passage: 3, row: "right" },
-    { mode: "worker", nave: 20, side: "left", passage: 3, row: "right" },
-    { mode: "lift", nave: 20, side: "left", passage: 3, row: "right" }
+    { mode: "passage", nave: 20, side: "left", passage: 3, row: "right" }
   ];
 
   function updateTourStep(time) {
@@ -1559,6 +1796,11 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     state.selectedNaveSide = step.side;
     state.selectedPassage = step.passage;
     state.selectedRowSide = step.row;
+    if (step.mode === "passage") {
+      teachingClock = 0;
+      teachingProcess = "harvest";
+      updatePassageProcessBadge();
+    }
     configureCamera(step.mode, true);
     updateSelection();
   }
@@ -1624,12 +1866,34 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateTourStep(time);
     const mode = state.cameraMode;
     const view = getCameraView(mode);
-    if (teachingCart && state.moving) {
-      teachingCart.position.z = -2.8 + ((time * .00125) % 8.8);
+    if (!teachingLastTime) teachingLastTime = time;
+    if (state.moving) teachingClock += Math.min(80, time - teachingLastTime);
+    teachingLastTime = time;
+    const processTime = teachingClock % 18000;
+    const nextTeachingProcess = processTime < 9000 ? "harvest" : "lift";
+    if (nextTeachingProcess !== teachingProcess) {
+      teachingProcess = nextTeachingProcess;
+      updatePassageProcessBadge();
     }
-    if (teachingWorker && state.moving) {
-      teachingWorker.position.z = 4.1 + Math.sin(time * .00075) * 1.1;
-      teachingWorker.rotation.y = Math.sin(time * .00075) > 0 ? 0 : Math.PI;
+    if (teachingCart && teachingLiftCart && teachingWorker) {
+      const harvestActive = teachingProcess === "harvest";
+      teachingCart.visible = layerState.carts && harvestActive;
+      teachingWorker.visible = layerState.people && harvestActive;
+      teachingLiftCart.visible = layerState.carts && !harvestActive;
+      if (harvestActive) {
+        const harvestProgress = processTime / 9000;
+        teachingCart.position.z = -3.2 + harvestProgress * 7.2;
+        teachingWorker.position.z = teachingCart.position.z - .95;
+        teachingWorker.rotation.y = 0;
+      } else {
+        const liftTime = processTime - 9000;
+        const travelProgress = clamp(liftTime / 2300, 0, 1);
+        teachingLiftCart.position.z = -1.6 + travelProgress * 4.4;
+        if (teachingLiftAssembly) {
+          const workProgress = clamp((liftTime - 2300) / 6200, 0, 1);
+          teachingLiftAssembly.position.y = .74 + Math.sin(workProgress * Math.PI) * 1.9;
+        }
+      }
     }
     if (camera === overviewCamera) {
       camera.position.lerp(new THREE.Vector3(0, 37, .01), .12);
@@ -1857,9 +2121,12 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const hero = $(".hero");
   const viewTiles = $(".view-tiles");
   const lessonLine = $(".lesson-line");
+  const tourHeroButton = $("#tourHeroButton");
   if (main && hero && sceneSection) main.insertBefore(sceneSection, hero);
   if (viewTiles && sceneSection) sceneSection.insertBefore(viewTiles, $(".scene-frame"));
+  if (tourHeroButton && sceneSection && viewTiles) sceneSection.insertBefore(tourHeroButton, viewTiles);
   if (lessonLine && sceneSection) sceneSection.insertBefore(lessonLine, $(".scene-frame"));
+  if (hero) hero.hidden = true;
   async function toggleFullscreen() {
     const isOpen = Boolean(document.fullscreenElement) || sceneSection.classList.contains("is-immersive");
     if (isOpen) {
