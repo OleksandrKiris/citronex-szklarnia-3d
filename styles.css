@@ -202,6 +202,13 @@ body.is-immersive { overflow: hidden; }
 
 /* The interactive scene follows the compact interior mode used by the site map. */
 .scene-section > .view-tiles { padding: 0 16px 14px; }
+.lesson-line { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; margin: 0 16px 12px; padding: 10px 11px; color: #173d31; background: #f3f8f5; border: 1px solid #c9ddd1; border-radius: 9px; }
+.lesson-step { display: grid; place-items: center; width: 38px; height: 38px; color: #fff; background: #167451; border-radius: 7px; font-size: 12px; font-weight: 900; }
+.lesson-line strong { min-width: 0; font-size: 13px; line-height: 1.3; }
+.lesson-next { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px 11px; color: #fff; background: #116e4b; border: 1px solid #0d6040; border-radius: 7px; font-size: 12px; font-weight: 850; }
+.lesson-next b { font-size: 18px; line-height: 1; }
+.lesson-next.is-restart { color: #28513f; background: #fff; border-color: #a9c8b6; }
+.lesson-next:active { transform: translateY(1px); }
 @media (min-width: 761px) {
   .scene-frame, #greenhouseCanvas { min-height: 520px; height: clamp(520px, 68vh, 680px); }
 }
@@ -264,5 +271,14 @@ body.is-immersive { overflow: hidden; }
 @media (max-width: 380px) {
   .scene-section > .view-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .scene-section > .view-tiles .view-tile { min-height: 66px; }
+}
+@media (max-width: 760px) {
+  .lesson-line { gap: 8px; margin: 0 8px 8px; padding: 8px; }
+  .lesson-step { width: 34px; height: 34px; }
+  .lesson-line strong { font-size: 11px; line-height: 1.25; }
+  .lesson-next { width: 42px; min-height: 42px; padding: 0; }
+  .lesson-next span { display: none; }
+  .scene-frame, #greenhouseCanvas { height: clamp(350px, 55svh, 490px); }
+  .scene-toolbar, .touch-hint { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }

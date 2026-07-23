@@ -329,6 +329,81 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(naveSelectionTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   translations.ru.nave = "Одна нава";
+  const lessonTranslations = {
+    pl: {
+      lessonOverview: "Droga środkowa dzieli szklarnię na prawą i lewą stronę.",
+      lessonNave: "Jedna nawa ma 5 wejść. Każde prowadzi do osobnego przejścia.",
+      lessonPassage: "W przejściu pracujesz przy lewym albo prawym rzędzie.",
+      lessonNextNave: "Dalej: jedna nawa",
+      lessonNextPassage: "Dalej: wejdź w przejście",
+      lessonRestart: "Zobacz od początku"
+    },
+    en: {
+      lessonOverview: "The middle road separates the right and left sides of the greenhouse.",
+      lessonNave: "One nave has 5 entrances. Each entrance leads to a separate passage.",
+      lessonPassage: "Inside a passage, you work at either the left or the right row.",
+      lessonNextNave: "Next: one nave",
+      lessonNextPassage: "Next: enter a passage",
+      lessonRestart: "Start again"
+    },
+    ua: {
+      lessonOverview: "Центральна дорога ділить теплицю на праву й ліву сторони.",
+      lessonNave: "В одній наві є 5 входів. Кожен веде до окремого проходу.",
+      lessonPassage: "У проході ви працюєте біля лівого або правого ряду.",
+      lessonNextNave: "Далі: одна нава",
+      lessonNextPassage: "Далі: увійти в прохід",
+      lessonRestart: "Почати спочатку"
+    },
+    ru: {
+      lessonOverview: "Центральная дорога делит теплицу на правую и левую стороны.",
+      lessonNave: "В одной наве есть 5 входов. Каждый ведёт в отдельный проход.",
+      lessonPassage: "В проходе вы работаете у левого или правого ряда.",
+      lessonNextNave: "Дальше: одна нава",
+      lessonNextPassage: "Дальше: войти в проход",
+      lessonRestart: "Посмотреть сначала"
+    },
+    az: {
+      lessonOverview: "Mərkəzi yol istixananı sağ və sol tərəfə ayırır.",
+      lessonNave: "Bir navada 5 giriş var. Hər giriş ayrıca keçidə aparır.",
+      lessonPassage: "Keçiddə sol və ya sağ cərgədə işləyirsiniz.",
+      lessonNextNave: "Sonra: bir nava",
+      lessonNextPassage: "Sonra: keçidə daxil olun",
+      lessonRestart: "Əvvəldən baxın"
+    },
+    es: {
+      lessonOverview: "El camino central divide el invernadero en lado derecho e izquierdo.",
+      lessonNave: "Una nave tiene 5 entradas. Cada entrada lleva a un pasillo distinto.",
+      lessonPassage: "En el pasillo se trabaja en la fila izquierda o derecha.",
+      lessonNextNave: "Siguiente: una nave",
+      lessonNextPassage: "Siguiente: entrar al pasillo",
+      lessonRestart: "Ver desde el principio"
+    },
+    fil: {
+      lessonOverview: "Hinahati ng gitnang daan ang kanan at kaliwang bahagi ng bahay-taniman.",
+      lessonNave: "May 5 pasukan ang isang nave. Bawat pasukan ay papunta sa hiwalay na daanan.",
+      lessonPassage: "Sa daanan, magtatrabaho ka sa kaliwa o kanang hanay.",
+      lessonNextNave: "Susunod: isang nave",
+      lessonNextPassage: "Susunod: pumasok sa daanan",
+      lessonRestart: "Magsimula muli"
+    },
+    id: {
+      lessonOverview: "Jalan tengah membagi rumah kaca menjadi sisi kanan dan kiri.",
+      lessonNave: "Satu nave memiliki 5 pintu masuk. Setiap pintu menuju lorong yang berbeda.",
+      lessonPassage: "Di dalam lorong, Anda bekerja di baris kiri atau kanan.",
+      lessonNextNave: "Berikutnya: satu nave",
+      lessonNextPassage: "Berikutnya: masuk ke lorong",
+      lessonRestart: "Lihat dari awal"
+    },
+    ne: {
+      lessonOverview: "बीचको बाटोले ग्रीनहाउसलाई दायाँ र बायाँ भागमा छुट्याउँछ।",
+      lessonNave: "एउटा नाभमा ५ प्रवेशद्वार हुन्छन्। प्रत्येक प्रवेशद्वार फरक बाटोमा जान्छ।",
+      lessonPassage: "बाटोभित्र तपाईं बायाँ वा दायाँ लाइनमा काम गर्नुहुन्छ।",
+      lessonNextNave: "अर्को: एउटा नाभ",
+      lessonNextPassage: "अर्को: बाटोभित्र जानुहोस्",
+      lessonRestart: "सुरुदेखि हेर्नुहोस्"
+    }
+  };
+  Object.entries(lessonTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
@@ -375,6 +450,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateWaterText();
     updateSelection();
     updateGuideText();
+    updateLessonText();
     $("#infoClose").setAttribute("aria-label", t("infoClose"));
   }
 
@@ -420,6 +496,29 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     status.textContent = t(keyByMode[state.cameraMode] || "guideStatusOverview");
   }
 
+  function updateLessonText() {
+    const step = $("#lessonStep");
+    const text = $("#lessonText");
+    const button = $("#lessonNextButton");
+    const buttonText = $("#lessonNextText");
+    if (!step || !text || !button || !buttonText) return;
+    const simpleMode = state.cameraMode === "nave"
+      ? "nave"
+      : ["passage", "worker", "lift"].includes(state.cameraMode) ? "passage" : "overview";
+    const content = {
+      overview: { step: "1/3", text: "lessonOverview", button: "lessonNextNave", next: "nave", icon: "→" },
+      nave: { step: "2/3", text: "lessonNave", button: "lessonNextPassage", next: "passage", icon: "→" },
+      passage: { step: "3/3", text: "lessonPassage", button: "lessonRestart", next: "overview", icon: "↺" }
+    }[simpleMode];
+    step.textContent = content.step;
+    text.textContent = t(content.text);
+    buttonText.textContent = t(content.button);
+    button.dataset.nextMode = content.next;
+    button.querySelector("b").textContent = content.icon;
+    button.setAttribute("aria-label", t(content.button));
+    button.classList.toggle("is-restart", simpleMode === "passage");
+  }
+
   $("#languageSelect").addEventListener("change", (event) => {
     state.lang = event.target.value;
     localStorage.setItem("citronex-3d-lang", state.lang);
@@ -452,6 +551,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let overviewOnlyObjects = [];
   let teachingGroups = {};
   let teachingCart = null;
+  let teachingWorker = null;
   let teachingPassageMarkers = [];
   let teachingPlants = [];
   let teachingCarts = [];
@@ -787,6 +887,24 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     group.add(cart);
     teachingCart = cart;
     teachingCarts.push(cart);
+
+    const worker = new THREE.Group();
+    teachingBox(worker, .28, .5, .2, 0xe7aa32, 0, .7, 0, { roughness: .75 }, "people");
+    teachingBox(worker, .1, .38, .1, 0x31424b, -.07, .26, 0, { roughness: .75 }, "people");
+    teachingBox(worker, .1, .38, .1, 0x31424b, .07, .26, 0, { roughness: .75 }, "people");
+    const head = new THREE.Mesh(new THREE.SphereGeometry(.14, 9, 8), new THREE.MeshStandardMaterial({ color: 0xd99a76, roughness: .86 }));
+    head.position.y = 1.08;
+    head.userData.infoKey = "people";
+    worker.add(head);
+    const helmet = new THREE.Mesh(new THREE.SphereGeometry(.17, 9, 6, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xf0c13b, roughness: .7 }));
+    helmet.position.y = 1.17;
+    helmet.userData.infoKey = "people";
+    worker.add(helmet);
+    worker.position.set(.25, 0, 4.1);
+    group.add(worker);
+    teachingWorker = worker;
+    teachingPeople.push(worker);
+
     scene.add(group);
     return group;
   }
@@ -1193,6 +1311,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
     applyLayerVisibility();
     updateGuideText();
+    updateLessonText();
   }
 
   function getCameraView(mode) {
@@ -1418,6 +1537,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     if (teachingCart && state.moving) {
       teachingCart.position.z = -2.8 + ((time * .00125) % 8.8);
     }
+    if (teachingWorker && state.moving) {
+      teachingWorker.position.z = 4.1 + Math.sin(time * .00075) * 1.1;
+      teachingWorker.rotation.y = Math.sin(time * .00075) > 0 ? 0 : Math.PI;
+    }
     if (camera === overviewCamera) {
       camera.position.lerp(new THREE.Vector3(0, 37, .01), .12);
       targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
@@ -1527,6 +1650,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   document.querySelectorAll("[data-camera]").forEach((button) => button.addEventListener("click", () => configureCamera(button.dataset.camera)));
+  $("#lessonNextButton").addEventListener("click", (event) => {
+    configureCamera(event.currentTarget.dataset.nextMode || "nave");
+  });
   $("#motionButton").addEventListener("click", () => { state.moving = !state.moving; state.tourActive = false; updateMotionText(); updateTourText(); });
   $("#resetButton").addEventListener("click", () => { resetCameraControls(); state.tourActive = false; state.tourStart = 0; state.tourStep = -1; state.growthAuto = true; state.waterActive = true; state.liftActive = true; applyGrowthStage(3); updateWaterText(); updateLiftText(); updateTourText(); applyLayerVisibility(); configureCamera(state.cameraMode); });
   function toggleTour() {
@@ -1640,8 +1766,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const main = document.querySelector("main");
   const hero = $(".hero");
   const viewTiles = $(".view-tiles");
+  const lessonLine = $(".lesson-line");
   if (main && hero && sceneSection) main.insertBefore(sceneSection, hero);
   if (viewTiles && sceneSection) sceneSection.insertBefore(viewTiles, $(".scene-frame"));
+  if (lessonLine && sceneSection) sceneSection.insertBefore(lessonLine, $(".scene-frame"));
   async function toggleFullscreen() {
     const isOpen = Boolean(document.fullscreenElement) || sceneSection.classList.contains("is-immersive");
     if (isOpen) {
