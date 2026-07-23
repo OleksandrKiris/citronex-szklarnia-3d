@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="styles.css?v=11">
 </head>
 <body>
   <div class="site-shell">
@@ -72,22 +72,27 @@
         <div class="scene-frame">
           <canvas id="greenhouseCanvas" aria-label="Interaktywna wizualizacja szklarni"></canvas>
           <div id="sceneFallback" class="scene-fallback" hidden>
+            <div class="fallback-side"><span data-i18n="rightSide">PRAWA STRONA</span><b>39 ... 1</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
             <div class="fallback-road" data-i18n="middleRoad">DROGA ŚRODKOWA</div>
-            <div class="fallback-side"><span data-i18n="leftSide">LEWA STRONA</span><b>1 2 3 4 5</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
-            <div class="fallback-side"><span data-i18n="rightSide">PRAWA STRONA</span><b>1 2 3 4 5</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
+            <div class="fallback-side"><span data-i18n="leftSide">LEWA STRONA</span><b>39 ... 1</b><small data-i18n="fivePassages">5 przejść / 10 rzędów</small></div>
           </div>
           <button class="scene-label label-road" type="button" data-info-key="middleRoad" data-i18n="middleRoad">DROGA ŚRODKOWA</button>
-          <button class="scene-label label-left" type="button" data-info-key="leftSide" data-i18n="leftSide">LEWA STRONA</button>
-          <button class="scene-label label-right" type="button" data-info-key="rightSide" data-i18n="rightSide">PRAWA STRONA</button>
-          <button class="scene-label label-cart" type="button" data-info-key="liftCart" data-i18n="liftCart">WÓZEK PODNOŚNIKOWY</button>
-          <button class="scene-label label-passage" type="button" data-info-key="passage" data-i18n="passage">PRZEJŚCIE</button>
+          <button class="scene-label label-right-side" type="button" data-info-key="rightSide" data-i18n="rightSide">PRAWA STRONA</button>
+          <button class="scene-label label-left-side" type="button" data-info-key="leftSide" data-i18n="leftSide">LEWA STRONA</button>
+          <div class="plan-overlay" aria-hidden="true">
+            <div class="plan-axis plan-axis-top"><span>39</span><i></i><span>1</span></div>
+            <div class="plan-axis plan-axis-bottom"><span>39</span><i></i><span>1</span></div>
+            <div class="plan-span-axis"><span>1</span><i></i><span>27</span></div>
+            <div class="plan-connectors"><b>1</b><b>2</b><b>3</b></div>
+          </div>
           <div class="mini-map" aria-hidden="true">
-            <span data-i18n="miniMapTitle">PLAN NAWY</span>
+            <span data-i18n="miniMapTitle">PLAN CAŁEJ SZKLARNI</span>
             <div class="mini-map-body">
-              <div class="mini-map-side"><b>5</b><b>4</b><b>3</b><b>2</b><b>1</b></div>
+              <div class="mini-map-side mini-map-right"><b data-i18n="rightSide">PRAWA STRONA</b><i></i><small data-i18n="naveCountShort">39 naw</small></div>
               <i class="mini-map-road"></i>
-              <div class="mini-map-side"><b>1</b><b>2</b><b>3</b><b>4</b><b>5</b></div>
+              <div class="mini-map-side mini-map-left"><b data-i18n="leftSide">LEWA STRONA</b><i></i><small data-i18n="naveCountShort">39 naw</small></div>
             </div>
+            <div class="mini-map-note"><span>1</span><i></i><span>27</span><b data-i18n="connectorCountShort">3 łączniki</b></div>
           </div>
           <div id="selectionBadge" class="selection-badge" data-i18n="selectionText">Wybrane: lewa strona, przejście 1, lewy rząd</div>
         </div>
@@ -208,6 +213,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=10"></script>
+    <script type="module" src="app.js?v=11"></script>
 </body>
 </html>

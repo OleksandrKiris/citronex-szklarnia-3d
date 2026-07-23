@@ -130,6 +130,18 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   Object.entries(explorationTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(processTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
   Object.entries(entryHints).forEach(([language, value]) => { translations[language].entryHint = value; });
+  const naveInfoTranslations = {
+    pl: { infoNave: "Nawa to długi, powtarzalny moduł szklarni. Na tym planie widać ich 39; konkretna liczba może zależeć od szklarni.", miniMapTitle: "PLAN CAŁEJ SZKLARNI", naveCountShort: "39 naw", connectorCountShort: "3 łączniki" },
+    en: { infoNave: "A nave is a long repeating greenhouse module. This plan shows 39; the exact number can differ between greenhouses.", miniMapTitle: "WHOLE GREENHOUSE PLAN", naveCountShort: "39 naves", connectorCountShort: "3 connectors" },
+    ua: { infoNave: "Нава — це довгий повторюваний модуль теплиці. На цьому плані їх 39; точна кількість може відрізнятися.", miniMapTitle: "ПЛАН УСІЄЇ ТЕПЛИЦІ", naveCountShort: "39 нав", connectorCountShort: "3 з’єднання" },
+    ru: { infoNave: "Нава — это длинный повторяющийся модуль теплицы. На этом плане их 39; точное количество может отличаться.", miniMapTitle: "ПЛАН ВСЕЙ ТЕПЛИЦЫ", naveCountShort: "39 нав", connectorCountShort: "3 соединения" },
+    az: { infoNave: "Nava istixananın uzun, təkrarlanan moduludur. Bu planda 39 nava göstərilir; dəqiq say istixanaya görə dəyişə bilər.", miniMapTitle: "BÜTÜN İSTİXANANIN PLANI", naveCountShort: "39 nava", connectorCountShort: "3 birləşdirici" },
+    es: { infoNave: "Una nave es un módulo largo y repetido del invernadero. Este plano muestra 39; el número exacto puede variar.", miniMapTitle: "PLANO DE TODO EL INVERNADERO", naveCountShort: "39 naves", connectorCountShort: "3 conexiones" },
+    fil: { infoNave: "Ang nave ay isang mahaba at paulit-ulit na bahagi ng greenhouse. Ipinapakita ng planong ito ang 39; maaaring mag-iba ang bilang.", miniMapTitle: "PLANO NG BUONG GREENHOUSE", naveCountShort: "39 nave", connectorCountShort: "3 koneksyon" },
+    id: { infoNave: "Nave adalah modul rumah kaca yang panjang dan berulang. Denah ini menunjukkan 39; jumlah sebenarnya dapat berbeda.", miniMapTitle: "DENAH SELURUH RUMAH KACA", naveCountShort: "39 nave", connectorCountShort: "3 penghubung" },
+    ne: { infoNave: "नावा ग्रीनहाउसको लामो र दोहोरिने भाग हो। यो योजनामा ३९ वटा देखाइएको छ; वास्तविक संख्या फरक हुन सक्छ।", miniMapTitle: "सम्पूर्ण ग्रीनहाउसको योजना", naveCountShort: "३९ नावा", connectorCountShort: "३ जोड्ने बाटा" }
+  };
+  Object.entries(naveInfoTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: true, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
@@ -194,6 +206,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const fallback = $("#sceneFallback");
   let renderer;
   let camera;
+  let perspectiveCamera;
+  let overviewCamera;
   let targetCamera;
   let scene;
   let animated = [];
@@ -207,6 +221,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   let peopleRecords = [];
   let demoLiftItem = null;
   let selectionArrows = [];
+  let roofMeshes = [];
   const layerState = { plants: true, capillaries: true, carts: true, people: true };
 
   function box(width, height, depth, color, x, y, z, materialOptions = {}) {
@@ -325,7 +340,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   }
 
   function addGlasshouse() {
-    const glass = { color: 0x8bd0c3, transparent: true, opacity: .08, roughness: .18, metalness: .08, side: THREE.DoubleSide };
+    // In the overview the roof must stay readable as a greenhouse outline, not hide the plan below it.
+    const glass = { color: 0xbde9dc, transparent: true, opacity: .035, depthWrite: false, roughness: .22, metalness: .03, side: THREE.DoubleSide };
     const frame = 0x4f8f7e;
     const floor = 0xd9e7dd;
     const passage = 0xd6bd83;
@@ -349,13 +365,16 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     ["left", "right"].forEach((naveSide) => {
       const centerZ = sideCenters[naveSide];
       box(blockWidth, .08, blockDepth, floor, 0, .15, centerZ);
-      box(blockWidth, .07, blockDepth, 0x8dcfc2, 0, 5.72, centerZ, glass);
+      roofMeshes.push(box(blockWidth, .07, blockDepth, 0x8dcfc2, 0, 5.72, centerZ, glass));
       box(blockWidth, 5.8, .08, 0x78b9aa, 0, 2.9, centerZ + (naveSide === "right" ? blockDepth / 2 : -blockDepth / 2), glass);
       box(.08, 5.8, blockDepth, 0x78b9aa, -blockWidth / 2, 2.9, centerZ, glass);
       box(.08, 5.8, blockDepth, 0x78b9aa, blockWidth / 2, 2.9, centerZ, glass);
       for (let nave = 0; nave <= naveCount; nave += 1) {
         const x = -blockWidth / 2 + navePitch * nave;
-        box(.035, 5.7, blockDepth, frame, x, 2.9, centerZ);
+        const naveLine = box(.035, 5.7, blockDepth, frame, x, 2.9, centerZ);
+        naveLine.userData.infoKey = "nave";
+        naveLine.userData.naveSide = naveSide;
+        naveLine.userData.naveNumber = naveCount - Math.min(nave, naveCount);
       }
       for (let span = 0; span <= spanCount; span += 1) {
         const z = naveSide === "right" ? roadEdge + span * spanPitch : -roadEdge - span * spanPitch;
@@ -444,6 +463,8 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       updateTourText();
     }
     state.cameraMode = cameraViews[mode] ? mode : "overview";
+    if (overviewCamera && perspectiveCamera) camera = state.cameraMode === "overview" ? overviewCamera : perspectiveCamera;
+    roofMeshes.forEach((mesh) => { mesh.visible = state.cameraMode !== "overview"; });
     resetCameraControls();
     document.querySelectorAll("[data-camera]").forEach((button) => button.classList.toggle("is-active", button.dataset.camera === mode));
   }
@@ -565,7 +586,9 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xdff4ea);
       scene.fog = new THREE.Fog(0xdff4ea, 38, 78);
-      camera = new THREE.PerspectiveCamera(38, 1, .1, 200);
+      perspectiveCamera = new THREE.PerspectiveCamera(38, 1, .1, 200);
+      overviewCamera = new THREE.OrthographicCamera(-14, 14, 14, -14, .1, 200);
+      camera = overviewCamera;
       targetCamera = new THREE.Vector3(0, 1, 0);
       renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: true, alpha: false, powerPreference: "high-performance" });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
@@ -580,6 +603,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
       selectionArrows.forEach((arrow) => scene.add(arrow));
       applyGrowthStage(state.growthStage);
       updateSelection();
+      configureCamera(state.cameraMode, true);
       resizeScene();
       requestAnimationFrame(animate);
     } catch (error) {
@@ -593,8 +617,19 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const width = sceneCanvas.clientWidth || 800;
     const height = sceneCanvas.clientHeight || 460;
     renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
+    const aspect = width / height;
+    if (perspectiveCamera) {
+      perspectiveCamera.aspect = aspect;
+      perspectiveCamera.updateProjectionMatrix();
+    }
+    if (overviewCamera) {
+      const halfHeight = 14;
+      overviewCamera.left = -halfHeight * aspect;
+      overviewCamera.right = halfHeight * aspect;
+      overviewCamera.top = halfHeight;
+      overviewCamera.bottom = -halfHeight;
+      overviewCamera.updateProjectionMatrix();
+    }
   }
 
   function animate(time) {
@@ -602,6 +637,55 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     updateTourStep(time);
     const mode = state.cameraMode;
     const view = getCameraView(mode);
+    if (camera === overviewCamera) {
+      camera.position.lerp(new THREE.Vector3(0, 37, .01), .12);
+      targetCamera.lerp(new THREE.Vector3(0, 0, 0), .12);
+      camera.zoom = clamp(1 / cameraTouch.zoom, .72, 1.45);
+      camera.updateProjectionMatrix();
+      camera.lookAt(targetCamera);
+      if (state.moving) animated.forEach((item) => {
+        if (item.type === "person") {
+          const direction = item.baseX < 0 ? -1 : 1;
+          if (item.axis === "x") item.object.position.x = item.baseX + Math.sin(time * .00045 + item.phase) * direction * 2.2;
+          else item.object.position.z = item.baseZ + Math.sin(time * .00045 + item.phase) * 5.5;
+          item.object.rotation.y = Math.sin(time * .00045 + item.phase) > 0 ? 0 : Math.PI;
+        }
+        if (item.type === "cart") {
+          if (item.axis === "x") {
+            const direction = item.baseX < 0 ? -1 : 1;
+            item.object.position.x = item.baseX + ((time * .0025 + item.phase * 2) % 3.4) * direction;
+            item.object.position.z = item.baseZ;
+          } else {
+            item.object.position.x = item.baseX;
+            item.object.position.z = ((item.baseZ + time * .0025 + item.phase * 2) % 28) - 14;
+          }
+          if (item.liftAssembly) {
+            const liftProgress = state.liftActive ? .5 + Math.sin(time * .0011 + item.phase) * .5 : 0;
+            item.liftAssembly.position.y = .72 + liftProgress * 1.45;
+          }
+        }
+        if (item.type === "harvest") {
+          if (item.axis === "x") {
+            const direction = item.baseX < 0 ? -1 : 1;
+            item.object.position.x = item.baseX + ((time * .0012 + item.phase * 2) % 3.4) * direction;
+            item.object.position.z = item.baseZ;
+          } else item.object.position.z = ((item.baseZ + time * .0012 + item.phase * 2) % 22) - 11;
+        }
+      });
+      if (state.growthAuto && state.moving) {
+        const automaticStage = Math.floor(time / 4200) % 4;
+        if (automaticStage !== state.growthStage) applyGrowthStage(automaticStage);
+      }
+      if (state.waterActive && state.moving) waterDots.forEach((dot) => {
+        if (dot.axis === "x") {
+          const start = dot.direction < 0 ? -2.3 : 2.3;
+          dot.mesh.position.x = start + ((time * .004 + dot.phase + 6.2) % 6.2) * dot.direction;
+          dot.mesh.position.z = dot.baseZ;
+        } else dot.mesh.position.z = ((dot.baseZ + time * .004 + dot.phase + 13.2) % 26.4) - 13.2;
+      });
+      renderer.render(scene, camera);
+      return;
+    }
     const focusX = selectedPassageX();
     const targetValues = [...view.target];
     const positionValues = [...view.position];
