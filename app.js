@@ -632,6 +632,127 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   };
   Object.entries(correctedRowCountTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
+  const clarityTranslations = {
+    pl: {
+      leftNaveRows: "LEWA NAWA • RZĘDY 1–5",
+      rightNaveRows: "PRAWA NAWA • RZĘDY 1–5",
+      leftRow: "Lewa strona rzędu",
+      rightRow: "Prawa strona rzędu",
+      passageDesc: "Jeden rząd / przejście i dwie strony pracy.",
+      lessonPassage: "Wchodzisz w jeden rząd / przejście. Pracujesz po jego lewej albo prawej stronie. Numery przęseł są na środku.",
+      step3Title: "Jeden rząd / przejście",
+      step3Text: "Jeden rząd / przejście ma lewą i prawą stronę pracy. Pośrodku widzisz numery przęseł.",
+      rowChoice: "Wybierz stronę pracy w rzędzie",
+      infoLeftRow: "Lewa strona jednego rzędu / przejścia. Tutaj pracujesz przy roślinach po lewej ręce.",
+      infoRightRow: "Prawa strona jednego rzędu / przejścia. Tutaj pracujesz przy roślinach po prawej ręce."
+    },
+    en: {
+      leftNaveRows: "LEFT NAVE • ROWS 1–5",
+      rightNaveRows: "RIGHT NAVE • ROWS 1–5",
+      leftRow: "Left side of the row",
+      rightRow: "Right side of the row",
+      passageDesc: "One row/passage with two work sides.",
+      lessonPassage: "Enter one row/passage. Work on its left or right side. Span numbers are marked in the centre.",
+      step3Title: "One row / passage",
+      step3Text: "One row/passage has a left and right work side. Span numbers are marked in the centre.",
+      rowChoice: "Choose the work side of the row",
+      infoLeftRow: "The left work side of one row/passage. Work with the plants on your left.",
+      infoRightRow: "The right work side of one row/passage. Work with the plants on your right."
+    },
+    ua: {
+      leftNaveRows: "ЛІВА НАВА • РЯДИ 1–5",
+      rightNaveRows: "ПРАВА НАВА • РЯДИ 1–5",
+      leftRow: "Ліва сторона ряду",
+      rightRow: "Права сторона ряду",
+      passageDesc: "Один ряд / прохід і дві сторони роботи.",
+      lessonPassage: "Увійдіть в один ряд / прохід. Працюйте з його лівого або правого боку. Номери прольотів позначені посередині.",
+      step3Title: "Один ряд / прохід",
+      step3Text: "Один ряд / прохід має ліву і праву сторони роботи. Посередині позначені номери прольотів.",
+      rowChoice: "Оберіть сторону роботи в ряду",
+      infoLeftRow: "Ліва робоча сторона одного ряду / проходу. Тут ви працюєте з рослинами ліворуч.",
+      infoRightRow: "Права робоча сторона одного ряду / проходу. Тут ви працюєте з рослинами праворуч."
+    },
+    ru: {
+      leftNaveRows: "ЛЕВАЯ НАВА • РЯДЫ 1–5",
+      rightNaveRows: "ПРАВАЯ НАВА • РЯДЫ 1–5",
+      leftRow: "Левая сторона ряда",
+      rightRow: "Правая сторона ряда",
+      passageDesc: "Один ряд / проход и две рабочие стороны.",
+      lessonPassage: "Войдите в один ряд / проход. Работайте с его левой или правой стороны. Номера секций указаны посередине.",
+      step3Title: "Один ряд / проход",
+      step3Text: "У одного ряда / прохода есть левая и правая рабочие стороны. Номера секций находятся посередине.",
+      rowChoice: "Выберите рабочую сторону ряда",
+      infoLeftRow: "Левая рабочая сторона одного ряда / прохода. Здесь вы работаете с растениями слева.",
+      infoRightRow: "Правая рабочая сторона одного ряда / прохода. Здесь вы работаете с растениями справа."
+    },
+    az: {
+      leftNaveRows: "SOL NAVA • 1–5 SIRALAR",
+      rightNaveRows: "SAĞ NAVA • 1–5 SIRALAR",
+      leftRow: "Sıranın sol tərəfi",
+      rightRow: "Sıranın sağ tərəfi",
+      passageDesc: "Bir sıra/keçid və iki iş tərəfi.",
+      lessonPassage: "Bir sıraya/keçidə daxil olun. Onun sol və ya sağ tərəfində işləyin. Bölmə nömrələri ortada göstərilib.",
+      step3Title: "Bir sıra / keçid",
+      step3Text: "Bir sıra/keçidin sol və sağ iş tərəfi var. Bölmə nömrələri ortada göstərilib.",
+      rowChoice: "Sırada iş tərəfini seçin",
+      infoLeftRow: "Bir sıra/keçidin sol iş tərəfi. Burada solunuzdakı bitkilərlə işləyirsiniz.",
+      infoRightRow: "Bir sıra/keçidin sağ iş tərəfi. Burada sağınızdakı bitkilərlə işləyirsiniz."
+    },
+    es: {
+      leftNaveRows: "NAVE IZQUIERDA • FILAS 1–5",
+      rightNaveRows: "NAVE DERECHA • FILAS 1–5",
+      leftRow: "Lado izquierdo de la fila",
+      rightRow: "Lado derecho de la fila",
+      passageDesc: "Una fila/pasillo con dos lados de trabajo.",
+      lessonPassage: "Entra en una fila/pasillo. Trabaja en su lado izquierdo o derecho. Los números de sección están en el centro.",
+      step3Title: "Una fila / pasillo",
+      step3Text: "Una fila/pasillo tiene un lado de trabajo izquierdo y otro derecho. Los números de sección están en el centro.",
+      rowChoice: "Elige el lado de trabajo de la fila",
+      infoLeftRow: "Lado de trabajo izquierdo de una fila/pasillo. Trabaja con las plantas de tu izquierda.",
+      infoRightRow: "Lado de trabajo derecho de una fila/pasillo. Trabaja con las plantas de tu derecha."
+    },
+    fil: {
+      leftNaveRows: "KALIWANG NAVE • HANAY 1–5",
+      rightNaveRows: "KANANG NAVE • HANAY 1–5",
+      leftRow: "Kaliwang panig ng hanay",
+      rightRow: "Kanang panig ng hanay",
+      passageDesc: "Isang hanay/daanan na may dalawang panig ng trabaho.",
+      lessonPassage: "Pumasok sa isang hanay/daanan. Magtrabaho sa kaliwa o kanang panig nito. Nasa gitna ang mga numero ng seksiyon.",
+      step3Title: "Isang hanay / daanan",
+      step3Text: "May kaliwa at kanang panig ng trabaho ang isang hanay/daanan. Nasa gitna ang mga numero ng seksiyon.",
+      rowChoice: "Piliin ang panig ng trabaho sa hanay",
+      infoLeftRow: "Kaliwang panig ng trabaho sa isang hanay/daanan. Dito ka nagtatrabaho sa mga halaman sa kaliwa.",
+      infoRightRow: "Kanang panig ng trabaho sa isang hanay/daanan. Dito ka nagtatrabaho sa mga halaman sa kanan."
+    },
+    id: {
+      leftNaveRows: "NAVE KIRI • BARIS 1–5",
+      rightNaveRows: "NAVE KANAN • BARIS 1–5",
+      leftRow: "Sisi kiri baris",
+      rightRow: "Sisi kanan baris",
+      passageDesc: "Satu baris/lorong dengan dua sisi kerja.",
+      lessonPassage: "Masuklah ke satu baris/lorong. Bekerjalah di sisi kiri atau kanannya. Nomor bagian ditandai di tengah.",
+      step3Title: "Satu baris / lorong",
+      step3Text: "Satu baris/lorong memiliki sisi kerja kiri dan kanan. Nomor bagian ditandai di tengah.",
+      rowChoice: "Pilih sisi kerja pada baris",
+      infoLeftRow: "Sisi kerja kiri dari satu baris/lorong. Di sini Anda bekerja dengan tanaman di sebelah kiri.",
+      infoRightRow: "Sisi kerja kanan dari satu baris/lorong. Di sini Anda bekerja dengan tanaman di sebelah kanan."
+    },
+    ne: {
+      leftNaveRows: "बायाँ नाभ • लाइन १–५",
+      rightNaveRows: "दायाँ नाभ • लाइन १–५",
+      leftRow: "लाइनको बायाँ भाग",
+      rightRow: "लाइनको दायाँ भाग",
+      passageDesc: "एउटा लाइन/बाटो र काम गर्ने दुई भाग।",
+      lessonPassage: "एउटा लाइन/बाटोमा प्रवेश गर्नुहोस्। यसको बायाँ वा दायाँ भागमा काम गर्नुहोस्। खण्डका नम्बर बीचमा छन्।",
+      step3Title: "एउटा लाइन / बाटो",
+      step3Text: "एउटा लाइन/बाटोमा बायाँ र दायाँ काम गर्ने भाग हुन्छ। खण्डका नम्बर बीचमा छन्।",
+      rowChoice: "लाइनमा काम गर्ने भाग छान्नुहोस्",
+      infoLeftRow: "एउटा लाइन/बाटोको बायाँ काम गर्ने भाग। यहाँ बायाँपट्टिका बिरुवामा काम गर्नुहोस्।",
+      infoRightRow: "एउटा लाइन/बाटोको दायाँ काम गर्ने भाग। यहाँ दायाँपट्टिका बिरुवामा काम गर्नुहोस्।"
+    }
+  };
+  Object.entries(clarityTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
@@ -1342,7 +1463,7 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     [-1, 1].forEach((direction) => {
       const centerZ = direction * naveCenter;
       const sideKey = direction < 0 ? "leftSide" : "rightSide";
-      teachingBox(group, 11.45, .055, naveDepth, 0xf1f4f1, 0, .16, centerZ, { roughness: .98 }, sideKey);
+      teachingBox(group, 11.45, .055, naveDepth, direction < 0 ? 0xe8f1f5 : 0xe9f4ec, 0, .16, centerZ, { roughness: .98 }, sideKey);
       rowXs.forEach((x, index) => {
         const rowNumber = index + 1;
         const selected = index === 0;

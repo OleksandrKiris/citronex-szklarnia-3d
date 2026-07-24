@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=26">
+    <link rel="stylesheet" href="styles.css?v=27">
 </head>
 <body>
   <div class="site-shell">
@@ -118,13 +118,14 @@
             <small data-i18n="naveFiveEntrances">2 nawy • 5 + 5 rzędów</small>
             <span class="nave-entry-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></span>
           </div>
-          <div class="nave-floor-numbers" aria-label="1 2 3 4 5"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div>
           <div class="standing-guide" aria-live="polite">
             <span class="standing-guide-icon" aria-hidden="true">↑</span>
             <span><strong data-i18n="standingPosition">STOISZ NA DRODZE</strong><small data-i18n="standingDirection">Plecami do pierwszych naw • patrzysz do przodu</small></span>
           </div>
-          <div class="passage-row-label passage-row-left" data-i18n="leftRow">Lewy rząd</div>
-          <div class="passage-row-label passage-row-right" data-i18n="rightRow">Prawy rząd</div>
+          <div class="nave-side-callout nave-side-left"><strong data-i18n="leftNaveRows">LEWA NAWA • RZĘDY 1–5</strong><span>1 2 3 4 5</span></div>
+          <div class="nave-side-callout nave-side-right"><strong data-i18n="rightNaveRows">PRAWA NAWA • RZĘDY 1–5</strong><span>1 2 3 4 5</span></div>
+          <div class="passage-row-label passage-row-left" data-i18n="leftRow">Lewa strona rzędu</div>
+          <div class="passage-row-label passage-row-right" data-i18n="rightRow">Prawa strona rzędu</div>
           <button class="passage-equipment-label passage-gutter-left" type="button" data-info-key="cultivationGutter" data-i18n="cultivationGutter">Rynna uprawowa</button>
           <button class="passage-equipment-label passage-rails" type="button" data-info-key="cartRails" data-i18n="cartRails">2 rury = tor wózka</button>
           <div class="passage-process-badge" aria-live="polite"><i></i><span id="passageProcessText" data-i18n="processHarvest">Zbiór: wózek jedzie po rurach</span></div>
@@ -168,8 +169,8 @@
             <div class="control-card">
               <strong data-i18n="rowChoice">Wybierz rząd w przejściu</strong>
               <div class="control-actions">
-                <button class="choice-button is-active" type="button" data-row-side="left" data-i18n="leftRow">Lewy rząd</button>
-                <button class="choice-button" type="button" data-row-side="right" data-i18n="rightRow">Prawy rząd</button>
+                <button class="choice-button is-active" type="button" data-row-side="left" data-i18n="leftRow">Lewa strona rzędu</button>
+                <button class="choice-button" type="button" data-row-side="right" data-i18n="rightRow">Prawa strona rzędu</button>
               </div>
             </div>
             <div class="control-card">
@@ -267,6 +268,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=26"></script>
+    <script type="module" src="app.js?v=27"></script>
 </body>
 </html>
