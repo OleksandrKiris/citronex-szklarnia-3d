@@ -928,6 +928,73 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   };
   Object.entries(orientationRuleTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
+  const hierarchyTranslations = {
+    pl: {
+      ruleOverview: "Odczytaj miejsce w tej kolejności",
+      hierarchyGreenhouse: "CAŁA SZKLARNIA",
+      hierarchyNave: "NUMER NAWY",
+      hierarchyEntry: "RZĄD / WEJŚCIE 1–5",
+      hierarchyWorkSide: "STRONA PRACY"
+    },
+    en: {
+      ruleOverview: "Read the work location in this order",
+      hierarchyGreenhouse: "WHOLE GREENHOUSE",
+      hierarchyNave: "NAVE NUMBER",
+      hierarchyEntry: "ROW / ENTRANCE 1–5",
+      hierarchyWorkSide: "WORK SIDE"
+    },
+    ua: {
+      ruleOverview: "Читайте позначення місця в такій послідовності",
+      hierarchyGreenhouse: "ВСЯ ТЕПЛИЦЯ",
+      hierarchyNave: "НОМЕР НАВИ",
+      hierarchyEntry: "РЯД / ВХІД 1–5",
+      hierarchyWorkSide: "СТОРОНА РОБОТИ"
+    },
+    ru: {
+      ruleOverview: "Читайте обозначение места по порядку",
+      hierarchyGreenhouse: "ВСЯ ТЕПЛИЦА",
+      hierarchyNave: "НОМЕР НАВЫ",
+      hierarchyEntry: "РЯД / ВХОД 1–5",
+      hierarchyWorkSide: "РАБОЧАЯ СТОРОНА"
+    },
+    az: {
+      ruleOverview: "Yeri bu ardıcıllıqla oxuyun",
+      hierarchyGreenhouse: "BÜTÜN İSTİXANA",
+      hierarchyNave: "NAVA NÖMRƏSİ",
+      hierarchyEntry: "SIRA / GİRİŞ 1–5",
+      hierarchyWorkSide: "İŞ TƏRƏFİ"
+    },
+    es: {
+      ruleOverview: "Lee el lugar de trabajo en este orden",
+      hierarchyGreenhouse: "INVERNADERO COMPLETO",
+      hierarchyNave: "NÚMERO DE NAVE",
+      hierarchyEntry: "FILA / ENTRADA 1–5",
+      hierarchyWorkSide: "LADO DE TRABAJO"
+    },
+    fil: {
+      ruleOverview: "Basahin ang lugar ng trabaho sa ganitong ayos",
+      hierarchyGreenhouse: "BUONG BAHAY-TANIMAN",
+      hierarchyNave: "NUMERO NG NAVE",
+      hierarchyEntry: "HANAY / PASUKAN 1–5",
+      hierarchyWorkSide: "PANIG NG TRABAHO"
+    },
+    id: {
+      ruleOverview: "Baca lokasi kerja dengan urutan ini",
+      hierarchyGreenhouse: "SELURUH RUMAH KACA",
+      hierarchyNave: "NOMOR NAVE",
+      hierarchyEntry: "BARIS / PINTU 1–5",
+      hierarchyWorkSide: "SISI KERJA"
+    },
+    ne: {
+      ruleOverview: "काम गर्ने स्थानलाई यो क्रममा बुझ्नुहोस्",
+      hierarchyGreenhouse: "पूरै ग्रीनहाउस",
+      hierarchyNave: "नाभ नम्बर",
+      hierarchyEntry: "लाइन / प्रवेश १–५",
+      hierarchyWorkSide: "काम गर्ने भाग"
+    }
+  };
+  Object.entries(hierarchyTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
@@ -1051,12 +1118,14 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     const left = $("#orientationRuleLeft");
     const center = $("#orientationRuleCenter");
     const right = $("#orientationRuleRight");
-    if (!title || !left || !center || !right) return;
+    const extra = $("#orientationRuleExtra");
+    const diagram = document.querySelector(".orientation-rule-diagram");
+    if (!title || !left || !center || !right || !extra || !diagram) return;
     const mode = simpleMode || (state.cameraMode === "nave"
       ? "nave"
       : ["passage", "worker", "lift"].includes(state.cameraMode) ? "passage" : "overview");
     const content = {
-      overview: { title: "ruleOverview", left: "leftSide", center: "ruleCenterRoad", right: "rightSide" },
+      overview: { title: "ruleOverview", left: "hierarchyGreenhouse", center: "hierarchyNave", right: "hierarchyEntry", extra: "hierarchyWorkSide" },
       nave: { title: "ruleNave", left: "leftNaveRows", center: "ruleCenterRoad", right: "rightNaveRows" },
       passage: { title: "rulePassage", left: "leftRow", center: "ruleSpanCenter", right: "rightRow" }
     }[mode];
@@ -1064,6 +1133,10 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     left.textContent = t(content.left);
     center.textContent = t(content.center);
     right.textContent = t(content.right);
+    const isHierarchy = Boolean(content.extra);
+    diagram.classList.toggle("is-hierarchy", isHierarchy);
+    extra.hidden = !isHierarchy;
+    if (isHierarchy) extra.textContent = t(content.extra);
   }
 
   function updatePassageProcessBadge() {
