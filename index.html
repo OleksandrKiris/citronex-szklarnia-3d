@@ -7,7 +7,7 @@
   <meta name="description" content="Interaktywna wizualizacja szklarni CITRONEX: nawy, przejścia, rzędy, pomidory, pracownicy i wózki.">
   <title>CITRONEX | Szklarnia 3D</title>
   <link rel="icon" href="assets/logo-citronex.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css?v=27">
+    <link rel="stylesheet" href="styles.css?v=28">
 </head>
 <body>
   <div class="site-shell">
@@ -86,6 +86,14 @@
             <span id="lessonNextText" data-i18n="lessonNextNave">Dalej: dwie nawy</span>
             <b aria-hidden="true">→</b>
           </button>
+        </div>
+        <div class="orientation-rule" aria-live="polite">
+          <strong id="orientationRuleTitle" data-i18n="ruleOverview">Stań plecami do pierwszych naw</strong>
+          <div class="orientation-rule-diagram">
+            <span id="orientationRuleLeft" class="orientation-rule-left" data-i18n="leftSide">LEWA STRONA</span>
+            <span id="orientationRuleCenter" class="orientation-rule-center" data-i18n="ruleCenterRoad">DROGA</span>
+            <span id="orientationRuleRight" class="orientation-rule-right" data-i18n="rightSide">PRAWA STRONA</span>
+          </div>
         </div>
         <div class="scene-frame">
           <canvas id="greenhouseCanvas" aria-label="Interaktywna wizualizacja szklarni"></canvas>
@@ -268,6 +276,6 @@
 
     <footer class="footer"><span>CITRONEX</span><span data-i18n="footerText">Osobny projekt wizualizacji szklarni. Instrukcje pracy pozostają w systemie lokalizacji.</span></footer>
   </div>
-    <script type="module" src="app.js?v=27"></script>
+    <script type="module" src="app.js?v=28"></script>
 </body>
 </html>

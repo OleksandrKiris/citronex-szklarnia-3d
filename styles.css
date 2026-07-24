@@ -260,6 +260,13 @@ body.is-immersive { overflow: hidden; }
 .lesson-next b { font-size: 18px; line-height: 1; }
 .lesson-next.is-restart { color: #28513f; background: #fff; border-color: #a9c8b6; }
 .lesson-next:active { transform: translateY(1px); }
+.orientation-rule { margin: 0 16px 12px; padding: 9px; background: #fff; border: 1px solid #c9ddd1; border-radius: 9px; box-shadow: 0 4px 14px rgba(22,61,48,.07); }
+.orientation-rule > strong { display: block; margin-bottom: 7px; color: #173d31; font-size: 11px; font-weight: 900; line-height: 1.2; text-align: center; }
+.orientation-rule-diagram { display: grid; grid-template-columns: minmax(0, 1fr) minmax(58px, .68fr) minmax(0, 1fr); gap: 5px; align-items: stretch; }
+.orientation-rule-diagram span { display: grid; place-items: center; min-height: 38px; padding: 5px 6px; border: 1px solid; border-radius: 7px; font-size: 9px; font-weight: 950; line-height: 1.15; text-align: center; overflow-wrap: anywhere; }
+.orientation-rule-left { color: #17536d; background: #eaf5fa; border-color: #a8cddd !important; }
+.orientation-rule-center { color: #694711; background: #fff1cb; border-color: #e8c66b !important; }
+.orientation-rule-right { color: #195a3b; background: #eaf6ee; border-color: #a9d2b8 !important; }
 @media (min-width: 761px) {
   .scene-frame, #greenhouseCanvas { min-height: 520px; height: clamp(520px, 68vh, 680px); }
 }
@@ -339,6 +346,10 @@ body.is-immersive { overflow: hidden; }
   .lesson-line strong { font-size: 11px; line-height: 1.25; }
   .lesson-next { width: 42px; min-height: 42px; padding: 0; }
   .lesson-next span { display: none; }
+  .orientation-rule { margin: 0 8px 8px; padding: 7px; }
+  .orientation-rule > strong { margin-bottom: 6px; font-size: 10px; }
+  .orientation-rule-diagram { gap: 4px; }
+  .orientation-rule-diagram span { min-height: 36px; padding: 4px; font-size: 8px; }
   .scene-frame, #greenhouseCanvas { height: clamp(350px, 55svh, 490px); }
   .scene-toolbar, .touch-hint { display: none; }
 }

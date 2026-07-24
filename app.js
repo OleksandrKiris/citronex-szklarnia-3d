@@ -753,6 +753,181 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   };
   Object.entries(clarityTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
 
+  const orientationRuleTranslations = {
+    pl: {
+      passageView: "Jeden rząd",
+      passageDesc: "Wejście oraz dwie strony pracy.",
+      lessonNave: "Dwie nawy są naprzeciw siebie. Lewa ma wejścia 1–5, prawa ma wejścia 1–5: razem 10 rzędów.",
+      step2Text: "Po dwóch stronach drogi są dwie nawy. Lewa ma 5 rzędów / wejść, prawa ma 5: razem 10.",
+      lessonPassage: "Wybierasz jeden rząd / wejście. Środkiem biegnie przejście, a po lewej i prawej jest strona pracy.",
+      step3Title: "Jeden rząd / wejście",
+      step3Text: "Wybierz wejście 1–5. Prowadzi ono do przejścia z lewą i prawą stroną pracy. Numery przęseł są pośrodku.",
+      leftRow: "Lewa strona pracy",
+      rightRow: "Prawa strona pracy",
+      rowChoice: "Wybierz stronę pracy",
+      ruleOverview: "Stań plecami do pierwszych naw",
+      ruleNave: "2 nawy = 5 rzędów po lewej + 5 po prawej",
+      rulePassage: "1 rząd / wejście = 2 strony pracy",
+      ruleCenterRoad: "DROGA",
+      ruleSpanCenter: "PRZEJŚCIE • NUMER PRZĘSŁA",
+      factPassages: "rzędów / wejść w jednej nawie",
+      factRows: "rzędów / wejść w dwóch nawach: 5 + 5"
+    },
+    en: {
+      passageView: "One row",
+      passageDesc: "Entrance and two work sides.",
+      lessonNave: "Two naves face each other. The left has entrances 1–5 and the right has entrances 1–5: 10 rows in total.",
+      step2Text: "There is a nave on each side of the road. The left has 5 rows/entrances and the right has 5: 10 in total.",
+      lessonPassage: "Choose one row/entrance. The passage runs through the centre, with a work side on the left and right.",
+      step3Title: "One row / entrance",
+      step3Text: "Choose entrance 1–5. It leads to a passage with a left and right work side. Span numbers are in the centre.",
+      leftRow: "Left work side",
+      rightRow: "Right work side",
+      rowChoice: "Choose the work side",
+      ruleOverview: "Stand with your back to the first naves",
+      ruleNave: "2 naves = 5 rows left + 5 rows right",
+      rulePassage: "1 row / entrance = 2 work sides",
+      ruleCenterRoad: "ROAD",
+      ruleSpanCenter: "PASSAGE • SPAN NUMBER",
+      factPassages: "rows / entrances in one nave",
+      factRows: "rows / entrances in two naves: 5 + 5"
+    },
+    ua: {
+      passageView: "Один ряд",
+      passageDesc: "Вхід і дві сторони роботи.",
+      lessonNave: "Дві нави розташовані одна навпроти одної. Ліва має входи 1–5, права має входи 1–5: разом 10 рядів.",
+      step2Text: "По обидва боки дороги є дві нави. Ліва має 5 рядів / входів, права має 5: разом 10.",
+      lessonPassage: "Оберіть один ряд / вхід. Посередині проходить прохід, а ліворуч і праворуч є сторони роботи.",
+      step3Title: "Один ряд / вхід",
+      step3Text: "Оберіть вхід 1–5. Він веде до проходу з лівою і правою сторонами роботи. Номери прольотів посередині.",
+      leftRow: "Ліва сторона роботи",
+      rightRow: "Права сторона роботи",
+      rowChoice: "Оберіть сторону роботи",
+      ruleOverview: "Станьте спиною до перших нав",
+      ruleNave: "2 нави = 5 рядів ліворуч + 5 праворуч",
+      rulePassage: "1 ряд / вхід = 2 сторони роботи",
+      ruleCenterRoad: "ДОРОГА",
+      ruleSpanCenter: "ПРОХІД • НОМЕР ПРОЛЬОТУ",
+      factPassages: "рядів / входів в одній наві",
+      factRows: "рядів / входів у двох навах: 5 + 5"
+    },
+    ru: {
+      passageView: "Один ряд",
+      passageDesc: "Вход и две рабочие стороны.",
+      lessonNave: "Две навы расположены напротив друг друга. В левой входы 1–5, в правой входы 1–5: всего 10 рядов.",
+      step2Text: "По обе стороны дороги расположены две навы. В левой 5 рядов / входов, в правой 5: всего 10.",
+      lessonPassage: "Выберите один ряд / вход. Посередине проходит проход, а слева и справа находятся рабочие стороны.",
+      step3Title: "Один ряд / вход",
+      step3Text: "Выберите вход 1–5. Он ведёт в проход с левой и правой рабочими сторонами. Номера секций находятся посередине.",
+      leftRow: "Левая рабочая сторона",
+      rightRow: "Правая рабочая сторона",
+      rowChoice: "Выберите рабочую сторону",
+      ruleOverview: "Встаньте спиной к первым навам",
+      ruleNave: "2 навы = 5 рядов слева + 5 справа",
+      rulePassage: "1 ряд / вход = 2 рабочие стороны",
+      ruleCenterRoad: "ДОРОГА",
+      ruleSpanCenter: "ПРОХОД • НОМЕР СЕКЦИИ",
+      factPassages: "рядов / входов в одной наве",
+      factRows: "рядов / входов в двух навах: 5 + 5"
+    },
+    az: {
+      passageView: "Bir sıra",
+      passageDesc: "Giriş və iki iş tərəfi.",
+      lessonNave: "İki nava qarşı-qarşıyadır. Solda 1–5, sağda 1–5 giriş var: cəmi 10 sıra.",
+      step2Text: "Yolun iki tərəfində iki nava var. Solda 5 sıra / giriş, sağda 5 sıra / giriş var: cəmi 10.",
+      lessonPassage: "Bir sıra / giriş seçin. Keçid ortadan keçir, sol və sağ tərəfdə isə iş sahələri var.",
+      step3Title: "Bir sıra / giriş",
+      step3Text: "1–5 girişlərindən birini seçin. O, sol və sağ iş tərəfi olan keçidə aparır. Bölmə nömrələri ortadadır.",
+      leftRow: "Sol iş tərəfi",
+      rightRow: "Sağ iş tərəfi",
+      rowChoice: "İş tərəfini seçin",
+      ruleOverview: "İlk navalara arxanızla dayanın",
+      ruleNave: "2 nava = solda 5 sıra + sağda 5 sıra",
+      rulePassage: "1 sıra / giriş = 2 iş tərəfi",
+      ruleCenterRoad: "YOL",
+      ruleSpanCenter: "KEÇİD • BÖLMƏ NÖMRƏSİ",
+      factPassages: "bir navada sıra / giriş",
+      factRows: "iki navada sıra / giriş: 5 + 5"
+    },
+    es: {
+      passageView: "Una fila",
+      passageDesc: "Entrada y dos lados de trabajo.",
+      lessonNave: "Dos naves están una frente a la otra. La izquierda tiene entradas 1–5 y la derecha entradas 1–5: 10 filas en total.",
+      step2Text: "Hay una nave a cada lado del camino. La izquierda tiene 5 filas / entradas y la derecha otras 5: 10 en total.",
+      lessonPassage: "Elige una fila / entrada. El pasillo va por el centro y hay un lado de trabajo a la izquierda y otro a la derecha.",
+      step3Title: "Una fila / entrada",
+      step3Text: "Elige una entrada del 1 al 5. Lleva a un pasillo con lado de trabajo izquierdo y derecho. Los números de sección están en el centro.",
+      leftRow: "Lado izquierdo de trabajo",
+      rightRow: "Lado derecho de trabajo",
+      rowChoice: "Elige el lado de trabajo",
+      ruleOverview: "Colócate de espaldas a las primeras naves",
+      ruleNave: "2 naves = 5 filas a la izquierda + 5 a la derecha",
+      rulePassage: "1 fila / entrada = 2 lados de trabajo",
+      ruleCenterRoad: "CAMINO",
+      ruleSpanCenter: "PASILLO • NÚMERO DE SECCIÓN",
+      factPassages: "filas / entradas en una nave",
+      factRows: "filas / entradas en dos naves: 5 + 5"
+    },
+    fil: {
+      passageView: "Isang hanay",
+      passageDesc: "Pasukan at dalawang panig ng trabaho.",
+      lessonNave: "Magkaharap ang dalawang nave. May pasukan 1–5 sa kaliwa at 1–5 sa kanan: 10 hanay lahat.",
+      step2Text: "May nave sa bawat panig ng daan. May 5 hanay / pasukan sa kaliwa at 5 sa kanan: 10 lahat.",
+      lessonPassage: "Pumili ng isang hanay / pasukan. Nasa gitna ang daanan at may panig ng trabaho sa kaliwa at kanan.",
+      step3Title: "Isang hanay / pasukan",
+      step3Text: "Pumili ng pasukan 1–5. Papunta ito sa daanan na may kaliwa at kanang panig ng trabaho. Nasa gitna ang mga numero ng seksiyon.",
+      leftRow: "Kaliwang panig ng trabaho",
+      rightRow: "Kanang panig ng trabaho",
+      rowChoice: "Piliin ang panig ng trabaho",
+      ruleOverview: "Tumayo nang nakatalikod sa mga unang nave",
+      ruleNave: "2 nave = 5 hanay sa kaliwa + 5 sa kanan",
+      rulePassage: "1 hanay / pasukan = 2 panig ng trabaho",
+      ruleCenterRoad: "DAAN",
+      ruleSpanCenter: "DAANAN • NUMERO NG SEKSIYON",
+      factPassages: "hanay / pasukan sa isang nave",
+      factRows: "hanay / pasukan sa dalawang nave: 5 + 5"
+    },
+    id: {
+      passageView: "Satu baris",
+      passageDesc: "Pintu masuk dan dua sisi kerja.",
+      lessonNave: "Dua nave saling berhadapan. Nave kiri memiliki pintu 1–5 dan nave kanan pintu 1–5: total 10 baris.",
+      step2Text: "Ada nave di setiap sisi jalan. Nave kiri memiliki 5 baris / pintu dan nave kanan 5: total 10.",
+      lessonPassage: "Pilih satu baris / pintu masuk. Lorong berada di tengah, dengan sisi kerja di kiri dan kanan.",
+      step3Title: "Satu baris / pintu masuk",
+      step3Text: "Pilih pintu 1–5. Pintu itu menuju lorong dengan sisi kerja kiri dan kanan. Nomor bagian berada di tengah.",
+      leftRow: "Sisi kerja kiri",
+      rightRow: "Sisi kerja kanan",
+      rowChoice: "Pilih sisi kerja",
+      ruleOverview: "Berdirilah membelakangi nave pertama",
+      ruleNave: "2 nave = 5 baris kiri + 5 baris kanan",
+      rulePassage: "1 baris / pintu = 2 sisi kerja",
+      ruleCenterRoad: "JALAN",
+      ruleSpanCenter: "LORONG • NOMOR BAGIAN",
+      factPassages: "baris / pintu dalam satu nave",
+      factRows: "baris / pintu dalam dua nave: 5 + 5"
+    },
+    ne: {
+      passageView: "एउटा लाइन",
+      passageDesc: "प्रवेश र काम गर्ने दुई भाग।",
+      lessonNave: "दुई नाभ आमनेसामने छन्। बायाँ नाभमा प्रवेश १–५ र दायाँ नाभमा प्रवेश १–५ छन्: जम्मा १० लाइन।",
+      step2Text: "बाटोको दुवैपट्टि एक-एक नाभ छ। बायाँ ५ लाइन / प्रवेश र दायाँ ५: जम्मा १०।",
+      lessonPassage: "एउटा लाइन / प्रवेश छान्नुहोस्। बाटो बीचमा हुन्छ र बायाँ तथा दायाँ काम गर्ने भाग हुन्छ।",
+      step3Title: "एउटा लाइन / प्रवेश",
+      step3Text: "प्रवेश १–५ मध्ये एउटा छान्नुहोस्। यसले बायाँ र दायाँ काम गर्ने भाग भएको बाटोमा पुर्‍याउँछ। खण्ड नम्बर बीचमा हुन्छन्।",
+      leftRow: "बायाँ काम गर्ने भाग",
+      rightRow: "दायाँ काम गर्ने भाग",
+      rowChoice: "काम गर्ने भाग छान्नुहोस्",
+      ruleOverview: "पहिलो नाभतर्फ ढाड फर्काएर उभिनुहोस्",
+      ruleNave: "२ नाभ = बायाँ ५ लाइन + दायाँ ५ लाइन",
+      rulePassage: "१ लाइन / प्रवेश = काम गर्ने २ भाग",
+      ruleCenterRoad: "बाटो",
+      ruleSpanCenter: "बाटो • खण्ड नम्बर",
+      factPassages: "एउटा नाभमा लाइन / प्रवेश",
+      factRows: "दुई नाभमा लाइन / प्रवेश: ५ + ५"
+    }
+  };
+  Object.entries(orientationRuleTranslations).forEach(([language, values]) => Object.assign(translations[language], values));
+
   const state = { lang: new URLSearchParams(location.search).get("lang") || localStorage.getItem("citronex-3d-lang") || "pl", moving: true, liftActive: true, waterActive: true, growthAuto: false, growthStage: 3, tourActive: false, tourStart: 0, tourStep: -1, selectedNave: 20, selectedNaveSide: "left", selectedPassage: 1, selectedRowSide: "left", cameraMode: "overview" };
   if (!LANGS.includes(state.lang)) state.lang = "en";
   const lowPowerDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
@@ -868,6 +1043,27 @@ import * as THREE from "./assets/vendor/three.module.min.js";
     button.querySelector("b").textContent = content.icon;
     button.setAttribute("aria-label", t(content.button));
     button.classList.toggle("is-restart", simpleMode === "passage");
+    updateOrientationRule(simpleMode);
+  }
+
+  function updateOrientationRule(simpleMode) {
+    const title = $("#orientationRuleTitle");
+    const left = $("#orientationRuleLeft");
+    const center = $("#orientationRuleCenter");
+    const right = $("#orientationRuleRight");
+    if (!title || !left || !center || !right) return;
+    const mode = simpleMode || (state.cameraMode === "nave"
+      ? "nave"
+      : ["passage", "worker", "lift"].includes(state.cameraMode) ? "passage" : "overview");
+    const content = {
+      overview: { title: "ruleOverview", left: "leftSide", center: "ruleCenterRoad", right: "rightSide" },
+      nave: { title: "ruleNave", left: "leftNaveRows", center: "ruleCenterRoad", right: "rightNaveRows" },
+      passage: { title: "rulePassage", left: "leftRow", center: "ruleSpanCenter", right: "rightRow" }
+    }[mode];
+    title.textContent = t(content.title);
+    left.textContent = t(content.left);
+    center.textContent = t(content.center);
+    right.textContent = t(content.right);
   }
 
   function updatePassageProcessBadge() {
@@ -2504,11 +2700,13 @@ import * as THREE from "./assets/vendor/three.module.min.js";
   const hero = $(".hero");
   const viewTiles = $(".view-tiles");
   const lessonLine = $(".lesson-line");
+  const orientationRule = $(".orientation-rule");
   const tourHeroButton = $("#tourHeroButton");
   if (main && hero && sceneSection) main.insertBefore(sceneSection, hero);
   if (viewTiles && sceneSection) sceneSection.insertBefore(viewTiles, $(".scene-frame"));
   if (tourHeroButton && sceneSection && viewTiles) sceneSection.insertBefore(tourHeroButton, viewTiles);
   if (lessonLine && sceneSection) sceneSection.insertBefore(lessonLine, $(".scene-frame"));
+  if (orientationRule && sceneSection) sceneSection.insertBefore(orientationRule, $(".scene-frame"));
   if (hero) hero.hidden = true;
   async function toggleFullscreen() {
     const isOpen = Boolean(document.fullscreenElement) || sceneSection.classList.contains("is-immersive");
